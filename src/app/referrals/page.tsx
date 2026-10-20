@@ -108,7 +108,7 @@ export default function ReferralsPage() {
           Cari pendamping
         </h1>
         <p className="text-xs text-text-muted">
-          FATHERCARE AI bukan pengganti manusia. Saat masalahmu memerlukan penanganan nyata, hubungi pendamping resmi yang kompeten.
+          SELA bukan pengganti manusia. Saat masalahmu memerlukan penanganan nyata, hubungi pendamping resmi yang kompeten.
         </p>
       </div>
 
@@ -127,7 +127,7 @@ export default function ReferralsPage() {
       <div className="p-3.5 rounded-xl bg-surface-inset border border-border-subtle/80 text-xs text-text-muted flex items-start gap-2.5">
         <AlertCircle className="w-4 h-4 text-brand-700 shrink-0 mt-0.5" />
         <p className="leading-relaxed">
-          <strong>Prinsip Anti-Halusinasi:</strong> FATHERCARE AI tidak mengarang nama pendamping, nomor telepon pribadi, atau alamat fiktif. Rujukan lokal akan aktif setelah diverifikasi bersama sekolah mitra dan jejaring resmi Forum Genre.
+          <strong>Prinsip Anti-Halusinasi:</strong> SELA tidak mengarang nama pendamping, nomor telepon pribadi, atau alamat fiktif. Rujukan lokal akan aktif setelah diverifikasi bersama sekolah mitra dan jejaring resmi Forum Genre.
         </p>
       </div>
 

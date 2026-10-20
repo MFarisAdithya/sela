@@ -1,19 +1,18 @@
 import React from "react";
 import Link from "next/link";
-import { Sparkles, Shield, Heart, ArrowRight } from "lucide-react";
+import { Sparkles, Shield, ArrowRight } from "lucide-react";
 import { NeuCard } from "@/components/ui/NeuCard";
 import { NeuButton } from "@/components/ui/NeuButton";
 import { Badge } from "@/components/ui/Badge";
+import { SelaMark } from "@/components/ui/SelaLogo";
 
 export default function SplashPage() {
   return (
     <div className="min-h-[85vh] flex flex-col items-center justify-center py-8 px-4 text-center">
-      <div className="w-full max-w-md mx-auto space-y-8 animate-in fade-in zoom-in-95 duration-300">
-        {/* Soft Neumorphic App Emblem */}
+      <div className="w-full max-w-md mx-auto space-y-7 animate-in fade-in zoom-in-95 duration-300">
+        {/* Soft Neumorphic SELA App Emblem */}
         <div className="relative mx-auto w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-surface shadow-neu-raised flex items-center justify-center border border-white/80">
-          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-800 flex items-center justify-center text-white shadow-inner">
-            <Heart className="w-8 h-8 sm:w-10 sm:h-10 text-white fill-white/20" />
-          </div>
+          <SelaMark size={56} />
           <span className="absolute -top-1.5 -right-1.5">
             <Badge variant="verified" size="sm">
               Genre 2026
@@ -22,18 +21,22 @@ export default function SplashPage() {
         </div>
 
         {/* Title & Tagline */}
-        <div className="space-y-3">
+        <div className="space-y-2.5">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-900 text-xs font-semibold shadow-neu-inset">
             <Sparkles className="w-3.5 h-3.5 text-brand-600" />
             <span>Pendampingan Awal Remaja</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-brand-900 leading-tight">
-            FATHERCARE AI
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-brand-900 leading-none lowercase">
+            sela
           </h1>
 
-          <p className="text-sm sm:text-base text-text-muted leading-relaxed font-normal px-2">
-            Ruang refleksi, latihan life skills, dan informasi pendampingan awal untuk remaja.
+          <p className="text-base sm:text-lg font-semibold text-brand-700 tracking-tight">
+            Ruang untuk dirimu.
+          </p>
+
+          <p className="text-xs sm:text-sm text-text-muted leading-relaxed font-normal px-2 max-w-sm mx-auto">
+            Ruang digital yang mendampingi remaja dalam mengenali diri, memahami emosi, melatih keterampilan hidup, dan menemukan dukungan yang tepat.
           </p>
         </div>
 

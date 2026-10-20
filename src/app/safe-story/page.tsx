@@ -47,7 +47,7 @@ export default function SafeStoryPage() {
     {
       id: "msg-welcome",
       sender: "ai",
-      text: `Halo ${userName}. Ini ruang cerita Safe Story AI. Kamu bisa menuliskan apa yang sedang kamu rasakan atau tanyakan seputar pengelolaan emosi, komunikasi, dan kesiapan diri. Jawaban didasarkan pada materi terverifikasi.`,
+      text: `Halo ${userName}. Ini ruang cerita Safe Story AI di SELA. Kamu bisa menuliskan apa yang sedang kamu rasakan atau tanyakan seputar pengelolaan emosi, komunikasi, dan kesiapan diri. Jawaban didasarkan pada materi terverifikasi.`,
       timestamp: "Baru saja",
       isAiGenerated: false,
       statusBadge: "Panduan Awal",
@@ -173,7 +173,7 @@ export default function SafeStoryPage() {
     if (!text || isLoading) return;
 
     // Check if first time sending in session - show consent
-    const hasAlreadyConsented = sessionStorage.getItem("fathercare_chat_consent") === "true";
+    const hasAlreadyConsented = sessionStorage.getItem("sela_chat_consent") === "true";
     if (!hasAlreadyConsented) {
       setPendingMessage(text);
       setIsConsentModalOpen(true);
@@ -184,7 +184,7 @@ export default function SafeStoryPage() {
   };
 
   const handleConfirmConsent = () => {
-    sessionStorage.setItem("fathercare_chat_consent", "true");
+    sessionStorage.setItem("sela_chat_consent", "true");
     setIsConsentModalOpen(false);
     if (pendingMessage) {
       executeSend(pendingMessage);
@@ -397,7 +397,7 @@ export default function SafeStoryPage() {
         isOpen={isConsentModalOpen}
         onClose={() => setIsConsentModalOpen(false)}
         title="Persetujuan Pemrosesan AI"
-        description="FATHERCARE AI mengedepankan prinsip persetujuan pengguna sebelum mengirim data ke model pihak ketiga."
+        description="SELA mengedepankan prinsip persetujuan pengguna sebelum mengirim data ke model pihak ketiga."
         footer={
           <>
             <NeuButton variant="ghost" size="sm" onClick={() => setIsConsentModalOpen(false)}>

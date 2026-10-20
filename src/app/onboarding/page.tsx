@@ -35,7 +35,7 @@ export default function OnboardingPage() {
           Sebelum kita mulai
         </h1>
         <p className="text-xs text-text-muted leading-relaxed">
-          FATHERCARE AI adalah asisten refleksi dan edukasi awal nonklinis. Mohon baca dan centang persetujuan di bawah ini.
+          SELA adalah ruang refleksi diri dan pendampingan awal nonklinis. Mohon baca dan centang persetujuan di bawah ini.
         </p>
       </div>
 

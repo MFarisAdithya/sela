@@ -59,7 +59,7 @@ export async function generateGeminiChat(
   const hasGroundedSources = !!params.sources && params.sources.length > 0;
 
   // Strict non-clinical system instructions
-  const systemPrompt = `Kamu adalah FATHERCARE AI, asisten pendampingan awal nonklinis bagi remaja dan dewasa muda (usia 15–24 tahun).
+  const systemPrompt = `Kamu adalah SELA, ruang refleksi digital dan pendampingan awal nonklinis bagi remaja dan dewasa muda (usia 15–24 tahun) dengan prinsip "Ruang untuk dirimu."
 Nama pengguna saat ini: ${params.userAlias || "Kawan"}.
 
 BATASAN PERILAKU & CONTENT DESIGN:

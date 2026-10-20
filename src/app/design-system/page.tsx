@@ -20,6 +20,7 @@ import { ProgressBar, CircularProgress } from "@/components/ui/ProgressBar";
 import { NeuModal } from "@/components/ui/NeuModal";
 import { Toast, ToastType } from "@/components/ui/Toast";
 import { StateCard, StateType } from "@/components/ui/StateCard";
+import { SelaLogo, SelaMark, SelaAppIcon } from "@/components/ui/SelaLogo";
 
 export default function DesignSystemPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -49,17 +50,17 @@ export default function DesignSystemPage() {
       <div className="space-y-2 border-b border-border-subtle/80 pb-6">
         <div className="flex items-center gap-2">
           <Badge variant="verified" size="sm" dot>
-            Fase 1
+            SELA 2026
           </Badge>
           <Badge variant="demo" size="sm">
-            Neumorphic Blue
+            Ruang untuk dirimu
           </Badge>
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-brand-900 tracking-tight">
-          Komponen Desain & Antarmuka
+          Sistem Desain & Identitas SELA
         </h1>
         <p className="text-sm text-text-muted leading-relaxed">
-          Daftar komponen dasar untuk tombol, kartu, input, dan dialog sistem FATHERCARE AI.
+          Daftar komponen dasar untuk tombol, kartu, input, dan dialog sistem SELA (&ldquo;Ruang untuk dirimu.&rdquo;).
         </p>
         <div className="pt-2 flex items-center gap-3">
           <Link href="/">
@@ -73,34 +74,80 @@ export default function DesignSystemPage() {
         </div>
       </div>
 
+      {/* 0. Identitas Brand SELA */}
+      <section className="space-y-4">
+        <h2 className="text-lg font-bold text-brand-900 flex items-center gap-2">
+          <span>0. Identitas Visual SELA (&ldquo;Ruang untuk dirimu.&rdquo;)</span>
+        </h2>
+        <NeuCard variant="raised" className="p-6 space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
+            {/* Logo Horizontal */}
+            <div className="p-4 rounded-2xl bg-surface-inset flex flex-col items-center justify-center space-y-2 border border-border-subtle/80">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-text-subtle">
+                Logo Horizontal
+              </span>
+              <SelaLogo layout="horizontal" size="lg" showTagline={true} />
+            </div>
+
+            {/* Logo Vertikal */}
+            <div className="p-4 rounded-2xl bg-surface-inset flex flex-col items-center justify-center space-y-2 border border-border-subtle/80">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-text-subtle">
+                Logo Vertikal
+              </span>
+              <SelaLogo layout="vertical" size="md" showTagline={true} />
+            </div>
+
+            {/* Ikon Aplikasi */}
+            <div className="p-4 rounded-2xl bg-surface-inset flex flex-col items-center justify-center space-y-2 border border-border-subtle/80">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-text-subtle">
+                Ikon Aplikasi (Terang & Gelap)
+              </span>
+              <div className="flex items-center gap-3">
+                <SelaAppIcon size="md" theme="light" />
+                <SelaAppIcon size="md" theme="dark" />
+              </div>
+            </div>
+          </div>
+          <p className="text-xs text-text-muted leading-relaxed">
+            Simbol abstrak daun dan gelombang melambangkan ruang refleksi yang menenangkan dan proses pertumbuhan personal yang alami.
+          </p>
+        </NeuCard>
+      </section>
+
       {/* 1. Color Palette Tokens */}
       <section className="space-y-4">
         <h2 className="text-lg font-bold text-brand-900 flex items-center gap-2">
-          <span>1. Palet Warna Utama (Dominan Biru & Kontras Tinggi)</span>
+          <span>1. Palet Warna Resmi SELA</span>
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
           <NeuCard variant="raised-sm" className="p-3 space-y-1">
             <div className="h-10 rounded-xl bg-[#17365D]" />
-            <div className="text-xs font-bold text-brand-900">Primary 900</div>
-            <div className="text-[11px] text-text-muted">#17365D (Navy Utama)</div>
+            <div className="text-xs font-bold text-brand-900">Navy Utama</div>
+            <div className="text-[11px] text-text-muted">#17365D (Teks Utama)</div>
           </NeuCard>
 
           <NeuCard variant="raised-sm" className="p-3 space-y-1">
             <div className="h-10 rounded-xl bg-[#2457A7]" />
-            <div className="text-xs font-bold text-brand-900">Primary 700</div>
-            <div className="text-[11px] text-text-muted">#2457A7 (Tombol Aksi)</div>
+            <div className="text-xs font-bold text-brand-900">Biru Primer</div>
+            <div className="text-[11px] text-text-muted">#2457A7 (Brand Utama)</div>
           </NeuCard>
 
           <NeuCard variant="raised-sm" className="p-3 space-y-1">
-            <div className="h-10 rounded-xl bg-[#4C7EDB]" />
-            <div className="text-xs font-bold text-brand-900">Primary 500</div>
-            <div className="text-[11px] text-text-muted">#4C7EDB (Aksen Biru)</div>
+            <div className="h-10 rounded-xl bg-[#6FB1FF]" />
+            <div className="text-xs font-bold text-brand-900">Biru Aksen</div>
+            <div className="text-[11px] text-text-muted">#6FB1FF (Aksen Sekunder)</div>
           </NeuCard>
 
           <NeuCard variant="raised-sm" className="p-3 space-y-1">
-            <div className="h-10 rounded-xl bg-[#E4EEFC] border border-brand-200" />
-            <div className="text-xs font-bold text-brand-900">Primary 100</div>
-            <div className="text-[11px] text-text-muted">#E4EEFC (Panel Muda)</div>
+            <div className="h-10 rounded-xl bg-[#E3EEFF] border border-border-subtle" />
+            <div className="text-xs font-bold text-brand-900">Biru Latar</div>
+            <div className="text-[11px] text-text-muted">#E3EEFF (Background)</div>
+          </NeuCard>
+
+          <NeuCard variant="raised-sm" className="p-3 space-y-1">
+            <div className="h-10 rounded-xl bg-[#F7FAFF] border border-border-subtle" />
+            <div className="text-xs font-bold text-brand-900">Putih Kebiruan</div>
+            <div className="text-[11px] text-text-muted">#F7FAFF (Surface Card)</div>
           </NeuCard>
         </div>
       </section>

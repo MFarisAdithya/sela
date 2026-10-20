@@ -1,0 +1,21 @@
+<svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sela-outer" x1="18" y1="90" x2="65" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#17365D" />
+      <stop offset="45%" stop-color="#2457A7" />
+      <stop offset="100%" stop-color="#6FB1FF" />
+    </linearGradient>
+    <linearGradient id="sela-inner" x1="30" y1="82" x2="85" y2="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E4B94" />
+      <stop offset="50%" stop-color="#4A93F5" />
+      <stop offset="100%" stop-color="#8AC4FF" />
+    </linearGradient>
+    <linearGradient id="sela-bud" x1="70" y1="32" x2="88" y2="10" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2457A7" />
+      <stop offset="100%" stop-color="#6FB1FF" />
+    </linearGradient>
+  </defs>
+  <path d="M26 80 C 14 62, 16 38, 38 22 C 32 36, 36 54, 52 64 C 62 70, 70 72, 73 70 C 65 82, 45 88, 26 80 Z" fill="url(#sela-outer)" />
+  <path d="M38 22 C 48 30, 64 42, 69 56 C 74 66, 70 76, 62 82 C 78 74, 82 52, 72 38 C 64 26, 50 18, 38 22 Z" fill="url(#sela-inner)" />
+  <path d="M74 24 C 71 16, 76 9, 84 8 C 89 15, 87 23, 79 26 C 77 27, 75 26, 74 24 Z" fill="url(#sela-bud)" />
+</svg>

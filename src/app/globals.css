@@ -3,30 +3,31 @@
 @tailwind utilities;
 
 :root {
-  --bg-app: #F2F6FC;
-  --surface-card: #F8FAFE;
-  --surface-inset: #EBF1FA;
+  --bg-app: #E3EEFF;
+  --surface-card: #F7FAFF;
+  --surface-inset: #EBF3FF;
   
   --color-primary-900: #17365D;
   --color-primary-800: #1C4477;
   --color-primary-700: #2457A7;
-  --color-primary-500: #4C7EDB;
-  --color-primary-100: #E4EEFC;
+  --color-primary-500: #4B8FEA;
+  --color-primary-400: #6FB1FF;
+  --color-primary-100: #E3EEFF;
   
-  --color-text-main: #1D2C43;
-  --color-text-muted: #5F738E;
-  --color-text-subtle: #8A9BA8;
-  --color-border-subtle: #D9E4F2;
-  --color-border-active: #B8D0F4;
+  --color-text-main: #17365D;
+  --color-text-muted: #4B6282;
+  --color-text-subtle: #7A90AE;
+  --color-border-subtle: #D0E1F9;
+  --color-border-active: #A8CBFA;
   
   --color-success: #1F7A65;
   --color-warning: #996200;
   --color-danger: #B42332;
 
-  --shadow-raised: 8px 8px 18px rgba(180, 196, 218, 0.45), -8px -8px 18px rgba(255, 255, 255, 0.85);
-  --shadow-raised-sm: 4px 4px 10px rgba(180, 196, 218, 0.35), -4px -4px 10px rgba(255, 255, 255, 0.8);
-  --shadow-inset: inset 4px 4px 8px rgba(180, 196, 218, 0.4), inset -4px -4px 8px rgba(255, 255, 255, 0.85);
-  --shadow-pressed: inset 2px 2px 5px rgba(180, 196, 218, 0.5), inset -2px -2px 5px rgba(255, 255, 255, 0.9);
+  --shadow-raised: 8px 8px 18px rgba(164, 188, 224, 0.55), -8px -8px 18px rgba(255, 255, 255, 0.95);
+  --shadow-raised-sm: 4px 4px 10px rgba(164, 188, 224, 0.42), -4px -4px 10px rgba(255, 255, 255, 0.9);
+  --shadow-inset: inset 4px 4px 8px rgba(164, 188, 224, 0.45), inset -4px -4px 8px rgba(255, 255, 255, 0.9);
+  --shadow-pressed: inset 2px 2px 5px rgba(164, 188, 224, 0.58), inset -2px -2px 5px rgba(255, 255, 255, 0.95);
 }
 
 * {

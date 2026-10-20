@@ -4,24 +4,31 @@ import { AppShell } from "@/components/layout/AppShell";
 import { AppProvider } from "@/context/AppContext";
 
 export const metadata: Metadata = {
-  title: "FATHERCARE AI — Pendampingan Awal Remaja",
+  title: "SELA — Ruang untuk dirimu.",
   description:
-    "Ruang refleksi, latihan life skills, dan informasi pendampingan awal nonklinis untuk remaja.",
+    "SELA adalah ruang digital yang mendampingi remaja dalam mengenali diri, memahami emosi, melatih keterampilan hidup, dan menemukan dukungan yang tepat.",
   keywords: [
-    "FATHERCARE AI",
-    "Genre Lampung",
+    "SELA",
+    "Ruang untuk dirimu",
+    "Refleksi Diri",
     "Resiliensi Remaja",
     "Life Skills",
     "Safe Story AI",
     "Pendampingan Awal Nonklinis",
+    "Genre 2026",
   ],
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#F2F6FC",
+  themeColor: "#E3EEFF",
 };
 
 export default function RootLayout({

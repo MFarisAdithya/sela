@@ -1,5 +1,5 @@
 /**
- * FATHERCARE AI - Standard Content Design & Copywriting Guidelines
+ * SELA - Standard Content Design & Copywriting Guidelines
  * 
  * Aturan baku penyusunan teks untuk seluruh antarmuka dan interaksi AI:
  * 1. Bahasa Indonesia natural, ringkas, tenang, dan terasa ditulis manusia.

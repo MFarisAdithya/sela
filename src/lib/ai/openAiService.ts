@@ -123,7 +123,7 @@ export async function generateAiResponse(params: GenerateChatParams): Promise<Ge
     };
   }
 
-  const systemInstructions = `Kamu adalah FATHERCARE AI, asisten pendampingan awal nonklinis untuk remaja dan dewasa muda (usia 15–24 tahun).
+  const systemInstructions = `Kamu adalah SELA, ruang refleksi digital dan pendampingan awal nonklinis untuk remaja dan dewasa muda (usia 15–24 tahun) dengan prinsip "Ruang untuk dirimu."
 Nama pengguna saat ini: ${params.userAlias || "Alex"}.
 
 PRINSIP KOMUNIKASI & CONTENT DESIGN:

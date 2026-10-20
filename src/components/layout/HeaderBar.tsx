@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Badge } from "@/components/ui/Badge";
 import { Shield, Sparkles } from "lucide-react";
+import { SelaMark } from "@/components/ui/SelaLogo";
 import { useApp } from "@/context/AppContext";
 
 export const HeaderBar: React.FC = () => {
@@ -21,16 +22,16 @@ export const HeaderBar: React.FC = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
         {/* Left: Brand Identity & Non-clinical Disclaimer */}
         <div className="flex items-center gap-3">
-          <Link href="/dashboard" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-600 to-brand-800 flex items-center justify-center text-white shadow-neu-raised-sm group-hover:shadow-neu-raised transition-all">
-              <Sparkles className="w-4 h-4" />
+          <Link href="/dashboard" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-xl bg-surface shadow-neu-raised-sm group-hover:shadow-neu-raised transition-all flex items-center justify-center border border-white/80">
+              <SelaMark size={22} />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-sm tracking-tight text-brand-900 leading-none">
-                FATHERCARE AI
+              <span className="font-extrabold text-base tracking-tight text-brand-900 leading-none lowercase">
+                sela
               </span>
               <span className="text-[10px] text-text-muted hidden sm:inline-block leading-tight mt-0.5">
-                Pendampingan Awal Remaja Nonklinis
+                Ruang untuk dirimu.
               </span>
             </div>
           </Link>

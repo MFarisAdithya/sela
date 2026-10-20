@@ -16,6 +16,7 @@ import {
   LifeBuoy,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
+import { SelaLogo } from "@/components/ui/SelaLogo";
 
 const navItems = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -40,18 +41,10 @@ export const DesktopSidebar: React.FC = () => {
     <aside className="hidden lg:flex flex-col w-64 shrink-0 h-screen sticky top-0 bg-surface border-r border-border-subtle/80 px-4 py-6 justify-between select-none">
       <div className="space-y-6">
         {/* Brand logo header */}
-        <div className="flex items-center gap-3 px-2">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-brand-600 to-brand-800 flex items-center justify-center text-white shadow-neu-raised-sm">
-            <MessageSquareHeart className="w-5 h-5" />
-          </div>
-          <div>
-            <span className="font-bold text-base tracking-tight text-brand-900 leading-none block">
-              FATHERCARE AI
-            </span>
-            <p className="text-[11px] text-text-muted mt-1 font-medium">
-              Pendampingan Awal
-            </p>
-          </div>
+        <div className="px-2 py-1">
+          <Link href="/dashboard" className="block focus:outline-none group">
+            <SelaLogo layout="horizontal" size="md" showTagline={true} />
+          </Link>
         </div>
 
         {/* Navigation list */}
