@@ -31,7 +31,7 @@ export default function SplashPage() {
             sela
           </h1>
 
-          <p className="text-base sm:text-lg font-semibold text-brand-700 tracking-tight">
+          <p className="font-serif text-xl sm:text-2xl font-medium text-brand-800 tracking-normal italic">
             Ruang untuk dirimu.
           </p>
 

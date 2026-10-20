@@ -1,7 +1,23 @@
 import type { Metadata, Viewport } from "next";
+import { Source_Sans_3, Lora } from "next/font/google";
 import "./globals.css";
 import { AppShell } from "@/components/layout/AppShell";
 import { AppProvider } from "@/context/AppContext";
+
+const sourceSans3 = Source_Sans_3({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-source-sans",
+  display: "swap",
+});
+
+const lora = Lora({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-lora",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "SELA — Ruang untuk dirimu.",
@@ -37,8 +53,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
-      <body className="antialiased bg-background text-text-main selection:bg-brand-200 selection:text-brand-900">
+    <html lang="id" className={`${sourceSans3.variable} ${lora.variable}`}>
+      <body className="font-sans antialiased bg-background text-text-main selection:bg-brand-200 selection:text-brand-900">
         <AppProvider>
           <AppShell>{children}</AppShell>
         </AppProvider>

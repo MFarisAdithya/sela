@@ -96,8 +96,8 @@ export default function JournalPage() {
               Ganti pertanyaan →
             </button>
           </div>
-          <div className="p-3.5 rounded-xl bg-surface-inset shadow-neu-inset text-xs font-medium text-brand-900 border border-border-subtle/80">
-            {prompts[selectedPromptIdx]}
+          <div className="p-3.5 rounded-xl bg-surface-inset shadow-neu-inset text-sm font-serif italic text-brand-900 border border-border-subtle/80 leading-relaxed">
+            &ldquo;{prompts[selectedPromptIdx]}&rdquo;
           </div>
         </div>
 
