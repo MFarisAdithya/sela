@@ -1,0 +1,50 @@
+[
+  {
+    "id": "ref-01",
+    "topic": "referrals",
+    "title": "Guru Bimbingan dan Konseling (BK) Sekolah",
+    "source_name": "Jejaring Sekolah Menengah / Vokasi",
+    "source_url_or_reference": "Ruang BK Sekolah masing-masing",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-06-10",
+    "audience": "Siswa SMP/SMA/SMK",
+    "content": "Guru BK berwenang mendampingi perkembangan pribadi, sosial, belajar, dan karier siswa secara rahasia di lingkungan sekolah tanpa biaya.",
+    "keywords": ["guru bk", "sekolah", "konseling sekolah", "masalah belajar", "jurusan"]
+  },
+  {
+    "id": "ref-02",
+    "topic": "referrals",
+    "title": "Konselor Sebaya Forum Genre / PIK-R Lampung",
+    "source_name": "Forum Generasi Berencana (Genre) BKKBN Provinsi Lampung",
+    "source_url_or_reference": "Sekretariat Forum Genre Lampung & PIK Remaja Wilayah",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-06-10",
+    "audience": "Remaja 15-24 tahun",
+    "content": "Teman sebaya yang telah terlatih untuk mendengarkan curahan hati, berbagi informasi kesehatan reproduksi dan life skills, serta mengarahkan ke layanan lanjutan.",
+    "keywords": ["genre", "pik-r", "konselor sebaya", "teman cerita", "lampung"]
+  },
+  {
+    "id": "ref-03",
+    "topic": "referrals",
+    "title": "Puskesmas Pelayanan Kesehatan Peduli Remaja (PKPR)",
+    "source_name": "Dinas Kesehatan Kota Bandar Lampung & Provinsi Lampung",
+    "source_url_or_reference": "Poli PKPR di Puskesmas Kecamatan terdekat",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-06-12",
+    "audience": "Remaja 15-24 tahun",
+    "content": "Layanan kesehatan fisik dan konseling psikologis dasar yang ramah remaja di Puskesmas dengan tarif subsidi BPJS / fasilitas kesehatan primer.",
+    "keywords": ["puskesmas", "pkpr", "dokter", "psikolog puskesmas", "konseling kesehatan"]
+  },
+  {
+    "id": "ref-04",
+    "topic": "referrals",
+    "title": "UPTD Perlindungan Perempuan dan Anak (PPA) Provinsi Lampung",
+    "source_name": "Dinas Pemberdayaan Perempuan dan Perlindungan Anak (PPPA) Provinsi Lampung",
+    "source_url_or_reference": "Layanan Pengaduan Kasus Kekerasan dan Pendampingan Hukum/Psikososial",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-06-12",
+    "audience": "Anak dan Remaja di bawah 18 tahun / Perempuan",
+    "content": "Lembaga resmi pemerintah daerah untuk penanganan, pendampingan hukum, dan pemulihan psikologis korban kekerasan atau penelantaran anak.",
+    "keywords": ["uptd ppa", "hukum", "kekerasan anak", "dp3a lampung", "pengaduan korban"]
+  }
+]

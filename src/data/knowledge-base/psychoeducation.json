@@ -1,0 +1,38 @@
+[
+  {
+    "id": "psycho-01",
+    "topic": "psychoeducation",
+    "title": "Mengenal Emosi Dasar dan Validasi Diri",
+    "source_name": "Modul Tentang Kita - Forum Genre & BKKBN (2021)",
+    "source_url_or_reference": "Panduan Pengelolaan Emosi Remaja, BKKBN RI",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-06-15",
+    "audience": "Remaja 15-24 tahun",
+    "content": "Emosi adalah sinyal alami tubuh terhadap peristiwa sekitar. Merasa sedih, kecewa, takut, atau marah bukanlah tanda kelemahan, melainkan respons wajar saat kebutuhan rasa aman atau perhatian belum terpenuhi. Langkah awal pengelolaan emosi adalah menamai perasaan tersebut secara jujur tanpa menghakimi diri sendiri.",
+    "keywords": ["emosi", "sedih", "marah", "kecewa", "menamai perasaan", "validasi diri", "lelah mental"]
+  },
+  {
+    "id": "psycho-02",
+    "topic": "psychoeducation",
+    "title": "Memahami Keterbatasan Peran Ayah Tanpa Menyalahkan Diri",
+    "source_name": "Ashari, Y. (2018) & Panduan Pengasuhan Positif KemenPPPA",
+    "source_url_or_reference": "Kajian Fatherless dan Dampak Perkembangan Emosi, Jurnal Psikologi Sosial",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-06-18",
+    "audience": "Remaja 15-24 tahun",
+    "content": "Ketidakhadiran figur ayah baik secara fisik maupun emosional terjadi karena berbagai faktor orang dewasa (perpisahan, tuntutan kerja, keterbatasan komunikasi, atau konflik keluarga). Remaja tidak bertanggung jawab atas ketidakhadiran tersebut. Kekurangan peran pengasuhan ini bukan salahmu, dan kamu berhak bertumbuh dengan mencari figur pendukung yang aman.",
+    "keywords": ["ayah", "fatherless", "keluarga", "sosok ayah", "kehilangan", "tidak diperhatikan", "rasa bersalah"]
+  },
+  {
+    "id": "psycho-03",
+    "topic": "psychoeducation",
+    "title": "Prinsip Resiliensi: Mengambil Langkah Kecil",
+    "source_name": "WHO & Kemendikbudristek: Panduan Dukungan Kesehatan Jiwa Remaja",
+    "source_url_or_reference": "Buku Saku Kesehatan Mental Remaja Indonesia",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-06-20",
+    "audience": "Remaja 15-24 tahun",
+    "content": "Resiliensi bukan berarti tidak pernah jatuh atau selalu kuat. Resiliensi adalah kemampuan bangkit kembali secara perlahan dengan mengenali apa yang bisa dikendalikan dan apa yang berada di luar kendali. Fokus pada satu tindakan kecil hari ini, seperti beristirahat, minum air, atau berbicara dengan satu orang terpercaya.",
+    "keywords": ["resiliensi", "bangkit", "kecewa", "tertekan", "kendali", "langkah kecil", "daya lentur"]
+  }
+]

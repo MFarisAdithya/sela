@@ -15,8 +15,15 @@ const viewports = [
 
 const pagesToTest = [
   { url: "http://localhost:3000", label: "Splash" },
+  { url: "http://localhost:3000/onboarding", label: "Onboarding" },
   { url: "http://localhost:3000/dashboard", label: "Dashboard" },
-  { url: "http://localhost:3000/design-system", label: "DesignSystem" },
+  { url: "http://localhost:3000/safe-story", label: "SafeStory" },
+  { url: "http://localhost:3000/journal", label: "Journal" },
+  { url: "http://localhost:3000/learning", label: "Learning" },
+  { url: "http://localhost:3000/support", label: "Support" },
+  { url: "http://localhost:3000/referrals", label: "Referrals" },
+  { url: "http://localhost:3000/growth-plan", label: "GrowthPlan" },
+  { url: "http://localhost:3000/settings", label: "Settings" },
 ];
 
 async function runVerification() {
@@ -37,9 +44,19 @@ async function runVerification() {
 
   for (const pageInfo of pagesToTest) {
     console.log(`\nTesting Page: ${pageInfo.label} (${pageInfo.url})`);
+    
+    // Warmup request
+    try {
+      await page.goto(pageInfo.url, { waitUntil: "domcontentloaded", timeout: 15000 });
+    } catch (e) {
+      // retry once if compiling
+      await new Promise((r) => setTimeout(r, 1000));
+      await page.goto(pageInfo.url, { waitUntil: "domcontentloaded", timeout: 15000 });
+    }
+
     for (const vp of viewports) {
       await page.setViewport({ width: vp.width, height: vp.height });
-      await page.goto(pageInfo.url, { waitUntil: "networkidle0" });
+      await page.goto(pageInfo.url, { waitUntil: "domcontentloaded", timeout: 15000 });
 
       // Check horizontal overflow
       const overflow = await page.evaluate(() => {

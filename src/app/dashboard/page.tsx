@@ -21,6 +21,8 @@ import { NeuButton } from "@/components/ui/NeuButton";
 import { Badge } from "@/components/ui/Badge";
 import { cn } from "@/lib/utils";
 
+import { useApp } from "@/context/AppContext";
+
 type MoodType = "sangat-sedih" | "sedih" | "biasa" | "senang" | "bersemangat";
 
 interface MoodOption {
@@ -64,10 +66,9 @@ const moodOptions: MoodOption[] = [
 ];
 
 export default function DashboardPage() {
-  const [selectedMood, setSelectedMood] = useState<MoodType | null>("biasa");
-  const [userName] = useState("Alex");
+  const { userName, currentMood, setCurrentMood, isAiConfigured } = useApp();
 
-  const currentMoodObj = moodOptions.find((m) => m.id === selectedMood);
+  const currentMoodObj = moodOptions.find((m) => m.id === currentMood);
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto py-2">
@@ -83,9 +84,15 @@ export default function DashboardPage() {
         </div>
 
         <div className="flex items-center gap-2">
-          <Badge variant="demo" dot size="sm">
-            Mode Demo
-          </Badge>
+          {isAiConfigured ? (
+            <Badge variant="active" dot size="sm">
+              AI Aktif
+            </Badge>
+          ) : (
+            <Badge variant="warning" dot size="sm">
+              API Belum Dikonfigurasi
+            </Badge>
+          )}
           <span className="text-xs text-text-muted hidden sm:inline">
             Data tersimpan di sesi ini
           </span>
@@ -103,9 +110,9 @@ export default function DashboardPage() {
               Pilih yang paling menggambarkan keadaanmu saat ini.
             </p>
           </div>
-          {selectedMood && (
+          {currentMood && (
             <button
-              onClick={() => setSelectedMood(null)}
+              onClick={() => setCurrentMood(null)}
               className="text-[11px] text-text-muted hover:text-brand-900 flex items-center gap-1 transition-colors"
             >
               <RotateCcw className="w-3 h-3" />
@@ -117,11 +124,11 @@ export default function DashboardPage() {
         {/* 5 Mood Selector Buttons */}
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
           {moodOptions.map((mood) => {
-            const isSelected = selectedMood === mood.id;
+            const isSelected = currentMood === mood.id;
             return (
               <button
                 key={mood.id}
-                onClick={() => setSelectedMood(mood.id)}
+                onClick={() => setCurrentMood(mood.id)}
                 className={cn(
                   "p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-2 transition-all duration-150 min-h-[72px]",
                   "border focus:outline-none focus:ring-2 focus:ring-brand-500",

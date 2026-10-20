@@ -1,36 +1,216 @@
-import React from "react";
-import Link from "next/link";
-import { ShieldCheck, ArrowLeft } from "lucide-react";
+"use client";
+
+import React, { useState } from "react";
+import {
+  ShieldCheck,
+  RotateCcw,
+  KeyRound,
+  CheckCircle2,
+  AlertTriangle,
+  Lock,
+  User,
+  Database,
+} from "lucide-react";
 import { NeuCard } from "@/components/ui/NeuCard";
 import { NeuButton } from "@/components/ui/NeuButton";
+import { NeuInput } from "@/components/ui/NeuInput";
 import { Badge } from "@/components/ui/Badge";
+import { useApp } from "@/context/AppContext";
 
-export default function SettingsPlaceholder() {
+export default function SettingsPage() {
+  const {
+    userName,
+    setUserName,
+    userAgeRange,
+    setUserAgeRange,
+    isAiConfigured,
+    checkAiConfiguration,
+    allowAiTransmission,
+    setAllowAiTransmission,
+    resetAllSessionData,
+  } = useApp();
+
+  const [inputName, setInputName] = useState(userName);
+  const [saveSuccess, setSaveSuccess] = useState(false);
+  const [resetSuccess, setResetSuccess] = useState(false);
+
+  const handleSaveProfile = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (inputName.trim()) {
+      setUserName(inputName.trim());
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 2500);
+    }
+  };
+
+  const handleReset = () => {
+    if (
+      confirm(
+        "Apakah kamu yakin ingin mereset seluruh data sesi (catatan, progres modul, kontak, dan tiket simulasi)?"
+      )
+    ) {
+      resetAllSessionData();
+      setInputName("Alex");
+      setResetSuccess(true);
+      setTimeout(() => setResetSuccess(false), 3000);
+    }
+  };
+
   return (
-    <div className="max-w-xl mx-auto py-8 space-y-6 text-center">
-      <div className="w-14 h-14 rounded-2xl bg-surface-inset shadow-neu-inset mx-auto flex items-center justify-center text-brand-700">
-        <ShieldCheck className="w-7 h-7" />
-      </div>
-      <div className="space-y-2">
-        <Badge variant="prototype" size="sm">
-          Fase 2
-        </Badge>
-        <h1 className="text-xl font-bold text-brand-900">Pengaturan & Privasi</h1>
-        <p className="text-xs text-text-muted max-w-md mx-auto leading-relaxed">
-          Pusat kendali privasi data, tombol pembersihan sesi lokal, dan indikator mode operasional AI (Demo vs Aktif).
+    <div className="space-y-6 max-w-3xl mx-auto py-2">
+      {/* Header */}
+      <div className="space-y-1 border-b border-border-subtle/80 pb-4">
+        <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
+          Pusat Kontrol Privasi
+        </span>
+        <h1 className="text-2xl font-extrabold text-brand-900 tracking-tight">
+          Pengaturan & privasi
+        </h1>
+        <p className="text-xs text-text-muted">
+          Kelola identitas samaran, status layanan AI, dan kontrol penyimpanan data.
         </p>
       </div>
-      <NeuCard variant="inset" className="p-4 text-xs text-text-muted max-w-sm mx-auto text-left">
-        <p className="font-semibold text-brand-900 mb-1">Status Pengembangan:</p>
-        <p>Fitur reset data sesi dan toggle mode AI akan diaktifkan secara utuh pada Fase 2.</p>
-      </NeuCard>
-      <div>
-        <Link href="/dashboard">
-          <NeuButton variant="secondary" size="sm" leftIcon={<ArrowLeft className="w-4 h-4" />}>
-            Kembali ke Dashboard
+
+      {/* 1. AI API Configuration Status Card */}
+      <NeuCard variant="raised" className="p-5 space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <KeyRound className="w-5 h-5 text-brand-700" />
+            <h2 className="text-sm font-bold text-brand-900">Status Konfigurasi AI Backend</h2>
+          </div>
+          {isAiConfigured ? (
+            <Badge variant="active" dot size="sm">
+              AI Aktif
+            </Badge>
+          ) : (
+            <Badge variant="warning" dot size="sm">
+              API Belum Dikonfigurasi
+            </Badge>
+          )}
+        </div>
+
+        <p className="text-xs text-text-muted leading-relaxed">
+          {isAiConfigured
+            ? "Server terhubung ke model OpenAI dengan perlindungan filter keselamatan dan RAG knowledge base lokal."
+            : "Kunci API (OPENAI_API_KEY) belum terpasang di file .env.local server. Safe Story AI saat ini menampilkan kutipan terverifikasi langsung dari basis pengetahuan lokal."}
+        </p>
+
+        <div className="pt-2 flex items-center justify-between border-t border-border-subtle/70">
+          <span className="text-[11px] text-text-subtle">
+            Model target: <code>gpt-4o-mini</code> (OpenAI Server-Side API)
+          </span>
+          <NeuButton size="sm" variant="secondary" onClick={() => checkAiConfiguration()}>
+            Periksa ulang status
           </NeuButton>
-        </Link>
-      </div>
+        </div>
+      </NeuCard>
+
+      {/* 2. Pseudonym & Profile Form */}
+      <NeuCard variant="raised" className="p-5 space-y-4">
+        <div className="flex items-center gap-2">
+          <User className="w-5 h-5 text-brand-700" />
+          <h2 className="text-sm font-bold text-brand-900">Identitas Samaran (Sesi Lokal)</h2>
+        </div>
+
+        <form onSubmit={handleSaveProfile} className="space-y-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <NeuInput
+              label="Nama Samaran"
+              value={inputName}
+              onChange={(e) => setInputName(e.target.value)}
+              helperText="Digunakan untuk menyapa di dashboard."
+            />
+
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-text-muted">
+                Rentang Usia
+              </label>
+              <select
+                value={userAgeRange}
+                onChange={(e) => setUserAgeRange(e.target.value)}
+                className="w-full px-4 py-3 text-sm rounded-xl bg-surface-inset shadow-neu-inset text-text-main border border-border-subtle focus:outline-none focus:ring-2 focus:ring-brand-500"
+              >
+                <option value="15-17 tahun">15–17 tahun (SMA / SMK)</option>
+                <option value="18-21 tahun">18–21 tahun (Awal Kuliah / Kerja)</option>
+                <option value="22-24 tahun">22–24 tahun (Dewasa Muda)</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between pt-1">
+            {saveSuccess && (
+              <span className="text-xs text-teal-700 font-semibold flex items-center gap-1">
+                <CheckCircle2 className="w-4 h-4" /> Profil samaran diperbarui
+              </span>
+            )}
+            <div className="ml-auto">
+              <NeuButton type="submit" size="sm" variant="primary">
+                Simpan perubahan
+              </NeuButton>
+            </div>
+          </div>
+        </form>
+      </NeuCard>
+
+      {/* 3. External AI Data Transmission Consent */}
+      <NeuCard variant="raised" className="p-5 space-y-3">
+        <div className="flex items-center gap-2">
+          <Lock className="w-5 h-5 text-brand-700" />
+          <h2 className="text-sm font-bold text-brand-900">Persetujuan Transmisi Teks AI</h2>
+        </div>
+
+        <p className="text-xs text-text-muted leading-relaxed">
+          Ketika kamu mengirim pesan di Cerita AI, teks disanitasi dari data pribadi (nomor telepon, email, NIK) sebelum diteruskan ke model AI.
+        </p>
+
+        <label className="flex items-center gap-3 p-3 rounded-xl bg-surface-inset border border-border-subtle/80 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={allowAiTransmission}
+            onChange={(e) => setAllowAiTransmission(e.target.checked)}
+            className="w-4 h-4 rounded text-brand-700"
+          />
+          <div className="text-xs space-y-0.5">
+            <span className="font-semibold text-brand-900 block">
+              Izinkan pemrosesan teks oleh model AI pihak ketiga
+            </span>
+            <span className="text-text-muted block">
+              Jika dinonaktifkan, chat hanya akan menampilkan kutipan materi terverifikasi tanpa generasi teks eksternal.
+            </span>
+          </div>
+        </label>
+      </NeuCard>
+
+      {/* 4. Reset & Data Clearance */}
+      <NeuCard variant="raised" className="p-5 space-y-3 border-red-200">
+        <div className="flex items-center gap-2 text-rose-700">
+          <Database className="w-5 h-5" />
+          <h2 className="text-sm font-bold">Hapus Seluruh Data Sesi</h2>
+        </div>
+
+        <p className="text-xs text-text-muted leading-relaxed">
+          Tindakan ini akan mengosongkan seluruh catatan pribadi, progres ruang belajar, kontak tambahan pada peta dukungan, dan tiket simulasi rujukan.
+        </p>
+
+        <div className="pt-1 flex items-center justify-between">
+          {resetSuccess ? (
+            <span className="text-xs text-teal-700 font-semibold flex items-center gap-1">
+              <CheckCircle2 className="w-4 h-4" /> Seluruh data sesi telah dibersihkan
+            </span>
+          ) : (
+            <span className="text-[11px] text-text-muted">Data di browser akan hilang seketika.</span>
+          )}
+
+          <NeuButton
+            variant="danger"
+            size="sm"
+            onClick={handleReset}
+            leftIcon={<RotateCcw className="w-3.5 h-3.5" />}
+          >
+            Hapus dan reset sesi
+          </NeuButton>
+        </div>
+      </NeuCard>
     </div>
   );
 }

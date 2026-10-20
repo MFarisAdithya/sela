@@ -1,0 +1,38 @@
+[
+  {
+    "id": "skill-01",
+    "topic": "life-skills",
+    "title": "Komunikasi Asertif: Teknik Pesan 'Saya'",
+    "source_name": "Modul Life Skills Pendidikan Sebaya - Forum Genre (2022)",
+    "source_url_or_reference": "Panduan Konselor Sebaya Remaja Indonesia, BKKBN",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-06-22",
+    "audience": "Remaja 15-24 tahun",
+    "content": "Komunikasi asertif membantu menyampaikan kebutuhan tanpa menyerang orang lain atau mengabaikan diri sendiri. Gunakan pola Pesan 'Saya': 'Ketika [kejadian/fakta], saya merasa [emosi spesifik], karena saya membutuhkan [kebutuhan]. Bisakah kita [permintaan konkret]?'. Contoh: 'Ketika pesanku tidak dibalas, aku merasa cemas karena aku butuh kepastian.'",
+    "keywords": ["komunikasi", "asertif", "bicara", "pesan saya", "menyampaikan perasaan", "konflik", "berani bicara"]
+  },
+  {
+    "id": "skill-02",
+    "topic": "life-skills",
+    "title": "Pemecahan Masalah Sederhana: 3 Langkah Nyata",
+    "source_name": "UNICEF & Kemendikbud: Pedoman Keterampilan Abad 21 untuk Remaja",
+    "source_url_or_reference": "Modul Keterampilan Hidup Remaja UNICEF Indonesia",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-06-25",
+    "audience": "Remaja 15-24 tahun",
+    "content": "Saat masalah terasa terlalu besar, uraikan menjadi tiga tahap: 1) Tuliskan inti masalah dalam satu kalimat pendek; 2) Bedakan mana hal yang bisa kamu pengaruhi langsung hari ini vs mana yang harus ditunda; 3) Tentukan satu langkah pertama berdurasi 5-15 menit untuk mulai mengurangi beban.",
+    "keywords": ["pemecahan masalah", "bingung", "kewalahan", "solusi", "langkah nyata", "beban pikiran"]
+  },
+  {
+    "id": "skill-03",
+    "topic": "life-skills",
+    "title": "Menetapkan Batasan Diri yang Sehat",
+    "source_name": "Panduan Bimbingan Konseling Remaja - ABKIN (2020)",
+    "source_url_or_reference": "Asosiasi Bimbingan dan Konseling Indonesia",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-06-28",
+    "audience": "Remaja 15-24 tahun",
+    "content": "Menolak ajakan atau situasi yang membuatmu merasa tidak aman bukanlah tindakan egois. Kamu berhak berkata 'Maaf, saat ini aku belum bisa membantu' atau 'Aku butuh waktu untuk berpikir'. Batasan yang jelas melindungi energimu untuk hal-hal yang benar-benar penting bagi masa depanmu.",
+    "keywords": ["batasan diri", "menolak", "boundaries", "tidak enak hati", "people pleasing", "tekanan teman"]
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "career-01",
+    "topic": "career",
+    "title": "Mengenali Potensi Diri dan Minat Kerja",
+    "source_name": "Kemnaker RI & BKKBN: Kesiapan Karier Generasi Berencana",
+    "source_url_or_reference": "Panduan Transisi Sekolah ke Dunia Kerja Remaja Indonesia",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-07-02",
+    "audience": "Remaja 17-24 tahun",
+    "content": "Kesiapan kerja dimulai dari mengenali aktivitas yang membuatmu fokus, keterampilan teknis yang sudah kamu latih di sekolah/kejuruan, serta cara kamu bekerja sama dengan orang lain. Pengalaman menghadapi tantangan keluarga sering kali melatih ketangguhan, kepekaan, dan kemampuan beradaptasi di lingkungan baru.",
+    "keywords": ["karier", "pekerjaan", "minat", "bakat", "lulus sekolah", "masa depan", "kesiapan kerja"]
+  },
+  {
+    "id": "career-02",
+    "topic": "career",
+    "title": "Latihan Perkenalan Diri 60 Detik untuk Wawancara",
+    "source_name": "Pedoman Pelatihan Vokasi dan Kesiapan Kerja - Kemendikbudristek",
+    "source_url_or_reference": "Modul Wawancara Kerja SMK/Vokasi Indonesia",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-07-05",
+    "audience": "Remaja 17-24 tahun",
+    "content": "Gunakan rumus Tiga Bagian: 1) Siapa dirimu dan latar belakang pendidikan/keahlianmu; 2) Pengalaman nyata atau proyek yang pernah kamu selesaikan; 3) Alasan ketertarikanmu pada posisi tersebut dan kontribusi yang ingin kamu berikan. Latihlah berbicara dengan tenang dan tatap mata pewawancara.",
+    "keywords": ["wawancara", "interview", "perkenalan diri", "melamar kerja", "percaya diri", "bicara di depan orang"]
+  }
+]

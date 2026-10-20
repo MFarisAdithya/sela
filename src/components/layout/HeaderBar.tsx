@@ -4,14 +4,12 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Badge } from "@/components/ui/Badge";
-import { Shield, Sparkles, AlertCircle } from "lucide-react";
+import { Shield, Sparkles } from "lucide-react";
+import { useApp } from "@/context/AppContext";
 
-interface HeaderBarProps {
-  isAiActive?: boolean;
-}
-
-export const HeaderBar: React.FC<HeaderBarProps> = ({ isAiActive = false }) => {
+export const HeaderBar: React.FC = () => {
   const pathname = usePathname();
+  const { isAiConfigured } = useApp();
 
   // Do not show header on landing splash or onboarding
   if (pathname === "/" || pathname === "/onboarding") {
@@ -40,13 +38,13 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({ isAiActive = false }) => {
 
         {/* Right: AI Mode Badge & Quick Settings */}
         <div className="flex items-center gap-2.5">
-          {isAiActive ? (
+          {isAiConfigured ? (
             <Badge variant="active" dot size="sm" title="Terhubung ke OpenAI Model">
               AI Aktif
             </Badge>
           ) : (
-            <Badge variant="demo" dot size="sm" title="Berjalan dalam mode simulasi lokal">
-              Mode Demo
+            <Badge variant="demo" dot size="sm" title="Kunci API belum diisi di server">
+              API Belum Dikonfigurasi
             </Badge>
           )}
 
