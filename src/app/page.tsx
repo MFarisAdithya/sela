@@ -46,7 +46,6 @@ export default function LandingPage() {
         </section>
 
         <p className="mt-6 text-sm text-[#17365D]/70">{crisisLine}</p>
-        <p className="mt-10 text-xs text-[#17365D]/55">{t.credit}</p>
       </div>
     </main>
   );

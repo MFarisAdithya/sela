@@ -19,7 +19,7 @@ export const LEARNING_MODULES: LearningModule[] = [
     title: "Mengenali & Menerima Emosi Diri",
     category: "Memahami Diri",
     duration: "3 menit baca",
-    source: "Modul Tentang Kita - Forum Genre & BKKBN",
+    source: "Modul Tentang Kita - BKKBN",
     description: "Membantu menamai apa yang kamu rasakan tanpa merasa bersalah atau menganggap diri lemah.",
     keyPoints: [
       "Semua emosi (marah, sedih, lelah) wajar dan memberi sinyal kebutuhan dirimu.",

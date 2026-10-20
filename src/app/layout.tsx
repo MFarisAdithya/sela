@@ -31,7 +31,6 @@ export const metadata: Metadata = {
     "Life Skills",
     "Safe Story AI",
     "Pendampingan Awal Nonklinis",
-    "Genre 2026",
   ],
   icons: {
     icon: "/favicon.svg",

@@ -20,7 +20,6 @@ export const copy = {
     privacyBody:
       "Ceritamu tidak disimpan di server kami dan tidak ada yang menilai. Saat kamu bercerita, tulisanmu dikirim ke AI supaya bisa dibalas. SELA bukan psikolog dan tidak mendiagnosis. Kalau terasa terlalu berat, SELA akan mengajakmu menghubungi orang yang bisa membantu langsung.",
     cta: "Masuk ke Sela",
-    credit: "Inovasi Program Genre InnovAItion AI Challenge • ADUJAKNAS 2026",
   },
 
   onboarding: {

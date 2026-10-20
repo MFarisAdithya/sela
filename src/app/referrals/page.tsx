@@ -39,8 +39,8 @@ const supportCategories: SupportTypeCategory[] = [
     configStatus: "belum_dikonfigurasi",
   },
   {
-    id: "sup-genre",
-    name: "Konselor Sebaya (Forum Genre / PIK-R)",
+    id: "sup-peer",
+    name: "Konselor Sebaya (PIK-R / Komunitas Remaja)",
     category: "Komunitas Remaja",
     description: "Rekan sebaya terlatih untuk mendengarkan, berbagi informasi life skills, dan mendiskusikan tantangan masa remaja.",
     officialScope: "Pusat Informasi & Konseling Remaja (PIK-R)",
@@ -127,7 +127,7 @@ export default function ReferralsPage() {
       <div className="p-3.5 rounded-xl bg-surface-inset border border-border-subtle/80 text-xs text-text-muted flex items-start gap-2.5">
         <AlertCircle className="w-4 h-4 text-brand-700 shrink-0 mt-0.5" />
         <p className="leading-relaxed">
-          <strong>Prinsip Anti-Halusinasi:</strong> SELA tidak mengarang nama pendamping, nomor telepon pribadi, atau alamat fiktif. Rujukan lokal akan aktif setelah diverifikasi bersama sekolah mitra dan jejaring resmi Forum Genre.
+          <strong>Prinsip Anti-Halusinasi:</strong> SELA tidak mengarang nama pendamping, nomor telepon pribadi, atau alamat fiktif. Rujukan lokal akan aktif setelah diverifikasi bersama sekolah mitra dan jejaring resmi komunitas remaja.
         </p>
       </div>
 
