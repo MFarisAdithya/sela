@@ -19,7 +19,7 @@ import {
 import { NeuCard } from "@/components/ui/NeuCard";
 
 const mainMobileTabs = [
-  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Beranda", href: "/dashboard", icon: LayoutDashboard },
   { label: "Cerita", href: "/safe-story", icon: MessageSquareHeart },
   { label: "Catatan", href: "/journal", icon: PenLine },
   { label: "Belajar", href: "/learning", icon: GraduationCap },

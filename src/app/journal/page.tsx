@@ -17,12 +17,10 @@ import { NeuButton } from "@/components/ui/NeuButton";
 import { NeuTextarea } from "@/components/ui/NeuInput";
 import { Badge } from "@/components/ui/Badge";
 import { useApp } from "@/context/AppContext";
+import { copy } from "@/lib/copy";
 
-const prompts = [
-  "Apa hal kecil yang membuatmu merasa lega atau bersyukur hari ini?",
-  "Jika ada perasaan yang sulit diungkapkan secara langsung hari ini, apa itu?",
-  "Apa satu hal yang ingin kamu lakukan untuk merawat dirimu minggu ini?",
-];
+const lora = { fontFamily: "var(--font-lora), Lora, Georgia, serif" };
+const prompts = copy.journal.prompts;
 
 export default function JournalPage() {
   const router = useRouter();
@@ -51,18 +49,18 @@ export default function JournalPage() {
   };
 
   return (
-    <div className="space-y-6 max-w-3xl mx-auto py-2">
+    <div className="space-y-6 max-w-3xl mx-auto py-2 animate-in fade-in duration-150">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-border-subtle/80 pb-4">
         <div>
           <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-            Refleksi Pribadi
+            Ruang Menulis Bebas
           </span>
           <h1 className="text-2xl font-extrabold text-brand-900 tracking-tight">
-            Catatan pribadi
+            Tumpahkan ke Kertas
           </h1>
           <p className="text-xs text-text-muted mt-0.5">
-            Tersimpan di browser selama sesi ini. Tidak dikirim ke server.
+            {copy.journal.saved}
           </p>
         </div>
 
@@ -96,7 +94,10 @@ export default function JournalPage() {
               Ganti pertanyaan →
             </button>
           </div>
-          <div className="p-3.5 rounded-xl bg-surface-inset shadow-neu-inset text-sm font-serif italic text-brand-900 border border-border-subtle/80 leading-relaxed">
+          <div
+            style={lora}
+            className="p-3.5 rounded-xl bg-surface-inset shadow-neu-inset text-sm font-serif italic text-brand-900 border border-border-subtle/80 leading-relaxed"
+          >
             &ldquo;{prompts[selectedPromptIdx]}&rdquo;
           </div>
         </div>

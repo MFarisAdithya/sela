@@ -21,6 +21,7 @@ import { SourceCitation } from "@/components/chat/SourceCitation";
 import { useApp } from "@/context/AppContext";
 import { RetrievedSource } from "@/types/knowledge";
 import { cn } from "@/lib/utils";
+import { copy } from "@/lib/copy";
 
 interface ChatMessage {
   id: string;
@@ -34,12 +35,7 @@ interface ChatMessage {
   statusBadge?: string;
 }
 
-const starterPrompts = [
-  "Bagaimana cara menyampaikan rasa kecewa kepada keluarga secara baik?",
-  "Apa langkah pertama untuk melatih komunikasi asertif?",
-  "Aku merasa kurang percaya diri saat berbicara di depan orang lain.",
-  "Aku merasa sangat lelah dan kewalahan hari ini.",
-];
+const starterPrompts = copy.safeStory.starters;
 
 export default function SafeStoryPage() {
   const { userName, isAiConfigured, checkAiConfiguration } = useApp();
@@ -47,10 +43,10 @@ export default function SafeStoryPage() {
     {
       id: "msg-welcome",
       sender: "ai",
-      text: `Halo ${userName}. Ini ruang cerita Safe Story AI di SELA. Kamu bisa menuliskan apa yang sedang kamu rasakan atau tanyakan seputar pengelolaan emosi, komunikasi, dan kesiapan diri. Jawaban didasarkan pada materi terverifikasi.`,
+      text: copy.safeStory.welcome(userName),
       timestamp: "Baru saja",
       isAiGenerated: false,
-      statusBadge: "Panduan Awal",
+      statusBadge: "Pojokan Tenang",
     },
   ]);
   const [inputValue, setInputValue] = useState("");
@@ -364,7 +360,7 @@ export default function SafeStoryPage() {
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Tulis apa yang sedang kamu rasakan..."
+              placeholder={copy.safeStory.placeholder}
               maxLength={1000}
               disabled={isLoading}
               className="w-full px-4 py-3 text-xs sm:text-sm rounded-xl bg-surface-inset shadow-neu-inset text-text-main border border-border-subtle focus:outline-none focus:ring-2 focus:ring-brand-500 placeholder:text-text-subtle"

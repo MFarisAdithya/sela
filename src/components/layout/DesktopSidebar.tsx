@@ -19,11 +19,11 @@ import { Badge } from "@/components/ui/Badge";
 import { SelaLogo } from "@/components/ui/SelaLogo";
 
 const navItems = [
-  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Cerita AI", href: "/safe-story", icon: MessageSquareHeart },
-  { label: "Catatan pribadi", href: "/journal", icon: PenLine },
-  { label: "Ruang belajar", href: "/learning", icon: GraduationCap },
-  { label: "Peta dukungan", href: "/support", icon: Users },
+  { label: "Beranda", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Cerita ke SELA", href: "/safe-story", icon: MessageSquareHeart },
+  { label: "Tumpahkan ke Kertas", href: "/journal", icon: PenLine },
+  { label: "Sudut Baca & Latihan", href: "/learning", icon: GraduationCap },
+  { label: "Cari Bantuan Nyata", href: "/support", icon: Users },
   { label: "Cari pendamping", href: "/referrals", icon: PhoneCall },
   { label: "Rencana bertumbuh", href: "/growth-plan", icon: TrendingUp },
   { label: "Pengaturan", href: "/settings", icon: ShieldCheck },

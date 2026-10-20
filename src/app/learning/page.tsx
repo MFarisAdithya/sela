@@ -17,13 +17,19 @@ import { Badge } from "@/components/ui/Badge";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { useApp } from "@/context/AppContext";
 import { LEARNING_MODULES, LearningModule } from "@/data/learningModules";
+import { copy } from "@/lib/copy";
 
 export default function LearningPage() {
   const { completedModules, toggleModuleCompleted } = useApp();
   const [selectedCategory, setSelectedCategory] = useState<string>("Semua");
   const [expandedModuleId, setExpandedModuleId] = useState<string | null>("mod-1");
 
-  const categories = ["Semua", "Psikoedukasi", "Life Skills", "Karier"];
+  const categories = [
+    "Semua",
+    copy.learning.categories.psikoedukasi,
+    copy.learning.categories.lifeSkills,
+    copy.learning.categories.karier,
+  ];
 
   const filteredModules =
     selectedCategory === "Semua"
@@ -35,18 +41,18 @@ export default function LearningPage() {
   );
 
   return (
-    <div className="space-y-6 max-w-4xl mx-auto py-2">
+    <div className="space-y-6 max-w-4xl mx-auto py-2 animate-in fade-in duration-150">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border-subtle/80 pb-5">
         <div>
           <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-            Edukasi Mandiri Nonklinis
+            Sudut Baca & Refleksi
           </span>
           <h1 className="text-2xl font-extrabold text-brand-900 tracking-tight">
-            Ruang belajar
+            {copy.learning.title}
           </h1>
           <p className="text-xs text-text-muted mt-0.5">
-            Materi psikoedukasi dan latihan life skills terverifikasi untuk remaja.
+            Hal-hal kecil tentang menghadapi orang lain dan memahami diri.
           </p>
         </div>
 

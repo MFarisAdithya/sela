@@ -44,8 +44,7 @@ export const SourceCitation: React.FC<SourceCitationProps> = ({ sources }) => {
       >
         <BookOpen className="w-3.5 h-3.5 text-brand-600" />
         <span>
-          {sources.length}{" "}
-          {hasOnlyVerified ? "Rujukan Terverifikasi Digunakan" : "Sumber Materi Terlampir"}
+          {hasOnlyVerified ? "Catatan yang mungkin relevan untukmu" : "Rujukan materi terlampir"}
         </span>
         {isOpen ? <ChevronUp className="w-3 h-3 text-text-muted" /> : <ChevronDown className="w-3 h-3 text-text-muted" />}
       </button>
