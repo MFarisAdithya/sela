@@ -12,13 +12,13 @@ export interface GenerateChatResult {
   reply: string;
   isAiGenerated: boolean;
   modelUsed?: string;
-  provider?: "openai" | "gemini" | "groq" | "free";
+  provider?: "gemini" | "openai" | "groq" | "free";
   error?: string;
 }
 
 export interface ModelInfo {
   isActive: boolean;
-  provider: "openai" | "gemini" | "groq" | "free" | "none";
+  provider: "gemini" | "openai" | "groq" | "free" | "none";
   model: string;
   description: string;
 }
@@ -30,23 +30,12 @@ export function getActiveModelInfo(): ModelInfo {
     return {
       isActive: true,
       provider: "gemini",
-      model: process.env.GEMINI_MODEL || "gemini-1.5-flash",
-      description: "Google Gemini (Gratis Resmi 15 RPM)",
+      model: process.env.GEMINI_MODEL || "gemini-flash-lite-latest",
+      description: "Google Gemini Flash (Gratis Resmi)",
     };
   }
 
-  // 2. Check Groq (Free & High Speed)
-  const groqKey = process.env.GROQ_API_KEY;
-  if (groqKey && groqKey.trim().length > 0 && !groqKey.includes("your-key")) {
-    return {
-      isActive: true,
-      provider: "groq",
-      model: process.env.GROQ_MODEL || "llama-3.3-70b-versatile",
-      description: "Groq Cloud (Gratis Resmi 30 RPM)",
-    };
-  }
-
-  // 3. Check OpenAI API
+  // 2. Check OpenAI API
   const openAiKey = process.env.OPENAI_API_KEY;
   if (openAiKey && openAiKey.trim().length > 0 && !openAiKey.includes("sk-your-key")) {
     return {
@@ -57,8 +46,19 @@ export function getActiveModelInfo(): ModelInfo {
     };
   }
 
+  // 3. Check Groq
+  const groqKey = process.env.GROQ_API_KEY;
+  if (groqKey && groqKey.trim().length > 0 && !groqKey.includes("your-key")) {
+    return {
+      isActive: true,
+      provider: "groq",
+      model: process.env.GROQ_MODEL || "llama-3.3-70b-versatile",
+      description: "Groq Cloud (Gratis Resmi 30 RPM)",
+    };
+  }
+
   // 4. Default: Zero-Config Free Cloud Gateway
-  const allowFree = process.env.AI_PROVIDER === "free" || !openAiKey;
+  const allowFree = process.env.AI_PROVIDER === "free";
   if (allowFree) {
     return {
       isActive: true,
@@ -80,6 +80,39 @@ export function isApiKeyConfigured(): boolean {
   return getActiveModelInfo().isActive;
 }
 
+async function callGeminiApi(apiKey: string, model: string, systemPrompt: string, userMessage: string): Promise<string> {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+  const res = await fetch(url, {
+    method: "POST",
+    signal: AbortSignal.timeout(12000),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      systemInstruction: {
+        parts: [{ text: systemPrompt }],
+      },
+      contents: [
+        { role: "user", parts: [{ text: userMessage }] },
+      ],
+      generationConfig: {
+        maxOutputTokens: 450,
+        temperature: 0.6,
+      },
+    }),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => null);
+    throw new Error(errorData?.error?.message || `Gemini API HTTP ${res.status}`);
+  }
+
+  const data = await res.json();
+  const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!text) {
+    throw new Error("Tidak ada respons yang dikembalikan oleh model Gemini.");
+  }
+  return text.trim();
+}
+
 export async function generateAiResponse(params: GenerateChatParams): Promise<GenerateChatResult> {
   const modelInfo = getActiveModelInfo();
   if (!modelInfo.isActive) {
@@ -90,42 +123,13 @@ export async function generateAiResponse(params: GenerateChatParams): Promise<Ge
     };
   }
 
-  let apiKey = "";
-  let baseURL: string | undefined = undefined;
-  let modelName = "";
-
-  if (modelInfo.provider === "gemini") {
-    apiKey = process.env.GEMINI_API_KEY!.trim();
-    baseURL = "https://generativelanguage.googleapis.com/v1beta/openai/";
-    modelName = process.env.GEMINI_MODEL || "gemini-1.5-flash";
-  } else if (modelInfo.provider === "groq") {
-    apiKey = process.env.GROQ_API_KEY!.trim();
-    baseURL = "https://api.groq.com/openai/v1";
-    modelName = process.env.GROQ_MODEL || "llama-3.3-70b-versatile";
-  } else if (modelInfo.provider === "openai") {
-    apiKey = process.env.OPENAI_API_KEY!.trim();
-    baseURL = undefined;
-    modelName = process.env.OPENAI_MODEL || "gpt-4o-mini";
-  } else {
-    // Free Gateway
-    apiKey = "free-tier-access";
-    baseURL = "https://text.pollinations.ai/openai";
-    modelName = "openai";
-  }
-
-  const openai = new OpenAI({
-    apiKey,
-    baseURL,
-    timeout: 18000,
-  });
-
   const systemInstructions = `Kamu adalah FATHERCARE AI, asisten pendampingan awal nonklinis untuk remaja dan dewasa muda (usia 15–24 tahun).
 Nama pengguna saat ini: ${params.userAlias || "Alex"}.
 
 PRINSIP KOMUNIKASI & CONTENT DESIGN:
 1. Gunakan bahasa Indonesia yang natural, hangat, tenang, dan terasa ditulis manusia.
 2. JANGAN mendiagnosis (dilarang menyebut "kamu depresi", "kamu trauma", "kamu bipolar", atau menetapkan label medis apa pun).
-3. JANGAN mengarang kontak darurat atau nama konselor fiktif. Rujuk hanya pada sumber terverifikasi resmi.
+3. JANGAN mengarang kontak darurat atau nama konselor fiktif. Rujuk hanya pada sumber terverifikasi resmi (Hotline 119 ext 8, SAPA 129).
 4. JANGAN gunakan slogan motivasi klise seperti "Kamu tidak sendirian", "Tetaplah tersenyum", atau kalimat pemasaran generik.
 5. JANGAN gunakan validasi emosional berulang atau berpura-pura merasakan apa yang dirasakan pengguna (hindari "Aku sangat memahami kepedihanmu").
 6. Tanggapi langsung situasi spesifik yang diceritakan pengguna, tawarkan 1 langkah kecil yang realistis, dan akhiri dengan 1 pertanyaan terbuka atau pilihan lanjut sesuai kenyamanan mereka.
@@ -136,22 +140,58 @@ ${params.contextText ? params.contextText : "Tidak ada dokumen khusus yang cocok
 Jika teks pengguna di luar materi terverifikasi, sampaikan batasanmu dengan jujur dan jangan mengarang teori sendiri.`;
 
   try {
-    const response = await openai.chat.completions.create({
-      model: modelName,
-      messages: [
-        { role: "system", content: systemInstructions },
-        { role: "user", content: params.userMessage },
-      ],
-      max_tokens: 450,
-      temperature: 0.6,
-    });
+    let reply = "";
 
-    const reply = response.choices[0]?.message?.content?.trim() || "Maaf, belum ada respons yang dapat dimuat saat ini.";
+    if (modelInfo.provider === "gemini") {
+      reply = await callGeminiApi(
+        process.env.GEMINI_API_KEY!.trim(),
+        modelInfo.model,
+        systemInstructions,
+        params.userMessage
+      );
+    } else {
+      // OpenAI, Groq, or Free OpenAI Compatible Gateway
+      let apiKey = "";
+      let baseURL: string | undefined = undefined;
+      let modelName = "";
+
+      if (modelInfo.provider === "groq") {
+        apiKey = process.env.GROQ_API_KEY!.trim();
+        baseURL = "https://api.groq.com/openai/v1";
+        modelName = process.env.GROQ_MODEL || "llama-3.3-70b-versatile";
+      } else if (modelInfo.provider === "openai") {
+        apiKey = process.env.OPENAI_API_KEY!.trim();
+        baseURL = undefined;
+        modelName = process.env.OPENAI_MODEL || "gpt-4o-mini";
+      } else {
+        apiKey = "free-tier-access";
+        baseURL = "https://text.pollinations.ai/openai";
+        modelName = "openai";
+      }
+
+      const openai = new OpenAI({
+        apiKey,
+        baseURL,
+        timeout: 18000,
+      });
+
+      const response = await openai.chat.completions.create({
+        model: modelName,
+        messages: [
+          { role: "system", content: systemInstructions },
+          { role: "user", content: params.userMessage },
+        ],
+        max_tokens: 450,
+        temperature: 0.6,
+      });
+
+      reply = response.choices[0]?.message?.content?.trim() || "Maaf, belum ada respons yang dapat dimuat saat ini.";
+    }
 
     return {
       reply,
       isAiGenerated: true,
-      modelUsed: `${modelInfo.description} (${modelName})`,
+      modelUsed: `${modelInfo.description}`,
       provider: modelInfo.provider === "none" ? undefined : modelInfo.provider,
     };
   } catch (error: any) {
