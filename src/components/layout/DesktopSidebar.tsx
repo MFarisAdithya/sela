@@ -45,9 +45,9 @@ export const DesktopSidebar: React.FC = () => {
             <MessageSquareHeart className="w-5 h-5" />
           </div>
           <div>
-            <h1 className="font-bold text-base tracking-tight text-brand-900 leading-none">
+            <span className="font-bold text-base tracking-tight text-brand-900 leading-none block">
               FATHERCARE AI
-            </h1>
+            </span>
             <p className="text-[11px] text-text-muted mt-1 font-medium">
               Pendampingan Awal
             </p>

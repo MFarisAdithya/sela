@@ -43,8 +43,8 @@ export const HeaderBar: React.FC = () => {
               AI Aktif
             </Badge>
           ) : (
-            <Badge variant="demo" dot size="sm" title="Kunci API belum diisi di server">
-              API Belum Dikonfigurasi
+            <Badge variant="demo" dot size="sm" title="Mode simulasi demonstrasi Fase 2">
+              DEMO MODE
             </Badge>
           )}
 

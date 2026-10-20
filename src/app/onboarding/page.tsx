@@ -58,9 +58,12 @@ export default function OnboardingPage() {
 
       {/* Consent Checkboxes */}
       <NeuCard variant="raised" className="p-4 sm:p-5 text-left space-y-3 bg-surface">
-        <div
+        <button
+          type="button"
+          role="checkbox"
+          aria-checked={agreeNonClinical}
           onClick={() => setAgreeNonClinical(!agreeNonClinical)}
-          className="flex items-start gap-3 cursor-pointer p-2 rounded-xl hover:bg-brand-50/50 transition-colors"
+          className="w-full text-left flex items-start gap-3 cursor-pointer p-2 rounded-xl hover:bg-brand-50/50 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
         >
           <div className="mt-0.5 text-brand-700 shrink-0">
             {agreeNonClinical ? (
@@ -77,11 +80,14 @@ export default function OnboardingPage() {
               Saya memahami bahwa AI ini bukan psikolog, psikiater, atau layanan gawat darurat klinis.
             </p>
           </div>
-        </div>
+        </button>
 
-        <div
+        <button
+          type="button"
+          role="checkbox"
+          aria-checked={agreePrivacy}
           onClick={() => setAgreePrivacy(!agreePrivacy)}
-          className="flex items-start gap-3 cursor-pointer p-2 rounded-xl hover:bg-brand-50/50 transition-colors"
+          className="w-full text-left flex items-start gap-3 cursor-pointer p-2 rounded-xl hover:bg-brand-50/50 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
         >
           <div className="mt-0.5 text-brand-700 shrink-0">
             {agreePrivacy ? (
@@ -98,7 +104,7 @@ export default function OnboardingPage() {
               Saya memahami data catatan dan obrolan berada di memori peramban ini dan saya berhak berhenti atau menghapusnya kapan saja.
             </p>
           </div>
-        </div>
+        </button>
       </NeuCard>
 
       {/* Proceed Button */}
