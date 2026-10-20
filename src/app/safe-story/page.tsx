@@ -67,29 +67,17 @@ export default function SafeStoryPage() {
     const text = textToSend.trim();
     if (!text || isLoading) return;
 
-    // Check if user text has high-risk self-harm signals
-    const highRiskKeywords = ["menyakiti diri", "bunuh diri", "ingin mati", "mengakhiri hidup", "self harm"];
-    const isRisky = highRiskKeywords.some((kw) => text.toLowerCase().includes(kw));
-
-    if (isRisky) {
-      setHighRiskAlert(
-        "Kami sangat peduli dengan keselamatanmu. Fathercare AI bukan layanan gawat darurat. Tolong segera hubungi orang dewasa terpercaya atau kontak darurat nasional di bawah ini."
-      );
-    } else {
-      setHighRiskAlert(null);
-    }
-
-    // If AI is in ACTIVE mode and transmission not yet confirmed by user in this session, show consent dialog
+    // If AI is in ACTIVE mode and user hasn't confirmed external transmission, prompt for consent first
     if (isAiActive && !hasConfirmedTransmission) {
       setPendingText(text);
       setShowConsentModal(true);
       return;
     }
 
-    executeMessage(text, isRisky);
+    executeMessage(text);
   };
 
-  const executeMessage = async (text: string, isRisky: boolean) => {
+  const executeMessage = async (text: string) => {
     const userMsg: ChatMessage = {
       id: "usr-" + Date.now(),
       sender: "user",
@@ -102,103 +90,48 @@ export default function SafeStoryPage() {
     setIsLoading(true);
 
     try {
-      if (isRisky) {
-        // High risk fallback response
-        setTimeout(() => {
-          setMessages((prev) => [
-            ...prev,
-            {
-              id: "ai-" + Date.now(),
-              sender: "ai",
-              text: "Aku mendengar bahwa situasi saat ini terasa sangat berat bagimu. Keselamatan dan kesejahteraanmu adalah yang paling utama. Aku adalah asisten AI dengan keterbatasan dan tidak bisa memberikan pendampingan krisis. Mohon cari tempat aman sekarang dan hubungi konselor, guru BK, atau layanan Hotline Kemenkes 119 ext 8.",
-              timestamp: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }),
-              isCrisis: true,
-            },
-          ]);
-          setIsLoading(false);
-        }, 600);
-        return;
-      }
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text }),
+      });
 
-      // If active mode and we have API route
-      if (isAiActive) {
-        const res = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: text }),
-        });
-
-        if (res.ok) {
-          const data = await res.json();
-          setMessages((prev) => [
-            ...prev,
-            {
-              id: "ai-" + Date.now(),
-              sender: "ai",
-              text: data.reply,
-              timestamp: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }),
-              citations: data.citations,
-            },
-          ]);
-          setIsLoading(false);
-          return;
-        }
-      }
-
-      // Demo Mode deterministic fallback simulation
-      setTimeout(() => {
-        let simulatedReply = "";
-        let simulatedCitations = [
-          {
-            title: "Pengenalan Emosi & Regulasi Diri Remaja",
-            source: "Modul Psikoedukasi Genre InnovAItion 2026",
-            status: "Ditinjau oleh Ahli Konseling",
-            summary: "Menamai emosi secara spesifik dan memvalidasi perasaan tanpa terburu-buru menghakimi diri sendiri.",
-          },
-        ];
-
-        if (text.toLowerCase().includes("cemas") || text.toLowerCase().includes("takut")) {
-          simulatedReply =
-            "Rasa cemas saat menghadapi tantangan atau ekspektasi adalah respon alami tubuhmu. Mengetahui bahwa kamu sedang cemas adalah langkah awal yang sangat baik. Cobalah teknik pernapasan 4-7-8 sejenak: tarik napas 4 detik, tahan 7 detik, dan hembuskan perlahan 8 detik. Apa satu hal kecil yang ada di bawah kendalimu hari ini?";
-        } else if (text.toLowerCase().includes("asertif") || text.toLowerCase().includes("teman")) {
-          simulatedReply =
-            "Menjaga batasan diri bukan berarti tidak peduli dengan orang lain. Kamu bisa menggunakan formula kalimat 'Saya merasa... ketika... karena... jadi saya ingin...'. Ini membantu temanmu memahami sudut pandangmu tanpa merasa diserang secara personal.";
-          simulatedCitations = [
-            {
-              title: "Komunikasi Asertif untuk Remaja & Pemuda",
-              source: "Panduan Life Skills ADUJAKNAS 2026",
-              status: "Terverifikasi",
-              summary: "Teknik menyampaikan kebutuhan diri secara jujur dan menghormati hak lawan bicara.",
-            },
-          ];
-        } else {
-          simulatedReply =
-            "Terima kasih sudah mau berbagi hal ini denganku. Mengungkapkan isi pikiran lewat tulisan butuh keberanian. Dari apa yang kamu ceritakan, bagian mana yang saat ini terasa paling menguras energimu? Kamu boleh memilih untuk lanjut bercerita, mencatatnya di jurnal, atau sekadar beristirahat sejenak.";
-        }
-
+      if (res.ok) {
+        const data = await res.json();
         setMessages((prev) => [
           ...prev,
           {
             id: "ai-" + Date.now(),
             sender: "ai",
-            text: simulatedReply,
+            text: data.reply,
             timestamp: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }),
-            citations: simulatedCitations,
+            citations: data.citations,
+            isCrisis: data.isCrisis,
           },
         ]);
-        setIsLoading(false);
-      }, 800);
+
+        if (data.isCrisis) {
+          setHighRiskAlert(
+            "Pemberitahuan Keselamatan: Sistem mengarahkan fokus ke keselamatan dan opsi bantuan darurat resmi."
+          );
+        } else {
+          setHighRiskAlert(null);
+        }
+      } else {
+        throw new Error("Gagal mengambil respon dari server");
+      }
     } catch {
-      setIsLoading(false);
       setMessages((prev) => [
         ...prev,
         {
           id: "ai-" + Date.now(),
           sender: "ai",
-          text: "Maaf, terjadi gangguan koneksi sementara. Sistem tetap dapat membantumu melalui modul Ruang Belajar atau kamu bisa bercerita kembali dalam beberapa saat.",
+          text: "Maaf, terjadi kendala koneksi sementara. Sistem tetap dapat membantumu melalui modul Ruang Belajar atau kamu bisa mencoba bercerita kembali.",
           timestamp: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }),
         },
       ]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -229,11 +162,11 @@ export default function SafeStoryPage() {
               </h1>
               {isAiActive ? (
                 <Badge variant="active" size="sm" dot>
-                  AI Aktif
+                  AI Aktif (Cloud)
                 </Badge>
               ) : (
                 <Badge variant="demo" size="sm" dot>
-                  Mode Demo
+                  Mode Demo (RAG Lokal)
                 </Badge>
               )}
             </div>
@@ -313,7 +246,7 @@ export default function SafeStoryPage() {
                 <div className="mt-3 pt-2.5 border-t border-border-subtle/80 space-y-2">
                   <div className="flex items-center gap-1.5 text-[11px] font-bold text-brand-900">
                     <BookOpen className="w-3.5 h-3.5 text-brand-600" />
-                    <span>Sumber Pengetahuan RAG:</span>
+                    <span>Sumber Pengetahuan RAG Terverifikasi:</span>
                   </div>
                   {msg.citations.map((cite, idx) => (
                     <div
@@ -345,7 +278,7 @@ export default function SafeStoryPage() {
         {isLoading && (
           <div className="flex items-center gap-2 text-xs text-text-muted p-2 animate-pulse">
             <Sparkles className="w-4 h-4 text-brand-600 animate-spin" />
-            <span>Fathercare AI sedang mencari materi dan menyusun respon empatik...</span>
+            <span>Fathercare AI sedang mencari materi RAG dan menyusun respon empatik...</span>
           </div>
         )}
 
@@ -411,7 +344,7 @@ export default function SafeStoryPage() {
         <div className="flex items-center justify-between px-2 text-[10px] text-text-subtle">
           <span className="flex items-center gap-1">
             <Shield className="w-3 h-3 text-brand-600" />
-            Percakapan privat di browser Anda &bull; Tidak disimpan di database publik
+            Percakapan diproses aman &bull; Filter keselamatan & disinfeksi PII aktif
           </span>
           <span>{inputText.length}/1000 karakter</span>
         </div>
@@ -438,7 +371,7 @@ export default function SafeStoryPage() {
               onClick={() => {
                 setHasConfirmedTransmission(true);
                 setShowConsentModal(false);
-                executeMessage(pendingText, false);
+                executeMessage(pendingText);
               }}
             >
               Setuju & Kirim
@@ -448,7 +381,7 @@ export default function SafeStoryPage() {
       >
         <div className="space-y-3 text-xs leading-relaxed text-text-muted">
           <p>
-            Anda sedang mengaktifkan <strong>Mode AI Aktif</strong>. Pesan Anda akan dikirim ke server backend kami untuk dicocokkan dengan basis pengetahuan (RAG) dan diteruskan ke OpenAI API untuk menghasilkan jawaban kontekstual.
+            Anda sedang mengaktifkan <strong>Mode AI Aktif</strong>. Pesan Anda akan dikirim ke server backend untuk dicocokkan dengan basis pengetahuan (RAG) dan diteruskan ke model bahasa OpenAI.
           </p>
           <div className="p-3 rounded-xl bg-surface-inset shadow-neu-inset space-y-1 text-text-main">
             <div className="flex items-center gap-1.5 font-semibold text-brand-900 text-xs">
@@ -456,9 +389,9 @@ export default function SafeStoryPage() {
               <span>Perlindungan Privasi Otomatis:</span>
             </div>
             <ul className="list-disc list-inside text-[11px] text-text-muted space-y-0.5">
-              <li>Penyaringan otomatis informasi identitas (PII: nomor HP, email, nama lengkap).</li>
+              <li>Penyaringan otomatis informasi identitas (nomor HP, NIK, dan email).</li>
               <li>Pesan tidak digunakan untuk melatih model umum publik.</li>
-              <li>Riwayat tidak disimpan di database permanen.</li>
+              <li>Riwayat tidak disimpan di database server permanen.</li>
             </ul>
           </div>
         </div>

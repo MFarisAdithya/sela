@@ -2,6 +2,9 @@
 .next/
 out/
 
+# Test Results
+.test-results/
+
 # Dependencies
 node_modules/
 /.pnp

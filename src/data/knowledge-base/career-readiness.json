@@ -1,0 +1,26 @@
+[
+  {
+    "id": "car-01",
+    "topic": "career",
+    "title": "Mengenali Potensi Karakter dari Kemandirian",
+    "source_name": "Kesiapan Kerja Remaja & Vokasi",
+    "source_url_or_reference": "Suroto et al. (2024) - Work Readiness of Youth & Adolescents",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-02-05",
+    "target_audience": "Remaja Usia Kerja & Mahasiswa (17-24 tahun)",
+    "keywords": ["karier", "kerja", "masa depan", "potensi", "kemandirian", "tanggung jawab", "magang", "vokasi"],
+    "content": "Pengalaman menghadapi tantangan keluarga seringkali mengasah ketangguhan mental (grit), kemampuan adaptasi cepat, serta empati sosial yang tinggi. Kualitas ini sangat dihargai di lingkungan profesional modern dan organisasi sosial."
+  },
+  {
+    "id": "car-02",
+    "topic": "career",
+    "title": "Struktur Perkenalan Diri 60 Detik untuk Wawancara",
+    "source_name": "Panduan Kesiapan Karier Muda Genre Lampung",
+    "source_url_or_reference": "Modul Pelatihan Kesiapan Kerja Pemuda (2025)",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-01-28",
+    "target_audience": "Pencari Kerja Muda & Siswa SMK/Mahasiswa",
+    "keywords": ["wawancara", "perkenalan", "interview", "percaya diri", "bicara di depan orang", "grogi"],
+    "content": "Gunakan struktur 3 poin dalam 60 detik: 1. Siapa Anda dan apa minat utama Anda, 2. Satu pencapaian atau keterampilan yang Anda kuasai dengan bangga, 3. Alasan Anda antusias belajar dan berkontribusi di tempat tersebut."
+  }
+]
