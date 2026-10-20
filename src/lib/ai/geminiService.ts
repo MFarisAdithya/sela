@@ -23,23 +23,27 @@ export interface GeminiModelStatus {
   statusText: string;
 }
 
+const DEFAULT_MODEL = "gemini-3.5-flash-lite";
+const FALLBACK_MODELS = ["gemini-3.5-flash-lite", "gemini-flash-lite-latest", "gemini-3.8-flash"];
+
 /**
  * Checks if GEMINI_API_KEY is configured on the server
  */
 export function getGeminiConfigStatus(): GeminiModelStatus {
   const apiKey = process.env.GEMINI_API_KEY;
   const isConfigured = !!apiKey && apiKey.trim().length > 0 && !apiKey.includes("your-key");
-  const model = process.env.GEMINI_MODEL || "gemini-flash-lite-latest";
+  const model = process.env.GEMINI_MODEL || DEFAULT_MODEL;
 
   return {
     isConfigured,
     model,
-    statusText: isConfigured ? "AI Aktif: Google Gemini" : "API Belum Dikonfigurasi",
+    statusText: isConfigured ? `AI Aktif: Google Gemini (${model})` : "API Belum Dikonfigurasi",
   };
 }
 
 /**
  * Generates an educational or reflective response using the official @google/genai SDK
+ * with resilient timeout handling and automatic fallback between official supported models.
  */
 export async function generateGeminiChat(
   params: GenerateGeminiChatParams
@@ -55,7 +59,8 @@ export async function generateGeminiChat(
     };
   }
 
-  const model = process.env.GEMINI_MODEL || "gemini-flash-lite-latest";
+  const primaryModel = process.env.GEMINI_MODEL || DEFAULT_MODEL;
+  const timeoutMs = parseInt(process.env.GEMINI_TIMEOUT_MS || "60000", 10);
   const hasGroundedSources = !!params.sources && params.sources.length > 0;
 
   // Strict non-clinical system instructions
@@ -82,61 +87,90 @@ Pertanyaan pengguna tidak memiliki rujukan materi khusus di basis pengetahuan lo
 Jawablah sebagai pendamping reflektif: dengarkan secara tenang, sampaikan dengan jujur bahwa kamu tidak memiliki panduan ilmiah khusus untuk topik tersebut, dan tawarkan langkah awal yang aman atau ajak mendiskusikannya dengan orang terpercaya.`
 }`;
 
-  try {
-    const ai = new GoogleGenAI({ apiKey: apiKey.trim() });
+  const ai = new GoogleGenAI({ apiKey: apiKey.trim() });
 
-    // Enforce 12-second timeout
-    const generatePromise = ai.models.generateContent({
-      model: model,
-      contents: params.userMessage,
-      config: {
-        systemInstruction: systemPrompt,
-        maxOutputTokens: 450,
-        temperature: 0.6,
-      },
-    });
+  // Build model attempt list (primary model first, then fallback alternatives)
+  const modelsToTry = [primaryModel, ...FALLBACK_MODELS.filter((m) => m !== primaryModel)];
 
-    const timeoutPromise = new Promise<never>((_, reject) =>
-      setTimeout(() => reject(new Error("Batas waktu permintaan ke Google Gemini (12 detik) terlampaui.")), 12000)
-    );
+  let lastError: any = null;
 
-    const response = (await Promise.race([generatePromise, timeoutPromise])) as any;
-    const replyText = response.text?.trim();
+  for (const modelToAttempt of modelsToTry) {
+    try {
+      const generatePromise = ai.models.generateContent({
+        model: modelToAttempt,
+        contents: params.userMessage,
+        config: {
+          systemInstruction: systemPrompt,
+          maxOutputTokens: 500,
+          temperature: 0.6,
+        },
+      });
 
-    if (!replyText) {
+      const timeoutPromise = new Promise<never>((_, reject) =>
+        setTimeout(
+          () =>
+            reject(
+              new Error(
+                `Batas waktu permintaan ke Google Gemini (${Math.round(timeoutMs / 1000)} detik) terlampaui.`
+              )
+            ),
+          timeoutMs
+        )
+      );
+
+      const response = (await Promise.race([generatePromise, timeoutPromise])) as any;
+      const replyText = response.text?.trim();
+
+      if (!replyText) {
+        return {
+          reply:
+            "Model AI tidak menghasilkan teks untuk masukan ini. Silakan coba rumuskan ceritamu dengan cara lain.",
+          isAiGenerated: true,
+          modelUsed: `Google Gemini (${modelToAttempt})`,
+          hasGroundedSources,
+        };
+      }
+
       return {
-        reply: "Model AI tidak menghasilkan teks untuk masukan ini. Silakan coba rumuskan ceritamu dengan cara lain.",
+        reply: replyText,
         isAiGenerated: true,
-        modelUsed: model,
+        modelUsed: `Google Gemini (${modelToAttempt})`,
         hasGroundedSources,
       };
+    } catch (error: any) {
+      lastError = error;
+      const errMsg = error?.message || "";
+      console.warn(`[Gemini Attempt] Model ${modelToAttempt} failed: ${errMsg.substring(0, 120)}`);
+
+      // If it's a critical auth issue, do not loop through other models
+      if (errMsg.includes("API_KEY_INVALID") || errMsg.includes("API key not valid")) {
+        break;
+      }
+      // If it was a timeout, continuing with a second heavy call might make user wait too long
+      if (errMsg.includes("Batas waktu permintaan")) {
+        break;
+      }
     }
-
-    return {
-      reply: replyText,
-      isAiGenerated: true,
-      modelUsed: `Google Gemini (${model})`,
-      hasGroundedSources,
-    };
-  } catch (error: any) {
-    console.error("Gemini SDK Generation Error:", error?.message || error);
-
-    const errorMessage = error?.message || "Terjadi kegagalan komunikasi dengan layanan Gemini.";
-    let friendlyError = errorMessage;
-
-    if (errorMessage.includes("API_KEY_INVALID") || errorMessage.includes("API key not valid")) {
-      friendlyError = "API key Google Gemini tidak valid atau telah dicabut.";
-    } else if (errorMessage.includes("ResourceExhausted") || errorMessage.includes("429")) {
-      friendlyError = "Batas kuota panggilan Google Gemini sementara tercapai. Mohon tunggu beberapa detik.";
-    } else if (errorMessage.includes("timeout")) {
-      friendlyError = "Koneksi ke Google Gemini terputus karena batas waktu (timeout).";
-    }
-
-    return {
-      reply: "",
-      isAiGenerated: false,
-      error: friendlyError,
-      hasGroundedSources,
-    };
   }
+
+  // Handle final error if all attempts fail
+  const rawMsg = lastError?.message || "Terjadi kegagalan komunikasi dengan layanan Gemini.";
+  let friendlyError = rawMsg;
+
+  if (rawMsg.includes("API_KEY_INVALID") || rawMsg.includes("API key not valid")) {
+    friendlyError = "API key Google Gemini tidak valid atau telah dicabut.";
+  } else if (rawMsg.includes("ResourceExhausted") || rawMsg.includes("429")) {
+    friendlyError = "Batas kuota panggilan Google Gemini sementara tercapai. Mohon tunggu beberapa saat.";
+  } else if (rawMsg.includes("UNAVAILABLE") || rawMsg.includes("503")) {
+    friendlyError = "Server Google Gemini sedang mengalami beban tinggi sementara. Mohon coba beberapa saat lagi.";
+  } else if (rawMsg.includes("Batas waktu permintaan")) {
+    friendlyError = rawMsg;
+  }
+
+  return {
+    reply: "",
+    isAiGenerated: false,
+    error: friendlyError,
+    hasGroundedSources,
+  };
 }
