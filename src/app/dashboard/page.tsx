@@ -67,8 +67,20 @@ const moodOptions: MoodOption[] = [
 
 export default function DashboardPage() {
   const { userName, currentMood, setCurrentMood, isAiConfigured } = useApp();
+  const [moodContext, setMoodContext] = useState("");
+  const [isCheckInSaved, setIsCheckInSaved] = useState(false);
 
   const currentMoodObj = moodOptions.find((m) => m.id === currentMood);
+
+  const handleSaveCheckIn = () => {
+    setIsCheckInSaved(true);
+  };
+
+  const handleResetCheckIn = () => {
+    setCurrentMood(null);
+    setMoodContext("");
+    setIsCheckInSaved(false);
+  };
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto py-2">
@@ -89,8 +101,8 @@ export default function DashboardPage() {
               AI Aktif
             </Badge>
           ) : (
-            <Badge variant="warning" dot size="sm">
-              API Belum Dikonfigurasi
+            <Badge variant="demo" dot size="sm">
+              Mode Demo (Fase 2)
             </Badge>
           )}
           <span className="text-xs text-text-muted hidden sm:inline">
@@ -112,11 +124,11 @@ export default function DashboardPage() {
           </div>
           {currentMood && (
             <button
-              onClick={() => setCurrentMood(null)}
+              onClick={handleResetCheckIn}
               className="text-[11px] text-text-muted hover:text-brand-900 flex items-center gap-1 transition-colors"
             >
               <RotateCcw className="w-3 h-3" />
-              <span>Reset</span>
+              <span>Ganti pilihan</span>
             </button>
           )}
         </div>
@@ -128,7 +140,10 @@ export default function DashboardPage() {
             return (
               <button
                 key={mood.id}
-                onClick={() => setCurrentMood(mood.id)}
+                onClick={() => {
+                  setCurrentMood(mood.id);
+                  setIsCheckInSaved(false);
+                }}
                 className={cn(
                   "p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-2 transition-all duration-150 min-h-[72px]",
                   "border focus:outline-none focus:ring-2 focus:ring-brand-500",
@@ -147,20 +162,57 @@ export default function DashboardPage() {
           })}
         </div>
 
-        {/* Gentle Contextual Note based on selection */}
-        {currentMoodObj && (
-          <NeuCard variant="inset" className="p-4 flex items-start gap-3 bg-surface-inset/80">
-            <div className="p-1.5 rounded-xl bg-surface shadow-neu-raised-sm shrink-0 mt-0.5">
-              {currentMoodObj.icon}
+        {/* Optional Context Input & Action */}
+        {currentMood && (
+          <NeuCard variant="raised-sm" className="p-4 space-y-3 bg-surface border border-border-subtle animate-in fade-in duration-150">
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-brand-900">
+                Ceritakan sedikit apa yang sedang terjadi (opsional):
+              </label>
+              <input
+                type="text"
+                value={moodContext}
+                onChange={(e) => setMoodContext(e.target.value)}
+                placeholder="Contoh: Ada hal yang membuatku kepikiran di sekolah atau rumah..."
+                className="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl bg-surface-inset shadow-neu-inset text-text-main border border-border-subtle focus:outline-none focus:ring-2 focus:ring-brand-500"
+              />
             </div>
-            <div className="space-y-0.5 text-left">
-              <span className="text-xs font-bold text-brand-900">
-                Langkah kecil yang bisa kamu ambil
+
+            <div className="flex items-center justify-between pt-1">
+              <span className="text-[11px] text-text-muted">
+                * Check-in ini bersifat refleksi mandiri dan bukan diagnosis psikologis.
               </span>
-              <p className="text-xs text-text-muted leading-relaxed">
-                {currentMoodObj.note}
-              </p>
+              <NeuButton size="sm" variant="primary" onClick={handleSaveCheckIn}>
+                Simpan check-in
+              </NeuButton>
             </div>
+
+            {/* Contextual Recommendation Feedback */}
+            {currentMoodObj && (
+              <div className="mt-3 pt-3 border-t border-border-subtle/80 flex items-start gap-3 bg-brand-50/50 p-3 rounded-xl">
+                <div className="p-1.5 rounded-xl bg-surface shadow-neu-raised-sm shrink-0 mt-0.5">
+                  {currentMoodObj.icon}
+                </div>
+                <div className="space-y-0.5 text-left">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold text-brand-900">
+                      Langkah kecil yang disarankan
+                    </span>
+                    <Badge variant="prototype" size="sm">
+                      Nonklinis
+                    </Badge>
+                  </div>
+                  <p className="text-xs text-text-muted leading-relaxed">
+                    {currentMoodObj.note}
+                  </p>
+                  {moodContext && (
+                    <p className="text-[11px] text-brand-800 italic pt-1">
+                      Catatanmu: &ldquo;{moodContext}&rdquo;
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
           </NeuCard>
         )}
       </section>

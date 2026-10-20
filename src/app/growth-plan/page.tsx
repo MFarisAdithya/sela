@@ -168,7 +168,7 @@ export default function GrowthPlanPage() {
       {/* Gentle Philosophy Reminder */}
       <div className="p-3 rounded-xl bg-surface-inset text-xs text-text-muted border border-border-subtle/80 flex items-center gap-2">
         <ShieldCheck className="w-4 h-4 text-brand-600 shrink-0" />
-        <span>Rencana bertumbuh berfokus pada kekuatan dan kebutuhanmu, bukan kompetisi atau streak beruntun.</span>
+        <span>Rencana bertumbuh adalah alat bantu perencanaan mandiri tanpa kompetisi atau streak. Fitur ini tidak menjamin kesembuhan atau perubahan kondisi klinis.</span>
       </div>
     </div>
   );

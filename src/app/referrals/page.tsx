@@ -10,7 +10,8 @@ import {
   FileCheck2,
   Lock,
   ArrowRight,
-  ExternalLink,
+  AlertCircle,
+  HelpCircle,
 } from "lucide-react";
 import { NeuCard } from "@/components/ui/NeuCard";
 import { NeuButton } from "@/components/ui/NeuButton";
@@ -19,76 +20,71 @@ import { NeuModal } from "@/components/ui/NeuModal";
 import { Badge } from "@/components/ui/Badge";
 import { useApp } from "@/context/AppContext";
 
-interface PartnerService {
+interface SupportTypeCategory {
   id: string;
   name: string;
-  role: string;
-  organization: string;
-  coverage: string;
-  isOfficial: boolean;
-  contactChannel: string;
+  category: string;
+  description: string;
+  officialScope: string;
+  configStatus: "belum_dikonfigurasi" | "terverifikasi_nasional";
 }
 
-const partnerServices: PartnerService[] = [
+const supportCategories: SupportTypeCategory[] = [
   {
-    id: "part-1",
-    name: "Guru Bimbingan & Konseling (BK)",
-    role: "Pendamping Perkembangan Siswa",
-    organization: "Ruang BK Sekolah Menengah",
-    coverage: "Siswa sekolah masing-masing",
-    isOfficial: true,
-    contactChannel: "Tatap muka langsung di sekolah",
+    id: "sup-bk",
+    name: "Guru Bimbingan dan Konseling (BK)",
+    category: "Lingkungan Sekolah",
+    description: "Pendampingan terkait masalah adaptasi sosial, hambatan belajar, hubungan pertemanan, dan rencana karier.",
+    officialScope: "Ruang BK di sekolah masing-masing",
+    configStatus: "belum_dikonfigurasi",
   },
   {
-    id: "part-2",
-    name: "Konselor Sebaya Forum Genre / PIK-R",
-    role: "Pendamping Remaja & Edukasi Sebaya",
-    organization: "Forum Genre Provinsi Lampung & BKKBN",
-    coverage: "Remaja 15-24 tahun",
-    isOfficial: true,
-    contactChannel: "Sekretariat Genre / Pusat Informasi Remaja",
+    id: "sup-genre",
+    name: "Konselor Sebaya (Forum Genre / PIK-R)",
+    category: "Komunitas Remaja",
+    description: "Rekan sebaya terlatih untuk mendengarkan, berbagi informasi life skills, dan mendiskusikan tantangan masa remaja.",
+    officialScope: "Pusat Informasi & Konseling Remaja (PIK-R)",
+    configStatus: "belum_dikonfigurasi",
   },
   {
-    id: "part-3",
-    name: "Poli Pelayanan Kesehatan Peduli Remaja (PKPR)",
-    role: "Tenaga Medis & Konseling Dasar",
-    organization: "Puskesmas Kecamatan",
-    coverage: "Masyarakat umum & remaja wilayah kerja",
-    isOfficial: true,
-    contactChannel: "Fasilitas Kesehatan Tingkat Pertama (FKTP)",
+    id: "sup-puskesmas",
+    name: "Poli Kesehatan Peduli Remaja (PKPR)",
+    category: "Layanan Kesehatan Primer",
+    description: "Pemeriksaan fisik dan konseling psikologis dasar yang ramah remaja di fasilitas kesehatan tingkat pertama.",
+    officialScope: "Puskesmas Kecamatan",
+    configStatus: "belum_dikonfigurasi",
   },
   {
-    id: "part-4",
-    name: "UPTD Perlindungan Perempuan & Anak (PPA)",
-    role: "Layanan Krisis, Hukum & Psikososial",
-    organization: "Dinas PPPA Provinsi Lampung",
-    coverage: "Korban kekerasan anak & perempuan",
-    isOfficial: true,
-    contactChannel: "Hotline SAPA 129 / Kantor DP3A",
+    id: "sup-ppa",
+    name: "Layanan Perlindungan Perempuan & Anak (SAPA 129)",
+    category: "Layanan Perlindungan Resmi",
+    description: "Layanan resmi Kementerian PPPA untuk pengaduan, pendampingan hukum, dan perlindungan korban kekerasan anak/remaja.",
+    officialScope: "Hotline Nasional SAPA 129 & UPTD PPA Daerah",
+    configStatus: "terverifikasi_nasional",
   },
 ];
 
 export default function ReferralsPage() {
   const { userName, userAgeRange, referralTickets, createReferralTicket } = useApp();
-  const [selectedPartner, setSelectedPartner] = useState<PartnerService | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<SupportTypeCategory | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [summaryText, setSummaryText] = useState("");
   const [shareAlias, setShareAlias] = useState(true);
   const [shareAge, setShareAge] = useState(true);
   const [ticketSuccess, setTicketSuccess] = useState<string | null>(null);
 
-  const handleOpenReferralModal = (partner: PartnerService) => {
-    setSelectedPartner(partner);
-    setSummaryText("Membutuhkan ruang bercerita seputar komunikasi keluarga dan rencana setelah lulus.");
+  const handleOpenReferralModal = (category: SupportTypeCategory) => {
+    setSelectedCategory(category);
+    setSummaryText("Membutuhkan pendampingan seputar komunikasi keluarga dan rencana setelah lulus.");
     setIsModalOpen(true);
   };
 
   const handleCreateTicket = () => {
-    if (!selectedPartner) return;
+    if (!selectedCategory) return;
 
     createReferralTicket({
-      type: selectedPartner.name,
-      contactTarget: selectedPartner.organization,
+      type: selectedCategory.name,
+      contactTarget: selectedCategory.officialScope,
       sharedData: {
         alias: shareAlias ? userName : "Anonim",
         ageRange: shareAge ? userAgeRange : "Dirahasiakan",
@@ -97,7 +93,7 @@ export default function ReferralsPage() {
     });
 
     setIsModalOpen(false);
-    setTicketSuccess(selectedPartner.name);
+    setTicketSuccess(selectedCategory.name);
     setTimeout(() => setTicketSuccess(null), 5000);
   };
 
@@ -106,28 +102,36 @@ export default function ReferralsPage() {
       {/* Header */}
       <div className="space-y-1 border-b border-border-subtle/80 pb-4">
         <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-          Pilihan Rujukan Resmi
+          Pilihan Pendamping Manusia
         </span>
         <h1 className="text-2xl font-extrabold text-brand-900 tracking-tight">
-          Cari pendamping manusia
+          Cari pendamping
         </h1>
         <p className="text-xs text-text-muted">
-          FATHERCARE AI adalah asisten awal. Ketika masalahmu memerlukan penanganan langsung, terhubunglah dengan pendamping terpercaya.
+          FATHERCARE AI bukan pengganti manusia. Saat masalahmu memerlukan penanganan nyata, hubungi pendamping resmi yang kompeten.
         </p>
       </div>
 
-      {/* Emergency Notice Card */}
+      {/* Emergency Hotline Alert */}
       <div className="p-4 rounded-2xl bg-rose-50 border border-rose-300 shadow-sm flex items-start gap-3 text-rose-950">
         <ShieldAlert className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
         <div className="space-y-1 text-xs">
-          <strong className="block font-bold text-rose-900">Dalam situasi bahaya mendesak?</strong>
+          <strong className="block font-bold text-rose-900">Butuh bantuan darurat segera?</strong>
           <p className="leading-relaxed">
-            Jika terjadi kekerasan atau ancaman keselamatan fisik, segera hubungi <strong>Hotline SAPA 129</strong> (Telepon 129 / WA 08111-129-129) atau <strong>Hotline Sejiwa Kemenkes 119 ext 8</strong>.
+            Jika kamu sedang berada dalam bahaya, ancaman kekerasan, atau krisis mendesak: Hubungi <strong>Hotline SAPA 129</strong> (Telepon 129 / WhatsApp 08111-129-129) atau <strong>Hotline SEJIWA Kemenkes 119 ext 8</strong> (Gratis, 24 Jam).
           </p>
         </div>
       </div>
 
-      {/* Success Notice if Ticket Created */}
+      {/* Transparent Disclaimer on No Fabricated Data */}
+      <div className="p-3.5 rounded-xl bg-surface-inset border border-border-subtle/80 text-xs text-text-muted flex items-start gap-2.5">
+        <AlertCircle className="w-4 h-4 text-brand-700 shrink-0 mt-0.5" />
+        <p className="leading-relaxed">
+          <strong>Prinsip Anti-Halusinasi:</strong> FATHERCARE AI tidak mengarang nama pendamping, nomor telepon pribadi, atau alamat fiktif. Rujukan lokal akan aktif setelah diverifikasi bersama sekolah mitra dan jejaring resmi Forum Genre.
+        </p>
+      </div>
+
+      {/* Success Notification */}
       {ticketSuccess && (
         <div className="p-4 rounded-2xl bg-teal-50 border border-teal-300 text-teal-950 text-xs flex items-center justify-between animate-in fade-in">
           <div className="flex items-center gap-2">
@@ -137,44 +141,57 @@ export default function ReferralsPage() {
             </span>
           </div>
           <Badge variant="success" size="sm">
-            Simulasi Tersimpan
+            Tersimpan di Sesi
           </Badge>
         </div>
       )}
 
-      {/* Partners List */}
+      {/* Categories of Support */}
       <div className="space-y-3">
         <h2 className="text-sm font-bold text-brand-900 uppercase tracking-wider">
-          Lembaga & Pendamping Tersedia
+          Jenis Dukungan yang Dapat Diakses
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {partnerServices.map((p) => (
-            <NeuCard key={p.id} variant="raised" className="p-5 flex flex-col justify-between space-y-4">
+          {supportCategories.map((item) => (
+            <NeuCard key={item.id} variant="raised" className="p-5 flex flex-col justify-between space-y-4">
               <div className="space-y-2">
                 <div className="flex items-start justify-between gap-2">
-                  <Badge variant="verified" size="sm">
-                    Lembaga Resmi
-                  </Badge>
-                  <span className="text-[11px] text-text-muted">{p.coverage}</span>
+                  <span className="text-[11px] font-semibold text-text-muted">{item.category}</span>
+                  {item.configStatus === "terverifikasi_nasional" ? (
+                    <Badge variant="verified" size="sm">
+                      Nasional Terverifikasi
+                    </Badge>
+                  ) : (
+                    <Badge variant="warning" size="sm">
+                      Belum Dikonfigurasi
+                    </Badge>
+                  )}
                 </div>
+
                 <div>
-                  <h3 className="text-base font-bold text-brand-900">{p.name}</h3>
-                  <p className="text-xs text-text-muted mt-0.5">{p.organization}</p>
+                  <h3 className="text-base font-bold text-brand-900">{item.name}</h3>
+                  <p className="text-xs text-text-muted mt-1 leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
-                <p className="text-xs text-text-main leading-relaxed">
-                  Peran: {p.role}
-                </p>
+
+                <div className="p-2 rounded-lg bg-surface-inset text-[11px] text-text-muted">
+                  <strong>Lingkup Layanan:</strong> {item.officialScope}
+                </div>
               </div>
 
               <div className="pt-2 border-t border-border-subtle/80 flex items-center justify-between">
-                <span className="text-[11px] text-text-muted">{p.contactChannel}</span>
+                <span className="text-[11px] text-text-subtle">
+                  {item.configStatus === "terverifikasi_nasional" ? "Layanan Resmi KemenPPPA" : "Perlu verifikasi sekolah"}
+                </span>
+
                 <NeuButton
                   size="sm"
                   variant="primary"
-                  onClick={() => handleOpenReferralModal(p)}
+                  onClick={() => handleOpenReferralModal(item)}
                 >
-                  Buat tiket rujukan
+                  Simulasi Tiket Rujukan
                 </NeuButton>
               </div>
             </NeuCard>
@@ -182,11 +199,11 @@ export default function ReferralsPage() {
         </div>
       </div>
 
-      {/* Created Referral Tickets (Session) */}
+      {/* Simulated Referral Tickets List */}
       {referralTickets.length > 0 && (
         <div className="space-y-3 pt-3 border-t border-border-subtle/80">
           <h2 className="text-sm font-bold text-brand-900 uppercase tracking-wider">
-            Tiket Rujukan Sesi Ini ({referralTickets.length})
+            Simulasi Tiket Rujukan Sesi Ini ({referralTickets.length})
           </h2>
 
           <div className="space-y-3">
@@ -203,13 +220,13 @@ export default function ReferralsPage() {
                 </div>
 
                 <div className="text-xs text-text-main space-y-1">
-                  <p><strong>Tujuan:</strong> {t.type} ({t.contactTarget})</p>
-                  <p><strong>Nama dibagikan:</strong> {t.sharedData.alias} | <strong>Rentang usia:</strong> {t.sharedData.ageRange}</p>
-                  <p><strong>Ringkasan kebutuhan:</strong> {t.sharedData.summary}</p>
+                  <p><strong>Jenis Layanan:</strong> {t.type} ({t.contactTarget})</p>
+                  <p><strong>Identitas Dibagikan:</strong> Nama: {t.sharedData.alias} | Rentang Usia: {t.sharedData.ageRange}</p>
+                  <p><strong>Ringkasan Kebutuhan:</strong> {t.sharedData.summary}</p>
                 </div>
 
                 <p className="text-[10px] text-text-muted italic pt-1">
-                  * Catatan: Ini adalah alur simulasi demonstrasi. Percakapan lengkap tidak pernah dibagikan secara otomatis.
+                  * Catatan demonstrasi: Tiket ini dibuat sebagai simulasi alur rujukan. Isi percakapan AI tidak pernah dibagikan ke pihak ketiga secara otomatis.
                 </p>
               </NeuCard>
             ))}
@@ -217,19 +234,19 @@ export default function ReferralsPage() {
         </div>
       )}
 
-      {/* Referral Modal with Selective Consent */}
+      {/* Modal Referral Simulator */}
       <NeuModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="Formulir Rujukan Pendamping"
-        description={selectedPartner ? `Tujuan rujukan: ${selectedPartner.name}` : ""}
+        title="Simulasi Alur Rujukan Pendamping"
+        description={selectedCategory ? `Jenis rujukan: ${selectedCategory.name}` : ""}
         footer={
           <>
             <NeuButton variant="ghost" size="sm" onClick={() => setIsModalOpen(false)}>
               Batal
             </NeuButton>
             <NeuButton variant="primary" size="sm" onClick={handleCreateTicket}>
-              Konfirmasi & Buat Tiket
+              Buat Tiket Simulasi
             </NeuButton>
           </>
         }
@@ -237,10 +254,10 @@ export default function ReferralsPage() {
         <div className="space-y-4 text-xs">
           <div className="p-3 rounded-xl bg-surface-inset border border-border-subtle text-text-muted space-y-1.5">
             <span className="font-bold text-brand-900 flex items-center gap-1.5">
-              <Lock className="w-3.5 h-3.5" /> Kontrol Data yang Dibagikan
+              <Lock className="w-3.5 h-3.5" /> Prinsip Persetujuan Selektif
             </span>
             <p>
-              Kamu memilih sendiri informasi apa yang boleh dibagikan kepada pendamping. Isi percakapan AI tidak dibagikan.
+              Pilihlah informasi yang bersedia kamu bagikan kepada pendamping. Sistem tidak pernah membagikan riwayat obrolan lengkap secara otomatis.
             </p>
           </div>
 
@@ -252,7 +269,7 @@ export default function ReferralsPage() {
                 onChange={(e) => setShareAlias(e.target.checked)}
                 className="w-4 h-4 rounded text-brand-700"
               />
-              <span className="text-brand-900 font-medium">Bagikan nama samaran ({userName})</span>
+              <span className="text-brand-900 font-medium">Sertakan nama samaran ({userName})</span>
             </label>
 
             <label className="flex items-center gap-2 cursor-pointer">
@@ -262,7 +279,7 @@ export default function ReferralsPage() {
                 onChange={(e) => setShareAge(e.target.checked)}
                 className="w-4 h-4 rounded text-brand-700"
               />
-              <span className="text-brand-900 font-medium">Bagikan rentang usia ({userAgeRange})</span>
+              <span className="text-brand-900 font-medium">Sertakan rentang usia ({userAgeRange})</span>
             </label>
           </div>
 
@@ -271,7 +288,7 @@ export default function ReferralsPage() {
             rows={3}
             value={summaryText}
             onChange={(e) => setSummaryText(e.target.value)}
-            placeholder="Jelaskan hal apa yang ingin kamu diskusikan dengan pendamping..."
+            placeholder="Tuliskan poin penting yang ingin kamu diskusikan dengan pendamping..."
           />
         </div>
       </NeuModal>

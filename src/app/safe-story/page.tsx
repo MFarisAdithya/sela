@@ -12,7 +12,7 @@ import {
   ExternalLink,
   ChevronDown,
   ChevronUp,
-  KeyRound,
+  Info,
 } from "lucide-react";
 import { NeuCard } from "@/components/ui/NeuCard";
 import { NeuButton } from "@/components/ui/NeuButton";
@@ -29,23 +29,174 @@ interface ChatMessage {
   sources?: RetrievedSource[];
   isCrisis?: boolean;
   isAiGenerated?: boolean;
+  demoLabel?: string;
 }
 
 const starterPrompts = [
   "Bagaimana cara menyampaikan rasa kecewa kepada keluarga secara baik?",
   "Apa langkah pertama untuk melatih komunikasi asertif?",
   "Aku merasa kurang percaya diri saat berbicara di depan orang lain.",
+  "Aku merasa sangat lelah dan kewalahan hari ini.",
 ];
 
+// Predefined verified demo scenarios for Phase 2
+function getDemoResponse(query: string, userName: string): { reply: string; sources: RetrievedSource[]; isCrisis: boolean } {
+  const q = query.toLowerCase();
+
+  // Crisis check
+  if (
+    q.includes("bunuh diri") ||
+    q.includes("ingin mati") ||
+    q.includes("mau mati") ||
+    q.includes("self harm") ||
+    q.includes("menyakiti diri") ||
+    q.includes("mengakhiri hidup")
+  ) {
+    return {
+      reply:
+        "Jika kamu atau seseorang di dekatmu sedang berada dalam bahaya mendesak atau membutuhkan bantuan segera, prioritaskan pergi ke tempat aman dan hubungi Hotline Kesehatan Jiwa Kemenkes 119 ekstensi 8 (Bebas pulsa, 24 jam) atau nomor darurat 112.",
+      isCrisis: true,
+      sources: [
+        {
+          id: "safety-01",
+          title: "Protokol Darurat Kesehatan Jiwa Nasional 119 ext 8",
+          source_name: "Kementerian Kesehatan RI (SEJIWA)",
+          reference: "Hotline 119 ekstensi 8 (Gratis 24 Jam)",
+          score: 1.0,
+          snippet: "Layanan konseling darurat pencegahan bunuh diri dan krisis kejiwaan nasional.",
+          review_status: "verified_expert",
+        },
+      ],
+    };
+  }
+
+  // Communication / Assertiveness
+  if (q.includes("komunikasi") || q.includes("asertif") || q.includes("bicara") || q.includes("bicara di depan")) {
+    return {
+      reply: `Menyampaikan apa yang kita rasakan tanpa memicu konflik memang membutuhkan latihan, ${userName}. 
+
+Salah satu cara yang terbukti efektif adalah menggunakan pola Pesan "Saya":
+1. Sebutkan fakta yang terjadi secara netral (tanpa menuduh).
+2. Sebutkan emosi spesifik yang kamu rasakan: "Aku merasa cemas / kurang dihargai..."
+3. Sampaikan kebutuhanmu dan ajakan konkret.
+
+Apakah situasi yang ingin kamu bicarakan ini terjadi dengan teman, guru, atau di rumah?`,
+      isCrisis: false,
+      sources: [
+        {
+          id: "skill-01",
+          title: "Komunikasi Asertif: Teknik Pesan 'Saya'",
+          source_name: "Modul Life Skills Pendidikan Sebaya - Forum Genre (2022)",
+          reference: "Panduan Konselor Sebaya Remaja Indonesia, BKKBN",
+          score: 0.95,
+          snippet: "Komunikasi asertif membantu menyampaikan kebutuhan tanpa menyerang orang lain.",
+          review_status: "verified_expert",
+        },
+      ],
+    };
+  }
+
+  // Family / Father reflection
+  if (q.includes("keluarga") || q.includes("ayah") || q.includes("orang tua") || q.includes("rumah")) {
+    return {
+      reply: `Membahas dinamika keluarga sering kali membawa perasaan campur aduk, ${userName}. 
+
+Penting untuk diingat bahwa keputusan dan keterbatasan komunikasi orang dewasa bukanlah kesalahanmu. Kamu tidak bertanggung jawab atas ketidakhadiran atau jarak emosional yang terjadi.
+
+Fokus yang paling aman saat ini adalah mengenali apa yang kamu butuhkan untuk merasa tenang. Dari hal-hal yang sedang kamu alami, bagian mana yang terasa paling berat?`,
+      isCrisis: false,
+      sources: [
+        {
+          id: "psycho-02",
+          title: "Memahami Keterbatasan Peran Ayah Tanpa Menyalahkan Diri",
+          source_name: "Ashari, Y. (2018) & Panduan Pengasuhan Positif KemenPPPA",
+          reference: "Kajian Fatherless dan Dampak Perkembangan Emosi, Jurnal Psikologi Sosial",
+          score: 0.92,
+          snippet: "Kekurangan peran pengasuhan bukan kesalahan remaja; remaja berhak bertumbuh dengan mencari figur pendukung yang aman.",
+          review_status: "verified_expert",
+        },
+      ],
+    };
+  }
+
+  // Confidence / Career / Interview
+  if (q.includes("percaya diri") || q.includes("wawancara") || q.includes("kerja") || q.includes("karier") || q.includes("lulus")) {
+    return {
+      reply: `Rasa gugup saat harus berbicara di depan orang lain atau menghadapi wawancara adalah hal yang wajar dialami siapa saja, ${userName}.
+
+Kamu bisa mencoba latihan perkenalan diri 60 detik dengan tiga bagian:
+1. Siapa dirimu dan latar belakang keahlianmu.
+2. Satu pengalaman nyata atau proyek yang pernah kamu selesaikan.
+3. Kontribusi yang ingin kamu berikan.
+
+Apakah kamu sedang mempersiapkan wawancara kerja, magang, atau presentasi di sekolah?`,
+      isCrisis: false,
+      sources: [
+        {
+          id: "career-02",
+          title: "Latihan Perkenalan Diri 60 Detik untuk Wawancara",
+          source_name: "Pedoman Pelatihan Vokasi - Kemendikbudristek",
+          reference: "Modul Wawancara Kerja SMK/Vokasi Indonesia",
+          score: 0.9,
+          snippet: "Rumus perkenalan 3 bagian membantu remaja menyampaikan potensi secara ringkas dan terarah.",
+          review_status: "verified_expert",
+        },
+      ],
+    };
+  }
+
+  // Sadness / Exhaustion
+  if (q.includes("sedih") || q.includes("lelah") || q.includes("capek") || q.includes("kewalahan") || q.includes("cemas")) {
+    return {
+      reply: `Hari yang berat bisa membuat energi kita terkuras, ${userName}. 
+
+Kamu tidak harus menyelesaikan semua masalah atau memikirkan jalan keluar malam ini. Terkadang langkah yang paling tepat adalah mengizinkan dirimu beristirahat, minum air putih, dan menarik napas perlahan.
+
+Jika terasa membantu, kamu juga bisa menuliskannya di Catatan Pribadi agar tidak terus berputar di pikiran. Apakah kamu ingin mengambil jeda sejenak sekarang?`,
+      isCrisis: false,
+      sources: [
+        {
+          id: "psycho-01",
+          title: "Mengenal Emosi Dasar dan Validasi Diri",
+          source_name: "Modul Tentang Kita - Forum Genre & BKKBN (2021)",
+          reference: "Panduan Pengelolaan Emosi Remaja, BKKBN RI",
+          score: 0.88,
+          snippet: "Langkah awal pengelolaan emosi adalah menamai perasaan tersebut secara jujur tanpa menghakimi diri sendiri.",
+          review_status: "verified_expert",
+        },
+      ],
+    };
+  }
+
+  // Default fallback
+  return {
+    reply: `Terima kasih sudah berbagi, ${userName}. Ini adalah topik yang baik untuk dieksplorasi secara perlahan.
+
+Dalam pendampingan awal, kita berfokus pada apa yang bisa kamu kendalikan hari ini. Dari apa yang kamu ceritakan tadi, langkah kecil apa yang terasa paling realistis untuk kamu coba terlebih dahulu?`,
+    isCrisis: false,
+    sources: [
+      {
+        id: "psycho-03",
+        title: "Prinsip Resiliensi: Mengambil Langkah Kecil",
+        source_name: "Panduan Dukungan Kesehatan Jiwa Remaja - Kemendikbud & WHO",
+        reference: "Buku Saku Kesehatan Mental Remaja Indonesia",
+        score: 0.8,
+        snippet: "Fokus pada satu tindakan kecil hari ini yang berada dalam kendalimu.",
+        review_status: "verified_expert",
+      },
+    ],
+  };
+}
+
 export default function SafeStoryPage() {
-  const { userName, isAiConfigured, checkAiConfiguration } = useApp();
+  const { userName } = useApp();
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "msg-init",
       sender: "ai",
-      text: `Halo ${userName}. Ini ruang cerita untuk refleksi awal dan mempelajari keterampilan diri. Kamu bisa menuliskan apa yang sedang kamu pikirkan saat ini.`,
+      text: `Halo ${userName}. Ini ruang cerita Safe Story AI. Untuk Fase 2, halaman ini berjalan dalam Mode DEMO dengan skenario respons terstruktur berbasis materi resmi. Silakan tulis apa yang sedang kamu rasakan atau pilih contoh topik di bawah.`,
       timestamp: "Baru saja",
-      isAiGenerated: false,
+      demoLabel: "Skenario Demo Fase 2",
     },
   ]);
   const [inputValue, setInputValue] = useState("");
@@ -54,14 +205,10 @@ export default function SafeStoryPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    checkAiConfiguration();
-  }, [checkAiConfiguration]);
-
-  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isLoading]);
 
-  const handleSendMessage = async (textToSend?: string) => {
+  const handleSendMessage = (textToSend?: string) => {
     const text = (textToSend || inputValue).trim();
     if (!text || isLoading) return;
 
@@ -77,42 +224,22 @@ export default function SafeStoryPage() {
     setInputValue("");
     setIsLoading(true);
 
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: text,
-          userAlias: userName,
-        }),
-      });
-
-      const data = await res.json();
+    // Simulate natural response latency (400ms - 800ms)
+    setTimeout(() => {
+      const demoResult = getDemoResponse(text, userName);
       const aiMsgId = "ai-" + Date.now();
 
-      if (data.status === "crisis_detected") {
+      if (demoResult.isCrisis) {
         setMessages((prev) => [
           ...prev,
           {
             id: aiMsgId,
             sender: "system",
-            text: data.reply,
+            text: demoResult.reply,
             timestamp: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }),
             isCrisis: true,
-            sources: data.sources,
-            isAiGenerated: false,
-          },
-        ]);
-      } else if (data.status === "api_unconfigured") {
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: aiMsgId,
-            sender: "ai",
-            text: `${data.reply}\n\n${data.ragContext ? `"${data.ragContext}"` : ""}`,
-            timestamp: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }),
-            sources: data.sources,
-            isAiGenerated: false,
+            sources: demoResult.sources,
+            demoLabel: "Protokol Keselamatan Demo",
           },
         ]);
       } else {
@@ -121,27 +248,15 @@ export default function SafeStoryPage() {
           {
             id: aiMsgId,
             sender: "ai",
-            text: data.reply,
+            text: demoResult.reply,
             timestamp: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }),
-            sources: data.sources,
-            isAiGenerated: data.isAiGenerated,
+            sources: demoResult.sources,
+            demoLabel: "Simulasi Respons Demo",
           },
         ]);
       }
-    } catch {
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: "err-" + Date.now(),
-          sender: "system",
-          text: "Gagal menghubungi server. Periksa koneksi internet atau status server lokal.",
-          timestamp: "Error",
-          isAiGenerated: false,
-        },
-      ]);
-    } finally {
       setIsLoading(false);
-    }
+    }, 600);
   };
 
   const toggleSourceExpand = (msgId: string) => {
@@ -152,13 +267,14 @@ export default function SafeStoryPage() {
   };
 
   const handleResetChat = () => {
-    if (confirm("Hapus seluruh percakapan sesi ini?")) {
+    if (confirm("Bersihkan seluruh percakapan di sesi ini?")) {
       setMessages([
         {
           id: "msg-init-reset",
           sender: "ai",
           text: `Halo ${userName}. Percakapan telah dibersihkan. Kamu bisa mulai bercerita kembali.`,
           timestamp: "Baru saja",
+          demoLabel: "Skenario Demo",
         },
       ]);
     }
@@ -169,16 +285,10 @@ export default function SafeStoryPage() {
       {/* Top Status Bar */}
       <div className="flex items-center justify-between border-b border-border-subtle/80 pb-3 shrink-0">
         <div className="flex items-center gap-2">
-          <h1 className="text-lg font-bold text-brand-900">Cerita AI</h1>
-          {isAiConfigured ? (
-            <Badge variant="active" dot size="sm">
-              AI Aktif
-            </Badge>
-          ) : (
-            <Badge variant="warning" dot size="sm">
-              API Belum Dikonfigurasi
-            </Badge>
-          )}
+          <h1 className="text-lg font-bold text-brand-900">Safe Story AI</h1>
+          <Badge variant="demo" dot size="sm">
+            Mode DEMO (Fase 2)
+          </Badge>
         </div>
 
         <div className="flex items-center gap-2">
@@ -198,15 +308,13 @@ export default function SafeStoryPage() {
         </div>
       </div>
 
-      {/* Warning banner if API key is not configured */}
-      {!isAiConfigured && (
-        <div className="p-3 rounded-xl bg-amber-50 border border-amber-200/80 text-xs text-amber-900 flex items-start gap-2 shrink-0">
-          <KeyRound className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
-          <div className="leading-relaxed">
-            <strong>Kunci API Belum Terpasang:</strong> AI aktif memerlukan <code>OPENAI_API_KEY</code> pada berkas <code>.env.local</code> di server. Saat ini, sistem menampilkan materi terverifikasi dari RAG lokal tanpa mengarang simulasi.
-          </div>
+      {/* Explicit Phase 2 Notice Banner */}
+      <div className="p-3 rounded-xl bg-amber-50 border border-amber-200/90 text-xs text-amber-950 flex items-start gap-2 shrink-0">
+        <Info className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+        <div className="leading-relaxed">
+          <strong>Mode Demo Terbatas (Fase 2):</strong> Respons pada tahap ini disimulasikan secara terstruktur berdasarkan materi resmi (BKKBN, ABKIN, Kemendikbud) untuk menguji antarmuka. <em>Backend AI sungguhan dan RAG live akan dihubungkan pada Fase 3.</em>
         </div>
-      )}
+      </div>
 
       {/* Chat Messages Container */}
       <div className="flex-1 overflow-y-auto space-y-4 pr-1 py-2">
@@ -216,7 +324,7 @@ export default function SafeStoryPage() {
 
           if (isSystem && msg.isCrisis) {
             return (
-              <div key={msg.id} className="p-4 rounded-2xl bg-rose-50 border border-rose-300 shadow-sm space-y-3 text-rose-950">
+              <div key={msg.id} className="p-4 rounded-2xl bg-rose-50 border border-rose-300 shadow-sm space-y-3 text-rose-950 animate-in fade-in">
                 <div className="flex items-center gap-2 text-rose-800 font-bold text-sm">
                   <ShieldAlert className="w-5 h-5 text-rose-600" />
                   <span>Protokol Keselamatan Darurat</span>
@@ -227,7 +335,7 @@ export default function SafeStoryPage() {
                     href="tel:119"
                     className="px-3 py-1.5 rounded-xl bg-rose-600 text-white font-semibold text-xs flex items-center gap-1.5 shadow-sm hover:bg-rose-700"
                   >
-                    Telepon 119 ext 8 (Kemenkes)
+                    Telepon 119 ext 8 (SEJIWA Kemenkes)
                   </a>
                   <a
                     href="tel:112"
@@ -237,7 +345,7 @@ export default function SafeStoryPage() {
                   </a>
                   <Link href="/referrals">
                     <span className="px-3 py-1.5 rounded-xl bg-white text-brand-900 border border-brand-200 font-semibold text-xs inline-block hover:bg-brand-50">
-                      Pilihan Pendamping Manusia &rarr;
+                      Lihat Direktori Bantuan Manusia &rarr;
                     </span>
                   </Link>
                 </div>
@@ -258,6 +366,14 @@ export default function SafeStoryPage() {
                     : "bg-surface text-text-main rounded-bl-sm border border-border-subtle shadow-neu-raised-sm"
                 )}
               >
+                {!isUser && msg.demoLabel && (
+                  <div className="mb-2">
+                    <Badge variant="demo" size="sm">
+                      {msg.demoLabel}
+                    </Badge>
+                  </div>
+                )}
+
                 <p className="whitespace-pre-wrap">{msg.text}</p>
 
                 {/* Grounded RAG Source Citations */}
@@ -295,26 +411,26 @@ export default function SafeStoryPage() {
               </div>
 
               <span className="text-[10px] text-text-muted mt-1 px-1">
-                {msg.timestamp} {msg.isAiGenerated && "• Model AI"}
+                {msg.timestamp}
               </span>
             </div>
           );
         })}
 
         {isLoading && (
-          <div className="flex items-center gap-2 text-xs text-text-muted p-3 bg-surface rounded-2xl border border-border-subtle shadow-neu-raised-sm w-fit">
+          <div className="flex items-center gap-2 text-xs text-text-muted p-3 bg-surface rounded-2xl border border-border-subtle shadow-neu-raised-sm w-fit animate-pulse">
             <Sparkles className="w-4 h-4 text-brand-600 animate-spin" />
-            <span>Menghubungi basis pengetahuan & menyusun jawaban...</span>
+            <span>Memproses skenario respons simulasi...</span>
           </div>
         )}
 
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Starter Prompts (if chat is fresh) */}
+      {/* Starter Prompts */}
       {messages.length <= 1 && (
         <div className="space-y-1.5 shrink-0">
-          <span className="text-[11px] font-semibold text-text-muted">Pilih contoh topik:</span>
+          <span className="text-[11px] font-semibold text-text-muted">Contoh topik demo:</span>
           <div className="flex flex-wrap gap-2">
             {starterPrompts.map((prompt, idx) => (
               <button
@@ -367,7 +483,7 @@ export default function SafeStoryPage() {
         </form>
 
         <p className="text-[10px] text-text-muted text-center">
-          Pesanmu dianalisis dengan penyaring keselamatan. Bukan pengganti konseling klinis.
+          Mode demo Fase 2. Bukan diagnosis dan bukan pengganti konseling profesional.
         </p>
       </div>
     </div>
