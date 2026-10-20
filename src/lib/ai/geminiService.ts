@@ -101,7 +101,7 @@ Jawablah sebagai pendamping reflektif: dengarkan secara tenang, sampaikan dengan
         contents: params.userMessage,
         config: {
           systemInstruction: systemPrompt,
-          maxOutputTokens: 500,
+          maxOutputTokens: 1000,
           temperature: 0.6,
         },
       });

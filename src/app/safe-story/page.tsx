@@ -142,8 +142,8 @@ export default function SafeStoryPage() {
             isAiGenerated: true,
             modelUsed: data.modelUsed,
             statusBadge: data.hasGroundedSources
-              ? `${data.modelUsed} • Rujukan Terverifikasi`
-              : `${data.modelUsed} • Refleksi Empatik`,
+              ? "SELA AI • Rujukan Terverifikasi"
+              : "SELA AI • Refleksi Empatik",
           },
         ]);
       }
