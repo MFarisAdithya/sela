@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { usePathname } from "next/navigation";
 import { HeaderBar } from "./HeaderBar";
 import { DesktopSidebar } from "./DesktopSidebar";
 import { MobileBottomNav } from "./MobileBottomNav";
@@ -10,6 +11,24 @@ interface AppShellProps {
 }
 
 export const AppShell: React.FC<AppShellProps> = ({ children }) => {
+  const pathname = usePathname();
+  const isLanding = pathname === "/";
+  const isOnboarding = pathname === "/onboarding";
+
+  // Landing page renders its own comprehensive navbar, editorial hero, and footer
+  if (isLanding) {
+    return <>{children}</>;
+  }
+
+  // Onboarding has its own focused single-column layout
+  if (isOnboarding) {
+    return (
+      <div className="min-h-screen bg-background text-text-main">
+        {children}
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col lg:flex-row bg-background text-text-main">
       {/* Desktop Left Sidebar */}

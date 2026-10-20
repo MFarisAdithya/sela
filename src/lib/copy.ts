@@ -13,13 +13,76 @@ export function greetingFor(hour: number): string {
 
 export const copy = {
   landing: {
+    eyebrow: "Pendampingan Awal Nonklinis & Ruang Refleksi",
     tagline: "Ruang untuk dirimu.",
     description:
       "Kadang kepalamu terasa terlalu bising. Di sini, kamu boleh berhenti sebentar, mengurai apa yang terasa mengganjal, atau sekadar bernapas tanpa harus pura-pura kuat.",
-    privacyTitle: "Soal ceritamu",
-    privacyBody:
+    cta: "Masuk ke SELA",
+    secondaryCta: "Lihat cara kerja",
+    featuresEyebrow: "Tiga Cara Beristirahat",
+    featuresTitle: "Temukan ritme yang pas untuk suasana hatimu saat ini.",
+    features: [
+      {
+        id: "chat",
+        category: "Bercerita",
+        title: "Cerita ke SELA",
+        desc: "Obrolan hangat dan empatik didampingi Safe Story AI nonklinis. Tempat mengurai benang kusut tanpa takut dihakimi, dilengkapi latihan pernapasan saat dada terasa sesak.",
+        action: "Mulai bercerita",
+        href: "/onboarding",
+      },
+      {
+        id: "journal",
+        category: "Menulis",
+        title: "Tumpahkan ke Kertas",
+        desc: "Ruang menulis hening berpandukan pertanyaan reflektif harian. Catatanmu tersimpan di perambanmu sendiri dan tidak pernah dikirim ke server mana pun.",
+        action: "Tulis refleksimu",
+        href: "/onboarding",
+      },
+      {
+        id: "learning",
+        category: "Belajar",
+        title: "Sudut Baca & Latihan",
+        desc: "Modul psikoedukasi dan keterampilan hidup praktis: dari mengenali emosi, teknik grounding 4-7-8, hingga langkah-langkah kecil merawat diri sehari-hari.",
+        action: "Eksplorasi materi",
+        href: "/onboarding",
+      },
+    ],
+    howItWorksEyebrow: "Alur Sederhana",
+    howItWorksTitle: "Cara kerja SELA mendampingimu",
+    steps: [
+      {
+        step: "01",
+        title: "Pilih kebutuhanmu",
+        desc: "Bercerita santai saat kepala bising, menumpahkan uneg-uneg lewat jurnal pribadi, atau membaca latihan keterampilan hidup yang kamu butuhkan.",
+      },
+      {
+        step: "02",
+        title: "Luangkan waktu tanpa tekanan",
+        desc: "Ruang hening yang tidak menilai, tidak mendiagnosis, dan tidak terburu-buru. Kamu memegang kendali penuh atas ritmemu sendiri.",
+      },
+      {
+        step: "03",
+        title: "Dapatkan arahan & langkah kecil",
+        desc: "Mulai dari teknik regulasi diri praktis hingga informasi rujukan profesional nyata jika kamu membutuhkan bantuan langsung.",
+      },
+    ],
+    privacyTitle: "Soal ceritamu & batas AI",
+    privacySummary:
       "Ceritamu tidak disimpan di server kami dan tidak ada yang menilai. Saat kamu bercerita, tulisanmu dikirim ke AI supaya bisa dibalas. SELA bukan psikolog dan tidak mendiagnosis. Kalau terasa terlalu berat, SELA akan mengajakmu menghubungi orang yang bisa membantu langsung.",
-    cta: "Masuk ke Sela",
+    privacyPoints: [
+      {
+        title: "Batas Layanan Nonklinis",
+        desc: "SELA bukan psikolog, psikiater, dokter, atau unit gawat darurat. SELA dirancang sebagai teman refleksi awal dan latihan ketahanan diri mandiri.",
+      },
+      {
+        title: "Pemrosesan Aman AI",
+        desc: "Percakapan Safe Story dikirim ke API AI (Google Gemini) agar bisa merespons percakapanmu. Tidak disimpan sebagai arsip permanen di server SELA.",
+      },
+      {
+        title: "Penyimpanan Lokal",
+        desc: "Jurnal pribadi dan nama panggilanmu tersimpan di peramban perangkatmu saja. Tidak ada pelacakan identitas pihak ketiga.",
+      },
+    ],
   },
 
   onboarding: {
