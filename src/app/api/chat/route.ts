@@ -11,8 +11,20 @@ const ChatRequestSchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
+  let json: unknown;
   try {
-    const json = await req.json();
+    json = await req.json();
+  } catch {
+    return NextResponse.json(
+      {
+        status: "validation_error",
+        error: "Format request JSON tidak valid.",
+      },
+      { status: 400 }
+    );
+  }
+
+  try {
     const parseResult = ChatRequestSchema.safeParse(json);
 
     if (!parseResult.success) {
