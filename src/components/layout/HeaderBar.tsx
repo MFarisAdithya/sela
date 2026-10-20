@@ -4,14 +4,12 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Badge } from "@/components/ui/Badge";
-import { Shield, Sparkles, AlertCircle } from "lucide-react";
+import { Shield, Sparkles } from "lucide-react";
+import { useApp } from "@/context/AppContext";
 
-interface HeaderBarProps {
-  isAiActive?: boolean;
-}
-
-export const HeaderBar: React.FC<HeaderBarProps> = ({ isAiActive = false }) => {
+export const HeaderBar: React.FC = () => {
   const pathname = usePathname();
+  const { isAiActive } = useApp();
 
   // Do not show header on landing splash or onboarding
   if (pathname === "/" || pathname === "/onboarding") {
@@ -19,7 +17,7 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({ isAiActive = false }) => {
   }
 
   return (
-    <header className="sticky top-0 z-30 w-full bg-background/80 backdrop-blur-md border-b border-border-subtle/80 px-4 lg:px-8 py-2.5">
+    <header className="sticky top-0 z-30 w-full bg-background/85 backdrop-blur-md border-b border-border-subtle/80 px-4 lg:px-8 py-2.5">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
         {/* Left: Brand Identity & Non-clinical Disclaimer */}
         <div className="flex items-center gap-3">
