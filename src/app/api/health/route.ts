@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
-import { isApiKeyConfigured } from "@/lib/ai/openAiService";
+import { getActiveModelInfo } from "@/lib/ai/openAiService";
 
 export async function GET() {
-  const isConfigured = isApiKeyConfigured();
+  const info = getActiveModelInfo();
 
   return NextResponse.json({
     status: "ok",
-    isConfigured,
-    model: process.env.OPENAI_MODEL || "gpt-4o-mini",
-    mode: isConfigured ? "AI_AKTIF" : "API_BELUM_DIKONFIGURASI",
+    isConfigured: info.isActive,
+    provider: info.provider,
+    model: info.model,
+    description: info.description,
+    mode: info.isActive ? "AI_AKTIF" : "API_BELUM_DIKONFIGURASI",
   });
 }
