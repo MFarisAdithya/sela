@@ -1,15 +1,15 @@
 import { NextResponse } from "next/server";
-import { getActiveModelInfo } from "@/lib/ai/openAiService";
+import { getGeminiConfigStatus } from "@/lib/ai/geminiService";
 
 export async function GET() {
-  const info = getActiveModelInfo();
+  const status = getGeminiConfigStatus();
 
   return NextResponse.json({
     status: "ok",
-    isConfigured: info.isActive,
-    provider: info.provider,
-    model: info.model,
-    description: info.description,
-    mode: info.isActive ? "AI_AKTIF" : "API_BELUM_DIKONFIGURASI",
+    isConfigured: status.isConfigured,
+    provider: "google_gemini",
+    model: status.model,
+    description: status.statusText,
+    mode: status.isConfigured ? "AI_AKTIF" : "API_BELUM_DIKONFIGURASI",
   });
 }

@@ -39,7 +39,7 @@ export const HeaderBar: React.FC = () => {
         {/* Right: AI Mode Badge & Quick Settings */}
         <div className="flex items-center gap-2.5">
           {isAiConfigured ? (
-            <Badge variant="active" dot size="sm" title="Terhubung ke OpenAI Model">
+            <Badge variant="active" dot size="sm" title="Terhubung ke Google Gemini API">
               AI Aktif
             </Badge>
           ) : (

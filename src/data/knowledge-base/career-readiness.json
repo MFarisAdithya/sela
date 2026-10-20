@@ -2,25 +2,29 @@
   {
     "id": "career-01",
     "topic": "career",
-    "title": "Mengenali Potensi Diri dan Minat Kerja",
-    "source_name": "Kemnaker RI & BKKBN: Kesiapan Karier Generasi Berencana",
-    "source_url_or_reference": "Panduan Transisi Sekolah ke Dunia Kerja Remaja Indonesia",
+    "title": "Perkenalan Diri 60 Detik untuk Wawancara Kerja dan Magang",
+    "author_or_organization": "Direktorat Jenderal Pendidikan Vokasi - Kemendikbudristek",
+    "publication_date": "2022",
+    "url": "https://vokasi.kemdikbud.go.id/",
+    "material_section": "Panduan Kesiapan Memasuki Dunia Kerja Lulusan Vokasi & SMK",
     "review_status": "verified_expert",
-    "reviewed_at": "2026-07-02",
-    "audience": "Remaja 17-24 tahun",
-    "content": "Kesiapan kerja dimulai dari mengenali aktivitas yang membuatmu fokus, keterampilan teknis yang sudah kamu latih di sekolah/kejuruan, serta cara kamu bekerja sama dengan orang lain. Pengalaman menghadapi tantangan keluarga sering kali melatih ketangguhan, kepekaan, dan kemampuan beradaptasi di lingkungan baru.",
-    "keywords": ["karier", "pekerjaan", "minat", "bakat", "lulus sekolah", "masa depan", "kesiapan kerja"]
+    "reviewed_at": "2026-06-19",
+    "audience": "Remaja & Dewasa Muda (17-24 tahun)",
+    "content": "Gunakan rumus perkenalan 3 bagian: 1) Siapa dirimu dan latar belakang keahlian atau minat utamamu; 2) Satu pengalaman nyata atau proyek praktis yang pernah kamu selesaikan secara konkret; 3) Alasan ketertarikanmu pada posisi tersebut dan kontribusi yang ingin kamu berikan. Latihlah berbicara dengan tempo tenang, kontak mata, dan hindari menghafal kata per kata secara kaku.",
+    "keywords": ["wawancara", "kerja", "magang", "perkenalan diri", "karier", "percaya diri", "presentasi", "melamar"]
   },
   {
     "id": "career-02",
     "topic": "career",
-    "title": "Latihan Perkenalan Diri 60 Detik untuk Wawancara",
-    "source_name": "Pedoman Pelatihan Vokasi dan Kesiapan Kerja - Kemendikbudristek",
-    "source_url_or_reference": "Modul Wawancara Kerja SMK/Vokasi Indonesia",
+    "title": "Menyusun Portofolio Keterampilan Sederhana bagi Pemula",
+    "author_or_organization": "Kementerian Ketenagakerjaan RI (Kemnaker) & Balai Vokasi",
+    "publication_date": "2023",
+    "url": "https://kemnaker.go.id/",
+    "material_section": "Modul Pelatihan Kesiapan Kerja Pemuda",
     "review_status": "verified_expert",
-    "reviewed_at": "2026-07-05",
-    "audience": "Remaja 17-24 tahun",
-    "content": "Gunakan rumus Tiga Bagian: 1) Siapa dirimu dan latar belakang pendidikan/keahlianmu; 2) Pengalaman nyata atau proyek yang pernah kamu selesaikan; 3) Alasan ketertarikanmu pada posisi tersebut dan kontribusi yang ingin kamu berikan. Latihlah berbicara dengan tenang dan tatap mata pewawancara.",
-    "keywords": ["wawancara", "interview", "perkenalan diri", "melamar kerja", "percaya diri", "bicara di depan orang"]
+    "reviewed_at": "2026-06-21",
+    "audience": "Remaja & Dewasa Muda (17-24 tahun)",
+    "content": "Bagi yang belum memiliki pengalaman kerja formal, portofolio dapat disusun dari: tugas sekolah/kuliah terbaik, proyek sukarela di komunitas, kepanitiaan organisasi, atau hasil karya mandiri. Tampilkan 2-3 karya paling relevan dengan menyertakan penjelasan: masalah yang dihadapi, peranmu, alat yang digunakan, dan hasil akhirnya.",
+    "keywords": ["portofolio", "cv", "resume", "lulus sekolah", "pengalaman kerja", "karier", "keterampilan"]
   }
 ]

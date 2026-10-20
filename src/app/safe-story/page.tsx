@@ -145,7 +145,9 @@ export default function SafeStoryPage() {
             sources: data.sources,
             isAiGenerated: true,
             modelUsed: data.modelUsed,
-            statusBadge: `AI Aktif (${data.modelUsed || "Cloud"})`,
+            statusBadge: data.hasGroundedSources
+              ? `${data.modelUsed} • Rujukan Terverifikasi`
+              : `${data.modelUsed} • Refleksi Empatik`,
           },
         ]);
       }

@@ -91,13 +91,13 @@ export default function SettingsPage() {
 
         <p className="text-xs text-text-muted leading-relaxed">
           {isAiConfigured
-            ? "Server terhubung ke model OpenAI dengan perlindungan filter keselamatan dan RAG knowledge base lokal."
-            : "Kunci API (OPENAI_API_KEY) belum terpasang di file .env.local server. Safe Story AI saat ini menampilkan kutipan terverifikasi langsung dari basis pengetahuan lokal."}
+            ? "Server terhubung ke Google Gemini API dengan semantic embeddings RAG dan filter kedaruratan nasional."
+            : "Kunci API (GEMINI_API_KEY) belum terpasang di file .env.local server. Safe Story AI saat ini menampilkan kutipan terverifikasi langsung dari basis pengetahuan lokal."}
         </p>
 
         <div className="pt-2 flex items-center justify-between border-t border-border-subtle/70">
           <span className="text-[11px] text-text-subtle">
-            Model target: <code>gpt-4o-mini</code> (OpenAI Server-Side API)
+            Model target: <code>gemini-flash-lite-latest</code> (Google Gen AI SDK Resmi)
           </span>
           <NeuButton size="sm" variant="secondary" onClick={() => checkAiConfiguration()}>
             Periksa ulang status

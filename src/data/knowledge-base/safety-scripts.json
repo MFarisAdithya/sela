@@ -2,25 +2,29 @@
   {
     "id": "safety-01",
     "topic": "safety",
-    "title": "Protokol Darurat: Keinginan Menyakiti Diri atau Situasi Krisis",
-    "source_name": "Kementerian Kesehatan RI - Layanan Kesehatan Jiwa SEJIWA (119 ext 8)",
-    "source_url_or_reference": "Hotline Darurat Kesehatan Jiwa Nasional 119 ext 8",
-    "review_status": "verified_expert",
-    "reviewed_at": "2026-06-01",
-    "audience": "Publik & Remaja",
-    "content": "Jika kamu atau seseorang yang kamu kenal sedang berada dalam bahaya mendesak, merasa ingin menyakiti diri, atau putus asa berat: 1) Segera pergi ke tempat yang aman dan ada orang lain; 2) Hubungi Layanan Kesehatan Jiwa Nasional Kemenkes RI melalui telepon 119 ekstensi 8 (Gratis, 24 Jam); 3) Hubungi nomor darurat 112 atau datangi IGD Puskesmas/Rumah Sakit terdekat.",
-    "keywords": ["bunuh diri", "menyakiti diri", "self harm", "mati", "putus asa", "mengakhiri hidup", "darurat", "bahaya"]
+    "title": "Protokol Darurat Kesehatan Jiwa Nasional 119 ext 8 (SEJIWA)",
+    "author_or_organization": "Kementerian Kesehatan Republik Indonesia",
+    "publication_date": "2023",
+    "url": "https://sejiwa.kemkes.go.id/",
+    "material_section": "SOP Penanganan Kedaruratan Krisis Kejiwaan dan Pencegahan Bunuh Diri",
+    "review_status": "official_protocol",
+    "reviewed_at": "2026-06-10",
+    "audience": "Masyarakat Umum & Remaja",
+    "content": "Jika kamu atau seseorang di dekatmu sedang berada dalam bahaya mendesak, dorongan menyakiti diri, atau krisis kejiwaan akut: Prioritaskan segera pergi ke tempat aman di dekat orang terpercaya, dan hubungi Hotline Kesehatan Jiwa Kemenkes 119 ekstensi 8 (Bebas pulsa, 24 jam) atau nomor darurat umum 112.",
+    "keywords": ["bunuh diri", "mati", "menyakiti diri", "self harm", "putus asa", "darurat", "119", "krisis", "bahaya"]
   },
   {
     "id": "safety-02",
     "topic": "safety",
-    "title": "Protokol Perlindungan dari Kekerasan dan Pelecehan",
-    "source_name": "KemenPPPA - Layanan Sahabat Perempuan dan Anak (SAPA 129)",
-    "source_url_or_reference": "Hotline SAPA 129 & WhatsApp 08111-129-129",
-    "review_status": "verified_expert",
-    "reviewed_at": "2026-06-01",
-    "audience": "Anak dan Remaja",
-    "content": "Jika kamu mengalami kekerasan fisik, ancaman, perundungan berat, atau pelecehan di rumah maupun sekolah: 1) Utamakan keselamatan fisikmu segera; 2) Hubungi Layanan SAPA 129 (Telepon 129 atau WhatsApp 08111-129-129); 3) Laporkan secara aman kepada Guru Bimbingan Konseling atau orang dewasa yang kamu percayai.",
-    "keywords": ["kekerasan", "dipukul", "diancam", "pelecehan", "perundungan", "bullying", "tidak aman di rumah", "kdrt"]
+    "title": "Layanan Pengaduan dan Perlindungan Sahabat Perempuan dan Anak (SAPA 129)",
+    "author_or_organization": "Kementerian Pemberdayaan Perempuan dan Perlindungan Anak (KemenPPPA)",
+    "publication_date": "2022",
+    "url": "https://kemenpppa.go.id/",
+    "material_section": "Protokol Layanan Pengaduan Kekerasan Anak dan Remaja",
+    "review_status": "official_protocol",
+    "reviewed_at": "2026-06-12",
+    "audience": "Anak & Remaja Korban Kekerasan",
+    "content": "Untuk laporan kekerasan dalam rumah tangga, pelecehan fisik atau verbal, kekerasan seksual, atau penelantaran anak/remaja: Hubungi Hotline SAPA 129 melalui telepon 129 atau WhatsApp resmi 08111-129-129. Layanan ini menyediakan konseling hukum, pendampingan psikologis, dan penjangkauan kasus secara resmi.",
+    "keywords": ["kekerasan", "dipukul", "pelecehan", "ancaman", "kdrt", "sapa 129", "pengaduan", "perlindungan anak"]
   }
 ]
