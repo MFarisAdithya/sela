@@ -96,13 +96,6 @@ export const DesktopSidebar: React.FC = () => {
             Lihat kontak bantuan →
           </Link>
         </div>
-
-        <div className="flex items-center justify-between text-[11px] text-text-subtle px-1">
-          <span>Genre ADUJAKNAS 2026</span>
-          <Badge variant="prototype" size="sm">
-            Prototype
-          </Badge>
-        </div>
       </div>
     </aside>
   );

@@ -53,6 +53,13 @@ body {
   font-family: var(--font-lora), "Lora", Georgia, serif;
 }
 
+/* Hide Next.js dev overlay button from blocking UI */
+nextjs-portal,
+[data-nextjs-toast],
+[data-nextjs-portal] {
+  display: none !important;
+}
+
 ::selection {
   background-color: #C6D8F8;
   color: #17365D;
