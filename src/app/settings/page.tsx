@@ -80,11 +80,11 @@ export default function SettingsPage() {
           </div>
           {isAiConfigured ? (
             <Badge variant="active" dot size="sm">
-              AI Aktif
+              Terhubung
             </Badge>
           ) : (
             <Badge variant="warning" dot size="sm">
-              API Belum Dikonfigurasi
+              Mode Lokal
             </Badge>
           )}
         </div>

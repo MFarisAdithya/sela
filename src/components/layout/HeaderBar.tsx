@@ -37,18 +37,8 @@ export const HeaderBar: React.FC = () => {
           </Link>
         </div>
 
-        {/* Right: AI Mode Badge & Quick Settings */}
+        {/* Right: Quick Settings */}
         <div className="flex items-center gap-2.5">
-          {isAiConfigured ? (
-            <Badge variant="active" dot size="sm" title="Terhubung ke Google Gemini API">
-              AI Aktif
-            </Badge>
-          ) : (
-            <Badge variant="demo" dot size="sm" title="Mode simulasi demonstrasi Fase 2">
-              DEMO MODE
-            </Badge>
-          )}
-
           <Link
             href="/settings"
             className="p-1.5 rounded-xl text-text-muted hover:text-brand-900 hover:bg-brand-100/60 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"

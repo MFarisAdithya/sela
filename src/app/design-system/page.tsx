@@ -264,7 +264,7 @@ export default function DesignSystemPage() {
             Mode Demo
           </Badge>
           <Badge variant="active" dot>
-            AI Aktif (Cloud)
+            Aktif / Terhubung
           </Badge>
           <Badge variant="verified">
             Sumber Terverifikasi

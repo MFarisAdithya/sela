@@ -37,7 +37,7 @@ export function getGeminiConfigStatus(): GeminiModelStatus {
   return {
     isConfigured,
     model,
-    statusText: isConfigured ? `AI Aktif: Google Gemini (${model})` : "API Belum Dikonfigurasi",
+    statusText: isConfigured ? `Layanan Terhubung: Google Gemini (${model})` : "API Belum Dikonfigurasi",
   };
 }
 

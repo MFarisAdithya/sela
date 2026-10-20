@@ -142,8 +142,8 @@ export default function SafeStoryPage() {
             isAiGenerated: true,
             modelUsed: data.modelUsed,
             statusBadge: data.hasGroundedSources
-              ? "SELA AI • Rujukan Terverifikasi"
-              : "SELA AI • Refleksi Empatik",
+              ? "Rujukan Terverifikasi"
+              : "Refleksi Empatik",
           },
         ]);
       }
@@ -207,16 +207,7 @@ export default function SafeStoryPage() {
       {/* Top Status Bar */}
       <div className="flex items-center justify-between border-b border-border-subtle/80 pb-3 shrink-0">
         <div className="flex items-center gap-2">
-          <h1 className="text-lg font-bold text-brand-900">Safe Story AI</h1>
-          {isAiConfigured ? (
-            <Badge variant="active" dot size="sm">
-              AI Aktif
-            </Badge>
-          ) : (
-            <Badge variant="info" dot size="sm">
-              RAG Lokal
-            </Badge>
-          )}
+          <h1 className="text-lg font-bold text-brand-900">Cerita ke SELA</h1>
         </div>
 
         <div className="flex items-center gap-2">
@@ -236,7 +227,7 @@ export default function SafeStoryPage() {
       <div className="p-3 rounded-xl bg-surface-inset border border-border-subtle/80 flex items-start gap-2.5 text-xs text-text-muted shrink-0">
         <AlertCircle className="w-4 h-4 text-brand-600 shrink-0 mt-0.5" />
         <p className="leading-relaxed">
-          <strong>Ruang Nonklinis:</strong> Asisten ini membantu refleksi awal dan edukasi terverifikasi. AI tidak membuat diagnosis medis dan tidak menggantikan konseling psikolog.
+          <strong>Ruang Nonklinis:</strong> Tempat ini membantu refleksi awal dan rangkuman materi terverifikasi. SELA tidak membuat diagnosis medis dan bukan pengganti konseling profesional.
         </p>
       </div>
 
