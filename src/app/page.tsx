@@ -25,7 +25,7 @@ export default function SplashPage() {
         <div className="space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-900 text-xs font-semibold shadow-neu-inset">
             <Sparkles className="w-3.5 h-3.5 text-brand-600" />
-            <span>Platform Pendampingan Awal Remaja</span>
+            <span>Pendampingan Awal Remaja</span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-brand-900 leading-tight">
@@ -33,7 +33,7 @@ export default function SplashPage() {
           </h1>
 
           <p className="text-sm sm:text-base text-text-muted leading-relaxed font-normal px-2">
-            Dukungan aman untuk jiwa muda yang hebat. Kami di sini untuk mendengarkan, memahami, dan mendukungmu di setiap langkah.
+            Ruang refleksi, latihan life skills, dan informasi pendampingan awal untuk remaja.
           </p>
         </div>
 
@@ -44,9 +44,9 @@ export default function SplashPage() {
               <Shield className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-xs font-bold text-brand-900">Privasi & Ruang Aman</h2>
+              <h2 className="text-xs font-bold text-brand-900">Batasan & Privasi</h2>
               <p className="text-xs text-text-muted mt-0.5 leading-relaxed">
-                Tanpa diagnosa klinis, tanpa data sensitif yang disimpan permanen, dan bebas melangkah sesuai kenyamananmu.
+                Tanpa diagnosis medis, data tidak disimpan permanen di server, dan kamu memegang kendali penuh.
               </p>
             </div>
           </div>
@@ -61,7 +61,7 @@ export default function SplashPage() {
               className="w-full text-base shadow-neu-raised"
               rightIcon={<ArrowRight className="w-4 h-4" />}
             >
-              Mulai Perjalanan
+              Mulai
             </NeuButton>
           </Link>
 
@@ -72,7 +72,7 @@ export default function SplashPage() {
               className="w-full text-sm shadow-neu-raised-sm"
               leftIcon={<Sparkles className="w-4 h-4 text-brand-600" />}
             >
-              Preview Design System & Komponen (Fase 1)
+              Lihat Komponen Desain
             </NeuButton>
           </Link>
 

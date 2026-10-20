@@ -3,9 +3,9 @@ import "./globals.css";
 import { AppShell } from "@/components/layout/AppShell";
 
 export const metadata: Metadata = {
-  title: "FATHERCARE AI — Pendampingan Awal Remaja & Dewasa Muda",
+  title: "FATHERCARE AI — Pendampingan Awal Remaja",
   description:
-    "Platform berbasis Artificial Intelligence untuk identifikasi awal nonklinis, penguatan resiliensi, edukasi life skills, dan pendampingan remaja.",
+    "Ruang refleksi, latihan life skills, dan informasi pendampingan awal nonklinis untuk remaja.",
   keywords: [
     "FATHERCARE AI",
     "Genre Lampung",

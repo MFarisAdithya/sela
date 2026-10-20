@@ -19,17 +19,17 @@ import {
 import { NeuCard } from "@/components/ui/NeuCard";
 
 const mainMobileTabs = [
-  { label: "Beranda", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Safe Story", href: "/safe-story", icon: MessageSquareHeart },
-  { label: "Jurnal", href: "/journal", icon: PenLine },
+  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Cerita", href: "/safe-story", icon: MessageSquareHeart },
+  { label: "Catatan", href: "/journal", icon: PenLine },
   { label: "Belajar", href: "/learning", icon: GraduationCap },
 ];
 
 const secondaryMobileTabs = [
-  { label: "Peta Dukungan", href: "/support", icon: Users, desc: "Lingkaran orang terpercaya" },
-  { label: "Hubungi Pendamping", href: "/referrals", icon: PhoneCall, desc: "Simulasi alur rujukan" },
-  { label: "Rencana Bertumbuh", href: "/growth-plan", icon: TrendingUp, desc: "Target & langkah mingguan" },
-  { label: "Privasi & Pengaturan", href: "/settings", icon: ShieldCheck, desc: "Kontrol data & mode AI" },
+  { label: "Peta dukungan", href: "/support", icon: Users, desc: "Orang terdekat yang bisa dihubungi" },
+  { label: "Cari pendamping", href: "/referrals", icon: PhoneCall, desc: "Pilihan guru BK, konselor, psikolog" },
+  { label: "Rencana bertumbuh", href: "/growth-plan", icon: TrendingUp, desc: "Target dan latihan mandiri" },
+  { label: "Pengaturan", href: "/settings", icon: ShieldCheck, desc: "Kontrol data dan mode AI" },
 ];
 
 export const MobileBottomNav: React.FC = () => {

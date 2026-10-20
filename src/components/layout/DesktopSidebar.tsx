@@ -19,13 +19,13 @@ import { Badge } from "@/components/ui/Badge";
 
 const navItems = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Safe Story AI", href: "/safe-story", icon: MessageSquareHeart },
-  { label: "Jurnal Reflektif", href: "/journal", icon: PenLine },
-  { label: "Ruang Belajar", href: "/learning", icon: GraduationCap },
-  { label: "Peta Dukungan", href: "/support", icon: Users },
-  { label: "Hubungi Pendamping", href: "/referrals", icon: PhoneCall },
-  { label: "Rencana Bertumbuh", href: "/growth-plan", icon: TrendingUp },
-  { label: "Privasi & Pengaturan", href: "/settings", icon: ShieldCheck },
+  { label: "Cerita AI", href: "/safe-story", icon: MessageSquareHeart },
+  { label: "Catatan pribadi", href: "/journal", icon: PenLine },
+  { label: "Ruang belajar", href: "/learning", icon: GraduationCap },
+  { label: "Peta dukungan", href: "/support", icon: Users },
+  { label: "Cari pendamping", href: "/referrals", icon: PhoneCall },
+  { label: "Rencana bertumbuh", href: "/growth-plan", icon: TrendingUp },
+  { label: "Pengaturan", href: "/settings", icon: ShieldCheck },
 ];
 
 export const DesktopSidebar: React.FC = () => {
@@ -49,7 +49,7 @@ export const DesktopSidebar: React.FC = () => {
               FATHERCARE AI
             </h1>
             <p className="text-[11px] text-text-muted mt-1 font-medium">
-              Sahabat Jiwa Muda
+              Pendampingan Awal
             </p>
           </div>
         </div>
@@ -91,7 +91,7 @@ export const DesktopSidebar: React.FC = () => {
         <div className="p-3 rounded-xl bg-surface-inset shadow-neu-inset border border-border-subtle/60 text-xs text-text-muted space-y-1.5">
           <div className="flex items-center gap-1.5 font-semibold text-brand-900 text-[11px]">
             <LifeBuoy className="w-3.5 h-3.5 text-brand-600" />
-            <span>Butuh Bantuan Segera?</span>
+            <span>Bantuan darurat</span>
           </div>
           <p className="text-[11px] leading-relaxed">
             Jika kamu dalam situasi tidak aman, segera cari tempat aman atau hubungi orang dewasa terpercaya.
@@ -100,7 +100,7 @@ export const DesktopSidebar: React.FC = () => {
             href="/referrals"
             className="block text-[11px] text-brand-700 hover:text-brand-900 font-semibold underline underline-offset-2 pt-0.5"
           >
-            Lihat Layanan Dukungan &rarr;
+            Lihat kontak bantuan &rarr;
           </Link>
         </div>
 

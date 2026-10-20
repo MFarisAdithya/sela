@@ -49,26 +49,26 @@ export default function DesignSystemPage() {
       <div className="space-y-2 border-b border-border-subtle/80 pb-6">
         <div className="flex items-center gap-2">
           <Badge variant="verified" size="sm" dot>
-            Fase 1 Foundation
+            Fase 1
           </Badge>
           <Badge variant="demo" size="sm">
-            Neumorphic Blue System
+            Neumorphic Blue
           </Badge>
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-brand-900 tracking-tight">
-          Design System & UI Components Showcase
+          Komponen Desain & Antarmuka
         </h1>
         <p className="text-sm text-text-muted leading-relaxed">
-          Koleksi token visual, tombol, kontainer neumorphic, input form, dialog, dan komponen responsif yang dirancang khusus untuk platform FATHERCARE AI.
+          Daftar komponen dasar untuk tombol, kartu, input, dan dialog sistem FATHERCARE AI.
         </p>
         <div className="pt-2 flex items-center gap-3">
           <Link href="/">
             <NeuButton size="sm" variant="secondary">
-              &larr; Ke Splash Screen
+              &larr; Halaman awal
             </NeuButton>
           </Link>
           <span className="text-xs text-text-muted">
-            Viewport responsif: 320, 375, 390, 768, 1024, 1440 px
+            Ukuran layar: 320, 375, 390, 768, 1024, 1440 px
           </span>
         </div>
       </div>
@@ -113,23 +113,23 @@ export default function DesignSystemPage() {
         <NeuCard variant="raised" className="p-5 space-y-4">
           <div className="flex flex-wrap items-center gap-3">
             <NeuButton variant="primary" rightIcon={<ArrowRight className="w-4 h-4" />}>
-              Primary Action
+              Mulai bercerita
             </NeuButton>
 
             <NeuButton variant="secondary" leftIcon={<Sparkles className="w-4 h-4 text-brand-600" />}>
-              Secondary Raised
+              Simpan catatan
             </NeuButton>
 
             <NeuButton variant="inset">
-              Inset Button
+              Pilihan terpilih
             </NeuButton>
 
             <NeuButton variant="danger" leftIcon={<Trash2 className="w-4 h-4" />}>
-              Hapus / Danger
+              Hapus
             </NeuButton>
 
             <NeuButton variant="ghost">
-              Ghost Link
+              Lewati
             </NeuButton>
 
             <NeuButton variant="primary" isLoading>
@@ -137,7 +137,7 @@ export default function DesignSystemPage() {
             </NeuButton>
           </div>
           <p className="text-xs text-text-muted">
-            Target sentuh minimal 44 piksel, dilengkapi efek hover halus dan transisi pressed yang responsif.
+            Target sentuh minimal 44 piksel pada layar ponsel.
           </p>
         </NeuCard>
       </section>
@@ -185,24 +185,24 @@ export default function DesignSystemPage() {
         <NeuCard variant="raised" className="p-5 space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <NeuInput
-              label="Nama Samaran Pengguna"
+              label="Nama samaran"
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
-              helperText="Identitas samaran menjaga privasimu selama sesi berlangsung."
+              helperText="Digunakan untuk menyapa di dashboard selama sesi ini."
             />
             <NeuInput
-              label="Input dengan Validasi Error"
-              defaultValue="teks@kurang-lengkap"
-              error="Format email belum valid atau tidak diperlukan di prototype."
+              label="Email (opsional)"
+              defaultValue="contoh@domain"
+              error="Format email belum sesuai."
             />
           </div>
 
           <NeuTextarea
-            label="Catatan Jurnal Reflektif"
+            label="Catatan pribadi"
             rows={3}
             value={textareaVal}
             onChange={(e) => setTextareaVal(e.target.value)}
-            helperText="Catatan ini hanya tersimpan di memori browser perangkatmu."
+            helperText="Tersimpan di browser selama sesi ini."
           />
         </NeuCard>
       </section>
@@ -246,20 +246,20 @@ export default function DesignSystemPage() {
           <div className="space-y-4">
             <ProgressBar
               value={40}
-              label="Modul Resiliensi Diselesaikan (2 dari 5)"
+              label="Kemajuan modul (2 dari 5)"
               showPercentage
             />
             <ProgressBar
               value={75}
-              label="Langkah Bertumbuh Minggu Ini"
+              label="Target minggu ini"
               showPercentage
             />
           </div>
 
           <div className="flex flex-col items-center justify-center text-center p-3">
-            <CircularProgress value={67} subtitle="Target Terpenuhi" />
+            <CircularProgress value={67} subtitle="Selesai" />
             <p className="text-xs text-text-muted mt-2">
-              Progres sirkular rencana bertumbuh tanpa mekanisme hukuman streak.
+              Indikator progres target pribadi tanpa batas waktu kaku.
             </p>
           </div>
         </NeuCard>
@@ -275,7 +275,7 @@ export default function DesignSystemPage() {
             variant="secondary"
             onClick={() => setIsModalOpen(true)}
           >
-            Buka Modal Konfirmasi
+            Buka dialog konfirmasi
           </NeuButton>
 
           <NeuButton
@@ -283,12 +283,12 @@ export default function DesignSystemPage() {
             onClick={() =>
               setToastConfig({
                 type: "success",
-                title: "Data Sesi Direset",
-                message: "Semua riwayat dan preferensi lokal telah dibersihkan.",
+                title: "Data sesi dihapus",
+                message: "Catatan dan preferensi lokal berhasil dibersihkan.",
               })
             }
           >
-            Picu Toast Sukses
+            Picu toast sukses
           </NeuButton>
 
           <NeuButton
@@ -296,12 +296,12 @@ export default function DesignSystemPage() {
             onClick={() =>
               setToastConfig({
                 type: "warning",
-                title: "Mode Demo Aktif",
-                message: "Kunci API belum diisi, respon disimulasikan dari basis pengetahuan lokal.",
+                title: "Mode demo aktif",
+                message: "Respons disimulasikan dari materi lokal.",
               })
             }
           >
-            Picu Toast Peringatan
+            Picu toast peringatan
           </NeuButton>
         </NeuCard>
 
@@ -309,8 +309,8 @@ export default function DesignSystemPage() {
         <NeuModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          title="Konfirmasi Pengiriman Teks AI"
-          description="FATHERCARE AI mengedepankan prinsip persetujuan bertingkat sebelum mengirim data ke pihak ketiga."
+          title="Kirim teks ke layanan AI?"
+          description="Teks kamu akan diproses untuk memberikan respons reflektif."
           footer={
             <>
               <NeuButton
@@ -327,19 +327,19 @@ export default function DesignSystemPage() {
                   setIsModalOpen(false);
                   setToastConfig({
                     type: "info",
-                    title: "Persetujuan Diberikan",
-                    message: "Teks refleksi diizinkan untuk diproses oleh sistem.",
+                    title: "Teks dikirim",
+                    message: "Permintaan sedang diproses.",
                   });
                 }}
               >
-                Saya Setuju & Lanjutkan
+                Setuju dan kirim
               </NeuButton>
             </>
           }
         >
           <div className="p-3 rounded-xl bg-surface-inset shadow-neu-inset text-xs text-text-muted space-y-2">
             <p>
-              Dengan melanjutkan, kamu memahami bahwa AI berperan sebagai pemandu refleksi awal dan bukan tenaga profesional pengganti psikolog.
+              AI ini bukan psikolog atau konselor klinis dan tidak menggantikan bantuan profesional.
             </p>
           </div>
         </NeuModal>
@@ -348,23 +348,23 @@ export default function DesignSystemPage() {
       {/* 8. UI States (Empty, Loading, Error, Success) */}
       <section className="space-y-4">
         <h2 className="text-lg font-bold text-brand-900">
-          8. Penanganan State UI Lengkap
+          8. Penanganan State UI
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <StateCard
             type="empty"
-            title="Belum Ada Jurnal Tersimpan"
-            description="Kamu belum menulis jurnal refleksi hari ini. Luangkan 2 menit untuk menamai apa yang kamu rasakan."
-            actionLabel="Mulai Menulis"
-            onAction={() => alert("Navigasi ke Jurnal Reflektif")}
+            title="Belum ada catatan"
+            description="Belum ada catatan refleksi yang tersimpan di sesi ini."
+            actionLabel="Tulis catatan"
+            onAction={() => alert("Membuka catatan")}
           />
 
           <StateCard
             type="error"
-            title="Koneksi Terputus"
-            description="Layanan AI eksternal tidak merespons. Sistem beralih ke materi terverifikasi di perangkatmu."
-            actionLabel="Coba Lagi"
-            onAction={() => alert("Mencoba ulang koneksi")}
+            title="Gagal memuat respons"
+            description="Tidak dapat terhubung ke server. Kamu tetap bisa membaca materi di Ruang Belajar."
+            actionLabel="Coba lagi"
+            onAction={() => alert("Mencoba ulang")}
           />
         </div>
       </section>
