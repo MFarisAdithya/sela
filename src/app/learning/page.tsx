@@ -174,7 +174,7 @@ export default function LearningPage() {
                   onClick={() => setExpandedModuleId(isExpanded ? null : mod.id)}
                   className="text-xs text-brand-700 hover:text-brand-900 font-medium"
                 >
-                  {isExpanded ? "Tutup materi" : "Baca materi lengkap &rarr;"}
+                  {isExpanded ? "Tutup materi" : "Baca materi lengkap →"}
                 </button>
               </div>
             </NeuCard>
