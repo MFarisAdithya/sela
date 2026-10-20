@@ -100,7 +100,7 @@ export const DesktopSidebar: React.FC = () => {
             href="/referrals"
             className="block text-[11px] text-brand-700 hover:text-brand-900 font-semibold underline underline-offset-2 pt-0.5"
           >
-            Lihat kontak bantuan &rarr;
+            Lihat kontak bantuan →
           </Link>
         </div>
 

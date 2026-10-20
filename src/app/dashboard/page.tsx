@@ -236,7 +236,7 @@ export default function DashboardPage() {
                   <MessageSquareHeart className="w-5 h-5" />
                 </div>
                 <span className="text-[11px] font-semibold text-brand-700 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                  Buka &rarr;
+                  Buka →
                 </span>
               </div>
               <div className="space-y-1">
@@ -260,7 +260,7 @@ export default function DashboardPage() {
                   <PenLine className="w-5 h-5" />
                 </div>
                 <span className="text-[11px] font-semibold text-brand-700 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                  Buka &rarr;
+                  Buka →
                 </span>
               </div>
               <div className="space-y-1">
@@ -284,7 +284,7 @@ export default function DashboardPage() {
                   <GraduationCap className="w-5 h-5" />
                 </div>
                 <span className="text-[11px] font-semibold text-brand-700 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                  Buka &rarr;
+                  Buka →
                 </span>
               </div>
               <div className="space-y-1">
@@ -308,7 +308,7 @@ export default function DashboardPage() {
                   <Users className="w-5 h-5" />
                 </div>
                 <span className="text-[11px] font-semibold text-brand-700 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                  Buka &rarr;
+                  Buka →
                 </span>
               </div>
               <div className="space-y-1">

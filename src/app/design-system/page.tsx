@@ -64,7 +64,7 @@ export default function DesignSystemPage() {
         <div className="pt-2 flex items-center gap-3">
           <Link href="/">
             <NeuButton size="sm" variant="secondary">
-              &larr; Halaman awal
+              ← Halaman awal
             </NeuButton>
           </Link>
           <span className="text-xs text-text-muted">

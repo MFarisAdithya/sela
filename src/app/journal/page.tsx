@@ -93,7 +93,7 @@ export default function JournalPage() {
               onClick={() => setSelectedPromptIdx((prev) => (prev + 1) % prompts.length)}
               className="text-[11px] text-brand-700 hover:text-brand-900 font-medium"
             >
-              Ganti pertanyaan &rarr;
+              Ganti pertanyaan →
             </button>
           </div>
           <div className="p-3.5 rounded-xl bg-surface-inset shadow-neu-inset text-xs font-medium text-brand-900 border border-border-subtle/80">

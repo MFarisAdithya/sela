@@ -121,7 +121,7 @@ export default function OnboardingPage() {
         </NeuButton>
 
         <Link href="/" className="block text-xs text-text-muted hover:text-brand-900">
-          &larr; Kembali ke halaman awal
+          ← Kembali ke halaman awal
         </Link>
       </div>
     </div>
