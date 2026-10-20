@@ -65,6 +65,17 @@ export default function SplashPage() {
             </NeuButton>
           </Link>
 
+          <Link href="/design-system" className="block w-full">
+            <NeuButton
+              size="md"
+              variant="secondary"
+              className="w-full text-sm shadow-neu-raised-sm"
+              leftIcon={<Sparkles className="w-4 h-4 text-brand-600" />}
+            >
+              Preview Design System & Komponen (Fase 1)
+            </NeuButton>
+          </Link>
+
           <p className="text-[11px] text-text-muted">
             Inovasi Program Genre InnovAItion AI Challenge &bull; ADUJAKNAS 2026
           </p>

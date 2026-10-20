@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { AppShell } from "@/components/layout/AppShell";
-import { AppProvider } from "@/context/AppContext";
 
 export const metadata: Metadata = {
   title: "FATHERCARE AI — Pendampingan Awal Remaja & Dewasa Muda",
@@ -32,9 +31,7 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body className="antialiased bg-background text-text-main selection:bg-brand-200 selection:text-brand-900">
-        <AppProvider>
-          <AppShell>{children}</AppShell>
-        </AppProvider>
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );
