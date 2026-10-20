@@ -15,6 +15,7 @@ const viewports = [
 
 const pagesToTest = [
   { url: "http://localhost:3000", label: "Splash" },
+  { url: "http://localhost:3000/dashboard", label: "Dashboard" },
   { url: "http://localhost:3000/design-system", label: "DesignSystem" },
 ];
 
