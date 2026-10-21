@@ -79,19 +79,6 @@ export default function DashboardPage() {
           </p>
         )}
       </section>
-
-      <section className="grid gap-4 sm:grid-cols-2" aria-label="Mau ke mana?">
-        {t.features.map((f) => (
-          <Link
-            key={f.href}
-            href={f.href}
-            className={`rounded-3xl bg-[#F7FAFF] p-5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#6FB1FF] border border-border-subtle/70 hover:scale-[1.01] transition-transform ${raised}`}
-          >
-            <span className="block text-lg font-semibold text-brand-900">{f.title}</span>
-            <span className="mt-1 block leading-relaxed text-[#17365D]/75 text-sm">{f.desc}</span>
-          </Link>
-        ))}
-      </section>
     </div>
   );
 }
