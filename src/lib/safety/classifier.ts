@@ -38,23 +38,27 @@ const MEDIUM_RISK_KEYWORDS = [
 ];
 
 const CLINICAL_DIAGNOSIS_KEYWORDS = [
+  "diagnosa",
+  "diagnosis",
+  "depresi",
+  "bipolar",
+  "skizofrenia",
+  "skizofren",
+  "kejiwaan",
+  "gangguan jiwa",
+  "resep obat",
+  "obat penenang",
+  "psikofarmaka",
+  "bpd",
+  "ptsd",
+  "anxiety disorder",
+  "gangguan kepribadian",
   "apakah aku depresi",
   "apakah saya depresi",
   "apakah aku bipolar",
   "apakah saya bipolar",
   "diagnosa aku",
   "diagnosis aku",
-  "diagnosa saya",
-  "diagnosis saya",
-  "apakah aku skizofrenia",
-  "apakah saya skizofrenia",
-  "apakah aku kena ocd",
-  "apakah ini ocd",
-  "apakah aku adhd",
-  "apakah saya adhd",
-  "apakah aku autis",
-  "apakah aku mengalami gangguan jiwa",
-  "apakah aku gila",
   "tes kejiwaan",
 ];
 
@@ -70,7 +74,7 @@ export function evaluateSafety(text: string): SafetyCheckResult {
       matchedKeywords: matchedHigh,
       suggestedAction: "emergency_protocol",
       safetyMessage:
-        "Jika kamu atau seseorang di dekatmu sedang berada dalam bahaya mendesak atau membutuhkan bantuan segera, prioritaskan pergi ke tempat aman dan hubungi Hotline Kesehatan Jiwa Kemenkes 119 ekstensi 8 (Bebas pulsa, 24 jam) atau nomor darurat 112.",
+        "Jika kamu atau seseorang di dekatmu sedang berada dalam bahaya mendesak atau membutuhkan bantuan segera, prioritaskan pergi ke tempat aman dan hubungi Hotline Kesehatan Jiwa Kemenkes SEJIWA 119 ext 8 (Bebas pulsa, 24 jam) atau nomor darurat 112.",
     };
   }
 

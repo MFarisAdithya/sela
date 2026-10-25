@@ -1,97 +1,138 @@
-# FATHERCARE AI — Web Platform Pendampingan Awal Remaja
-
-Platform berbasis web responsif untuk pendampingan awal nonklinis bagi remaja dan dewasa muda (15–24 tahun), dirancang dengan pendekatan *Youth-centered*, *Strength-based*, dan *Privacy & Safety by Design*.
-
----
-
-## 1. Fitur Utama Aplikasi
-
-1. **Splash & Welcome Gate (`/`):** Pengenalan batasan platform secara jujur, privasi data, dan navigasi awal.
-2. **Onboarding & Persetujuan Bertingkat (`/onboarding`):** Persetujuan eksplisit batas nonklinis dan kendali privasi sesi sebelum masuk ke aplikasi.
-3. **Beranda & Check-in Emosi (`/dashboard`):** Sapaan netral, 5 level check-in emosi interaktif dengan langkah kecil realistis, dan 4 tombol akses cepat fungsional.
-4. **Safe Story AI (`/safe-story`):** Ruang percakapan terintegrasi RAG knowledge base lokal, penelusuran sumber rujukan resmi, penanganan krisis darurat otomatis, dan status konfigurasi API transparan.
-5. **Catatan Pribadi / Jurnal (`/journal`):** Pertanyaan pemandu harian, penulisan refleksi, penyimpanan lokal sesi, dan tombol konsultasi ke Cerita AI.
-6. **Ruang Belajar (`/learning`):** Modul psikoedukasi, komunikasi asertif, resiliensi, dan kesiapan karier dengan latihan praktis 60 detik serta pelacak progres.
-7. **Peta Dukungan (`/support`):** Visualisasi konsentris orang terpercaya (sahabat, keluarga, guru BK, konselor) dengan fitur penambahan kontak lokal secara privat.
-8. **Cari Pendamping (`/referrals`):** Direktori layanan resmi (Guru BK, Konselor Sebaya Forum Genre/PIK-R, PKPR Puskesmas, UPTD PPA) dan generator tiket simulasi rujukan dengan persetujuan selektif data yang dibagikan.
-9. **Rencana Bertumbuh (`/growth-plan`):** Target mingguan sukarela dengan indikator progres sirkular tanpa sistem hukuman streak.
-10. **Pengaturan & Privasi (`/settings`):** Pusat kendali data, status konfigurasi AI backend, toggle izin transmisi AI, dan tombol reset seluruh sesi dengan satu klik.
+# SELA.AI — AI-Powered Help-Seeking Navigator
+> *"From Unspoken Problems to Prepared Conversations"*  
+> Platform navigasi nonklinis untuk membantu remaja dan dewasa muda (15–24 tahun) mengurai beban pikiran yang sulit diungkapkan, menyusunnya menjadi ringkasan yang jelas, berlatih berbicara secara asertif, dan menemukan jalur bantuan nyata yang tepat.
 
 ---
 
-## 2. Cara Menjalankan Proyek Secara Lokal
+## 🌟 4 Pilar Inti SELA.AI
 
-### Kebutuhan Sistem:
-* Node.js v18 ke atas (Direkomendasikan v20 / v24)
-* npm v9 ke atas
+SELA.AI tidak dirancang sebagai chatbot teman curhat tanpa ujung atau pengganti tenaga profesional. Setiap alur dioptimalkan untuk memindahkan pengguna dari **masalah yang terpendam menuju percakapan nyata yang siap dihadapi**:
+
+1. **Pilar 1: Guided Story (`/safe-story`)**  
+   Pengurai beban pikiran terpandu 4 langkah (*Lawan Bicara & Fakta, Emosi yang Dirasa, Kebutuhan Nyata, dan Kalimat Pembuka*). Membantu pengguna memisahkan fakta objektif dari kecemasan sebelum berbicara. Dilengkapi opsi obrolan bebas dengan pendamping AI dan intersepsi krisis darurat.
+2. **Pilar 2: Kartu Cerita Pribadi (`/journal`)**  
+   Generator ringkasan 4 kuadran yang rapi dan terstruktur. Pengguna dapat mengedit langsung, menyalin ke papan klip, mengunduh salinan teks aman (`.TXT`), serta membawanya langsung ke sesi simulasi bicara.
+3. **Pilar 3: Practice Talk (`/dashboard`)**  
+   Simulasi percakapan *turn-by-turn* dengan 4 persona realistis: *Orang Tua, Guru / Dosen, Teman Sebaya, dan Konselor Profesional*. Dilengkapi laci contekkan Kartu Cerita dan catatan pembinaan komunikasi asertif (*[Tips Komunikasi]*).
+4. **Pilar 4: Support Pathway (`/support`)**  
+   Navigasi bantuan nyata yang **selalu 100% gratis tanpa paywall**: panduan 4 langkah konsultasi kesehatan mental di Puskesmas menggunakan BPJS Kesehatan, contekkan kata pembuka pertama untuk dokter umum, dan hotline darurat nasional (SEJIWA 119 ext 8, SAPA 129, Halo Kemenkes 1500-567).
+
+---
+
+## 🛡️ Batas AI & Prinsip Keselamatan Nonklinis
+
+- **Bukan Alat Diagnosis:** SELA.AI secara tegas menolak pertanyaan spekulasi medis (*"apakah aku depresi?"*, *"diagnosa bipolar"*), memberikan penegasan batas nonklinis, dan menyediakan sitasi resmi rujukan faskes.
+- **Intersepsi Krisis Otomatis:** Deteksi indikasi bahaya mendesak langsung menghentikan alur promosi/simulasi dan memunculkan banner darurat SEJIWA 119 ekstensi 8 (Bebas pulsa, 24 jam).
+- **Penyaring Data Pribadi (PII Masker):** Secara otomatis menyamarkan NIK 16 digit, nomor telepon Indonesia (+62 8xx / 08xx), alamat surel, dan nama legal sebelum teks diproses oleh model bahasa.
+- **Kepatuhan Privasi (UU No. 27/2022 PDP):** Persetujuan terpisah antara Ketentuan Layanan, Kebijakan Privasi, dan Izin Pemrosesan AI. Pengguna memiliki kendali penuh untuk mengekspor atau menghapus akun dan datanya secara permanen.
+- **Tanpa Auto-Charge:** Model *Supporter* (Rp19.000 / 30 hari) bersifat perpanjangan manual; tidak ada penagihan kartu kredit otomatis atau perpanjangan paksa.
+
+---
+
+## 🛠️ Arsitektur Teknologi & Tech Stack
+
+- **Frontend & App Framework:** Next.js 15.5 (App Router, Server & Client Components, Route Groups)
+- **Desain & UI:** Tailwind CSS, Soft Neumorphism terkurasi, Palet Resmi SELA (Navy `#17365D`, Royal Blue `#2457A7`, Ice Blue `#E3EEFF`), Lucide React Icons
+- **AI & RAG Engine:** Google Gen AI SDK (Gemini 1.5 Flash), Hybrid In-Memory Retrieval (BM25 Keyword Scoring + Semantic Domain Mapping) dengan 24 artikel terkurasi resmi
+- **Gerbang Pembayaran:** Abstraksi Midtrans Snap Sandbox terverifikasi dengan penanganan webhook idempoten
+- **Pengujian & QA:** Puppeteer headless testing suite (Multi-viewport: 320, 375, 390, 768, 1024, 1440 px)
+
+---
+
+## 🚀 Panduan Menjalankan Secara Lokal
+
+### Prasyarat Sistem:
+- **Node.js:** Versi 18 ke atas (Direkomendasikan v20 atau v24)
+- **npm:** Versi 9 ke atas
 
 ### Langkah Instalasi:
 ```bash
 # 1. Masuk ke direktori proyek
 cd FATHERCARE-AI
 
-# 2. Instal seluruh dependensi
+# 2. Pasang dependensi
 npm install
 
-# 3. Jalankan server lokal
+# 3. Konfigurasikan Environment Variables (Salin template)
+cp .env.example .env.local
+
+# 4. Jalankan server pengembangan lokal
 npm run dev
 ```
-Buka browser pada: **http://localhost:3000**
+
+Buka peramban pada tautan: **http://localhost:3000**
 
 ---
 
-## 3. Cara Mengaktifkan AI Sungguhan (OpenAI API)
+## 🔑 Konfigurasi Environment (`.env.local`)
 
-Aplikasi dibangun untuk bekerja secara aktif dengan model AI di backend, bukan simulasi statis.
+File `.env.local` digunakan untuk mengatur integrasi backend. Salin dari `.env.example`:
 
-1. Buat file `.env.local` pada root direktori proyek (salin dari `.env.example`):
-   ```bash
-   cp .env.example .env.local
-   ```
-2. Isi `OPENAI_API_KEY` dengan kunci API OpenAI Anda:
-   ```env
-   OPENAI_API_KEY=sk-proj-xxxxxxxxxxxxxxxxxxxxxxxx
-   OPENAI_MODEL=gpt-4o-mini
-   ```
-3. Muat ulang server (`npm run dev`).
-4. Status pada navigasi akan otomatis berubah dari **"API Belum Dikonfigurasi"** menjadi **"AI Aktif"**.
+```env
+# 1. Google Gemini AI (Server-Side Only)
+GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_MODEL=gemini-1.5-flash
+GEMINI_TIMEOUT_MS=60000
 
-> **Keamanan Kunci API:**  
-> Kunci API dibaca **hanya di sisi server** (`src/app/api/chat/route.ts` dan `src/lib/ai/openAiService.ts`). Kunci **tidak pernah** dikirim atau terekspos ke bundle JavaScript di peramban pengguna.
+# 2. Gerbang Pembayaran Sandbox (Midtrans Snap)
+PAYMENT_PROVIDER=midtrans
+PAYMENT_MODE=sandbox
+MIDTRANS_SERVER_KEY=your_midtrans_server_key_here
+MIDTRANS_CLIENT_KEY=your_midtrans_client_key_here
+MIDTRANS_IS_PRODUCTION=false
 
----
-
-## 4. Basis Pengetahuan RAG & Sumber Terverifikasi
-
-Setiap respons di Safe Story AI diperiksa terlebih dahulu terhadap dokumen materi terverifikasi di `src/data/knowledge-base/`:
-* **Psikoedukasi:** Modul *Tentang Kita* Forum Genre & BKKBN (2021), Kajian *Fatherless* Ashari (2018), Panduan Pengasuhan Positif KemenPPPA.
-* **Life Skills:** Panduan Konselor Sebaya Remaja Indonesia, ABKIN (2020), Modul Keterampilan Hidup UNICEF.
-* **Karier:** Pedoman Pelatihan Vokasi Kemendikbudristek & Kesiapan Kerja Kemnaker RI.
-* **Protokol Keselamatan:** Layanan Kesehatan Jiwa SEJIWA Kemenkes RI (119 ext 8) & SAPA 129 KemenPPPA.
-* **Rujukan:** Jejaring Ruang BK, PIK-R Forum Genre Lampung, Poli PKPR Puskesmas, UPTD PPA Provinsi Lampung.
-
----
-
-## 5. Protokol Keselamatan & Perlindungan Data
-
-* **Deteksi Krisis & Self-Harm:** Jika terdeteksi indikasi bahaya mendesak atau keinginan menyakiti diri, sistem **seketika menghentikan generasi AI** dan menampilkan kartu keselamatan darurat berisi nomor telepon resmi nasional (119 ext 8, 112, SAPA 129).
-* **Sanitasi Data Pribadi (PII Masking):** Pola nomor telepon, surel, dan NIK disamarkan secara otomatis sebelum teks diproses oleh model bahasa.
-* **Batas Nonklinis:** Sistem tidak mendiagnosis penyakit mental, tidak melabeli pengguna, dan tidak mengarang nama atau nomor pendamping palsu.
-* **Zero Server Storage:** Catatan pribadi dan isi percakapan tidak disimpan permanen di basis data server.
-
----
-
-## 6. Hasil Pengujian Browser & Viewport
-
-Aplikasi telah diaudit secara otomatis di Microsoft Edge pada 6 titik henti (*breakpoints*) untuk 10 rute inti (total **60/60 uji lulus**):
-* **320 px** (iPhone SE 1st gen) &bull; Nol horizontal overflow
-* **375 px** (iPhone 8 / SE gen 2–3) &bull; Nol horizontal overflow
-* **390 px** (iPhone 14/15/16 Pro) &bull; Nol horizontal overflow
-* **768 px** (iPad / Tablet Potret) &bull; Nol horizontal overflow
-* **1024 px** (Laptop Ringkas / Lanskap) &bull; Sidebar desktop aktif
-* **1440 px** (Desktop HD) &bull; Tata letak terpusat proporsional
-
-Jalankan pengujian ulang kapan saja dengan perintah:
-```bash
-npm run test:viewports
+# 3. Aplikasi
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
+
+> **Catatan Sandbox & AI Fallback:**  
+> Jika `GEMINI_API_KEY` atau `MIDTRANS_SERVER_KEY` belum diisi, platform secara otomatis beralih ke mode **Simulasi Terpandu Offline** dan **SELA Sandbox Payment Simulator** tanpa error atau klaim fiktif.
+
+---
+
+## 🧪 Menjalankan Suite Pengujian & QA Otomatis
+
+Proyek dilengkapi script pengujian verifikasi berbasis headless browser Microsoft Edge:
+
+```bash
+# Uji reposisi & arsitektur publik (Fase 1)
+node scripts/verify-phase1.mjs
+
+# Uji autentikasi, persetujuan UU PDP, & route guard (Fase 2)
+node scripts/verify-phase2.mjs
+
+# Uji 4 Pilar Inti & 24 cek multi-viewport (Fase 3)
+node scripts/verify-phase3.mjs
+
+# Uji RAG Knowledge Base, PII Sanitizer, & Refusal Guardrail (Fase 4)
+node scripts/verify-phase4.mjs
+
+# Uji Freemium Entitlements, Webhook Idempotensi, & 18 cek viewport billing (Fase 5)
+node scripts/verify-phase5.mjs
+
+# Uji Keamanan Lintas Akun, Kebocoran Kunci, Intersepsi Krisis, & E2E QA (Fase 6)
+node scripts/verify-phase6-security-qa.mjs
+```
+
+---
+
+## 📦 Kompilasi Produksi & Deployment
+
+```bash
+# Build aplikasi produksi
+npm run build
+
+# Menjalankan build produksi secara lokal
+npm run start
+```
+
+### Deployment ke Vercel:
+1. Hubungkan repositori GitHub: `https://github.com/MFarisAdithya/sela.git`.
+2. Masukkan Environment Variables di dashboard Vercel (`GEMINI_API_KEY`, `MIDTRANS_SERVER_KEY`, dll.).
+3. Pilih framework preset **Next.js**.
+4. Klik **Deploy**.
+
+---
+
+## 📄 Lisensi & Hak Cipta
+Hak Cipta © 2026 SELA.AI. Seluruh hak cipta dilindungi undang-undang.

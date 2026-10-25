@@ -54,6 +54,7 @@ export async function POST(req: NextRequest) {
     if (safety.isCrisis) {
       return NextResponse.json({
         status: "crisis_detected",
+        isCrisis: true,
         reply: safety.safetyMessage,
         isAiGenerated: false,
         safety,
@@ -76,6 +77,7 @@ export async function POST(req: NextRequest) {
     if (safety.isClinicalDiagnosisRequest) {
       return NextResponse.json({
         status: "clinical_refusal",
+        isClinicalDiagnosisRequest: true,
         reply: safety.safetyMessage,
         isAiGenerated: false,
         safety,
