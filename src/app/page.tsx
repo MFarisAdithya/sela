@@ -222,8 +222,8 @@ export default function LandingPage() {
               {/* Premium Plan */}
               <div className="rounded-3xl bg-[#17365D] text-white p-8 border border-[#2457A7] shadow-[8px_8px_20px_rgba(23,54,93,0.25)] flex flex-col justify-between relative overflow-hidden">
                 <div className="absolute top-4 right-4">
-                  <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#2457A7] text-[#CCE1FF]">
-                    Asumsi Validasi
+                  <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#2457A7] text-[#CCE1FF] border border-[#6FB1FF]/30">
+                    Pilihan Supporter ⭐
                   </span>
                 </div>
 

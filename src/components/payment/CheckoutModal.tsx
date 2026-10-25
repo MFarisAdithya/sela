@@ -266,26 +266,26 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 </div>
                 <div className="text-right">
                   <div className="text-xl font-black text-[#2457A7]">Rp19.000</div>
-                  <div className="text-[10px] text-[#17365D]/60">Satu kali bayar (Tanpa auto-charge)</div>
+                  <div className="text-[10px] text-[#17365D]/60">Satu kali bayar · Tanpa auto-charge</div>
                 </div>
               </div>
 
-              <div className="border-t border-[#CCE1FF]/60 pt-3 grid grid-cols-2 gap-2 text-xs text-[#17365D]/80">
+              <div className="border-t border-[#CCE1FF]/60 pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#17365D]/80">
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#1F7A65]" />
-                  <span>100 respons AI / bln</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#1F7A65] shrink-0" />
+                  <span>Kuota interaksi AI jauh lebih besar</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#1F7A65]" />
-                  <span>Hingga 20 Kartu Cerita</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#1F7A65] shrink-0" />
+                  <span>Lebih banyak kesempatan Practice Talk</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#1F7A65]" />
-                  <span>10 sesi Practice Talk</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#1F7A65] shrink-0" />
+                  <span>Kapasitas Kartu Cerita lebih luas</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#1F7A65]" />
-                  <span>Lencana Supporter</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#1F7A65] shrink-0" />
+                  <span>Akses penuh modul premium &amp; lencana</span>
                 </div>
               </div>
             </div>

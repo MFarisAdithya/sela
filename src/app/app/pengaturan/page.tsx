@@ -133,7 +133,7 @@ export default function PengaturanAkunPage() {
           </div>
           <p className="text-xs sm:text-sm text-[#17365D]/75 max-w-lg leading-relaxed">
             {user?.plan === "premium"
-              ? "Akunmu aktif sebagai SELA Supporter dengan kapasitas refleksi terpandu 100 respons/bulan dan hingga 20 Kartu Cerita."
+              ? "Akunmu aktif sebagai SELA Supporter dengan kuota interaksi AI jauh lebih besar, kapasitas Kartu Cerita luas, dan akses penuh ke seluruh modul premium."
               : "Kamu menggunakan akses dasar SELA.AI. Bantuan darurat dan Support Pathway selalu dapat diakses gratis."}
           </p>
         </div>
