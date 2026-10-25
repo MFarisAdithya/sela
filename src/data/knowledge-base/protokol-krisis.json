@@ -1,0 +1,58 @@
+[
+  {
+    "id": "krisis-01",
+    "topic": "protokol-krisis",
+    "title": "Protokol Layanan Darurat Kesehatan Jiwa Nasional 119 Ekstensi 8 (SEJIWA)",
+    "author_or_organization": "Kementerian Kesehatan Republik Indonesia",
+    "publication_date": "2023",
+    "url": "https://sejiwa.kemkes.go.id/",
+    "material_section": "Protokol Standar Operasional Layanan Konseling Darurat dan Pencegahan Bunuh Diri",
+    "review_status": "official_protocol",
+    "reviewed_at": "2026-08-25",
+    "audience": "Masyarakat Umum & Remaja (Semua Usia)",
+    "content": "Hotline SEJIWA (119 ekstensi 8) adalah saluran resmi pemerintah Indonesia untuk pertolongan krisis kejiwaan 24 jam bebas pulsa dari semua operator telepon. Layanan ini menghubungkan penelepon dengan psikolog dan konselor terlatih untuk meredakan dorongan krisis, de-eskalasi emosional darurat, serta koordinasi penjemputan medis/ambulans bila terjadi ancaman bahaya fisik langsung.",
+    "keywords": ["sejiwa 119", "hotline krisis", "pencegahan bunuh diri", "darurat jiwa", "kemenkes", "bebas pulsa", "pertolongan pertama krisis"]
+  },
+  {
+    "id": "krisis-02",
+    "topic": "protokol-krisis",
+    "title": "Protokol Penanganan Kasus Kekerasan dan Layanan SAPA 129",
+    "author_or_organization": "Kementerian Pemberdayaan Perempuan dan Perlindungan Anak (KemenPPPA)",
+    "publication_date": "2023",
+    "url": "https://kemenpppa.go.id/",
+    "material_section": "Standar Operasional Penanganan Korban Kekerasan Berbasis Gender dan Anak",
+    "review_status": "official_protocol",
+    "reviewed_at": "2026-08-26",
+    "audience": "Anak, Remaja, dan Perempuan",
+    "content": "SAPA 129 (Sahabat Perempuan dan Anak) melayani pengaduan kekerasan fisik, psikis, perundungan berat, penelantaran, atau eksploitasi seksual melalui telepon 129 atau WhatsApp 08111-129-129. Tim SAPA berkoordinasi dengan Unit Pelaksana Teknis Daerah Perlindungan Perempuan dan Anak (UPTD PPA) dan kepolisian untuk pendampingan hukum, medis, serta penyediaan rumah aman (safe house).",
+    "keywords": ["sapa 129", "kekerasan anak", "kekerasan seksual", "pelecehan", "perundungan fisik", "kemenpppa", "rumah aman", "pengaduan kekerasan"]
+  },
+  {
+    "id": "krisis-03",
+    "topic": "protokol-krisis",
+    "title": "Mengenali Tanda Bahaya Krisis Emosional pada Diri Sendiri dan Sahabat",
+    "author_or_organization": "Into The Light Indonesia & American Association of Suicidology",
+    "publication_date": "2022",
+    "url": "https://www.intothelightid.org/",
+    "material_section": "Panduan Deteksi Dini Tanda Peringatan Krisis Bunuh Diri (Warning Signs)",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-08-28",
+    "audience": "Remaja & Dewasa Muda (15-24 tahun)",
+    "content": "Tanda bahaya krisis emosional yang memerlukan pertolongan segera: (1) Mengungkapkan secara eksplisit atau implisit keinginan mati ('Lebih baik aku tidak ada', 'Semoga besok tidak bangun lagi'); (2) Menarik diri secara drastis dari semua orang dan membagikan barang-barang berharga; (3) Perubahan emosi drastis dari sangat tertekan mendadak tampak tenang tanpa alasan jelas; (4) Melakukan tindakan berbahaya atau mengonsumsi zat berbahaya secara impulsif.",
+    "keywords": ["tanda bahaya krisis", "warning signs", "dorongan menyakiti diri", "kehilangan harapan", "ingin mati", "deteksi krisis"]
+  },
+  {
+    "id": "krisis-04",
+    "topic": "protokol-krisis",
+    "title": "Menyusun Rencana Keselamatan Pribadi (Safety Planning)",
+    "author_or_organization": "Stanley-Brown Safety Planning Intervention & HIMPSI",
+    "publication_date": "2022",
+    "url": "https://himpsi.or.id/",
+    "material_section": "Pedoman Pembuatan Dokumen Safety Plan Mandiri",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-08-30",
+    "audience": "Remaja & Dewasa Muda (15-24 tahun)",
+    "content": "Rencana keselamatan pribadi (safety plan) adalah dokumen tertulis yang memandu tindakan saat gelombang emosi ekstrem melanda: (1) Kenali pemicu awal (mis. pertengkaran keluarga di malam hari); (2) Tuliskan 3 strategi distraksi mandiri (mis. mendengarkan playlist musik, mandi air dingin); (3) Tuliskan 2 nama sahabat terpercaya yang bisa dihubungi; (4) Cantumkan nomor darurat SEJIWA 119 ext 8; (5) Pastikan benda tajam atau berbahaya dijauhkan dari jangkauan.",
+    "keywords": ["safety planning", "rencana keselamatan", "meredam krisis", "kontak darurat pribadi", "tempat aman", "pertolongan mandiri"]
+  }
+]

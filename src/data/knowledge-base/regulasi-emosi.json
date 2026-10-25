@@ -1,0 +1,72 @@
+[
+  {
+    "id": "regulasi-01",
+    "topic": "regulasi-emosi",
+    "title": "Teknik Grounding 5-4-3-2-1 untuk Meredakan Kecemasan Akut",
+    "author_or_organization": "Perhimpunan Dokter Spesialis Kedokteran Jiwa Indonesia (PDSKJI)",
+    "publication_date": "2021",
+    "url": "https://pdskji.org/",
+    "material_section": "Panduan Praktis Manajemen Kecemasan dan Serangan Panik",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-07-22",
+    "audience": "Remaja & Dewasa Muda (15-24 tahun)",
+    "content": "Teknik grounding 5-4-3-2-1 mengembalikan kesadaran ke masa kini saat pikiran dibanjiri kecemasan atau panik: sebutkan 5 benda yang kamu lihat di sekitarmu, 4 benda yang bisa kamu sentuh/rasakan teksturnya, 3 suara yang terdengar di telingamu, 2 aroma yang bisa kamu cium, dan 1 rasa di lidahmu atau satu hal baik tentang dirimu. Teknik ini menstimulasi korteks prefrontal untuk menenangkan amigdala.",
+    "keywords": ["grounding", "54321", "cemas", "panik", "kecemasan akut", "serangan panik", "kewalahan", "overwhelmed", "menenangkan diri"]
+  },
+  {
+    "id": "regulasi-02",
+    "topic": "regulasi-emosi",
+    "title": "Latihan Pernapasan Kotak (Box Breathing) untuk Regulasi Saraf Otonom",
+    "author_or_organization": "Kementerian Kesehatan RI & WHO Mental Health",
+    "publication_date": "2022",
+    "url": "https://ayosehat.kemkes.go.id/",
+    "material_section": "Buku Saku Relaksasi Mandiri Remaja",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-07-24",
+    "audience": "Remaja & Dewasa Muda (15-24 tahun)",
+    "content": "Pernapasan kotak (box breathing) menstabilkan detak jantung dengan mengaktifkan saraf parasimpatis: tarik napas perlahan melalui hidung selama 4 detik, tahan napas dengan paru-paru terisi selama 4 detik, hembuskan napas perlahan melalui mulut selama 4 detik, lalu tahan paru-paru kosong selama 4 detik. Ulangi siklus ini 4 hingga 5 kali saat merasa tegang sebelum berbicara di depan orang banyak atau menghadapi ujian.",
+    "keywords": ["box breathing", "pernapasan kotak", "relaksasi", "detak jantung cepat", "napas dalam", "saraf parasimpatis", "stres", "tegang"]
+  },
+  {
+    "id": "regulasi-03",
+    "topic": "regulasi-emosi",
+    "title": "Kekuatan Menamai Emosi (Name It to Tame It)",
+    "author_or_organization": "Daniel J. Siegel (Mindsight Institute) & BKKBN",
+    "publication_date": "2021",
+    "url": "https://siapnikah.org/modul-tentang-kita/",
+    "material_section": "Modul Tentang Kita - Pengenalan Diri dan Regulasi Afektif",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-07-25",
+    "audience": "Remaja & Dewasa Muda (15-24 tahun)",
+    "content": "Ketika emosi terasa membingungkan atau meledak-ledak, memberi label kata secara spesifik pada apa yang dirasakan ('Aku bukan sekadar marah, tapi aku merasa kecewa dan takut diabaikan') dapat menurunkan reaktivitas sistem saraf hingga 50%. Menamai emosi memindahkan pemrosesan dari pusat impuls primitif ke area bahasa dan logika di otak.",
+    "keywords": ["menamai emosi", "name it to tame it", "emosi dasar", "validasi perasaan", "kecewa", "marah", "bingung", "refleksi batin"]
+  },
+  {
+    "id": "regulasi-04",
+    "topic": "regulasi-emosi",
+    "title": "Reframing Kognitif: Membedakan Fakta dari Asumsi Batin",
+    "author_or_organization": "Himpunan Psikologi Indonesia (HIMPSI)",
+    "publication_date": "2022",
+    "url": "https://himpsi.or.id/",
+    "material_section": "Modul Intervensi Kognitif Sederhana untuk Kesejahteraan Emosional",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-07-28",
+    "audience": "Remaja & Dewasa Muda (15-24 tahun)",
+    "content": "Pikiran kita bukanlah fakta mutlak. Saat terjebak dalam spiral overthinking ('Pasti semua orang menilaiku bodoh'), lakukan teknik reframing: tanyakan pada diri sendiri: (1) Apa bukti nyata yang mendukung pikiran ini? (2) Apa bukti nyata yang membantahnya? (3) Apa skenario yang lebih realistis dan berimbang? Memisahkan asumsi dari kenyataan objektif menghentikan katastrofisasi.",
+    "keywords": ["overthinking", "reframing kognitif", "fakta vs asumsi", "katastrofisasi", "takut dinilai", "pikiran negatif", "cbt"]
+  },
+  {
+    "id": "regulasi-05",
+    "topic": "regulasi-emosi",
+    "title": "Mempraktikkan Welas Asih pada Diri Sendiri (Self-Compassion)",
+    "author_or_organization": "Center for Mindful Self-Compassion & SehatMental.id",
+    "publication_date": "2022",
+    "url": "https://sehatmental.id/",
+    "material_section": "Kajian Hubungan Self-Compassion dan Kesehatan Jiwa Remaja",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-07-30",
+    "audience": "Remaja & Dewasa Muda (15-24 tahun)",
+    "content": "Self-compassion bukan berarti memanjakan diri atau lari dari tanggung jawab. Self-compassion terdiri dari 3 pilar: (1) Self-kindness: memperlakukan diri dengan kehangatan saat gagal, bukan mencaci maki; (2) Common humanity: menyadari bahwa membuat kesalahan dan merasa rapuh adalah bagian dari pengalaman universal manusia; (3) Mindfulness: mengamati rasa sakit tanpa melebih-lebihkannya.",
+    "keywords": ["self compassion", "welas asih", "memaafkan diri", "merasa gagal", "pengkritik batin", "inner critic", "penerimaan diri"]
+  }
+]

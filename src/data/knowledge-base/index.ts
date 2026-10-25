@@ -1,16 +1,16 @@
 import { KnowledgeChunk } from "@/types/knowledge";
-import psychoeducation from "./psychoeducation.json";
-import lifeSkills from "./life-skills.json";
-import careerReadiness from "./career-readiness.json";
-import safetyScripts from "./safety-scripts.json";
-import referralDirectory from "./referral-directory.json";
+import komunikasiAsertif from "./komunikasi-asertif.json";
+import regulasiEmosi from "./regulasi-emosi.json";
+import navigasiBantuan from "./navigasi-bantuan.json";
+import relasiSosial from "./relasi-sosial.json";
+import protokolKrisis from "./protokol-krisis.json";
 
 export const ALL_KNOWLEDGE_CHUNKS: KnowledgeChunk[] = [
-  ...(psychoeducation as KnowledgeChunk[]),
-  ...(lifeSkills as KnowledgeChunk[]),
-  ...(careerReadiness as KnowledgeChunk[]),
-  ...(safetyScripts as KnowledgeChunk[]),
-  ...(referralDirectory as KnowledgeChunk[]),
+  ...(komunikasiAsertif as KnowledgeChunk[]),
+  ...(regulasiEmosi as KnowledgeChunk[]),
+  ...(navigasiBantuan as KnowledgeChunk[]),
+  ...(relasiSosial as KnowledgeChunk[]),
+  ...(protokolKrisis as KnowledgeChunk[]),
 ];
 
 export function getChunksByTopic(topic: KnowledgeChunk["topic"]): KnowledgeChunk[] {

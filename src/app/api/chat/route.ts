@@ -73,6 +73,40 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    if (safety.isClinicalDiagnosisRequest) {
+      return NextResponse.json({
+        status: "clinical_refusal",
+        reply: safety.safetyMessage,
+        isAiGenerated: false,
+        safety,
+        statusBadge: "Batas Nonklinis SELA.AI",
+        sources: [
+          {
+            id: "navigasi-04",
+            title: "Mengenal Peran Psikolog Klinis, Psikiater (Sp.KJ), dan Konselor Sebaya",
+            author_or_organization: "Ikatan Psikolog Klinis (IPK) Indonesia & PDSKJI",
+            publication_date: "2023",
+            url: "https://ipkindonesia.or.id/",
+            material_section: "Pedoman Penyelenggaraan Pelayanan Kesehatan Mental Terpadu",
+            score: 1.0,
+            snippet: "Psikolog klinis dan psikiater adalah tenaga profesional yang berwenang memberikan asesmen dan evaluasi klinis mendalam, bukan model kecerdasan buatan.",
+            review_status: "verified_expert",
+          },
+          {
+            id: "navigasi-01",
+            title: "Alur Konsultasi Kesehatan Mental di Puskesmas Menggunakan BPJS Kesehatan",
+            author_or_organization: "BPJS Kesehatan & Kementerian Kesehatan Republik Indonesia",
+            publication_date: "2023",
+            url: "https://bpjs-kesehatan.go.id/",
+            material_section: "Panduan Layanan Kesehatan Jiwa Tingkat Pertama (Faskes 1)",
+            score: 0.95,
+            snippet: "Konsultasi kesehatan mental ditanggung 100% oleh BPJS Kesehatan di Faskes Tingkat 1 (Puskesmas/Klinik Pratama tempat terdaftar).",
+            review_status: "official_protocol",
+          },
+        ],
+      });
+    }
+
     // 2. Data Sanitization (PII Masking)
     const sanitizedMessage = maskPii(message);
 

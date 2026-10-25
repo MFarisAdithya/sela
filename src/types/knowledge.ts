@@ -1,6 +1,16 @@
 export interface KnowledgeChunk {
   id: string;
-  topic: "psychoeducation" | "life-skills" | "career" | "safety" | "referrals";
+  topic:
+    | "komunikasi-asertif"
+    | "regulasi-emosi"
+    | "navigasi-bantuan"
+    | "relasi-sosial"
+    | "protokol-krisis"
+    | "psychoeducation"
+    | "life-skills"
+    | "career"
+    | "safety"
+    | "referrals";
   title: string;
   author_or_organization: string;
   publication_date: string;

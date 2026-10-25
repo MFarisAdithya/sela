@@ -172,6 +172,19 @@ export default function SafeStoryPage() {
             statusBadge: "Protokol Keselamatan",
           },
         ]);
+      } else if (data.status === "clinical_refusal") {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: aiMsgId,
+            sender: "system",
+            text: data.reply,
+            timestamp: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }),
+            sources: data.sources,
+            isAiGenerated: false,
+            statusBadge: data.statusBadge || "Batas Nonklinis SELA.AI",
+          },
+        ]);
       } else if (data.status === "api_unconfigured") {
         setMessages((prev) => [
           ...prev,

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "navigasi-01",
+    "topic": "navigasi-bantuan",
+    "title": "Alur Konsultasi Kesehatan Mental di Puskesmas Menggunakan BPJS Kesehatan",
+    "author_or_organization": "BPJS Kesehatan & Kementerian Kesehatan Republik Indonesia",
+    "publication_date": "2023",
+    "url": "https://bpjs-kesehatan.go.id/",
+    "material_section": "Panduan Layanan Kesehatan Jiwa Tingkat Pertama (Faskes 1)",
+    "review_status": "official_protocol",
+    "reviewed_at": "2026-08-01",
+    "audience": "Remaja & Dewasa Muda (15-24 tahun)",
+    "content": "Konsultasi kesehatan mental ditanggung 100% oleh BPJS Kesehatan di Faskes Tingkat 1 (Puskesmas/Klinik Pratama tempat terdaftar). Langkah praktis: (1) Datang ke loket pendaftaran Puskesmas dengan KTP/Kartu Pelajar dan KIS/BPJS aktif; (2) Minta nomor antrean Poli Psikologi atau Poli Umum; (3) Ceritakan keluhan secara jujur kepada dokter/psikolog; (4) Jika membutuhkan obat atau psikoterapi lanjutan, dokter akan menerbitkan surat rujukan ke Poli Jiwa RSUD.",
+    "keywords": ["puskesmas bpjs", "konseling gratis", "faskes tingkat 1", "poli psikologi", "rujukan psikiater", "bpjs kesehatan", "gratis"]
+  },
+  {
+    "id": "navigasi-02",
+    "topic": "navigasi-bantuan",
+    "title": "Memanfaatkan Layanan Bimbingan Konseling Sekolah dan Kampus Tanpa Stigma",
+    "author_or_organization": "Asosiasi Bimbingan dan Konseling Indonesia (ABKIN)",
+    "publication_date": "2022",
+    "url": "https://abkin.org/",
+    "material_section": "Panduan Standar Layanan BK Ramah Pelajar & Mahasiswa",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-08-03",
+    "audience": "Remaja & Dewasa Muda (15-24 tahun)",
+    "content": "Ruang BK dan Unit Konseling Mahasiswa (PKM) bukan tempat mengadili siswa bermasalah, melainkan ruang pendampingan perkembangan psikososial dan akademis. Konselor sekolah dan kampus terikat etika kerahasiaan: apa yang diceritakan tidak akan disebarkan ke teman sekelas atau guru mata pelajaran lain. Kamu berhak membuat janji temu secara privat melalui pesan singkat atau langsung ke ruangan BK.",
+    "keywords": ["guru bk", "bimbingan konseling", "konseling kampus", "stigma bk", "konsultasi rahasia", "masalah akademik", "teman cerita sekolah"]
+  },
+  {
+    "id": "navigasi-03",
+    "topic": "navigasi-bantuan",
+    "title": "Batas Kerahasiaan (Confidentiality) dalam Layanan Konseling dan Psikoterapi",
+    "author_or_organization": "Kode Etik Psikologi Indonesia - Himpunan Psikologi Indonesia (HIMPSI)",
+    "publication_date": "2020",
+    "url": "https://himpsi.or.id/kode-etik",
+    "material_section": "Bab V: Kerahasiaan Rekam Psikologis dan Komunikasi Konseli",
+    "review_status": "official_protocol",
+    "reviewed_at": "2026-08-05",
+    "audience": "Remaja & Dewasa Muda (15-24 tahun)",
+    "content": "Semua informasi yang kamu sampaikan dalam sesi konseling profesional dilindungi kerahasiaannya oleh hukum dan kode etik profesi. Psikolog atau konselor dilarang membocorkan isi ceritamu kepada orang tua atau pihak luar tanpa izinmu, KECUALI dalam situasi bahaya langsung yang mengancam nyawa (seperti niat bunuh diri aktif atau ancaman kekerasan fisik berat pada orang lain) demi keselamatan jiwa.",
+    "keywords": ["kerahasiaan konseling", "confidentiality", "kode etik psikolog", "aman bercerita", "rahasia pasien", "privasi konseling"]
+  },
+  {
+    "id": "navigasi-04",
+    "topic": "navigasi-bantuan",
+    "title": "Mengenal Peran Psikolog Klinis, Psikiater (Sp.KJ), dan Konselor Sebaya",
+    "author_or_organization": "Ikatan Psikolog Klinis (IPK) Indonesia & PDSKJI",
+    "publication_date": "2023",
+    "url": "https://ipkindonesia.or.id/",
+    "material_section": "Pedoman Penyelenggaraan Pelayanan Kesehatan Mental Terpadu",
+    "review_status": "verified_expert",
+    "reviewed_at": "2026-08-08",
+    "audience": "Remaja & Dewasa Muda (15-24 tahun)",
+    "content": "Penting memahami perbedaan profesional kesehatan jiwa: (1) Psikolog Klinis berlatar belakang Magister Psikologi Profesi, berfokus pada psikoterapi, konseling, dan asesmen kepribadian tanpa resep obat; (2) Psikiater (Sp.KJ) adalah dokter spesialis kedokteran jiwa yang berwenang mendiagnosis medis dan meresepkan farmakoterapi (obat); (3) Konselor Sebaya adalah teman terlatih yang memberikan pertolongan pertama emosional dan rujukan.",
+    "keywords": ["perbedaan psikolog psikiater", "psikiater spkj", "psikolog klinis", "konselor sebaya", "terapi wicara", "obat penenang", "ahli jiwa"]
+  },
+  {
+    "id": "navigasi-05",
+    "topic": "navigasi-bantuan",
+    "title": "Mengatasi Rasa Malu dan Takut Dihakimi saat Mencari Bantuan Pertama Kali",
+    "author_or_organization": "Into The Light Indonesia & WHO Adolescent Health",
+    "publication_date": "2022",
+    "url": "https://www.intothelightid.org/",
+    "material_section": "Panduan Menghapus Hambatan Mencari Pertolongan (Help-Seeking Barriers)",
+    "review_status": "verified_peer",
+    "reviewed_at": "2026-08-10",
+    "audience": "Remaja & Dewasa Muda (15-24 tahun)",
+    "content": "Merasa takut dianggap 'lemah' atau 'kurang bersyukur' adalah hambatan nomor satu yang dialami 70% orang muda di Indonesia saat ingin berkonsultasi. Ingatlah bahwa mencari bantuan saat beban pikiran melampaui kapasitasmu adalah tindakan keberanian dan tanggung jawab diri yang matang, sama wajarnya seperti memeriksakan diri ke dokter gigi saat sakit gigi. Kamu tidak harus menunggu sampai hancur untuk boleh meminta bantuan.",
+    "keywords": ["malu ke psikolog", "takut dihakimi", "stigma kesehatan jiwa", "kurang bersyukur", "help seeking barrier", "keberanian meminta bantuan"]
+  }
+]

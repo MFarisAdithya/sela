@@ -11,8 +11,23 @@ export interface RagResult {
   contextText: string;
 }
 
-// Memory cache of pre-embedded chunks
-const EMBEDDED_CHUNKS: KnowledgeChunk[] = (embeddedChunksData as KnowledgeChunk[]) || ALL_KNOWLEDGE_CHUNKS;
+// Map pre-computed embeddings if available
+const precomputedMap = new Map<string, number[]>();
+if (Array.isArray(embeddedChunksData)) {
+  for (const c of embeddedChunksData as any[]) {
+    if (c.id && c.embedding) {
+      precomputedMap.set(c.id, c.embedding);
+    }
+  }
+}
+
+// Ensure all 24 curated knowledge chunks are indexed
+const EMBEDDED_CHUNKS: KnowledgeChunk[] = ALL_KNOWLEDGE_CHUNKS.map((chunk) => {
+  if (!chunk.embedding && precomputedMap.has(chunk.id)) {
+    return { ...chunk, embedding: precomputedMap.get(chunk.id) };
+  }
+  return chunk;
+});
 
 function cosineSimilarity(vecA: number[], vecB: number[]): number {
   if (!vecA || !vecB || vecA.length !== vecB.length) return 0;
