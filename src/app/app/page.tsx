@@ -37,7 +37,7 @@ export default function AppDashboardPage() {
       title: "Guided Story",
       subtitle: "Susun Ceritaku",
       desc: "Uraikan apa yang mengganjal lewat pertanyaan bertahap tanpa paksaan.",
-      href: "/app/guided-story",
+      href: "/safe-story",
       icon: MessageSquareHeart,
       badge: "Langkah 1",
       badgeColor: "bg-[#EBF3FF] text-[#2457A7]",
@@ -46,7 +46,7 @@ export default function AppDashboardPage() {
       title: "Kartu Cerita",
       subtitle: "Rapikan Catatan",
       desc: "Lihat dan kelola draf ringkasan cerita yang siap dibagikan.",
-      href: "/app/kartu-cerita",
+      href: "/journal",
       icon: Compass,
       badge: "Langkah 2",
       badgeColor: "bg-[#EBF3FF] text-[#2457A7]",
@@ -55,7 +55,7 @@ export default function AppDashboardPage() {
       title: "Practice Talk",
       subtitle: "Latihan Bicara",
       desc: "Simulasikan percakapan dengan teman atau guru BK sebelum bicara sungguhan.",
-      href: "/app/practice-talk",
+      href: "/dashboard",
       icon: MessageCircle,
       badge: "Langkah 3",
       badgeColor: "bg-[#EBF3FF] text-[#2457A7]",
@@ -64,7 +64,7 @@ export default function AppDashboardPage() {
       title: "Support Pathway",
       subtitle: "Cari Dukungan",
       desc: "Temukan pilihan bantuan nyata dan checklist persiapan bicara tanpa biaya.",
-      href: "/app/support-pathway",
+      href: "/support",
       icon: Users,
       badge: "Langkah 4",
       badgeColor: "bg-[#E6F4EA] text-[#1F7A65]",
@@ -176,7 +176,7 @@ export default function AppDashboardPage() {
       {/* 4. Fitur Refleksi Pendukung */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-border-subtle/80">
         <Link
-          href="/app/jurnal"
+          href="/journal"
           className="p-4 rounded-2xl bg-white border border-[#CCE1FF] hover:border-[#2457A7] transition-all flex items-center gap-3 text-xs text-[#17365D]"
         >
           <BookOpen className="w-4 h-4 text-[#2457A7] shrink-0" />
@@ -187,7 +187,7 @@ export default function AppDashboardPage() {
         </Link>
 
         <Link
-          href="/app/ruang-belajar"
+          href="/learning"
           className="p-4 rounded-2xl bg-white border border-[#CCE1FF] hover:border-[#2457A7] transition-all flex items-center gap-3 text-xs text-[#17365D]"
         >
           <BookOpen className="w-4 h-4 text-[#2457A7] shrink-0" />
@@ -198,7 +198,7 @@ export default function AppDashboardPage() {
         </Link>
 
         <Link
-          href="/app/rencana-langkah"
+          href="/growth-plan"
           className="p-4 rounded-2xl bg-white border border-[#CCE1FF] hover:border-[#2457A7] transition-all flex items-center gap-3 text-xs text-[#17365D]"
         >
           <Sparkles className="w-4 h-4 text-[#2457A7] shrink-0" />
@@ -218,7 +218,7 @@ export default function AppDashboardPage() {
           </span>
         </div>
         <Link
-          href="/app/support-pathway"
+          href="/support"
           className="text-xs font-bold text-[#2457A7] hover:underline whitespace-nowrap"
         >
           Lihat Jalur Bantuan →

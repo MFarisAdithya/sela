@@ -23,16 +23,16 @@ import { NeuCard } from "@/components/ui/NeuCard";
 
 const mainMobileTabs = [
   { label: "Dashboard", href: "/app", icon: LayoutDashboard },
-  { label: "Guided Story", href: "/app/guided-story", icon: MessageSquareHeart },
-  { label: "Kartu Cerita", href: "/app/kartu-cerita", icon: Compass },
-  { label: "Practice Talk", href: "/app/practice-talk", icon: MessageCircle },
+  { label: "Guided Story", href: "/safe-story", icon: MessageSquareHeart },
+  { label: "Kartu Cerita", href: "/journal", icon: Compass },
+  { label: "Practice Talk", href: "/dashboard", icon: MessageCircle },
 ];
 
 const secondaryMobileTabs = [
-  { label: "Support Pathway", href: "/app/support-pathway", icon: Users, desc: "Pilihan bantuan nyata tanpa biaya" },
-  { label: "Jurnal Reflektif", href: "/app/jurnal", icon: PenLine, desc: "Catatan pribadi tersimpan lokal" },
-  { label: "Ruang Belajar", href: "/app/ruang-belajar", icon: GraduationCap, desc: "Modul keterampilan hidup & emosi" },
-  { label: "Rencana Langkah", href: "/app/rencana-langkah", icon: TrendingUp, desc: "Target kecil sukarela mandiri" },
+  { label: "Support Pathway", href: "/support", icon: Users, desc: "Pilihan bantuan nyata tanpa biaya" },
+  { label: "Jurnal Reflektif", href: "/journal", icon: PenLine, desc: "Catatan pribadi tersimpan lokal" },
+  { label: "Ruang Belajar", href: "/learning", icon: GraduationCap, desc: "Modul keterampilan hidup & emosi" },
+  { label: "Rencana Langkah", href: "/growth-plan", icon: TrendingUp, desc: "Target kecil sukarela mandiri" },
   { label: "Paket & Kuota", href: "/app/paket", icon: Sparkles, desc: "Status langganan dan kuota AI" },
   { label: "Riwayat Transaksi", href: "/app/pembayaran", icon: CreditCard, desc: "Faktur dan catatan pembayaran" },
   { label: "Pengaturan Akun", href: "/app/pengaturan", icon: ShieldCheck, desc: "Profil, privasi, dan hapus akun" },

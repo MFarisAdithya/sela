@@ -23,16 +23,16 @@ import { useAuth } from "@/context/AuthContext";
 
 const coreNavItems = [
   { label: "Dashboard", href: "/app", icon: LayoutDashboard },
-  { label: "Guided Story", href: "/app/guided-story", icon: MessageSquareHeart },
-  { label: "Kartu Cerita", href: "/app/kartu-cerita", icon: Compass },
-  { label: "Practice Talk", href: "/app/practice-talk", icon: MessageCircle },
-  { label: "Support Pathway", href: "/app/support-pathway", icon: Users },
+  { label: "Guided Story", href: "/safe-story", icon: MessageSquareHeart },
+  { label: "Kartu Cerita", href: "/journal", icon: Compass },
+  { label: "Practice Talk", href: "/dashboard", icon: MessageCircle },
+  { label: "Support Pathway", href: "/support", icon: Users },
 ];
 
 const secondaryNavItems = [
-  { label: "Jurnal Reflektif", href: "/app/jurnal", icon: PenLine },
-  { label: "Ruang Belajar", href: "/app/ruang-belajar", icon: GraduationCap },
-  { label: "Rencana Langkah", href: "/app/rencana-langkah", icon: TrendingUp },
+  { label: "Jurnal Reflektif", href: "/journal", icon: PenLine },
+  { label: "Ruang Belajar", href: "/learning", icon: GraduationCap },
+  { label: "Rencana Langkah", href: "/growth-plan", icon: TrendingUp },
 ];
 
 const accountNavItems = [
