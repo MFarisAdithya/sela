@@ -3,6 +3,7 @@ import { Source_Sans_3, Lora } from "next/font/google";
 import "./globals.css";
 import { AppShell } from "@/components/layout/AppShell";
 import { AppProvider } from "@/context/AppContext";
+import { AuthProvider } from "@/context/AuthContext";
 
 const sourceSans3 = Source_Sans_3({
   subsets: ["latin"],
@@ -62,9 +63,11 @@ export default function RootLayout({
   return (
     <html lang="id" className={`${sourceSans3.variable} ${lora.variable}`}>
       <body className="font-sans antialiased bg-background text-text-main selection:bg-brand-200 selection:text-brand-900">
-        <AppProvider>
-          <AppShell>{children}</AppShell>
-        </AppProvider>
+        <AuthProvider>
+          <AppProvider>
+            <AppShell>{children}</AppShell>
+          </AppProvider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -3,47 +3,67 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Badge } from "@/components/ui/Badge";
 import { Shield, Sparkles } from "lucide-react";
 import { SelaMark } from "@/components/ui/SelaLogo";
-import { useApp } from "@/context/AppContext";
+import { useAuth } from "@/context/AuthContext";
 
 export const HeaderBar: React.FC = () => {
   const pathname = usePathname();
-  const { isAiConfigured } = useApp();
+  const { user } = useAuth();
 
-  // Do not show header on landing splash or onboarding
-  if (pathname === "/" || pathname === "/onboarding") {
+  const isPublicOrOnboarding =
+    pathname === "/" ||
+    pathname === "/onboarding" ||
+    pathname.startsWith("/cara-kerja") ||
+    pathname.startsWith("/fitur") ||
+    pathname.startsWith("/harga") ||
+    pathname.startsWith("/tentang") ||
+    pathname.startsWith("/privasi") ||
+    pathname.startsWith("/syarat") ||
+    pathname.startsWith("/masuk") ||
+    pathname.startsWith("/daftar") ||
+    pathname.startsWith("/lupa-password") ||
+    pathname.startsWith("/verifikasi-email");
+
+  if (isPublicOrOnboarding) {
     return null;
   }
 
   return (
     <header className="sticky top-0 z-30 w-full bg-background/80 backdrop-blur-md border-b border-border-subtle/80 px-4 lg:px-8 py-2.5">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
-        {/* Left: Brand Identity & Non-clinical Disclaimer */}
+        {/* Left: Brand Identity */}
         <div className="flex items-center gap-3">
-          <Link href="/dashboard" className="flex items-center gap-2.5 group">
+          <Link href="/app" className="flex items-center gap-2.5 group">
             <div className="w-8 h-8 rounded-xl bg-surface shadow-neu-raised-sm group-hover:shadow-neu-raised transition-all flex items-center justify-center border border-white/80">
               <SelaMark size={22} />
             </div>
             <div className="flex flex-col">
               <span className="font-extrabold text-base tracking-tight text-brand-900 leading-none lowercase">
-                sela
+                sela<span className="text-[#2457A7]">.ai</span>
               </span>
               <span className="text-[10px] text-text-muted hidden sm:inline-block leading-tight mt-0.5">
-                Ruang untuk dirimu.
+                Help-Seeking Navigator
               </span>
             </div>
           </Link>
         </div>
 
-        {/* Right: Quick Settings */}
-        <div className="flex items-center gap-2.5">
+        {/* Right: Plan Pill & Quick Settings */}
+        <div className="flex items-center gap-3">
           <Link
-            href="/settings"
+            href="/app/paket"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface border border-border-subtle/80 text-xs font-semibold text-text-muted hover:text-brand-900 transition-colors shadow-neu-raised-sm"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-brand-600" />
+            <span>{user?.plan === "premium" ? "Premium" : "Paket Free"}</span>
+          </Link>
+
+          <Link
+            href="/app/pengaturan"
             className="p-1.5 rounded-xl text-text-muted hover:text-brand-900 hover:bg-brand-100/60 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
-            title="Pengaturan Privasi & Mode AI"
-            aria-label="Pengaturan Privasi"
+            title="Pengaturan Akun & Privasi"
+            aria-label="Pengaturan Akun"
           >
             <Shield className="w-4 h-4" />
           </Link>
