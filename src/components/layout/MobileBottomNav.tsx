@@ -34,6 +34,7 @@ const secondaryMobileTabs = [
   { label: "Ruang Belajar", href: "/app/ruang-belajar", icon: GraduationCap, desc: "Modul keterampilan hidup & emosi" },
   { label: "Rencana Langkah", href: "/app/rencana-langkah", icon: TrendingUp, desc: "Target kecil sukarela mandiri" },
   { label: "Paket & Kuota", href: "/app/paket", icon: Sparkles, desc: "Status langganan dan kuota AI" },
+  { label: "Riwayat Transaksi", href: "/app/pembayaran", icon: CreditCard, desc: "Faktur dan catatan pembayaran" },
   { label: "Pengaturan Akun", href: "/app/pengaturan", icon: ShieldCheck, desc: "Profil, privasi, dan hapus akun" },
 ];
 

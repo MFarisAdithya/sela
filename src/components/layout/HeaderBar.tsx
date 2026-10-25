@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Shield, Sparkles } from "lucide-react";
 import { SelaMark } from "@/components/ui/SelaLogo";
 import { useAuth } from "@/context/AuthContext";
+import { cn } from "@/lib/utils";
 
 export const HeaderBar: React.FC = () => {
   const pathname = usePathname();
@@ -53,10 +54,15 @@ export const HeaderBar: React.FC = () => {
         <div className="flex items-center gap-3">
           <Link
             href="/app/paket"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface border border-border-subtle/80 text-xs font-semibold text-text-muted hover:text-brand-900 transition-colors shadow-neu-raised-sm"
+            className={cn(
+              "hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold transition-all shadow-neu-raised-sm",
+              user?.plan === "premium"
+                ? "bg-[#17365D] text-white border border-[#2457A7]"
+                : "bg-surface border border-border-subtle/80 text-text-muted hover:text-brand-900"
+            )}
           >
-            <Sparkles className="w-3.5 h-3.5 text-brand-600" />
-            <span>{user?.plan === "premium" ? "Premium" : "Paket Free"}</span>
+            <Sparkles className={cn("w-3.5 h-3.5", user?.plan === "premium" ? "text-[#CCE1FF]" : "text-brand-600")} />
+            <span>{user?.plan === "premium" ? "Supporter ⭐" : "Paket Free"}</span>
           </Link>
 
           <Link

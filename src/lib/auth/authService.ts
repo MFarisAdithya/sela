@@ -3,8 +3,9 @@ import { UserProfile, UserConsent, AuthSession } from "@/types/auth";
 const SESSION_COOKIE_NAME = "sela_session_token";
 const CURRENT_POLICY_VERSION = "2026.1";
 
-// Demo/In-Memory User Repository for Sandbox & Local Testing
-const demoUsersMap = new Map<string, { passwordHash: string; profile: UserProfile }>();
+const globalForAuth = globalThis as unknown as {
+  selaDemoUsersMap?: Map<string, { passwordHash: string; profile: UserProfile }>;
+};
 
 // Seed a default demo user for easy testing
 const defaultDemoUser: UserProfile = {
@@ -31,10 +32,15 @@ const defaultDemoUser: UserProfile = {
   updatedAt: new Date().toISOString(),
 };
 
-demoUsersMap.set("alex@sela.ai", {
-  passwordHash: "Password123!", // Sandbox demo password
-  profile: defaultDemoUser,
-});
+if (!globalForAuth.selaDemoUsersMap) {
+  globalForAuth.selaDemoUsersMap = new Map<string, { passwordHash: string; profile: UserProfile }>();
+  globalForAuth.selaDemoUsersMap.set("alex@sela.ai", {
+    passwordHash: "Password123!", // Sandbox demo password
+    profile: defaultDemoUser,
+  });
+}
+
+const demoUsersMap = globalForAuth.selaDemoUsersMap;
 
 /**
  * Simple safe hash mock for sandbox demo

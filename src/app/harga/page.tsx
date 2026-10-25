@@ -1,27 +1,44 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { Check, ArrowRight, ShieldCheck, HelpCircle, Building2, Info } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Check, ArrowRight, ShieldCheck, HelpCircle, Building2, Info, Sparkles } from "lucide-react";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { PublicFooter } from "@/components/layout/PublicFooter";
 import { copy } from "@/lib/copy";
+import { useAuth } from "@/context/AuthContext";
+import { CheckoutModal } from "@/components/payment/CheckoutModal";
 
 export default function HargaPage() {
+  const router = useRouter();
+  const { user } = useAuth();
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+
   const t = copy.pricing;
   const free = copy.landing.freePlan;
   const premium = copy.landing.premiumPlan;
+
+  const isUserPremium = user?.plan === "premium";
 
   const comparisonRows = [
     { feature: "Akses Dashboard & Refleksi Harian", free: "Tersedia", premium: "Tersedia" },
     { feature: "Guided Story AI", free: "10 respons / bulan", premium: "100 respons / bulan" },
     { feature: "Kartu Cerita Aktif Tersimpan", free: "1 kartu aktif", premium: "Hingga 20 kartu aktif" },
-    { feature: "Practice Talk (Simulasi Bicara)", free: "2 sesi / bulan", premium: "10 sesi / bulan (Semua Skenario)" },
+    { feature: "Practice Talk (Simulasi Bicara)", free: "2 sesi / bulan", premium: "10 sesi / bulan (Semua Persona)" },
     { feature: "Support Pathway & Checklist Bicara", free: "Gratis Tanpa Batas", premium: "Gratis Tanpa Batas" },
     { feature: "Modul Edukasi & Life Skills", free: "Modul Inti", premium: "Semua Modul Lanjutan" },
-    { feature: "Ekspor Ringkasan Kartu Cerita", free: "—", premium: "Tersedia (Teks Ringkas)" },
+    { feature: "Lencana SELA Supporter", free: "—", premium: "Tersedia ⭐" },
     { feature: "Model Perpanjangan", free: "Selamanya", premium: "Manual (Tanpa Auto-Charge)" },
   ];
+
+  const handleChoosePremium = () => {
+    if (user) {
+      setIsCheckoutOpen(true);
+    } else {
+      router.push("/masuk?redirect=/harga");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#E3EEFF] text-[#17365D]">
@@ -32,7 +49,7 @@ export default function HargaPage() {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F7FAFF] border border-[#CCE1FF] text-xs font-semibold text-[#2457A7] uppercase tracking-wider mb-4">
-              <span>Transparansi Biaya</span>
+              <span>Transparansi Biaya &amp; Model Supporter</span>
             </div>
             <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#17365D]">
               {t.title}
@@ -43,9 +60,12 @@ export default function HargaPage() {
           </div>
 
           {/* Pricing Notice */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-[#EBF3FF] border border-[#CCE1FF] text-xs sm:text-sm text-[#17365D]/85 flex items-start gap-3 max-w-3xl mx-auto mb-12">
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#EBF3FF] border border-[#CCE1FF] text-xs sm:text-sm text-[#17365D]/85 flex items-start gap-3 max-w-3xl mx-auto mb-12 shadow-sm">
             <Info className="w-5 h-5 text-[#2457A7] shrink-0 mt-0.5" />
-            <p>{t.notice}</p>
+            <p className="leading-relaxed">
+              <strong>Jaminan Akses Keselamatan:</strong> SELA.AI tidak pernah mengunci Support Pathway, panduan rujukan Puskesmas,
+              atau hotline darurat kesehatan mental di balik pintu berbayar. Model Supporter bersifat sukarela untuk mendukung biaya komputasi AI server.
+            </p>
           </div>
 
           {/* Cards Grid */}
@@ -77,10 +97,10 @@ export default function HargaPage() {
 
               <div className="mt-10 pt-6 border-t border-[#CCE1FF]/70">
                 <Link
-                  href="/onboarding"
-                  className="w-full inline-flex items-center justify-center rounded-full bg-white border border-[#2457A7] py-3.5 text-sm font-semibold text-[#2457A7] hover:bg-[#EBF3FF] transition-colors"
+                  href={user ? "/app" : "/onboarding"}
+                  className="w-full inline-flex items-center justify-center rounded-full bg-white border border-[#2457A7] py-3.5 text-sm font-semibold text-[#2457A7] hover:bg-[#EBF3FF] transition-colors shadow-sm"
                 >
-                  Gunakan Paket Free
+                  {user ? "Buka Ruang Pengguna" : "Gunakan Paket Free"}
                 </Link>
               </div>
             </div>
@@ -89,17 +109,19 @@ export default function HargaPage() {
             <div className="p-8 sm:p-10 rounded-3xl bg-[#17365D] text-white border border-[#2457A7] shadow-[8px_8px_20px_rgba(23,54,93,0.25)] flex flex-col justify-between relative overflow-hidden">
               <div className="absolute top-4 right-4">
                 <span className="text-xs font-semibold px-3.5 py-1 rounded-full bg-[#2457A7] text-[#CCE1FF]">
-                  Rekomendasi Uji
+                  {isUserPremium ? "Paket Aktifmu ⭐" : "Rekomendasi Supporter"}
                 </span>
               </div>
 
               <div>
                 <h2 className="text-2xl font-bold text-white">{premium.name}</h2>
                 <div className="mt-4 flex items-baseline gap-2">
-                  <span className="text-5xl font-extrabold text-white">{premium.price}</span>
+                  <span className="text-5xl font-extrabold text-white">Rp19.000</span>
                   <span className="text-xs text-white/70">/ 30 hari</span>
                 </div>
-                <p className="mt-4 text-sm text-white/80 leading-relaxed">{premium.desc}</p>
+                <p className="mt-4 text-sm text-white/80 leading-relaxed">
+                  Mendukung independensi platform SELA.AI dengan kapasitas refleksi terpandu dan simulasi yang lebih leluasa.
+                </p>
 
                 <ul className="mt-8 space-y-3.5 border-t border-white/15 pt-6">
                   {premium.features.map((item, idx) => (
@@ -112,13 +134,14 @@ export default function HargaPage() {
               </div>
 
               <div className="mt-10 pt-6 border-t border-white/15">
-                <Link
-                  href="/onboarding"
+                <button
+                  type="button"
+                  onClick={handleChoosePremium}
                   className="w-full inline-flex items-center justify-center rounded-full bg-[#2457A7] py-3.5 text-sm font-semibold text-white hover:bg-[#3374D4] transition-colors shadow-md"
                 >
-                  Pilih Premium
+                  {isUserPremium ? "Perpanjang Masa Aktif" : "Pilih Premium"}
                   <ArrowRight className="w-4 h-4 ml-2" />
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -163,7 +186,7 @@ export default function HargaPage() {
 
             <Link
               href="mailto:kemitraan@sela.ai?subject=Permintaan%20Demo%20Institusi%20SELA.AI"
-              className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#17365D] text-sm font-semibold text-white hover:bg-[#2457A7] transition-colors"
+              className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#17365D] text-sm font-semibold text-white hover:bg-[#2457A7] transition-colors shadow-sm"
             >
               Ajukan Demo Institusi
               <ArrowRight className="w-4 h-4" />
@@ -173,6 +196,15 @@ export default function HargaPage() {
       </main>
 
       <PublicFooter />
+
+      {/* Checkout Modal */}
+      <CheckoutModal
+        isOpen={isCheckoutOpen}
+        onClose={() => setIsCheckoutOpen(false)}
+        onSuccess={() => {
+          router.push("/app/paket");
+        }}
+      />
     </div>
   );
 }
