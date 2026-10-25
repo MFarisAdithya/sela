@@ -20,16 +20,20 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "SELA — Ruang untuk dirimu.",
+  title: "SELA.AI — From Unspoken Problems to Prepared Conversations",
   description:
-    "SELA adalah ruang digital yang mendampingi remaja dalam mengenali diri, memahami emosi, melatih keterampilan hidup, dan menemukan dukungan yang tepat.",
+    "SELA.AI adalah platform AI-Powered Help-Seeking Navigator yang mendampingi remaja dalam menguraikan cerita pribadi, berlatih memulai percakapan, dan menemukan jalur dukungan nyata tanpa rasa takut dihakimi.",
   keywords: [
-    "SELA",
-    "Ruang untuk dirimu",
-    "Refleksi Diri",
+    "SELA.AI",
+    "Help-Seeking Navigator",
+    "From Unspoken Problems to Prepared Conversations",
+    "Guided Story",
+    "Kartu Cerita Pribadi",
+    "Practice Talk",
+    "Support Pathway",
     "Resiliensi Remaja",
-    "Life Skills",
-    "Safe Story AI",
+    "SDG 3",
+    "Komunikasi Asertif",
     "Pendampingan Awal Nonklinis",
   ],
   icons: {

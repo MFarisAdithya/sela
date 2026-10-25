@@ -46,18 +46,22 @@ interface SelaLogoProps {
   layout?: "horizontal" | "vertical" | "mark-only";
   size?: "sm" | "md" | "lg" | "xl";
   showTagline?: boolean;
+  taglineText?: string;
+  showAiSuffix?: boolean;
   variant?: "gradient" | "monochrome" | "white";
   className?: string;
 }
 
 /**
- * Complete SELA Brand Logo Component
+ * Complete SELA.AI Brand Logo Component
  * Supports Horizontal, Vertical, and App Icon displays.
  */
 export const SelaLogo: React.FC<SelaLogoProps> = ({
   layout = "horizontal",
   size = "md",
   showTagline = false,
+  taglineText = "From Unspoken Problems to Prepared Conversations",
+  showAiSuffix = true,
   variant = "gradient",
   className,
 }) => {
@@ -95,22 +99,27 @@ export const SelaLogo: React.FC<SelaLogoProps> = ({
         <div className="mt-2 flex flex-col items-center">
           <span
             className={cn(
-              "font-bold font-sans lowercase text-brand-900 leading-none",
+              "font-bold font-sans lowercase text-brand-900 leading-none flex items-center",
               variant === "white" && "text-white",
               textSizes[size]
             )}
           >
             sela
+            {showAiSuffix && (
+              <span className={cn(variant === "white" ? "text-[#6FB1FF]" : "text-[#2457A7]", "font-extrabold")}>
+                .ai
+              </span>
+            )}
           </span>
           {showTagline && (
             <span
               className={cn(
-                "text-text-muted mt-1 font-normal tracking-normal leading-tight font-sans",
+                "text-text-muted mt-1 font-normal tracking-normal leading-tight font-sans max-w-xs",
                 variant === "white" && "text-white/80",
                 taglineSizes[size]
               )}
             >
-              Ruang untuk dirimu.
+              {taglineText}
             </span>
           )}
         </div>
@@ -125,22 +134,27 @@ export const SelaLogo: React.FC<SelaLogoProps> = ({
       <div className="flex flex-col leading-none">
         <span
           className={cn(
-            "font-extrabold font-sans lowercase text-brand-900 leading-none tracking-tight",
+            "font-extrabold font-sans lowercase text-brand-900 leading-none tracking-tight flex items-center",
             variant === "white" && "text-white",
             textSizes[size]
           )}
         >
           sela
+          {showAiSuffix && (
+            <span className={cn(variant === "white" ? "text-[#6FB1FF]" : "text-[#2457A7]", "font-black")}>
+              .ai
+            </span>
+          )}
         </span>
         {showTagline && (
           <span
             className={cn(
-              "text-text-muted text-[11px] sm:text-xs font-normal mt-0.5 tracking-tight font-sans",
+              "text-text-muted text-[11px] sm:text-xs font-normal mt-0.5 tracking-tight font-sans max-w-[180px] sm:max-w-xs truncate hidden sm:inline-block",
               variant === "white" && "text-white/80",
               taglineSizes[size]
             )}
           >
-            Ruang untuk dirimu.
+            {taglineText}
           </span>
         )}
       </div>

@@ -12,21 +12,26 @@ interface AppShellProps {
 
 export const AppShell: React.FC<AppShellProps> = ({ children }) => {
   const pathname = usePathname();
-  const isLanding = pathname === "/";
-  const isOnboarding = pathname === "/onboarding";
 
-  // Landing page renders its own comprehensive navbar, editorial hero, and footer
-  if (isLanding) {
+  // Public pages that manage their own full-width layout, navbar, and footer
+  const isPublicPage =
+    pathname === "/" ||
+    pathname.startsWith("/cara-kerja") ||
+    pathname.startsWith("/fitur") ||
+    pathname.startsWith("/harga") ||
+    pathname.startsWith("/tentang") ||
+    pathname.startsWith("/privasi") ||
+    pathname.startsWith("/syarat") ||
+    pathname.startsWith("/masuk") ||
+    pathname.startsWith("/daftar") ||
+    pathname.startsWith("/lupa-password") ||
+    pathname.startsWith("/verifikasi-email") ||
+    pathname.startsWith("/checkout") ||
+    pathname.startsWith("/pembayaran") ||
+    pathname === "/onboarding";
+
+  if (isPublicPage) {
     return <>{children}</>;
-  }
-
-  // Onboarding has its own focused single-column layout
-  if (isOnboarding) {
-    return (
-      <div className="min-h-screen bg-background text-text-main">
-        {children}
-      </div>
-    );
   }
 
   return (
