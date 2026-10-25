@@ -7,7 +7,7 @@ const BASE_URL = "http://localhost:3000";
 
 async function runPhase3Tests() {
   console.log("=================================================================");
-  console.log("   FATHERCARE AI - PHASE 3 GOOGLE GEMINI & RAG VERIFICATION SUITE");
+  console.log("       SELA.AI - PHASE 3 GOOGLE GEMINI & RAG VERIFICATION SUITE");
   console.log("=================================================================\n");
 
   const results = {

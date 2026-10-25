@@ -21,7 +21,7 @@ function record(category, testName, status, details) {
 
 async function runAudit() {
   console.log("========================================================================");
-  console.log("        FATHERCARE AI - AUDIT KOMPREHENSIF EMPAT PILAR UTAMA            ");
+  console.log("            SELA.AI - AUDIT KOMPREHENSIF EMPAT PILAR UTAMA            ");
   console.log("========================================================================\n");
 
   // ====================================================================

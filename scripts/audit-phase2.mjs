@@ -4,7 +4,7 @@ const EDGE_PATH = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge
 const BASE_URL = "http://localhost:3000";
 
 async function runAudit() {
-  console.log("=== STARTING FATHERCARE AI PHASE 2 COMPREHENSIVE AUDIT ===\n");
+  console.log("=== STARTING SELA.AI PHASE 2 COMPREHENSIVE AUDIT ===\n");
 
   const browser = await puppeteer.launch({
     executablePath: EDGE_PATH,
