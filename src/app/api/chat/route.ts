@@ -8,6 +8,16 @@ import { generateGeminiChat, getGeminiConfigStatus } from "@/lib/ai/geminiServic
 const ChatRequestSchema = z.object({
   message: z.string().min(1, "Pesan tidak boleh kosong").max(1000, "Pesan maksimal 1.000 karakter"),
   userAlias: z.string().optional().default("Alex"),
+  mode: z.enum(["guided_story", "practice_talk"]).optional().default("guided_story"),
+  persona: z.enum(["orang_tua", "guru_dosen", "teman", "konselor"]).optional().default("orang_tua"),
+  storyContext: z
+    .object({
+      facts: z.string().optional(),
+      feelings: z.string().optional(),
+      needs: z.string().optional(),
+      openingLine: z.string().optional(),
+    })
+    .optional(),
 });
 
 export async function POST(req: NextRequest) {
@@ -37,7 +47,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { message, userAlias } = parseResult.data;
+    const { message, userAlias, mode, persona, storyContext } = parseResult.data;
 
     // 1. Safety Screening & Triage Layer (Rule: Separate from LLM)
     const safety = evaluateSafety(message);
@@ -72,6 +82,27 @@ export async function POST(req: NextRequest) {
     // 4. Check Gemini API Configuration Status
     const configStatus = getGeminiConfigStatus();
     if (!configStatus.isConfigured) {
+      if (mode === "practice_talk") {
+        const offlinePersonaReplies: Record<string, string> = {
+          orang_tua:
+            "Bapak/Ibu mengerti kamu mungkin merasa berat menyampaikannya. Coba ceritakan pelan-pelan apa kendalanya, biar kita cari jalan keluarnya sama-sama.\n\n[Tips Komunikasi: Kalimat pembukamu sudah cukup tenang. Lanjutkan dengan menyampaikan fakta secara jelas tanpa merasa harus defensif.]",
+          guru_dosen:
+            "Terima kasih sudah berinisiatif menyampaikan hal ini secara terbuka. Bisa jelaskan lebih spesifik bagian tugas mana yang mengalami kendala dan rencana penyelesaianmu?\n\n[Tips Komunikasi: Penyampaianmu sopan dan langsung ke pokok permasalahan. Ini memudahkan lawan bicara memahami situasi.]",
+          teman:
+            "Santai aja, ceritain aja pelan-pelan. Aku dengerin kok, nggak usah ngerasa nggak enakan gitu ke aku.\n\n[Tips Komunikasi: Sikap terbuka dan jujur membantu sahabatmu merasa dipercaya untuk mendengarkan.]",
+          konselor:
+            "Terima kasih sudah meluangkan waktu untuk hadir dan mulai bercerita. Ruang ini aman, silakan sampaikan apa yang paling mengganjal di hatimu saat ini.\n\n[Tips Komunikasi: Memulai dengan mengutarakan emosi yang dirasakan adalah langkah awal yang sangat baik dalam konseling.]",
+        };
+
+        return NextResponse.json({
+          status: "simulation_reply",
+          isAiGenerated: false,
+          reply: offlinePersonaReplies[persona] || offlinePersonaReplies.orang_tua,
+          hasGroundedSources: false,
+          statusBadge: "Simulasi Latihan",
+        });
+      }
+
       return NextResponse.json({
         status: "api_unconfigured",
         isAiGenerated: false,
@@ -92,6 +123,9 @@ export async function POST(req: NextRequest) {
       sources: rag.sources,
       userAlias,
       isEducationalQuery: rag.hasMatch,
+      mode,
+      persona,
+      storyContext,
     });
 
     if (aiResult.error) {

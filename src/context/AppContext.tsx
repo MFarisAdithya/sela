@@ -4,6 +4,17 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 
 export type MoodType = "sangat-sedih" | "sedih" | "biasa" | "senang" | "bersemangat";
 
+export interface StoryCard {
+  id: string;
+  title: string;
+  date: string;
+  facts: string;
+  feelings: string;
+  needs: string;
+  openingLine: string;
+  targetPerson: "Orang Tua" | "Guru / Dosen" | "Teman Sebaya" | "Konselor Profesional";
+}
+
 export interface JournalEntry {
   id: string;
   date: string;
@@ -57,6 +68,13 @@ interface AppContextType {
   addJournalEntry: (entry: Omit<JournalEntry, "id" | "date">) => void;
   deleteJournalEntry: (id: string) => void;
   clearAllJournal: () => void;
+  storyCards: StoryCard[];
+  activeStoryCard: StoryCard | null;
+  setActiveStoryCard: (card: StoryCard | null) => void;
+  addStoryCard: (card: Omit<StoryCard, "id" | "date">) => StoryCard;
+  updateStoryCard: (id: string, updates: Partial<StoryCard>) => void;
+  deleteStoryCard: (id: string) => void;
+  clearAllStoryCards: () => void;
   supportContacts: SupportContact[];
   addSupportContact: (contact: Omit<SupportContact, "id">) => void;
   deleteSupportContact: (id: string) => void;
@@ -82,6 +100,29 @@ const defaultContacts: SupportContact[] = [
   { id: "c-3", name: "Kak Dimas", role: "Konselor Sebaya PIK-R", category: "profesional" },
 ];
 
+const defaultStoryCards: StoryCard[] = [
+  {
+    id: "sc-1",
+    title: "Bicara dengan Orang Tua Soal Minat Jurusan",
+    date: "25 Oktober 2026",
+    facts: "Jurusan yang kuinginkan berbeda dari rencana orang tua, dan nilai semester ini menurun karena merasa terbebani.",
+    feelings: "Cemas mengecewakan keluarga, lelah memendam sendiri, takut disalahkan jika terbuka.",
+    needs: "Didengarkan dengan tenang tanpa langsung dihakimi, dan diberi ruang mendiskusikan opsi secara realistis.",
+    openingLine: "Ayah/Ibu, ada hal penting tentang perkuliahan yang ingin aku obrolkan dengan tenang saat Ayah/Ibu ada waktu senggang.",
+    targetPerson: "Orang Tua",
+  },
+  {
+    id: "sc-2",
+    title: "Konsultasi Kendala Tugas ke Dosen/Guru",
+    date: "24 Oktober 2026",
+    facts: "Tiga tugas besar memiliki tenggat bersamaan minggu ini, sementara kondisi fisik sedang tidak fit.",
+    feelings: "Kewalahan, takut dianggap mencari alasan atau tidak bertanggung jawab.",
+    needs: "Konsultasi prioritas pengerjaan tugas atau kemungkinan dispensasi perpanjangan tenggat.",
+    openingLine: "Selamat pagi Bapak/Ibu, mohon izin meminta waktu sebentar untuk berkonsultasi mengenai progres dan kendala tugas saya.",
+    targetPerson: "Guru / Dosen",
+  },
+];
+
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -92,6 +133,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [currentMood, setCurrentMood] = useState<MoodType | null>("biasa");
   const [completedModules, setCompletedModules] = useState<string[]>(["mod-1"]);
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
+  const [storyCards, setStoryCards] = useState<StoryCard[]>(defaultStoryCards);
+  const [activeStoryCard, setActiveStoryCard] = useState<StoryCard | null>(defaultStoryCards[0]);
   const [supportContacts, setSupportContacts] = useState<SupportContact[]>(defaultContacts);
   const [growthTasks, setGrowthTasks] = useState<GrowthTask[]>(defaultTasks);
   const [referralTickets, setReferralTickets] = useState<ReferralTicket[]>([]);
@@ -172,12 +215,50 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setReferralTickets((prev) => [newTicket, ...prev]);
   };
 
+  const addStoryCard = (card: Omit<StoryCard, "id" | "date">): StoryCard => {
+    const newCard: StoryCard = {
+      ...card,
+      id: "sc-" + Date.now(),
+      date: new Date().toLocaleDateString("id-ID", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }),
+    };
+    setStoryCards((prev) => [newCard, ...prev]);
+    setActiveStoryCard(newCard);
+    return newCard;
+  };
+
+  const updateStoryCard = (id: string, updates: Partial<StoryCard>) => {
+    setStoryCards((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, ...updates } : c))
+    );
+    if (activeStoryCard?.id === id) {
+      setActiveStoryCard((prev) => (prev ? { ...prev, ...updates } : null));
+    }
+  };
+
+  const deleteStoryCard = (id: string) => {
+    setStoryCards((prev) => prev.filter((c) => c.id !== id));
+    if (activeStoryCard?.id === id) {
+      setActiveStoryCard(null);
+    }
+  };
+
+  const clearAllStoryCards = () => {
+    setStoryCards([]);
+    setActiveStoryCard(null);
+  };
+
   const resetAllSessionData = () => {
     setUserName("Alex");
     setHasConsented(false);
     setCurrentMood(null);
     setCompletedModules([]);
     setJournalEntries([]);
+    setStoryCards(defaultStoryCards);
+    setActiveStoryCard(defaultStoryCards[0]);
     setSupportContacts(defaultContacts);
     setGrowthTasks(defaultTasks.map((t) => ({ ...t, completed: false })));
     setReferralTickets([]);
@@ -202,6 +283,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         addJournalEntry,
         deleteJournalEntry,
         clearAllJournal,
+        storyCards,
+        activeStoryCard,
+        setActiveStoryCard,
+        addStoryCard,
+        updateStoryCard,
+        deleteStoryCard,
+        clearAllStoryCards,
         supportContacts,
         addSupportContact,
         deleteSupportContact,

@@ -1,84 +1,491 @@
 "use client";
 
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { copy, greetingFor } from "@/lib/copy";
-import { useApp } from "@/context/AppContext";
+import { useRouter } from "next/navigation";
+import {
+  Send,
+  Sparkles,
+  Users,
+  GraduationCap,
+  HeartHandshake,
+  UserCheck,
+  RotateCcw,
+  BookOpen,
+  ArrowRight,
+  ShieldCheck,
+  AlertCircle,
+  FileText,
+  ChevronDown,
+  ChevronUp,
+  MessageSquare,
+  Sparkle,
+} from "lucide-react";
+import { useApp, StoryCard } from "@/context/AppContext";
+import { cn } from "@/lib/utils";
 
-// Samakan dengan key yang dipakai halaman onboarding untuk menyimpan nama panggilan.
-const NICKNAME_KEY = "sela:nickname";
+interface PracticeMessage {
+  id: string;
+  sender: "user" | "persona";
+  text: string;
+  tip?: string;
+  timestamp: string;
+}
 
-const lora = { fontFamily: "var(--font-lora), Lora, Georgia, serif" };
-const raised = "shadow-[6px_6px_14px_rgba(23,54,93,0.11),-6px_-6px_14px_rgba(255,255,255,0.95)]";
-const pressed = "shadow-[inset_4px_4px_10px_rgba(23,54,93,0.10),inset_-4px_-4px_10px_rgba(255,255,255,0.9)]";
+type PersonaKey = "orang_tua" | "guru_dosen" | "teman" | "konselor";
 
-export default function DashboardPage() {
-  const t = copy.dashboard;
-  const { userName, currentMood, setCurrentMood } = useApp();
-  const [hello, setHello] = useState("Hai");
-  const [mood, setMood] = useState<string | null>(currentMood || null);
+const personas: {
+  key: PersonaKey;
+  label: string;
+  roleTitle: string;
+  desc: string;
+  avatarIcon: any;
+  starterOptions: string[];
+}[] = [
+  {
+    key: "orang_tua",
+    label: "Orang Tua (Ayah / Ibu)",
+    roleTitle: "Simulasi Orang Tua",
+    desc: "Melatih nada bicara tenang saat menghadapi kekhawatiran atau ekspektasi keluarga.",
+    avatarIcon: Users,
+    starterOptions: [
+      "Ayah/Ibu, ada hal penting tentang perkuliahan yang ingin aku ceritain dengan tenang.",
+      "Boleh minta waktu sebentar? Aku pengen ngobrol berdua tanpa terburu-buru.",
+      "Aku tahu Ayah/Ibu ingin yang terbaik buat aku, tapi ada yang terasa berat di jurusanku saat ini.",
+    ],
+  },
+  {
+    key: "guru_dosen",
+    label: "Guru / Dosen Pembimbing",
+    roleTitle: "Simulasi Guru / Dosen",
+    desc: "Melatih penyampaian kendala tugas secara formal, sopan, dan berorientasi solusi.",
+    avatarIcon: GraduationCap,
+    starterOptions: [
+      "Selamat pagi Bapak/Ibu, mohon izin meminta waktu sebentar untuk berkonsultasi mengenai progres tugas saya.",
+      "Saya mengalami kendala kesehatan minggu ini sehingga tertinggal, apakah memungkinkan mendiskusikan dispensasi tenggat?",
+      "Mohon arahan Bapak/Ibu terkait bagian materi tugas yang belum saya pahami sepenuhnya.",
+    ],
+  },
+  {
+    key: "teman",
+    label: "Teman Sebaya / Sahabat",
+    roleTitle: "Simulasi Sahabat",
+    desc: "Melatih keterbukaan emosional santai tanpa merasa canggung atau takut dihakimi.",
+    avatarIcon: HeartHandshake,
+    starterOptions: [
+      "Boleh ngobrol sebentar berdua? Ada yang kepikiran di kepalaku dan pengen aku lurusin.",
+      "Akhir-akhir ini aku ngerasa agak overwhelmed dan butuh temen cerita sebentar.",
+      "Maaf ya kalau beberapa hari kemarin aku agak slow-response, aku lagi ngerasa capek banget secara mental.",
+    ],
+  },
+  {
+    key: "konselor",
+    label: "Konselor / Tenaga Profesional",
+    roleTitle: "Simulasi Konseling Awal",
+    desc: "Melatih cara menyampaikan keluhan secara terbuka saat pertama kali konseling.",
+    avatarIcon: UserCheck,
+    starterOptions: [
+      "Halo, ini pertama kalinya saya berkonsultasi. Saya ingin mengurai hal yang sedang terasa mengganjal.",
+      "Saya sering merasa cemas berlebihan saat memikirkan masa depan dan ekspektasi orang lain.",
+      "Saya merasa sulit mengatur emosi dan pola tidur beberapa minggu terakhir.",
+    ],
+  },
+];
 
-  // Dihitung setelah mount supaya tidak bentrok dengan render server.
+export default function PracticeTalkDashboard() {
+  const router = useRouter();
+  const { userName, activeStoryCard, storyCards, setActiveStoryCard } = useApp();
+
+  const [selectedPersonaKey, setSelectedPersonaKey] = useState<PersonaKey>("orang_tua");
+  const [messages, setMessages] = useState<PracticeMessage[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isCheatSheetOpen, setIsCheatSheetOpen] = useState(true);
+
+  const currentPersona = personas.find((p) => p.key === selectedPersonaKey) || personas[0];
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Initialize welcome message when persona changes
   useEffect(() => {
-    let name = userName;
-    try {
-      const stored = sessionStorage.getItem(NICKNAME_KEY);
-      if (stored) name = stored;
-    } catch {
-      // penyimpanan peramban tidak tersedia; pakai sapaan tanpa nama
-    }
-    const greeting = greetingFor(new Date().getHours());
-    setHello(name ? `${greeting}, ${name}` : greeting);
-  }, [userName]);
+    const welcomeTexts: Record<PersonaKey, string> = {
+      orang_tua: `Halo ${userName}. Ada apa, Nak? Tumben mau ngobrol serius, ada masalah apa di kampus atau sekolah?`,
+      guru_dosen: `Selamat siang, ${userName}. Ya, silakan duduk. Ada kendala akademik apa yang ingin kamu konsultasikan?`,
+      teman: `Oi ${userName}! Tumben ngajak ngobrol serius, ada apa nih? Cerita aja santai, aku dengerin kok.`,
+      konselor: `Halo ${userName}, selamat datang. Ruang ini aman dan tidak akan menghakimi. Silakan sampaikan apa yang sedang terasa berat di pikiranmu.`,
+    };
 
-  const handleSelectMood = (id: string) => {
-    setMood(id);
-    setCurrentMood(id as any);
+    setMessages([
+      {
+        id: "msg-init-" + selectedPersonaKey,
+        sender: "persona",
+        text: welcomeTexts[selectedPersonaKey],
+        timestamp: "Baru saja",
+      },
+    ]);
+  }, [selectedPersonaKey, userName]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isLoading]);
+
+  const handleSendMessage = async (textToSend?: string) => {
+    const text = (textToSend || inputValue).trim();
+    if (!text || isLoading) return;
+
+    const userMsgId = "user-" + Date.now();
+    const newUserMsg: PracticeMessage = {
+      id: userMsgId,
+      sender: "user",
+      text,
+      timestamp: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }),
+    };
+
+    setMessages((prev) => [...prev, newUserMsg]);
+    setInputValue("");
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: text,
+          userAlias: userName,
+          mode: "practice_talk",
+          persona: selectedPersonaKey,
+          storyContext: activeStoryCard
+            ? {
+                facts: activeStoryCard.facts,
+                feelings: activeStoryCard.feelings,
+                needs: activeStoryCard.needs,
+                openingLine: activeStoryCard.openingLine,
+              }
+            : undefined,
+        }),
+      });
+
+      const data = await res.json();
+      const replyFull = data.reply || "Maaf, respon tidak dapat dihasilkan.";
+
+      // Parse [Tips Komunikasi: ...] if returned
+      let cleanText = replyFull;
+      let commTip: string | undefined = undefined;
+
+      const tipMatch = replyFull.match(/\[Tips Komunikasi:\s*(.*?)\]/i);
+      if (tipMatch) {
+        commTip = tipMatch[1].trim();
+        cleanText = replyFull.replace(/\[Tips Komunikasi:\s*.*?\]/i, "").trim();
+      }
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: "persona-" + Date.now(),
+          sender: "persona",
+          text: cleanText,
+          tip: commTip,
+          timestamp: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }),
+        },
+      ]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: "err-" + Date.now(),
+          sender: "persona",
+          text: "Bapak/Ibu/Teman mendengarmu. Coba lanjutkan kata-katamu dengan tenang.",
+          tip: "Koneksi simulasi terputus sementara, namun kamu tetap bisa terus melatih penyampaianmu.",
+          timestamp: "Error",
+        },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
+  const handleResetSession = () => {
+    if (confirm("Mulai ulang sesi latihan dengan persona ini?")) {
+      const welcomeTexts: Record<PersonaKey, string> = {
+        orang_tua: `Halo ${userName}. Ada apa, Nak? Tumben mau ngobrol serius, ada masalah apa di kampus atau sekolah?`,
+        guru_dosen: `Selamat siang, ${userName}. Ya, silakan duduk. Ada kendala akademik apa yang ingin kamu konsultasikan?`,
+        teman: `Oi ${userName}! Tumben ngajak ngobrol serius, ada apa nih? Cerita aja santai, aku dengerin kok.`,
+        konselor: `Halo ${userName}, selamat datang. Ruang ini aman dan tidak akan menghakimi. Silakan sampaikan apa yang sedang terasa berat di pikiranmu.`,
+      };
+
+      setMessages([
+        {
+          id: "msg-reset-" + Date.now(),
+          sender: "persona",
+          text: welcomeTexts[selectedPersonaKey],
+          timestamp: "Baru saja",
+        },
+      ]);
+    }
+  };
+
+  const PersonaIcon = currentPersona.avatarIcon;
+
   return (
-    <div className="max-w-2xl mx-auto py-2 space-y-10 animate-in fade-in duration-150">
-      <header>
-        <h1 className="text-3xl font-semibold text-brand-900 tracking-tight">{hello}</h1>
-        <p className="mt-1 text-xl italic text-[#2457A7]" style={lora}>
-          {t.subtitle}
-        </p>
-      </header>
+    <div className="space-y-5 max-w-4xl mx-auto py-2 animate-in fade-in duration-150">
+      {/* Top Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#CCE1FF]/80 pb-4">
+        <div>
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#2457A7] px-2.5 py-0.5 rounded-full bg-[#EBF3FF]">
+            Pilar 3 · Practice Talk
+          </span>
+          <h1 className="text-2xl font-extrabold text-[#17365D] tracking-tight mt-1">
+            Latihan Percakapan Interaktif
+          </h1>
+          <p className="text-xs sm:text-sm text-[#17365D]/75 mt-0.5">
+            Uji kalimat dan latih keberanian bicaramu dengan persona terpandu sebelum menghadapi situasi nyata.
+          </p>
+        </div>
 
-      <section aria-labelledby="mood-title">
-        <h2 id="mood-title" className="text-xl font-semibold text-brand-900">
-          {t.moodTitle}
-        </h2>
+        <button
+          type="button"
+          onClick={handleResetSession}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#CCE1FF] bg-white text-xs font-semibold text-[#17365D] hover:bg-[#EBF3FF] self-start sm:self-auto shadow-sm"
+        >
+          <RotateCcw className="w-3.5 h-3.5 text-[#2457A7]" />
+          Mulai Ulang Sesi
+        </button>
+      </div>
 
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          {t.moods.map((m) => {
-            const active = mood === m.id;
+      {/* Persona Selection Bar */}
+      <div className="space-y-2">
+        <span className="text-xs font-bold uppercase tracking-wider text-[#2457A7]">
+          Pilih Siapa Lawan Bicara yang Ingin Dilatih:
+        </span>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
+          {personas.map((p) => {
+            const Icon = p.avatarIcon;
+            const isSelected = selectedPersonaKey === p.key;
             return (
               <button
-                key={m.id}
+                key={p.key}
                 type="button"
-                aria-pressed={active}
-                onClick={() => handleSelectMood(m.id)}
-                className={`rounded-2xl bg-[#F7FAFF] p-4 text-left transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#6FB1FF] border border-border-subtle/80 ${
-                  active ? `${pressed} bg-brand-100/70 border-brand-300 font-medium` : raised
-                }`}
+                onClick={() => setSelectedPersonaKey(p.key)}
+                className={cn(
+                  "p-3.5 rounded-2xl border text-left transition-all flex flex-col justify-between",
+                  isSelected
+                    ? "bg-[#2457A7] text-white border-[#2457A7] shadow-md font-semibold"
+                    : "bg-[#F7FAFF] text-[#17365D] border-[#CCE1FF] hover:border-[#2457A7]/50"
+                )}
               >
-                <span className="block font-semibold text-brand-900">{m.label}</span>
-                <span className="mt-0.5 block text-sm text-[#17365D]/75">{m.hint}</span>
+                <div className="flex items-center gap-2 mb-1.5">
+                  <div
+                    className={cn(
+                      "w-7 h-7 rounded-xl flex items-center justify-center shrink-0",
+                      isSelected ? "bg-white/20 text-white" : "bg-[#EBF3FF] text-[#2457A7]"
+                    )}
+                  >
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <span className="text-xs font-bold truncate">{p.label}</span>
+                </div>
+                <p
+                  className={cn(
+                    "text-[11px] leading-snug line-clamp-2",
+                    isSelected ? "text-white/80" : "text-[#17365D]/70"
+                  )}
+                >
+                  {p.desc}
+                </p>
               </button>
             );
           })}
         </div>
+      </div>
 
-        {mood && (
-          <p className="mt-4 text-[#17365D]/85 leading-relaxed" role="status">
-            {t.moodThanks}{" "}
-            <Link href="/safe-story" className="font-semibold text-[#2457A7] underline underline-offset-4 hover:text-brand-900">
-              Cerita ke SELA →
-            </Link>
-          </p>
+      {/* Story Card Cheat Sheet Drawer (If card exists) */}
+      {activeStoryCard && (
+        <div className="rounded-2xl border border-[#CCE1FF] bg-[#EBF3FF] overflow-hidden">
+          <div
+            onClick={() => setIsCheatSheetOpen(!isCheatSheetOpen)}
+            className="p-3 px-4 flex items-center justify-between cursor-pointer hover:bg-[#CCE1FF]/30 transition-all text-xs font-bold text-[#17365D]"
+          >
+            <div className="flex items-center gap-2">
+              <FileText className="w-4 h-4 text-[#2457A7]" />
+              <span>Contekan Kartu Ceritamu: &ldquo;{activeStoryCard.title}&rdquo;</span>
+            </div>
+            <div className="flex items-center gap-2 text-xs font-semibold text-[#2457A7]">
+              <span>{isCheatSheetOpen ? "Sembunyikan" : "Tampilkan Poin"}</span>
+              {isCheatSheetOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </div>
+          </div>
+
+          {isCheatSheetOpen && (
+            <div className="p-4 pt-1 border-t border-[#CCE1FF]/70 text-xs text-[#17365D] space-y-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px]">
+                <div className="p-2.5 rounded-xl bg-white/80 border border-[#CCE1FF]/60">
+                  <strong className="block text-[#2457A7] uppercase tracking-wider mb-0.5">Fakta:</strong>
+                  <span className="line-clamp-2">{activeStoryCard.facts}</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-white/80 border border-[#CCE1FF]/60">
+                  <strong className="block text-[#2457A7] uppercase tracking-wider mb-0.5">Emosi:</strong>
+                  <span className="line-clamp-2">{activeStoryCard.feelings}</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-white/80 border border-[#CCE1FF]/60">
+                  <strong className="block text-[#2457A7] uppercase tracking-wider mb-0.5">Kebutuhan:</strong>
+                  <span className="line-clamp-2">{activeStoryCard.needs}</span>
+                </div>
+              </div>
+
+              {activeStoryCard.openingLine && (
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2.5 rounded-xl bg-white border border-[#2457A7]/30">
+                  <div className="text-xs">
+                    <span className="text-[10px] text-[#2457A7] font-bold uppercase tracking-wider block">
+                      Kalimat Pembuka Rekomendasi:
+                    </span>
+                    <span className="italic font-medium text-[#17365D]">
+                      &ldquo;{activeStoryCard.openingLine}&rdquo;
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => handleSendMessage(activeStoryCard.openingLine)}
+                    className="px-3 py-1.5 rounded-xl bg-[#2457A7] text-white text-[11px] font-semibold hover:bg-[#1C4477] transition-all shrink-0 self-start sm:self-auto"
+                  >
+                    Gunakan Sekarang →
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Chat Simulation Area */}
+      <div className="bg-[#F7FAFF] p-4 sm:p-6 rounded-3xl border border-[#CCE1FF] shadow-[6px_6px_16px_rgba(164,188,224,0.35),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col h-[520px]">
+        {/* Messages List */}
+        <div className="flex-1 overflow-y-auto space-y-4 pr-1 min-h-0">
+          {messages.map((msg) => {
+            const isUser = msg.sender === "user";
+
+            return (
+              <div
+                key={msg.id}
+                className={cn("flex flex-col animate-in fade-in duration-150", isUser ? "items-end" : "items-start")}
+              >
+                {!isUser && (
+                  <div className="flex items-center gap-1.5 mb-1 px-1 text-[11px] font-bold text-[#2457A7]">
+                    <PersonaIcon className="w-3.5 h-3.5" />
+                    <span>{currentPersona.roleTitle}</span>
+                  </div>
+                )}
+
+                <div
+                  className={cn(
+                    "max-w-[88%] sm:max-w-[78%] rounded-2xl p-4 text-xs sm:text-sm leading-relaxed",
+                    isUser
+                      ? "bg-[#2457A7] text-white shadow-sm rounded-br-none"
+                      : "bg-white border border-[#CCE1FF] shadow-sm text-[#17365D] rounded-bl-none"
+                  )}
+                >
+                  <p className="whitespace-pre-wrap">{msg.text}</p>
+
+                  {/* Communication Coaching Tip Note */}
+                  {msg.tip && (
+                    <div className="mt-3 p-3 rounded-xl bg-[#EBF3FF] border border-[#CCE1FF] text-xs text-[#17365D] space-y-1">
+                      <div className="flex items-center gap-1 text-[11px] font-bold text-[#2457A7]">
+                        <Sparkles className="w-3.5 h-3.5" />
+                        <span>Tinjauan Komunikasi Asertif:</span>
+                      </div>
+                      <p className="text-[11px] text-[#17365D]/85 leading-relaxed">{msg.tip}</p>
+                    </div>
+                  )}
+                </div>
+
+                <span className="text-[10px] text-[#17365D]/50 mt-1 px-1">
+                  {msg.timestamp}
+                </span>
+              </div>
+            );
+          })}
+
+          {isLoading && (
+            <div className="flex items-center gap-2 text-xs text-[#17365D]/75 p-3 bg-white rounded-2xl border border-[#CCE1FF] shadow-sm w-fit animate-pulse">
+              <Sparkles className="w-4 h-4 text-[#2457A7] animate-spin" />
+              <span>{currentPersona.roleTitle} sedang merespons...</span>
+            </div>
+          )}
+
+          <div ref={messagesEndRef} />
+        </div>
+
+        {/* Starter Sentence Suggestions */}
+        {messages.length <= 2 && (
+          <div className="pt-3 pb-1 border-t border-[#CCE1FF]/60 space-y-1.5 shrink-0">
+            <span className="text-[11px] font-semibold text-[#17365D]/60">
+              Pilihan kalimat awal untuk {currentPersona.label}:
+            </span>
+            <div className="flex flex-wrap gap-2">
+              {currentPersona.starterOptions.map((opt, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => handleSendMessage(opt)}
+                  className="px-3 py-1.5 rounded-xl bg-white text-xs text-[#17365D] border border-[#CCE1FF] shadow-sm hover:border-[#2457A7] text-left transition-all"
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </div>
         )}
-      </section>
+
+        {/* Input Box */}
+        <div className="pt-3 border-t border-[#CCE1FF]/60 shrink-0">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSendMessage();
+            }}
+            className="flex items-center gap-2"
+          >
+            <div className="relative flex-1">
+              <input
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder={`Uji kalimatmu ke ${currentPersona.label}...`}
+                maxLength={1000}
+                disabled={isLoading}
+                className="w-full px-4 py-3 text-xs sm:text-sm rounded-2xl bg-white shadow-inner text-[#17365D] border border-[#CCE1FF] focus:outline-none focus:ring-2 focus:ring-[#2457A7] placeholder:text-[#17365D]/40"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={!inputValue.trim() || isLoading}
+              className="shrink-0 px-4 py-3 min-h-[44px] rounded-2xl bg-[#2457A7] text-white hover:bg-[#1C4477] transition-all disabled:opacity-40 shadow-sm"
+              aria-label="Kirim latihan bicara"
+            >
+              <Send className="w-4 h-4" />
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* Bottom Transition Banner to Pilar 4 (Support Pathway) */}
+      <div className="p-5 rounded-3xl bg-[#E3EEFF] border border-[#CCE1FF] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="text-xs sm:text-sm text-[#17365D]/85 space-y-1">
+          <strong className="block text-[#17365D] font-bold text-sm sm:text-base">
+            Siap Bicara di Dunia Nyata atau Butuh Bantuan Profesional?
+          </strong>
+          <p className="text-xs text-[#17365D]/75">
+            Latihan adalah langkah awal. Saat kamu merasa butuh pendamping nyata, layanan konseling profesional, atau bantuan krisis darurat, jalur dukungan selalu terbuka tanpa biaya.
+          </p>
+        </div>
+
+        <Link
+          href="/support"
+          className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#1F7A65] hover:bg-[#18604F] text-white text-xs sm:text-sm font-semibold transition-all shadow-md shrink-0 self-start sm:self-auto"
+        >
+          <ShieldCheck className="w-4 h-4" />
+          Lihat Support Pathway
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
     </div>
   );
 }

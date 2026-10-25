@@ -4,188 +4,492 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
-  PenLine,
+  FileText,
+  Copy,
+  Download,
   Trash2,
-  Sparkles,
+  Edit3,
+  Check,
   ArrowRight,
+  Plus,
+  Heart,
+  MessageSquare,
+  Sparkles,
+  Layers,
   BookOpen,
-  Calendar,
-  CheckCircle2,
+  Send,
+  AlertCircle,
+  HelpCircle,
+  Share2,
 } from "lucide-react";
-import { NeuCard } from "@/components/ui/NeuCard";
-import { NeuButton } from "@/components/ui/NeuButton";
-import { NeuTextarea } from "@/components/ui/NeuInput";
-import { Badge } from "@/components/ui/Badge";
-import { useApp } from "@/context/AppContext";
-import { copy } from "@/lib/copy";
+import { useApp, StoryCard } from "@/context/AppContext";
+import { cn } from "@/lib/utils";
 
-const lora = { fontFamily: "var(--font-lora), Lora, Georgia, serif" };
-const prompts = copy.journal.prompts;
-
-export default function JournalPage() {
+export default function StoryCardHubPage() {
   const router = useRouter();
-  const { journalEntries, addJournalEntry, deleteJournalEntry, clearAllJournal, currentMood } = useApp();
-  const [selectedPromptIdx, setSelectedPromptIdx] = useState(0);
-  const [entryText, setEntryText] = useState("");
-  const [isSavedNotice, setIsSavedNotice] = useState(false);
+  const {
+    storyCards,
+    activeStoryCard,
+    setActiveStoryCard,
+    addStoryCard,
+    updateStoryCard,
+    deleteStoryCard,
+    clearAllStoryCards,
+    journalEntries,
+    addJournalEntry,
+    deleteJournalEntry,
+  } = useApp();
 
-  const handleSave = () => {
-    if (!entryText.trim()) return;
+  const [activeTab, setActiveTab] = useState<"story_cards" | "free_journal">("story_cards");
+  const [selectedCardId, setSelectedCardId] = useState<string>(
+    activeStoryCard?.id || storyCards[0]?.id || ""
+  );
+  const [copiedNotice, setCopiedNotice] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
-    addJournalEntry({
-      prompt: prompts[selectedPromptIdx],
-      content: entryText.trim(),
-      mood: currentMood || undefined,
-    });
+  // Edit fields
+  const currentCard = storyCards.find((c) => c.id === selectedCardId) || storyCards[0];
+  const [editFacts, setEditFacts] = useState(currentCard?.facts || "");
+  const [editFeelings, setEditFeelings] = useState(currentCard?.feelings || "");
+  const [editNeeds, setEditNeeds] = useState(currentCard?.needs || "");
+  const [editOpeningLine, setEditOpeningLine] = useState(currentCard?.openingLine || "");
 
-    setEntryText("");
-    setIsSavedNotice(true);
-    setTimeout(() => setIsSavedNotice(false), 3000);
+  // Free journal fields
+  const [journalNote, setJournalNote] = useState("");
+  const [journalSaved, setJournalSaved] = useState(false);
+
+  const handleSelectCard = (card: StoryCard) => {
+    setSelectedCardId(card.id);
+    setActiveStoryCard(card);
+    setIsEditing(false);
+    setEditFacts(card.facts);
+    setEditFeelings(card.feelings);
+    setEditNeeds(card.needs);
+    setEditOpeningLine(card.openingLine);
   };
 
-  const handleConsultWithAi = (content: string) => {
-    // Navigate to safe story with content
-    router.push("/safe-story");
+  const handleSaveEdit = () => {
+    if (!currentCard) return;
+    updateStoryCard(currentCard.id, {
+      facts: editFacts,
+      feelings: editFeelings,
+      needs: editNeeds,
+      openingLine: editOpeningLine,
+    });
+    setIsEditing(false);
+  };
+
+  const handleCopyToClipboard = () => {
+    if (!currentCard) return;
+    const textToCopy = `[KARTU CERITA SELA.AI - ${currentCard.title}]
+Lawan Bicara: ${currentCard.targetPerson}
+Tanggal: ${currentCard.date}
+
+1. FAKTA SITUASI:
+${currentCard.facts}
+
+2. PERASAAN YANG DIRASAKAN:
+${currentCard.feelings}
+
+3. KEBUTUHAN SEBENARNYA:
+${currentCard.needs}
+
+4. KALIMAT PEMBUKA PERCAKAPAN:
+"${currentCard.openingLine}"
+
+(Dibuat secara aman di SELA.AI - Help-Seeking Navigator)`;
+
+    navigator.clipboard.writeText(textToCopy);
+    setCopiedNotice(true);
+    setTimeout(() => setCopiedNotice(false), 2500);
+  };
+
+  const handleDownloadTxt = () => {
+    if (!currentCard) return;
+    const content = `KARTU CERITA PRIBADI - SELA.AI
+=====================================================
+Judul        : ${currentCard.title}
+Lawan Bicara : ${currentCard.targetPerson}
+Tanggal      : ${currentCard.date}
+=====================================================
+
+[1] FAKTA SITUASI OBJEKTIF:
+${currentCard.facts}
+
+[2] PERASAAN YANG DIRASAKAN:
+${currentCard.feelings}
+
+[3] KEBUTUHAN SEBENARNYA:
+${currentCard.needs}
+
+[4] KALIMAT PEMBUKA SIAP PAKAI:
+"${currentCard.openingLine}"
+
+=====================================================
+Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversations.
+`;
+
+    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `kartu-cerita-${currentCard.id}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleGoToPracticeTalk = (card: StoryCard) => {
+    setActiveStoryCard(card);
+    router.push("/dashboard");
+  };
+
+  const handleSaveFreeJournal = () => {
+    if (!journalNote.trim()) return;
+    addJournalEntry({
+      prompt: "Refleksi Mandiri Bebas",
+      content: journalNote.trim(),
+    });
+    setJournalNote("");
+    setJournalSaved(true);
+    setTimeout(() => setJournalSaved(false), 2500);
   };
 
   return (
-    <div className="space-y-6 max-w-3xl mx-auto py-2 animate-in fade-in duration-150">
+    <div className="space-y-6 max-w-4xl mx-auto py-2 animate-in fade-in duration-150">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-border-subtle/80 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#CCE1FF]/80 pb-4">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-            Ruang Menulis Bebas
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#2457A7] px-2.5 py-0.5 rounded-full bg-[#EBF3FF]">
+            Pilar 2 · Kartu Cerita
           </span>
-          <h1 className="text-2xl font-extrabold text-brand-900 tracking-tight">
-            Tumpahkan ke Kertas
+          <h1 className="text-2xl font-extrabold text-[#17365D] tracking-tight mt-1">
+            Kartu Cerita Pribadi
           </h1>
-          <p className="text-xs text-text-muted mt-0.5">
-            {copy.journal.saved}
+          <p className="text-xs sm:text-sm text-[#17365D]/75 mt-0.5">
+            Jembatan konkret dari situasi yang kusut menjadi poin bicara yang siap diucapkan.
           </p>
         </div>
 
-        {journalEntries.length > 0 && (
-          <NeuButton
-            size="sm"
-            variant="ghost"
-            onClick={() => {
-              if (confirm("Hapus semua catatan di sesi ini?")) clearAllJournal();
-            }}
-            className="text-state-danger hover:text-red-700 text-xs self-start sm:self-auto"
-            leftIcon={<Trash2 className="w-3.5 h-3.5" />}
+        {/* View Toggle */}
+        <div className="flex items-center gap-1.5 p-1 bg-[#E3EEFF] rounded-2xl border border-[#CCE1FF] self-start sm:self-auto">
+          <button
+            type="button"
+            onClick={() => setActiveTab("story_cards")}
+            className={cn(
+              "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5",
+              activeTab === "story_cards"
+                ? "bg-[#2457A7] text-white shadow-sm"
+                : "text-[#17365D]/70 hover:text-[#17365D]"
+            )}
           >
-            Hapus semua
-          </NeuButton>
-        )}
+            <FileText className="w-3.5 h-3.5" />
+            Kartu Cerita ({storyCards.length})
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("free_journal")}
+            className={cn(
+              "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5",
+              activeTab === "free_journal"
+                ? "bg-[#2457A7] text-white shadow-sm"
+                : "text-[#17365D]/70 hover:text-[#17365D]"
+            )}
+          >
+            <BookOpen className="w-3.5 h-3.5" />
+            Catatan Bebas ({journalEntries.length})
+          </button>
+        </div>
       </div>
 
-      {/* Writing Form */}
-      <NeuCard variant="raised" className="p-5 sm:p-6 space-y-4">
-        {/* Daily Prompt Picker */}
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-brand-900 uppercase tracking-wider">
-              Pertanyaan pemandu
-            </span>
-            <button
-              onClick={() => setSelectedPromptIdx((prev) => (prev + 1) % prompts.length)}
-              className="text-[11px] text-brand-700 hover:text-brand-900 font-medium"
+      {/* TAB 1: STORY CARDS */}
+      {activeTab === "story_cards" && (
+        <div className="space-y-6">
+          {/* Card Selector Row & Create Button */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0">
+              {storyCards.map((c) => (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => handleSelectCard(c)}
+                  className={cn(
+                    "px-4 py-2 rounded-2xl text-xs font-semibold whitespace-nowrap border transition-all",
+                    currentCard?.id === c.id
+                      ? "bg-[#2457A7] text-white border-[#2457A7] shadow-sm"
+                      : "bg-[#F7FAFF] text-[#17365D] border-[#CCE1FF] hover:border-[#2457A7]/50"
+                  )}
+                >
+                  {c.title}
+                </button>
+              ))}
+            </div>
+
+            <Link
+              href="/safe-story"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-2xl bg-white border border-[#2457A7] text-[#2457A7] hover:bg-[#EBF3FF] text-xs font-semibold shadow-sm shrink-0 self-start sm:self-auto"
             >
-              Ganti pertanyaan →
-            </button>
+              <Plus className="w-3.5 h-3.5" />
+              Buat Cerita Baru di Guided Story
+            </Link>
           </div>
-          <div
-            style={lora}
-            className="p-3.5 rounded-xl bg-surface-inset shadow-neu-inset text-sm font-serif italic text-brand-900 border border-border-subtle/80 leading-relaxed"
-          >
-            &ldquo;{prompts[selectedPromptIdx]}&rdquo;
-          </div>
-        </div>
 
-        {/* Textarea */}
-        <NeuTextarea
-          label="Tulis catatanmu di sini"
-          rows={5}
-          value={entryText}
-          onChange={(e) => setEntryText(e.target.value)}
-          placeholder="Tulis dengan jujur apa yang kamu rasakan tanpa khawatir dinilai..."
-        />
-
-        {/* Action button */}
-        <div className="flex items-center justify-between pt-1">
-          <span className="text-[11px] text-text-muted">
-            {isSavedNotice ? (
-              <span className="text-teal-700 font-semibold flex items-center gap-1">
-                <CheckCircle2 className="w-3.5 h-3.5" /> Catatan tersimpan di sesi
-              </span>
-            ) : (
-              "Data otomatis hilang bila sesi ditutup."
-            )}
-          </span>
-
-          <NeuButton
-            variant="primary"
-            size="md"
-            onClick={handleSave}
-            disabled={!entryText.trim()}
-          >
-            Simpan catatan
-          </NeuButton>
-        </div>
-      </NeuCard>
-
-      {/* Journal History */}
-      <div className="space-y-3 pt-2">
-        <h2 className="text-sm font-bold text-brand-900 uppercase tracking-wider">
-          Riwayat sesi ini ({journalEntries.length})
-        </h2>
-
-        {journalEntries.length === 0 ? (
-          <NeuCard variant="inset" className="p-6 text-center text-xs text-text-muted space-y-2">
-            <BookOpen className="w-8 h-8 text-brand-400 mx-auto" />
-            <p className="font-semibold text-brand-900">Belum ada catatan tersimpan</p>
-            <p>Tulis beberapa kalimat pada kolom di atas untuk mulai mencatat.</p>
-          </NeuCard>
-        ) : (
-          <div className="space-y-3">
-            {journalEntries.map((entry) => (
-              <NeuCard key={entry.id} variant="raised-sm" className="p-4 space-y-3">
-                <div className="flex items-start justify-between gap-2 border-b border-border-subtle/70 pb-2">
-                  <div className="space-y-0.5">
-                    <span className="text-[11px] text-text-muted flex items-center gap-1">
-                      <Calendar className="w-3 h-3" /> {entry.date}
+          {currentCard ? (
+            <div className="bg-[#F7FAFF] p-6 sm:p-8 rounded-3xl border border-[#CCE1FF] shadow-[6px_6px_16px_rgba(164,188,224,0.35),-6px_-6px_16px_rgba(255,255,255,0.95)] space-y-6">
+              {/* Card Meta Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#CCE1FF]/70 pb-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#EBF3FF] text-[#2457A7]">
+                      Lawan Bicara: {currentCard.targetPerson}
                     </span>
-                    <p className="text-xs font-semibold text-brand-900">{entry.prompt}</p>
+                    <span className="text-xs text-[#17365D]/60">{currentCard.date}</span>
                   </div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-[#17365D] mt-1.5">
+                    {currentCard.title}
+                  </h2>
+                </div>
+
+                {/* Toolbar */}
+                <div className="flex items-center gap-2">
                   <button
-                    onClick={() => deleteJournalEntry(entry.id)}
-                    className="p-1 text-text-muted hover:text-state-danger transition-colors"
-                    aria-label="Hapus catatan ini"
+                    type="button"
+                    onClick={() => {
+                      if (isEditing) handleSaveEdit();
+                      else setIsEditing(true);
+                    }}
+                    className="p-2 sm:px-3 sm:py-1.5 rounded-xl border border-[#CCE1FF] bg-white text-xs font-semibold text-[#17365D] hover:bg-[#EBF3FF] flex items-center gap-1.5 shadow-sm"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Edit3 className="w-3.5 h-3.5 text-[#2457A7]" />
+                    <span>{isEditing ? "Simpan Perubahan" : "Edit Poin"}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleCopyToClipboard}
+                    className="p-2 sm:px-3 sm:py-1.5 rounded-xl border border-[#CCE1FF] bg-white text-xs font-semibold text-[#17365D] hover:bg-[#EBF3FF] flex items-center gap-1.5 shadow-sm"
+                  >
+                    {copiedNotice ? <Check className="w-3.5 h-3.5 text-[#1F7A65]" /> : <Copy className="w-3.5 h-3.5 text-[#2457A7]" />}
+                    <span>{copiedNotice ? "Tersalin!" : "Salin"}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleDownloadTxt}
+                    className="p-2 sm:px-3 sm:py-1.5 rounded-xl border border-[#CCE1FF] bg-white text-xs font-semibold text-[#17365D] hover:bg-[#EBF3FF] flex items-center gap-1.5 shadow-sm"
+                    title="Unduh file .TXT"
+                  >
+                    <Download className="w-3.5 h-3.5 text-[#2457A7]" />
+                    <span className="hidden sm:inline">Unduh .TXT</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (confirm("Hapus kartu cerita ini dari perangkatmu?")) {
+                        deleteStoryCard(currentCard.id);
+                      }
+                    }}
+                    className="p-2 rounded-xl border border-[#CCE1FF] bg-white text-[#B42332] hover:bg-[#FFEBEB] shadow-sm"
+                    title="Hapus Kartu"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
                   </button>
                 </div>
+              </div>
 
-                <p className="text-xs text-text-main leading-relaxed whitespace-pre-wrap">
-                  {entry.content}
-                </p>
-
-                <div className="pt-1 flex items-center justify-end">
-                  <NeuButton
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleConsultWithAi(entry.content)}
-                    className="text-xs text-brand-700 hover:text-brand-900"
-                    rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
-                  >
-                    Bantu refleksikan di Cerita AI
-                  </NeuButton>
+              {/* 4 Quadrants of the Story Card */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Quadrant 1: Facts */}
+                <div className="p-5 rounded-2xl bg-white border border-[#CCE1FF] shadow-inner space-y-2">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#2457A7]">
+                    <Layers className="w-4 h-4 text-[#2457A7]" />
+                    1. Fakta Situasi Objektif
+                  </div>
+                  {isEditing ? (
+                    <textarea
+                      rows={3}
+                      value={editFacts}
+                      onChange={(e) => setEditFacts(e.target.value)}
+                      className="w-full text-xs text-[#17365D] p-2 border border-[#CCE1FF] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#2457A7]"
+                    />
+                  ) : (
+                    <p className="text-xs sm:text-sm text-[#17365D]/90 leading-relaxed">
+                      {currentCard.facts}
+                    </p>
+                  )}
                 </div>
-              </NeuCard>
-            ))}
+
+                {/* Quadrant 2: Feelings */}
+                <div className="p-5 rounded-2xl bg-white border border-[#CCE1FF] shadow-inner space-y-2">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#2457A7]">
+                    <Heart className="w-4 h-4 text-[#2457A7]" />
+                    2. Emosi yang Dirasakan
+                  </div>
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      value={editFeelings}
+                      onChange={(e) => setEditFeelings(e.target.value)}
+                      className="w-full text-xs text-[#17365D] p-2 border border-[#CCE1FF] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#2457A7]"
+                    />
+                  ) : (
+                    <p className="text-xs sm:text-sm text-[#17365D]/90 leading-relaxed">
+                      {currentCard.feelings}
+                    </p>
+                  )}
+                </div>
+
+                {/* Quadrant 3: Needs */}
+                <div className="p-5 rounded-2xl bg-white border border-[#CCE1FF] shadow-inner space-y-2">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#2457A7]">
+                    <HelpCircle className="w-4 h-4 text-[#2457A7]" />
+                    3. Kebutuhan Sebenarnya
+                  </div>
+                  {isEditing ? (
+                    <textarea
+                      rows={3}
+                      value={editNeeds}
+                      onChange={(e) => setEditNeeds(e.target.value)}
+                      className="w-full text-xs text-[#17365D] p-2 border border-[#CCE1FF] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#2457A7]"
+                    />
+                  ) : (
+                    <p className="text-xs sm:text-sm text-[#17365D]/90 leading-relaxed">
+                      {currentCard.needs}
+                    </p>
+                  )}
+                </div>
+
+                {/* Quadrant 4: Opening Line */}
+                <div className="p-5 rounded-2xl bg-[#EBF3FF] border border-[#CCE1FF] shadow-inner space-y-2">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#2457A7]">
+                    <MessageSquare className="w-4 h-4 text-[#2457A7]" />
+                    4. Kalimat Pembuka Siap Pakai
+                  </div>
+                  {isEditing ? (
+                    <textarea
+                      rows={3}
+                      value={editOpeningLine}
+                      onChange={(e) => setEditOpeningLine(e.target.value)}
+                      className="w-full text-xs text-[#17365D] p-2 border border-[#CCE1FF] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#2457A7]"
+                    />
+                  ) : (
+                    <p className="text-xs sm:text-sm text-[#17365D] font-medium italic leading-relaxed">
+                      &ldquo;{currentCard.openingLine}&rdquo;
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Bottom Transition Banner to Pilar 3 (Practice Talk) */}
+              <div className="pt-4 border-t border-[#CCE1FF]/70 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#E3EEFF]/50 p-4 rounded-2xl border border-[#CCE1FF]">
+                <div className="text-xs text-[#17365D]/85">
+                  <strong className="block text-[#17365D] font-bold">
+                    Siap Menguji Kata-katamu Sebelum Obrolan Nyata?
+                  </strong>
+                  Gunakan kartu ini sebagai contekan dalam simulasi latihan percakapan interaktif (Practice Talk).
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => handleGoToPracticeTalk(currentCard)}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#2457A7] text-white text-xs sm:text-sm font-semibold hover:bg-[#1C4477] transition-all shadow-md shrink-0"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  Latih di Practice Talk
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="p-12 text-center bg-[#F7FAFF] rounded-3xl border border-[#CCE1FF] space-y-3">
+              <FileText className="w-10 h-10 text-[#2457A7]/50 mx-auto" />
+              <h3 className="text-base font-bold text-[#17365D]">Belum Ada Kartu Cerita</h3>
+              <p className="text-xs text-[#17365D]/70 max-w-sm mx-auto">
+                Mulai dari Guided Story untuk merapikan situasi yang mengganjal ke dalam 4 dimensi.
+              </p>
+              <Link
+                href="/safe-story"
+                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#2457A7] text-white text-xs font-semibold shadow-md"
+              >
+                Mulai Urai Cerita Sekarang
+              </Link>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* TAB 2: FREE JOURNAL NOTES */}
+      {activeTab === "free_journal" && (
+        <div className="space-y-6">
+          <div className="bg-[#F7FAFF] p-6 sm:p-8 rounded-3xl border border-[#CCE1FF] shadow-[6px_6px_16px_rgba(164,188,224,0.35),-6px_-6px_16px_rgba(255,255,255,0.95)] space-y-4">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#2457A7]">
+                Catatan Bebas Lokal
+              </span>
+              <h2 className="text-xl font-bold text-[#17365D] mt-1">
+                Tumpahkan Apa yang Ada di Kepala
+              </h2>
+              <p className="text-xs text-[#17365D]/75 mt-0.5">
+                Catatan ini hanya disimpan di perambanmu dan tidak dikirimkan ke mana pun.
+              </p>
+            </div>
+
+            <textarea
+              rows={5}
+              value={journalNote}
+              onChange={(e) => setJournalNote(e.target.value)}
+              placeholder="Tuliskan unek-unek, refleksi bebas, atau apa pun yang ingin kamu catat hari ini..."
+              className="w-full rounded-2xl bg-white border border-[#CCE1FF] p-4 text-sm text-[#17365D] placeholder:text-[#17365D]/40 focus:outline-none focus:ring-2 focus:ring-[#2457A7] leading-relaxed shadow-inner"
+            />
+
+            <div className="flex items-center justify-between pt-2">
+              <span className="text-xs text-[#1F7A65] font-semibold">
+                {journalSaved && "✓ Catatan berhasil disimpan di sesi ini!"}
+              </span>
+              <button
+                type="button"
+                onClick={handleSaveFreeJournal}
+                disabled={!journalNote.trim()}
+                className="px-6 py-2.5 rounded-full bg-[#2457A7] text-white text-xs font-semibold hover:bg-[#1C4477] transition-all shadow-md disabled:opacity-50"
+              >
+                Simpan Catatan
+              </button>
+            </div>
           </div>
-        )}
-      </div>
+
+          {/* List of saved journal notes */}
+          {journalEntries.length > 0 && (
+            <div className="space-y-3">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[#2457A7]">
+                Riwayat Catatan Sesi Ini ({journalEntries.length})
+              </h3>
+              <div className="space-y-2.5">
+                {journalEntries.map((j) => (
+                  <div
+                    key={j.id}
+                    className="p-4 rounded-2xl bg-white border border-[#CCE1FF] shadow-sm flex items-start justify-between gap-3 text-xs"
+                  >
+                    <div className="space-y-1">
+                      <span className="text-[10px] text-[#17365D]/50 font-semibold">{j.date}</span>
+                      <p className="text-[#17365D] leading-relaxed whitespace-pre-wrap">{j.content}</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => deleteJournalEntry(j.id)}
+                      className="text-[#B42332] hover:text-[#8e1b27] p-1 shrink-0"
+                      title="Hapus catatan"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

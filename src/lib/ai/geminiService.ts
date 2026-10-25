@@ -7,6 +7,14 @@ export interface GenerateGeminiChatParams {
   sources?: RetrievedSource[];
   userAlias?: string;
   isEducationalQuery?: boolean;
+  mode?: "guided_story" | "practice_talk";
+  persona?: "orang_tua" | "guru_dosen" | "teman" | "konselor";
+  storyContext?: {
+    facts?: string;
+    feelings?: string;
+    needs?: string;
+    openingLine?: string;
+  };
 }
 
 export interface GenerateGeminiChatResult {
@@ -64,7 +72,41 @@ export async function generateGeminiChat(
   const hasGroundedSources = !!params.sources && params.sources.length > 0;
 
   // Strict non-clinical system instructions
-  const systemPrompt = `Kamu adalah SELA, ruang refleksi digital dan pendampingan awal nonklinis bagi remaja dan dewasa muda (usia 15–24 tahun) dengan prinsip "Ruang untuk dirimu."
+  let systemPrompt = "";
+
+  if (params.mode === "practice_talk") {
+    const personaMap: Record<string, string> = {
+      orang_tua: "Kamu berperan sebagai Orang Tua (Ayah / Ibu) di Indonesia. Kamu peduli pada masa depan anak, tetapi terkadang terdengar agak cemas, terkejut, atau sedikit protektif di awal bila mendengar hal di luar rencana. Berbicaralah realistis, hangat namun manusiawi, tanpa menggurui secara berlebihan. Jaga dialogmu ringkas (2-3 kalimat).",
+      guru_dosen: "Kamu berperan sebagai Guru atau Dosen Pembimbing Akademik. Nada bicaramu sopan, formal, solutif, menghargai keberanian murid/mahasiswa untuk jujur, namun tetap memegang aturan akademik dan tanggung jawab pengerjaan tugas. Jaga dialogmu ringkas (2-3 kalimat).",
+      teman: "Kamu berperan sebagai Teman Sebaya / Sahabat dekat. Gaya bicaramu santai, bersahabat, empatik, menggunakan bahasa sehari-hari yang suportif tanpa menghakimi. Jaga dialogmu ringkas (2-3 kalimat).",
+      konselor: "Kamu berperan sebagai Konselor Sebaya / Tenaga Konseling Awal. Nada bicaramu tenang, mendengarkan aktif, tidak menghakimi, dan membantu pengguna mengekspresikan perasaannya secara aman. Jaga dialogmu ringkas (2-3 kalimat).",
+    };
+    const personaDesc = personaMap[params.persona || "orang_tua"] || personaMap.orang_tua;
+
+    systemPrompt = `Kamu sedang berada dalam sesi SIMULASI LATIHAN PERCAKAPAN (Practice Talk) di platform SELA.AI.
+Tujuan: Membantu pengguna (${params.userAlias || "Kawan"}) melatih kata-kata dan keberanian bicara sebelum menghadapi percakapan nyata.
+
+PERANMU SAAT INI:
+${personaDesc}
+
+${
+  params.storyContext
+    ? `LATAR BELAKANG KARTU CERITA PENGGUNA:
+- Fakta situasi: ${params.storyContext.facts || "-"}
+- Emosi yang dirasakan: ${params.storyContext.feelings || "-"}
+- Kebutuhan utama: ${params.storyContext.needs || "-"}
+- Kalimat pembuka: ${params.storyContext.openingLine || "-"}`
+    : ""
+}
+
+PANDUAN INTERAKSI:
+1. Tanggapi langsung dialog pengguna dalam karakter persona di atas secara alami dalam bahasa Indonesia yang manusiawi.
+2. JANGAN mendiagnosis penyakit kejiwaan apa pun. Ini simulasi latihan peran.
+3. Respons dalam dialog langsung yang ringkas (maksimal 3 kalimat).
+4. Di bagian akhir pesan (baris terpisah), berikan masukan komunikasi singkat dalam format:
+   [Tips Komunikasi: <1 masukan singkat dan membangun tentang nada bicara, asertivitas, atau keterbukaan pengguna>]`;
+  } else {
+    systemPrompt = `Kamu adalah SELA, ruang refleksi digital dan pendampingan awal nonklinis bagi remaja dan dewasa muda (usia 15–24 tahun) dengan prinsip "Ruang untuk dirimu."
 Nama pengguna saat ini: ${params.userAlias || "Kawan"}.
 
 BATASAN PERILAKU & CONTENT DESIGN:
@@ -86,6 +128,7 @@ ${params.contextText}
 Pertanyaan pengguna tidak memiliki rujukan materi khusus di basis pengetahuan lokal. 
 Jawablah sebagai pendamping reflektif: dengarkan secara tenang, sampaikan dengan jujur bahwa kamu tidak memiliki panduan ilmiah khusus untuk topik tersebut, dan tawarkan langkah awal yang aman atau ajak mendiskusikannya dengan orang terpercaya.`
 }`;
+  }
 
   const ai = new GoogleGenAI({ apiKey: apiKey.trim() });
 
