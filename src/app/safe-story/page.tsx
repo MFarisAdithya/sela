@@ -53,10 +53,10 @@ const feelingsOptions = [
 ];
 
 const starterPrompts = [
-  "Aku merasa tertekan karena jurusan kuliahku tidak sesuai minat, tapi orang tuaku punya ekspektasi tinggi.",
-  "Tugas dan deadline minggu ini menumpuk sampai aku tidak bisa tidur, tapi aku takut bicara ke dosen.",
-  "Aku merasa hubunganku dengan sahabat merenggang karena ada kesalahpahaman yang belum sempat dibahas.",
-  "Aku sering merasa apa pun yang kukerjakan belum cukup baik di mata keluargaku.",
+  "Aku merasa tertekan karena jurusanku kurang cocok, tapi orang tua berharap tinggi.",
+  "Tugas minggu ini menumpuk dan aku kurang tidur, tapi takut izin ke dosen.",
+  "Hubunganku dengan sahabat merenggang karena salah paham yang belum dibahas.",
+  "Aku sering merasa apa pun yang kukerjakan belum cukup baik buat keluarga.",
 ];
 
 export default function SafeStoryPage() {
@@ -81,7 +81,7 @@ export default function SafeStoryPage() {
     {
       id: "msg-welcome",
       sender: "ai",
-      text: `Halo ${userName}. Ini ruang tenang untukmu mengurai isi kepala yang terasa rumit. Kamu bisa mengetikkan apa pun yang sedang kamu rasakan tanpa perlu terburu-buru.`,
+      text: `Halo ${userName}. Tulis apa saja yang sedang terasa mengganjal di pikiranmu, santai dan tanpa terburu-buru.`,
       timestamp: "Baru saja",
       isAiGenerated: false,
       statusBadge: "Pojokan Tenang",

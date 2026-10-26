@@ -17,99 +17,94 @@ export const copy = {
   brand: {
     name: "SELA.AI",
     tagline: "From Unspoken Problems to Prepared Conversations.",
-    subtitle: "AI-Powered Help-Seeking Navigator untuk Remaja & Dewasa Muda",
-    mission:
-      "Membantu remaja yang kesulitan mengungkapkan masalahnya untuk mempersiapkan percakapan dan menemukan bantuan yang tepat.",
+    subtitle: "Pemandu Persiapan Obrolan untuk Remaja & Dewasa Muda",
+    mission: "Membantu remaja merapikan pikiran, menyusun kata-kata, dan menemukan bantuan nyata.",
     sdgBadge: "Fokus Dampak: SDG 3 — Kehidupan Sehat dan Sejahtera",
   },
 
   landing: {
-    eyebrow: "AI-Powered Help-Seeking Navigator",
+    eyebrow: "Pemandu Persiapan Obrolan",
     headlinePart1: "Bercerita tidak harus langsung ",
     headlineAccent: "sempurna.",
-    description:
-      "SELA.AI membantumu mengurai apa yang sedang terasa berat, menyusunnya menjadi ringkasan yang jelas, berlatih memulai percakapan, dan melihat pilihan dukungan nyata yang bisa kamu pertimbangkan.",
+    description: "Urai uneg-uneg, latih caramu bicara, dan temukan bantuan saat kamu siap.",
     cta: "Mulai Gratis",
     secondaryCta: "Lihat Cara Kerja",
     trustNotes: [
       "Bukan alat diagnosis",
       "Kontrol penuh di tanganmu",
-      "Jalur bantuan tidak pernah dipaywall",
+      "Bantuan darurat selalu gratis",
     ],
 
     fourStepsTitle: "Empat Langkah Menuju Percakapan yang Siap",
-    fourStepsSubtitle:
-      "Dari benang kusut di kepala hingga siap berbicara dengan orang yang kamu percayai.",
+    fourStepsSubtitle: "Langkah bertahap agar kamu lebih tenang saat bicara.",
     fourSteps: [
       {
         number: "01",
         title: "Guided Story",
         subtitle: "Uraikan Masalahmu",
-        desc: "Jawab pertanyaan singkat dan bertahap tanpa paksaan. Setiap pertanyaan boleh dilewati kapan saja.",
+        desc: "Jawab pertanyaan santai sebisamu. Boleh lewati kapan saja.",
         href: "/cara-kerja#guided-story",
       },
       {
         number: "02",
         title: "Kartu Cerita Pribadi",
         subtitle: "Rapikan Kebutuhanmu",
-        desc: "Dapatkan draf terstruktur: apa yang terjadi, apa yang dirasakan, dan kalimat pembuka yang siap digunakan.",
+        desc: "Dapatkan rangkuman perasaan dan kalimat pembuka obrolan.",
         href: "/cara-kerja#kartu-cerita",
       },
       {
         number: "03",
         title: "Practice Talk",
         subtitle: "Latihan Memulai Obrolan",
-        desc: "Simulasikan percakapan dengan teman, guru BK, atau orang tua sebelum berbicara sungguhan di dunia nyata.",
+        desc: "Latihan simulasi peran dengan lawan bicara sebelum obrolan sungguhan.",
         href: "/cara-kerja#practice-talk",
       },
       {
         number: "04",
         title: "Support Pathway",
         subtitle: "Temukan Jalur Bantuan",
-        desc: "Lihat opsi bantuan nyata yang terverifikasi dan checklist persiapan bicara tanpa biaya apa pun.",
+        desc: "Temukan kontak bantuan resmi dan daftar persiapan bicara gratis.",
         href: "/cara-kerja#support-pathway",
       },
     ],
 
-    pricingTeaserTitle: "Dukungan yang Jujur dan Terjangkau",
-    pricingTeaserDesc:
-      "Fitur keselamatan dan informasi bantuan selalu gratis. Paket Premium hadir untuk latihan lebih mendalam.",
+    pricingTeaserTitle: "Pilihan Paket yang Jelas",
+    pricingTeaserDesc: "Bantuan darurat tetap gratis. Paket Supporter untuk latihan ekstra.",
     freePlan: {
-      name: "Paket Free",
+      name: "Paket Gratis",
       price: "Rp0",
       period: "selamanya",
-      desc: "Manfaat inti untuk mengurai beban pikiran dan mencari bantuan yang aman.",
+      desc: "Mulai rapikan uneg-uneg tanpa bayar apa pun.",
       features: [
-        "Akses dashboard dan refleksi dasar",
-        "Penyusunan cerita awal dengan Guided Story",
-        "Penyimpanan draf Kartu Cerita aktif",
-        "Sesi latihan bicara Practice Talk dasar",
-        "Modul edukasi keterampilan hidup inti",
-        "Support Pathway & kontak darurat 100% gratis selamanya",
+        "10 respons Guided Story per bulan",
+        "2 sesi latihan Practice Talk per bulan",
+        "Simpan 1 Kartu Cerita aktif",
+        "Modul belajar kelola emosi dasar",
+        "Support Pathway & kontak darurat gratis",
       ],
       cta: "Mulai Gratis Sekarang",
       href: "/onboarding",
     },
     premiumPlan: {
-      name: "SELA Supporter Premium",
+      name: "SELA Supporter",
       price: "Rp19.000",
-      period: "per 30 hari",
-      desc: "Satu kali bayar · Tanpa auto-charge",
+      period: "buat 30 hari",
+      desc: "Sekali bayar · Tanpa tagihan otomatis",
       features: [
-        "Kuota interaksi AI jauh lebih besar dibandingkan paket Gratis",
-        "Lebih banyak kesempatan menggunakan Practice Talk",
-        "Kapasitas penyimpanan Kartu Cerita lebih luas",
-        "Akses penuh ke seluruh modul premium",
-        "Insight refleksi dan perkembangan diri yang lebih mendalam",
-        "Rencana dukungan personal untuk membantu pengguna menentukan langkah berikutnya",
+        "100 respons Guided Story per bulan",
+        "10 sesi Practice Talk (4 peran)",
+        "Simpan sampai 20 Kartu Cerita",
+        "Buka semua modul kelola emosi & konflik",
+        "Rangkuman pola bicara & tips praktis",
+        "Daftar langkah sebelum mulai obrolan",
       ],
-      cta: "Pilih Premium",
+      cta: "Pilih Supporter",
       href: "/harga",
     },
 
     safetyDisclaimer: {
-      title: "Batasan Penting & Privasi Transparan",
-      body: "SELA.AI bukan psikolog, psikiater, dokter, atau layanan gawat darurat medis. Kami tidak mendiagnosis dan tidak menjanjikan bahwa semua masalah selesai seketika dengan AI. Ketika kamu menggunakan fitur AI, tulisanmu dikirim ke Google Gemini agar bisa diproses. Data jurnal dan nama panggilanmu tersimpan di perambanmu sendiri.",
+      title: "Batas Layanan & Privasi",
+      body: "SELA.AI adalah alat bantu latihan, bukan psikolog atau layanan darurat medis. Obrolan diproses dengan Google Gemini. Catatan jurnal dan namamu tersimpan di perangkatmu sendiri.",
       emergencyContacts: [
         { name: "Hotline Kesehatan Jiwa Kemenkes (SEJIWA)", number: "119 ext 8", note: "Bebas pulsa, 24 jam" },
         { name: "Sahabat Perempuan & Anak (SAPA KemenPPPA)", number: "129 / WhatsApp 08111-129-129", note: "Layanan perlindungan dan pendampingan" },
@@ -118,101 +113,97 @@ export const copy = {
   },
 
   howItWorks: {
-    title: "Bagaimana SELA.AI Bekerja",
-    subtitle:
-      "Alur bertahap yang membimbingmu dari kebingungan menjadi rasa percaya diri saat mencari bantuan.",
+    title: "Cara Kerja SELA.AI",
+    subtitle: "Alur bertahap agar kamu lebih percaya diri mencari bantuan.",
     steps: [
       {
         id: "guided-story",
         step: "Langkah 1",
         title: "Guided Story: Mengurai Situasi Tanpa Paksaan",
-        desc: "Kamu tidak harus langsung tahu dari mana harus mulai. SELA.AI memberikan pertanyaan panduan bertahap (apa yang terjadi, apa yang paling sulit, apa yang kamu butuhkan). Kamu memegang kendali penuh dan dapat melewati pertanyaan apa pun.",
+        desc: "Jawab pertanyaan panduan bertahap saat pikiranmu sedang penuh. Kamu bebas melewati pertanyaan apa pun.",
         points: [
           "Pertanyaan ringan dan tidak menghakimi",
-          "Dapat dilewati kapan saja tanpa rasa bersalah",
-          "Teks hanya dikirim ke AI setelah persetujuanmu",
+          "Boleh dilewati kapan saja tanpa beban",
+          "Teks hanya dikirim setelah persetujuanmu",
         ],
       },
       {
         id: "kartu-cerita",
         step: "Langkah 2",
-        title: "Kartu Cerita Pribadi: Mengubah Uneg-Uneg Jadi Ringkasan",
-        desc: "AI membantu merapikan jawabanmu menjadi draf kartu ringkas dengan 5 elemen: situasi yang dialami, perasaan yang dirasakan, kebutuhan dukungan, kalimat pembuka bicara, dan calon pendamping. Kamu dapat memeriksa dan mengedit semuanya sebelum disimpan.",
+        title: "Kartu Cerita Pribadi: Ringkasan Pegangan Bicara",
+        desc: "AI merapikan ceritamu jadi kartu ringkas: situasi, perasaan, kebutuhan, dan kalimat pembuka.",
         points: [
-          "Diberi label 'Draf dari AI — periksa dan edit sebelum digunakan'",
-          "Tersimpan di akun hanya setelah persetujuan eksplisit",
-          "Bisa diunduh, disalin, atau dihapus permanen kapan saja",
+          "Draf dari AI yang bisa kamu edit bebas",
+          "Tersimpan hanya jika kamu setujui",
+          "Bisa disalin atau dihapus kapan saja",
         ],
       },
       {
         id: "practice-talk",
         step: "Langkah 3",
         title: "Practice Talk: Simulasi Percakapan yang Aman",
-        desc: "Merasa gugup sebelum bicara? Kamu bisa berlatih menyampaikan kalimat pembuka lewat simulasi lawan bicara (teman sebaya, guru BK, atau orang tua). AI bertindak sebagai mitra latihan dan memberikan 1–3 umpan balik praktis yang suportif.",
+        desc: "Latih kalimat pembukamu bareng simulasi lawan bicara (teman, guru/dosen, orang tua) sebelum bicara sungguhan.",
         points: [
-          "Transparan sebagai simulasi, bukan percakapan nyata",
-          "Umpan balik yang tidak mempermalukan atau menyalahkan",
-          "Riwayat percakapan tidak disimpan permanen secara default",
+          "Simulasi peran tanpa takut dihakimi",
+          "Tips komunikasi praktis dan suportif",
+          "Riwayat percakapan tidak disimpan permanen",
         ],
       },
       {
         id: "support-pathway",
         step: "Langkah 4",
         title: "Support Pathway: Menghubungkan ke Bantuan Nyata",
-        desc: "Tujuan akhir SELA.AI adalah membantumu terhubung dengan manusia tepercaya. Sistem menyediakan checklist persiapan bicara dan direktori pihak terverifikasi (guru BK, konselor sebaya, puskesmas, psikolog, serta kontak krisis nasional).",
+        desc: "Temukan checklist persiapan dan kontak bantuan resmi: guru BK, konselor sebaya, puskesmas, dan hotline krisis.",
         points: [
-          "Selalu gratis dan tidak pernah dikunci di balik paywall",
-          "Hanya menampilkan kontak yang benar-benar telah diverifikasi",
-          "Tidak mengarang nomor telepon atau fasilitas fiktif",
+          "Selalu gratis dan tanpa paywall",
+          "Hanya kontak resmi terverifikasi",
+          "Panduan faskes BPJS yang jelas",
         ],
       },
     ],
   },
 
   features: {
-    title: "Fitur yang Dirancang dengan Empati dan Batasan Etis",
-    subtitle:
-      "Bukan sekadar chatbot. Setiap modul dibangun untuk mendukung ketahanan mental dan kecakapan hidup remaja.",
+    title: "Fitur yang Dirancang Aman",
+    subtitle: "Membantu melatih keberanian bicara dan kecakapan hidup remaja.",
     list: [
       {
         title: "Guided Story AI",
         category: "Navigasi Awal",
-        desc: "Panduan pertanyaan berurutan yang membantu mengurai benang kusut di kepala tanpa paksaan membuka trauma.",
+        desc: "Pertanyaan bertahap untuk merapikan isi kepala tanpa paksaan.",
       },
       {
         title: "Kartu Cerita Pribadi",
         category: "Komunikasi",
-        desc: "Dokumen pegangan pribadi yang memuat kalimat pembuka siap pakai saat kamu butuh bicara dengan orang lain.",
+        desc: "Ringkasan situasi dan kalimat pembuka siap pakai saat bicara.",
       },
       {
         title: "Practice Talk Simulation",
         category: "Latihan Praktis",
-        desc: "Ruang uji coba menyampaikan perasaan kepada figur yang berbeda tanpa rasa takut dihakimi.",
+        desc: "Simulasi latihan bicara dengan berbagai peran lawan bicara.",
       },
       {
         title: "Support Pathway & Checklist",
         category: "Koneksi Nyata",
-        desc: "Daftar opsi bantuan manusia yang realistis beserta panduan langkah demi langkah saat menemui pendamping.",
+        desc: "Pilihan bantuan manusia nyata dan checklist sebelum bertemu pendamping.",
       },
       {
         title: "Jurnal Reflektif Mandiri",
         category: "Refleksi",
-        desc: "Ruang catatan pribadi dengan pertanyaan refleksi harian. Tersimpan lokal di perangkatmu tanpa pelacakan.",
+        desc: "Catatan harian pribadi yang tersimpan di perangkatmu sendiri.",
       },
       {
         title: "Ruang Belajar & Life Skills",
-        category: "Psikoedukasi",
-        desc: "Modul ringkas mengenai komunikasi asertif, regulasi emosi, teknik napas 4-7-8, dan pemecahan masalah.",
+        category: "Edukasi",
+        desc: "Modul ringkas kelola emosi, komunikasi tegas, dan pernapasan 4-7-8.",
       },
     ],
   },
 
   pricing: {
-    title: "Paket & Harga yang Transparan",
-    subtitle:
-      "Asumsi harga awal untuk validasi produk. Bantuan keselamatan dasar tidak pernah dipaywall.",
-    notice:
-      "Harga Rp19.000 / 30 hari adalah asumsi awal untuk uji validasi pasar BPC Management Expo 2026. Pembayaran tidak diperpanjang secara otomatis (tidak ada auto-charge).",
+    title: "Pilihan Paket SELA.AI",
+    subtitle: "Bantuan darurat selalu gratis. Paket Supporter untuk latihan lebih banyak.",
+    notice: "Rp19.000 untuk 30 hari. Bayar sekali dan tidak ada tagihan otomatis.",
   },
 
   about: {

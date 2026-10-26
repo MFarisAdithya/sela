@@ -257,8 +257,8 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <div className="mt-8 text-center text-xs text-[#17365D]/70 max-w-lg mx-auto">
-              Paket tidak diperpanjang otomatis (tanpa auto-charge). Bantuan dasar dan Support Pathway selalu dapat diakses gratis.
+            <div className="mt-6 text-center text-xs text-[#17365D]/70 max-w-lg mx-auto">
+              Sekali bayar tanpa tagihan otomatis. Bantuan krisis dan Support Pathway selalu gratis.
             </div>
           </div>
         </section>
@@ -266,31 +266,31 @@ export default function LandingPage() {
         {/* =========================================================
             5. PRIVASI, BATAS AI, & KONTAK DARURAT RESMI
         ========================================================== */}
-        <section className="py-20 sm:py-28 bg-[#EBF3FF] border-t border-[#D0E1F9]">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-14">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E3EEFF] border border-[#CCE1FF] text-xs font-semibold text-[#2457A7] uppercase tracking-wider mb-4">
+        <section className="py-16 sm:py-24 bg-[#EBF3FF] border-t border-[#D0E1F9]">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E3EEFF] border border-[#CCE1FF] text-xs font-semibold text-[#2457A7] uppercase tracking-wider mb-3">
                 <Lock className="w-3.5 h-3.5" />
                 <span>Keamanan &amp; Etika</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-[#17365D]">
+              <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#17365D]">
                 {t.safetyDisclaimer.title}
               </h2>
-              <p className="mt-4 text-base leading-relaxed text-[#17365D]/85">
+              <p className="mt-3 text-sm sm:text-base leading-relaxed text-[#17365D]/85">
                 {t.safetyDisclaimer.body}
               </p>
             </div>
 
             {/* Emergency Hotline Box */}
-            <div className="rounded-3xl bg-[#F7FAFF] p-6 sm:p-8 border border-[#CCE1FF] shadow-[inset_3px_3px_8px_rgba(23,54,93,0.06),inset_-3px_-3px_8px_rgba(255,255,255,0.85)]">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-6 border-b border-[#CCE1FF]/70">
+            <div className="rounded-3xl bg-[#F7FAFF] p-6 sm:p-7 border border-[#CCE1FF] shadow-[inset_3px_3px_8px_rgba(23,54,93,0.06),inset_-3px_-3px_8px_rgba(255,255,255,0.85)]">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5 border-b border-[#CCE1FF]/70">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2 text-sm font-semibold text-[#2457A7]">
                     <PhoneCall className="w-4 h-4" />
                     <span>Butuh bicara dengan manusia tepercaya sekarang juga?</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-[#17365D]/80">
-                    Layanan bantuan resmi gratis dan bebas pulsa nasional untuk situasi darurat kejiwaan dan perlindungan:
+                  <p className="text-xs text-[#17365D]/80">
+                    Layanan bantuan darurat resmi nasional, bebas pulsa 24 jam:
                   </p>
                 </div>
 

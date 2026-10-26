@@ -46,7 +46,7 @@ const personas: {
     key: "orang_tua",
     label: "Orang Tua (Ayah / Ibu)",
     roleTitle: "Simulasi Orang Tua",
-    desc: "Melatih nada bicara tenang saat menghadapi kekhawatiran atau ekspektasi keluarga.",
+    desc: "Latih nada bicara tenang saat hadapi ekspektasi keluarga.",
     avatarIcon: Users,
     starterOptions: [
       "Ayah/Ibu, ada hal penting tentang perkuliahan yang ingin aku ceritain dengan tenang.",
@@ -58,7 +58,7 @@ const personas: {
     key: "guru_dosen",
     label: "Guru / Dosen Pembimbing",
     roleTitle: "Simulasi Guru / Dosen",
-    desc: "Melatih penyampaian kendala tugas secara formal, sopan, dan berorientasi solusi.",
+    desc: "Latih cara izin kendala tugas secara sopan dan jelas.",
     avatarIcon: GraduationCap,
     starterOptions: [
       "Selamat pagi Bapak/Ibu, mohon izin meminta waktu sebentar untuk berkonsultasi mengenai progres tugas saya.",
@@ -70,7 +70,7 @@ const personas: {
     key: "teman",
     label: "Teman Sebaya / Sahabat",
     roleTitle: "Simulasi Sahabat",
-    desc: "Melatih keterbukaan emosional santai tanpa merasa canggung atau takut dihakimi.",
+    desc: "Latih obrolan terbuka bareng teman tanpa canggung.",
     avatarIcon: HeartHandshake,
     starterOptions: [
       "Boleh ngobrol sebentar berdua? Ada yang kepikiran di kepalaku dan pengen aku lurusin.",
@@ -82,7 +82,7 @@ const personas: {
     key: "konselor",
     label: "Konselor / Tenaga Profesional",
     roleTitle: "Simulasi Konseling Awal",
-    desc: "Melatih cara menyampaikan keluhan secara terbuka saat pertama kali konseling.",
+    desc: "Latih cara sampaikan uneg-uneg saat pertama kali konseling.",
     avatarIcon: UserCheck,
     starterOptions: [
       "Halo, ini pertama kalinya saya berkonsultasi. Saya ingin mengurai hal yang sedang terasa mengganjal.",

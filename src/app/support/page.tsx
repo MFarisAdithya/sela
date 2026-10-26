@@ -91,19 +91,16 @@ export default function SupportPathwayPage() {
           Peta Jalur Dukungan Nyata
         </h1>
         <p className="text-xs sm:text-sm text-[#17365D]/75 mt-0.5">
-          Direktori bantuan krisis darurat, panduan konseling Puskesmas (BPJS), layanan kampus/sekolah, dan komunitas pendamping sebaya bebas biaya.
+          Daftar kontak bantuan resmi, faskes Puskesmas BPJS, dan pendamping sebaya gratis.
         </p>
       </div>
 
       {/* Free Access & Non-Paywall Commitment Banner */}
-      <div className="p-4 rounded-2xl bg-[#EBF3FF] border border-[#CCE1FF] flex items-start gap-3 text-xs text-[#17365D]">
-        <ShieldCheck className="w-5 h-5 text-[#2457A7] shrink-0 mt-0.5" />
-        <div className="space-y-0.5">
-          <strong className="block font-bold">Komitmen Akses Bantuan Terbuka (Zero Paywall)</strong>
-          <p className="text-[#17365D]/80 leading-relaxed">
-            Informasi kontak bantuan darurat, panduan faskes primer, dan nomor rujukan di halaman ini <strong>tidak akan pernah dikunci di balik biaya atau langganan apa pun</strong>. Keselamatan dan akses pertolongan adalah hak dasar setiap individu.
-          </p>
-        </div>
+      <div className="p-3.5 rounded-2xl bg-[#EBF3FF] border border-[#CCE1FF] flex items-start gap-2.5 text-xs text-[#17365D]">
+        <ShieldCheck className="w-4 h-4 text-[#2457A7] shrink-0 mt-0.5" />
+        <p className="text-[#17365D]/85 leading-snug">
+          <strong>Akses Terbuka:</strong> Semua kontak darurat dan panduan rujukan faskes di halaman ini <strong>selalu gratis tanpa paywall</strong>.
+        </p>
       </div>
 
       {/* Category Tabs */}
