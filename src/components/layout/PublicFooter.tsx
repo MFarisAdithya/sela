@@ -8,71 +8,70 @@ import { copy } from "@/lib/copy";
 
 export const PublicFooter: React.FC = () => {
   return (
-    <footer className="bg-[#17365D] text-white/90 pt-16 pb-12 border-t border-[#1C4477]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-white/10">
+    <footer className="bg-[#DCEAFB] text-[#102542] pt-14 pb-10 border-t-2 border-[#9AC0EB]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-10 border-b border-[#9AC0EB]">
           {/* Brand Info & SDG 3 */}
           <div className="md:col-span-5 flex flex-col items-start">
-            <Link href="/" className="flex items-center gap-2.5 mb-4 group" aria-label="SELA.AI Beranda">
+            <Link href="/" className="flex items-center gap-2.5 mb-3" aria-label="SELA.AI Beranda">
               <SelaLogo
                 layout="horizontal"
                 size="md"
-                variant="white"
                 showTagline={true}
                 showAiSuffix={true}
-                taglineText={copy.brand.tagline}
+                taglineText="Ruang Persiapan Obrolan & Kartu Cerita"
               />
             </Link>
-            <p className="text-sm leading-relaxed text-white/75 max-w-sm">
+            <p className="text-sm leading-relaxed text-[#2B4566] max-w-sm">
               {copy.brand.mission}
             </p>
 
             {/* SDG 3 Impact Badge */}
-            <div className="mt-5 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-xs text-[#CCE1FF]">
-              <HeartHandshake className="w-3.5 h-3.5 text-[#6FB1FF]" />
+            <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#FAFDFE] border border-[#C6DCF5] text-xs font-medium text-[#102542] shadow-sm">
+              <HeartHandshake className="w-3.5 h-3.5 text-[#1E56A0]" />
               <span>{copy.brand.sdgBadge}</span>
             </div>
 
-            <div className="mt-4 flex items-center gap-2 text-xs text-white/60">
-              <ShieldCheck className="w-4 h-4 text-[#6FB1FF]" />
-              <span>Privasi data lokal • Divalidasi nonklinis</span>
+            <div className="mt-3 flex items-center gap-2 text-xs text-[#516B8C]">
+              <ShieldCheck className="w-4 h-4 text-[#1A6B5A]" />
+              <span>Privasi data di perangkatmu sendiri, divalidasi nonklinis</span>
             </div>
           </div>
 
           {/* Navigasi Utama */}
           <div className="md:col-span-3">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#6FB1FF] mb-4">
-              Jelajahi SELA.AI
+            <h4 className="text-sm font-semibold text-[#102542] mb-3">
+              Halaman utama
             </h4>
-            <ul className="space-y-2.5 text-sm text-white/80">
+            <ul className="space-y-2 text-sm text-[#2B4566]">
               <li>
-                <Link href="/cara-kerja" className="hover:text-white transition-colors">
-                  Cara Kerja (4 Langkah)
+                <Link href="/cara-kerja" className="hover:text-[#1E56A0] hover:underline transition-colors">
+                  Cara kerja (4 langkah)
                 </Link>
               </li>
               <li>
-                <Link href="/fitur" className="hover:text-white transition-colors">
-                  Fitur &amp; Batasan AI
+                <Link href="/fitur" className="hover:text-[#1E56A0] hover:underline transition-colors">
+                  Fitur dan batasan AI
                 </Link>
               </li>
               <li>
-                <Link href="/harga" className="hover:text-white transition-colors">
-                  Paket &amp; Harga (Free vs Premium)
+                <Link href="/harga" className="hover:text-[#1E56A0] hover:underline transition-colors">
+                  Pilihan paket (Gratis dan Supporter)
                 </Link>
               </li>
               <li>
-                <Link href="/tentang" className="hover:text-white transition-colors">
-                  Tentang Kami &amp; SDG 3
+                <Link href="/tentang" className="hover:text-[#1E56A0] hover:underline transition-colors">
+                  Tentang kami dan SDG 3
                 </Link>
               </li>
               <li>
-                <Link href="/privasi" className="hover:text-white transition-colors">
-                  Kebijakan Privasi
+                <Link href="/privasi" className="hover:text-[#1E56A0] hover:underline transition-colors">
+                  Kebijakan privasi
                 </Link>
               </li>
               <li>
-                <Link href="/syarat" className="hover:text-white transition-colors">
-                  Ketentuan Layanan
+                <Link href="/syarat" className="hover:text-[#1E56A0] hover:underline transition-colors">
+                  Ketentuan layanan
                 </Link>
               </li>
             </ul>
@@ -80,28 +79,33 @@ export const PublicFooter: React.FC = () => {
 
           {/* Layanan Krisis Resmi (Bebas Pulsa) */}
           <div className="md:col-span-4">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#6FB1FF] mb-4">
-              Bantuan Krisis Langsung
+            <h4 className="text-sm font-semibold text-[#102542] mb-3">
+              Bantuan darurat nasional (24 jam)
             </h4>
-            <div className="space-y-3 text-sm text-white/80">
-              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
-                <div className="font-semibold text-white text-xs flex items-center gap-1.5">
-                  <PhoneCall className="w-3.5 h-3.5 text-[#6FB1FF]" />
-                  <span>SEJIWA (Kemenkes RI)</span>
+            <div className="space-y-2.5 text-sm">
+              <div className="p-3.5 rounded-xl bg-[#FAFDFE] border border-[#C6DCF5] shadow-sm">
+                <div className="font-semibold text-[#102542] text-xs flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <PhoneCall className="w-3.5 h-3.5 text-[#1A6B5A]" />
+                    <span>SEJIWA (Kemenkes RI)</span>
+                  </span>
+                  <span className="font-mono-num font-bold text-[#1E56A0]">119 ext 8</span>
                 </div>
-                <div className="text-xs text-white/70 mt-1">
-                  Hotline Kesehatan Jiwa Nasional: Hubungi <strong>119 ext 8</strong> (Bebas pulsa, 24 Jam).
+                <div className="text-xs text-[#516B8C] mt-1">
+                  Bebas pulsa, atau kunjungi healing119.id
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
-                <div className="font-semibold text-white text-xs flex items-center gap-1.5">
-                  <PhoneCall className="w-3.5 h-3.5 text-[#6FB1FF]" />
-                  <span>SAPA 129 (KemenPPPA)</span>
+              <div className="p-3.5 rounded-xl bg-[#FAFDFE] border border-[#C6DCF5] shadow-sm">
+                <div className="font-semibold text-[#102542] text-xs flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <PhoneCall className="w-3.5 h-3.5 text-[#1A6B5A]" />
+                    <span>SAPA 129 (KemenPPPA)</span>
+                  </span>
+                  <span className="font-mono-num font-bold text-[#1E56A0]">129</span>
                 </div>
-                <div className="text-xs text-white/70 mt-1">
-                  Sahabat Perempuan &amp; Anak: Telepon <strong>129</strong> atau WhatsApp{" "}
-                  <strong>08111-129-129</strong>.
+                <div className="text-xs text-[#516B8C] mt-1">
+                  Perlindungan anak dan perempuan, WhatsApp <span className="font-mono-num font-medium text-[#102542]">08111-129-129</span>
                 </div>
               </div>
             </div>
@@ -109,10 +113,10 @@ export const PublicFooter: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60">
-          <p>© 2026 SELA.AI. {copy.brand.tagline}</p>
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#516B8C]">
+          <p>© 2026 SELA.AI. Ruang persiapan obrolan untuk remaja Indonesia.</p>
           <p className="text-center sm:text-right max-w-md">
-            SELA.AI bukan layanan medis atau konseling psikiatris. Tidak menyediakan diagnosis klinis atau resep obat.
+            SELA.AI adalah alat bantu persiapan komunikasi nonklinis, bukan pengganti psikolog atau layanan medis darurat.
           </p>
         </div>
       </div>

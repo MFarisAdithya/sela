@@ -1,0 +1,83 @@
+/* Hallmark · v2.0 · theme: custom (calm-sky-atelier) · genre: editorial · idea: "Calm sky-blue desk where unspoken teenage worries are drafted onto tactile cotton index cards" · posture: restrained · axes: light/roman-serif/cool */
+/* Critique: Replaces generic baby-blue neumorphic card kit with tactile cotton index sheets on a serene sky-mist desk, Newsreader display heads over Plus Jakarta Sans, IBM Plex Mono index numerals, and letterpress controls. */
+
+:root {
+  /* Core Calm Sky-Blue & Cotton Stationery Palette */
+  --color-paper: #E8F1FC;
+  --color-paper-2: #DCEAFB;
+  --color-paper-3: #CFE2F8;
+  --color-cotton: #FAFDFE;
+  --color-cotton-warm: #F4F9FF;
+
+  /* Ink Hierarchy */
+  --color-ink: #102542;
+  --color-ink-2: #2B4566;
+  --color-muted: #516B8C;
+  --color-subtle: #6E87A6;
+
+  /* Hairlines & Index Rules */
+  --color-rule: #C6DCF5;
+  --color-rule-2: #9AC0EB;
+  --color-rule-ink: #102542;
+
+  /* Signals & Accents */
+  --color-accent: #1E56A0;
+  --color-accent-hover: #164380;
+  --color-accent-ink: #FAFDFE;
+  --color-accent-soft: #D6E7FA;
+  --color-focus: #1E56A0;
+
+  /* Semantic States */
+  --color-settled: #1A6B5A;
+  --color-settled-bg: #E3F3EE;
+  --color-settled-border: #B2DFD2;
+  --color-warning: #8F5B00;
+  --color-warning-bg: #FFF4DF;
+  --color-danger: #AC2130;
+  --color-danger-bg: #FDECEE;
+
+  /* Legacy Variable Bridges for App Components */
+  --bg-app: var(--color-paper);
+  --surface-card: var(--color-cotton);
+  --surface-inset: var(--color-paper-2);
+  --color-primary-900: var(--color-ink);
+  --color-primary-800: #17365D;
+  --color-primary-700: var(--color-accent);
+  --color-primary-500: #3B76C4;
+  --color-primary-400: #6BA4E8;
+  --color-primary-100: var(--color-paper);
+  --color-text-main: var(--color-ink);
+  --color-text-muted: var(--color-ink-2);
+  --color-text-subtle: var(--color-muted);
+  --color-border-subtle: var(--color-rule);
+  --color-border-active: var(--color-rule-2);
+  --color-success: var(--color-settled);
+
+  /* Typography Tokens */
+  --font-display: var(--font-newsreader), "Newsreader", Georgia, serif;
+  --font-body: var(--font-jakarta), "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Tactile Cotton Sheet & Letterpress Elevation */
+  --radius-card: 12px;
+  --radius-stock: 10px;
+  --radius-input: 8px;
+  --radius-pill: 999px;
+  --rule-hair: 1px;
+  --rule-bar: 2px;
+
+  --edge-stock: inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 0 rgba(16, 37, 66, 0.06), 0 0 0 1px rgba(154, 192, 235, 0.55), 0 2px 4px rgba(16, 37, 66, 0.04);
+  --cast-stock: 0 1px 2px rgba(16, 37, 66, 0.05), 0 10px 24px -10px rgba(22, 67, 128, 0.14);
+  --cast-stock-lift: 0 2px 4px rgba(16, 37, 66, 0.07), 0 16px 32px -12px rgba(22, 67, 128, 0.20);
+  --press-groove: inset 0 1.5px 3px rgba(16, 37, 66, 0.10), inset 0 -1px 0 rgba(255, 255, 255, 0.85), 0 0 0 1px rgba(154, 192, 235, 0.65);
+
+  --shadow-raised: var(--edge-stock), var(--cast-stock);
+  --shadow-raised-sm: var(--edge-stock);
+  --shadow-inset: var(--press-groove);
+  --shadow-pressed: inset 0 2px 4px rgba(16, 37, 66, 0.14);
+
+  /* Motion Curves */
+  --dur-fast: 140ms;
+  --dur-med: 220ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}

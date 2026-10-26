@@ -1,33 +1,38 @@
 import type { Metadata, Viewport } from "next";
-import { Source_Sans_3, Lora } from "next/font/google";
+import { Plus_Jakarta_Sans, Newsreader, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { AppShell } from "@/components/layout/AppShell";
 import { AppProvider } from "@/context/AppContext";
 import { AuthProvider } from "@/context/AuthContext";
 
-const sourceSans3 = Source_Sans_3({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-source-sans",
+  variable: "--font-jakarta",
   display: "swap",
 });
 
-const lora = Lora({
+const newsreader = Newsreader({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   style: ["normal", "italic"],
-  variable: "--font-lora",
+  variable: "--font-newsreader",
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-plex-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "SELA.AI — From Unspoken Problems to Prepared Conversations",
+  title: "SELA.AI — Ruang Persiapan Obrolan & Kartu Cerita Remaja",
   description:
-    "SELA.AI adalah platform AI-Powered Help-Seeking Navigator yang mendampingi remaja dalam menguraikan cerita pribadi, berlatih memulai percakapan, dan menemukan jalur dukungan nyata tanpa rasa takut dihakimi.",
+    "SELA.AI membantu remaja merapikan pikiran yang kusut menjadi Kartu Cerita, berlatih memulai percakapan, dan menemukan jalur bantuan nyata yang aman.",
   keywords: [
     "SELA.AI",
-    "Help-Seeking Navigator",
-    "From Unspoken Problems to Prepared Conversations",
     "Guided Story",
     "Kartu Cerita Pribadi",
     "Practice Talk",
@@ -52,7 +57,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#E3EEFF",
+  themeColor: "#E8F1FC",
 };
 
 export default function RootLayout({
@@ -61,8 +66,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${sourceSans3.variable} ${lora.variable}`}>
-      <body className="font-sans antialiased bg-background text-text-main selection:bg-brand-200 selection:text-brand-900">
+    <html
+      lang="id"
+      className={`${jakarta.variable} ${newsreader.variable} ${plexMono.variable}`}
+    >
+      <body className="antialiased selection:bg-[#D6E7FA] selection:text-[#102542]">
         <AuthProvider>
           <AppProvider>
             <AppShell>{children}</AppShell>

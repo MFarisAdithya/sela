@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { SelaLogo } from "@/components/ui/SelaLogo";
 import { cn } from "@/lib/utils";
 
@@ -16,7 +16,7 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({ className }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: "Cara Kerja", href: "/cara-kerja" },
+    { label: "Cara kerja", href: "/cara-kerja" },
     { label: "Fitur", href: "/fitur" },
     { label: "Harga", href: "/harga" },
     { label: "Tentang", href: "/tentang" },
@@ -26,15 +26,15 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({ className }) => {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full bg-[#E3EEFF]/90 backdrop-blur-md border-b border-[#CCE1FF]/70 transition-all",
+        "sticky top-0 z-50 w-full bg-[#E8F1FC]/90 backdrop-blur-md border-b border-[#C6DCF5]",
         className
       )}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
         {/* Brand Logo */}
         <Link
           href="/"
-          className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2457A7] rounded-xl p-1 shrink min-w-0"
+          className="flex items-center gap-3 rounded-lg p-1 shrink min-w-0"
           aria-label="SELA.AI Beranda"
         >
           <SelaLogo
@@ -42,12 +42,12 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({ className }) => {
             size="md"
             showTagline={true}
             showAiSuffix={true}
-            taglineText="From Unspoken Problems to Prepared Conversations"
+            taglineText="Ruang Persiapan Obrolan & Kartu Cerita"
           />
         </Link>
 
         {/* Desktop Navigation (lg+) */}
-        <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-[#17365D]/80">
+        <nav className="hidden lg:flex items-center gap-1 p-1 rounded-xl bg-[#DCEAFB]/80 border border-[#C6DCF5] text-sm font-medium text-[#2B4566]">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -55,8 +55,10 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({ className }) => {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "hover:text-[#2457A7] transition-colors py-1 px-1.5 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2457A7]",
-                  isActive && "text-[#2457A7] font-semibold border-b-2 border-[#2457A7]"
+                  "px-3.5 py-1.5 rounded-lg transition-colors",
+                  isActive
+                    ? "bg-[#FAFDFE] text-[#102542] font-semibold shadow-sm border border-[#C6DCF5]"
+                    : "hover:text-[#102542] hover:bg-[#FAFDFE]/50"
                 )}
               >
                 {link.label}
@@ -66,19 +68,18 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({ className }) => {
         </nav>
 
         {/* Desktop Actions (lg+) */}
-        <div className="hidden lg:flex items-center gap-4 shrink-0">
+        <div className="hidden lg:flex items-center gap-3 shrink-0">
           <Link
-            href="/onboarding"
-            className="text-sm font-semibold text-[#2457A7] hover:text-[#17365D] transition-colors px-3 py-2"
+            href="/masuk"
+            className="text-sm font-semibold text-[#2B4566] hover:text-[#102542] transition-colors px-3 py-2 rounded-lg"
           >
             Masuk
           </Link>
           <Link
             href="/onboarding"
-            className="inline-flex items-center justify-center rounded-full bg-[#2457A7] px-6 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#1C4477] hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#6FB1FF] shadow-[5px_5px_12px_rgba(23,54,93,0.12),-5px_-5px_12px_rgba(255,255,255,0.9)]"
+            className="letterpress-primary inline-flex items-center justify-center px-5 py-2.5 text-sm"
           >
-            Mulai Gratis
-            <ArrowRight className="w-4 h-4 ml-1.5" />
+            Mulai gratis
           </Link>
         </div>
 
@@ -86,14 +87,14 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({ className }) => {
         <div className="flex lg:hidden items-center gap-2 shrink-0">
           <Link
             href="/onboarding"
-            className="inline-flex items-center justify-center rounded-full bg-[#2457A7] px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-[#1C4477]"
+            className="letterpress-primary inline-flex items-center justify-center px-4 py-2 text-xs"
           >
             Mulai
           </Link>
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-xl text-[#17365D] hover:bg-white/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2457A7]"
+            className="p-2 rounded-lg text-[#102542] hover:bg-[#FAFDFE]/70"
             aria-label={mobileMenuOpen ? "Tutup menu" : "Buka menu navigasi"}
             aria-expanded={mobileMenuOpen}
           >
@@ -104,16 +105,18 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({ className }) => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-[#CCE1FF] bg-[#EBF3FF] px-6 py-5 shadow-lg space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
-          <nav className="flex flex-col space-y-3 text-base font-medium text-[#17365D]">
+        <div className="lg:hidden border-b border-[#C6DCF5] bg-[#FAFDFE] px-6 py-5 shadow-lg space-y-4">
+          <nav className="flex flex-col space-y-2 text-base font-medium text-[#102542]">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className={cn(
-                  "py-1.5 transition-colors",
-                  pathname === link.href ? "text-[#2457A7] font-semibold" : "hover:text-[#2457A7]"
+                  "py-2 px-3 rounded-lg transition-colors",
+                  pathname === link.href
+                    ? "bg-[#E8F1FC] text-[#1E56A0] font-semibold"
+                    : "hover:bg-[#E8F1FC]/50"
                 )}
               >
                 {link.label}
@@ -121,13 +124,20 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({ className }) => {
             ))}
           </nav>
 
-          <div className="pt-3 border-t border-[#CCE1FF]/70 flex flex-col gap-2.5">
+          <div className="pt-3 border-t border-[#C6DCF5] flex flex-col gap-2.5">
+            <Link
+              href="/masuk"
+              onClick={() => setMobileMenuOpen(false)}
+              className="letterpress-cotton w-full inline-flex items-center justify-center py-2.5 text-sm"
+            >
+              Masuk akun
+            </Link>
             <Link
               href="/onboarding"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full inline-flex items-center justify-center rounded-full bg-[#2457A7] py-3 text-sm font-semibold text-white shadow-md hover:bg-[#1C4477]"
+              className="letterpress-primary w-full inline-flex items-center justify-center py-2.5 text-sm"
             >
-              Mulai Gratis Sekarang
+              Mulai gratis sekarang
             </Link>
           </div>
         </div>

@@ -284,48 +284,48 @@ export default function SafeStoryPage() {
   };
 
   return (
-    <div className="space-y-5 max-w-4xl mx-auto py-2 animate-in fade-in duration-150">
+    <div className="space-y-5 max-w-4xl mx-auto py-2">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#CCE1FF]/80 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#C6DCF5] pb-4">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#2457A7] px-2.5 py-0.5 rounded-full bg-[#EBF3FF]">
-            Pilar 1 · Guided Story
+          <span className="font-mono-num text-xs font-semibold text-[#1E56A0] block mb-0.5">
+            Tahap 01 — Guided Story
           </span>
-          <h1 className="text-2xl font-extrabold text-[#17365D] tracking-tight mt-1">
+          <h1 className="font-display-serif text-2xl sm:text-3xl font-medium text-[#102542]">
             Urai Cerita Pribadi
           </h1>
-          <p className="text-xs sm:text-sm text-[#17365D]/75 mt-0.5">
-            Merapikan pikiran yang kusut ke dalam 4 dimensi sebelum berbicara dengan orang lain.
+          <p className="text-xs sm:text-sm text-[#2B4566] mt-0.5">
+            Rapikan uneg-uneg ke dalam 4 bagian Kartu Cerita sebelum kamu bicara.
           </p>
         </div>
 
-        {/* Mode Selector Pill */}
-        <div className="flex items-center gap-1.5 p-1 bg-[#E3EEFF] rounded-2xl border border-[#CCE1FF] self-start sm:self-auto">
+        {/* Mode Selector Groove */}
+        <div className="sky-groove flex items-center gap-1 self-start sm:self-auto">
           <button
             type="button"
             onClick={() => setActiveTab("guided_steps")}
             className={cn(
-              "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5",
+              "px-3.5 py-1.5 rounded-md text-xs font-semibold transition-colors flex items-center gap-1.5",
               activeTab === "guided_steps"
-                ? "bg-[#2457A7] text-white shadow-sm"
-                : "text-[#17365D]/70 hover:text-[#17365D]"
+                ? "bg-[#FAFDFE] text-[#102542] shadow-sm border border-[#9AC0EB]"
+                : "text-[#2B4566] hover:text-[#102542]"
             )}
           >
-            <Layers className="w-3.5 h-3.5" />
+            <Layers className="w-3.5 h-3.5 text-[#1E56A0]" />
             Langkah Terpadu
           </button>
           <button
             type="button"
             onClick={() => setActiveTab("free_chat")}
             className={cn(
-              "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5",
+              "px-3.5 py-1.5 rounded-md text-xs font-semibold transition-colors flex items-center gap-1.5",
               activeTab === "free_chat"
-                ? "bg-[#2457A7] text-white shadow-sm"
-                : "text-[#17365D]/70 hover:text-[#17365D]"
+                ? "bg-[#FAFDFE] text-[#102542] shadow-sm border border-[#9AC0EB]"
+                : "text-[#2B4566] hover:text-[#102542]"
             )}
           >
-            <MessageSquare className="w-3.5 h-3.5" />
-            Obrolan Bebas
+            <MessageSquare className="w-3.5 h-3.5 text-[#1E56A0]" />
+            Obrolan Reflektif
           </button>
         </div>
       </div>

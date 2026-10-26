@@ -7,13 +7,10 @@ import {
   MessageCircle,
   Users,
   BookOpen,
-  ArrowRight,
-  ShieldCheck,
   PhoneCall,
   Sparkles,
-  Lock,
-  Plus,
   Compass,
+  Check,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useApp } from "@/context/AppContext";
@@ -21,11 +18,11 @@ import { greetingFor } from "@/lib/copy";
 
 export default function AppDashboardPage() {
   const { user } = useAuth();
-  const { currentMood, setCurrentMood } = useApp();
-  const [greeting, setGreeting] = useState("Hai");
-  const [stepDismissed, setStepDismissed] = useState(false);
+  const { storyCards, activeStoryCard } = useApp();
+  const [greeting, setGreeting] = useState("Selamat datang");
 
   const displayName = user?.displayName || "Kawan";
+  const featuredCard = activeStoryCard || storyCards[0];
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -34,194 +31,242 @@ export default function AppDashboardPage() {
 
   const coreActions = [
     {
+      code: "01",
       title: "Guided Story",
-      subtitle: "Susun Ceritaku",
-      desc: "Uraikan apa yang mengganjal lewat pertanyaan bertahap tanpa paksaan.",
+      subtitle: "Uraikan cerita",
+      desc: "Jawab pertanyaan santai untuk merapikan uneg-uneg di kepala.",
       href: "/safe-story",
       icon: MessageSquareHeart,
-      badge: "Langkah 1",
-      badgeColor: "bg-[#EBF3FF] text-[#2457A7]",
     },
     {
+      code: "02",
       title: "Kartu Cerita",
-      subtitle: "Rapikan Catatan",
-      desc: "Lihat dan kelola draf ringkasan cerita yang siap dibagikan.",
+      subtitle: "Pegangan bicara",
+      desc: "Lihat dan edit draf ringkasan 4 kuadran sebelum mulai bicara.",
       href: "/journal",
       icon: Compass,
-      badge: "Langkah 2",
-      badgeColor: "bg-[#EBF3FF] text-[#2457A7]",
     },
     {
+      code: "03",
       title: "Practice Talk",
-      subtitle: "Latihan Bicara",
-      desc: "Simulasikan percakapan dengan teman atau guru BK sebelum bicara sungguhan.",
+      subtitle: "Simulasi obrolan",
+      desc: "Latih kalimat pembukamu bareng peran orang tua, dosen, atau teman.",
       href: "/dashboard",
       icon: MessageCircle,
-      badge: "Langkah 3",
-      badgeColor: "bg-[#EBF3FF] text-[#2457A7]",
     },
     {
+      code: "04",
       title: "Support Pathway",
-      subtitle: "Cari Dukungan",
-      desc: "Temukan pilihan bantuan nyata dan checklist persiapan bicara tanpa biaya.",
+      subtitle: "Jalur bantuan nyata",
+      desc: "Daftar kontak darurat, panduan Puskesmas BPJS, dan checklist bicara.",
       href: "/support",
       icon: Users,
-      badge: "Langkah 4",
-      badgeColor: "bg-[#E6F4EA] text-[#1F7A65]",
     },
   ];
 
   return (
-    <div className="space-y-8 py-2 animate-in fade-in duration-150 text-[#17365D]">
+    <div className="space-y-7 py-2 text-[#102542]">
       {/* 1. Header Greeting & Status Paket */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-border-subtle/80">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-5 border-b border-[#C6DCF5]">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#17365D]">
-            {greeting}, {displayName}
+          <h1 className="font-display-serif text-2xl sm:text-3xl font-medium text-[#102542]">
+            {greeting}, {displayName}.
           </h1>
-          <p className="mt-1 text-sm text-[#17365D]/75">
-            Ruang tenang untuk merapikan pikiran dan menyiapkan langkahmu berikutnya.
+          <p className="mt-1 text-sm text-[#2B4566]">
+            Meja persiapan obrolan dan catatan reflektif pribadimu.
           </p>
         </div>
 
-        {/* Plan Status Pill */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <Link
             href="/app/paket"
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F7FAFF] border border-[#CCE1FF] text-xs font-semibold text-[#17365D] hover:border-[#2457A7] transition-colors shadow-sm"
+            className="letterpress-cotton inline-flex items-center gap-2 px-3.5 py-2 text-xs"
           >
-            <span className="w-2 h-2 rounded-full bg-[#1F7A65]" />
-            <span>Paket {user?.plan === "premium" ? "Premium Aktif" : "Free"}</span>
-            <span className="text-[11px] text-[#2457A7] font-bold">Kelola →</span>
+            <Sparkles className="w-3.5 h-3.5 text-[#1E56A0]" />
+            <span>
+              {user?.plan === "premium" ? "SELA Supporter Aktif" : "Paket Gratis"}
+            </span>
+            <span className="text-[#1E56A0] font-semibold underline underline-offset-2 ml-1">
+              Kelola kuota
+            </span>
           </Link>
         </div>
       </div>
 
-      {/* 2. Rekomendasi Langkah Kecil (Dapat Ditutup) */}
-      {!stepDismissed && (
-        <div className="p-4 sm:p-5 rounded-3xl bg-[#F7FAFF] border border-[#CCE1FF] shadow-sm flex items-start justify-between gap-4">
-          <div className="flex items-start gap-3.5">
-            <div className="w-9 h-9 rounded-2xl bg-[#EBF3FF] text-[#2457A7] flex items-center justify-center shrink-0 mt-0.5">
-              <Sparkles className="w-4 h-4" />
+      {/* 2. Featured Cotton Story Card on the Desk */}
+      {featuredCard && (
+        <div className="cotton-sheet border-t-2 border-t-[#1E56A0] border border-[#9AC0EB] overflow-hidden">
+          <div className="px-5 py-3 bg-[#F4F9FF] border-b border-[#C6DCF5] flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-2.5">
+              <span className="font-mono-num text-xs font-semibold px-2 py-0.5 rounded bg-[#DCEAFB] text-[#1E56A0] border border-[#9AC0EB]">
+                KARTU AKTIF
+              </span>
+              <span className="text-xs font-semibold text-[#102542]">
+                {featuredCard.title} ({featuredCard.targetPerson})
+              </span>
             </div>
-            <div className="space-y-1">
-              <h2 className="text-sm font-bold text-[#17365D]">
-                Rekomendasi Langkah Hari Ini:
-              </h2>
-              <p className="text-xs sm:text-sm text-[#17365D]/80 leading-relaxed">
-                Luangkan 3 menit untuk menguraikan situasi yang sedang kamu pikirkan melalui <strong>Guided Story</strong>, atau simpan satu kalimat pembuka di <strong>Practice Talk</strong>.
+            <span className="settled-stamp">
+              <Check className="w-3.5 h-3.5" />
+              <span>Tersimpan di meja</span>
+            </span>
+          </div>
+
+          <div className="p-5 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+            <div className="md:col-span-8 space-y-2">
+              <div className="text-xs text-[#516B8C]">Kalimat pembuka peganganmu:</div>
+              <p className="text-sm font-medium text-[#102542] bg-[#E8F1FC]/70 p-3 rounded-lg border border-[#C6DCF5]">
+                &ldquo;{featuredCard.openingLine}&rdquo;
               </p>
             </div>
+            <div className="md:col-span-4 flex flex-col sm:flex-row md:flex-col gap-2">
+              <Link
+                href="/dashboard"
+                className="letterpress-primary w-full inline-flex items-center justify-center py-2.5 px-4 text-xs"
+              >
+                Latih di Practice Talk
+              </Link>
+              <Link
+                href="/journal"
+                className="letterpress-cotton w-full inline-flex items-center justify-center py-2 px-4 text-xs"
+              >
+                Lihat semua kartu ({storyCards.length})
+              </Link>
+            </div>
           </div>
-          <button
-            type="button"
-            onClick={() => setStepDismissed(true)}
-            className="text-xs text-[#17365D]/50 hover:text-[#17365D] p-1 shrink-0"
-            aria-label="Tutup rekomendasi"
-          >
-            ✕
-          </button>
         </div>
       )}
 
-      {/* 3. Empat Aksi Inti (Four-Pillar Experience) */}
+      {/* 3. Empat Tahap Persiapan Bicara — Ruled Cotton Grid */}
       <div>
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <h2 className="text-lg font-bold text-[#17365D]">Alur Navigasi Bantuan</h2>
-            <p className="text-xs text-[#17365D]/70">Pilih tahapan yang paling sesuai dengan kesiapanmu.</p>
-          </div>
+        <div className="mb-3">
+          <h2 className="font-display-serif text-xl font-medium text-[#102542]">
+            Empat tahap persiapan bicara
+          </h2>
+          <p className="text-xs text-[#516B8C]">
+            Pilih tahap yang paling sesuai dengan kebutuhanmu hari ini.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-          {coreActions.map((action) => {
-            const Icon = action.icon;
-            return (
-              <Link
-                key={action.title}
-                href={action.href}
-                className="p-6 rounded-3xl bg-[#F7FAFF] border border-[#CCE1FF] shadow-[5px_5px_14px_rgba(164,188,224,0.3),-5px_-5px_14px_rgba(255,255,255,0.9)] hover:border-[#2457A7] transition-all group flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-11 h-11 rounded-2xl bg-[#E3EEFF] text-[#2457A7] flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
-                      <Icon className="w-5 h-5" />
+        <div className="cotton-sheet border-t-2 border-t-[#102542] border border-[#9AC0EB] overflow-hidden">
+          <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-[#C6DCF5]">
+            {coreActions.slice(0, 2).map((action) => {
+              const Icon = action.icon;
+              return (
+                <Link
+                  key={action.code}
+                  href={action.href}
+                  className="p-5 hover:bg-[#F4F9FF] transition-colors flex flex-col justify-between group"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-[#C6DCF5]">
+                      <span className="font-mono-num text-lg font-semibold text-[#1E56A0]">
+                        {action.code}
+                      </span>
+                      <span className="text-xs font-medium px-2.5 py-0.5 rounded bg-[#E8F1FC] text-[#2B4566] border border-[#C6DCF5]">
+                        {action.subtitle}
+                      </span>
                     </div>
-                    <span className={`text-[11px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${action.badgeColor}`}>
-                      {action.badge}
-                    </span>
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <Icon className="w-4 h-4 text-[#1E56A0]" />
+                      <h3 className="text-base font-bold text-[#102542]">{action.title}</h3>
+                    </div>
+                    <p className="text-xs sm:text-sm text-[#2B4566] leading-relaxed">
+                      {action.desc}
+                    </p>
                   </div>
+                  <div className="mt-4 pt-2.5 border-t border-[#E8F1FC] text-xs font-semibold text-[#1E56A0] group-hover:underline">
+                    Buka {action.title}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
 
-                  <h3 className="text-base font-bold text-[#17365D] mb-1">
-                    {action.subtitle}
-                  </h3>
-                  <p className="text-xs text-[#2457A7] font-semibold uppercase tracking-wider mb-2">
-                    {action.title}
-                  </p>
-                  <p className="text-xs sm:text-sm text-[#17365D]/75 leading-relaxed">
-                    {action.desc}
-                  </p>
-                </div>
-
-                <div className="mt-5 pt-3 border-t border-[#CCE1FF]/50 flex items-center justify-between text-xs font-semibold text-[#2457A7]">
-                  <span>Mulai langkah ini</span>
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                </div>
-              </Link>
-            );
-          })}
+          <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-[#C6DCF5] border-t border-[#C6DCF5]">
+            {coreActions.slice(2, 4).map((action) => {
+              const Icon = action.icon;
+              return (
+                <Link
+                  key={action.code}
+                  href={action.href}
+                  className="p-5 hover:bg-[#F4F9FF] transition-colors flex flex-col justify-between group"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-[#C6DCF5]">
+                      <span className="font-mono-num text-lg font-semibold text-[#1E56A0]">
+                        {action.code}
+                      </span>
+                      <span className="text-xs font-medium px-2.5 py-0.5 rounded bg-[#E8F1FC] text-[#2B4566] border border-[#C6DCF5]">
+                        {action.subtitle}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <Icon className="w-4 h-4 text-[#1E56A0]" />
+                      <h3 className="text-base font-bold text-[#102542]">{action.title}</h3>
+                    </div>
+                    <p className="text-xs sm:text-sm text-[#2B4566] leading-relaxed">
+                      {action.desc}
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-2.5 border-t border-[#E8F1FC] text-xs font-semibold text-[#1E56A0] group-hover:underline">
+                    Buka {action.title}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </div>
 
       {/* 4. Fitur Refleksi Pendukung */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-border-subtle/80">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Link
           href="/journal"
-          className="p-4 rounded-2xl bg-white border border-[#CCE1FF] hover:border-[#2457A7] transition-all flex items-center gap-3 text-xs text-[#17365D]"
+          className="cotton-sheet p-4 border border-[#9AC0EB] hover:bg-[#F4F9FF] transition-colors flex items-center gap-3 text-xs text-[#102542]"
         >
-          <BookOpen className="w-4 h-4 text-[#2457A7] shrink-0" />
+          <BookOpen className="w-4 h-4 text-[#1E56A0] shrink-0" />
           <div>
             <div className="font-bold">Jurnal Reflektif</div>
-            <div className="text-[11px] text-[#17365D]/65">Catatan pribadi tersimpan lokal</div>
+            <div className="text-[11px] text-[#516B8C]">Catatan pribadi di perangkatmu</div>
           </div>
         </Link>
 
         <Link
           href="/learning"
-          className="p-4 rounded-2xl bg-white border border-[#CCE1FF] hover:border-[#2457A7] transition-all flex items-center gap-3 text-xs text-[#17365D]"
+          className="cotton-sheet p-4 border border-[#9AC0EB] hover:bg-[#F4F9FF] transition-colors flex items-center gap-3 text-xs text-[#102542]"
         >
-          <BookOpen className="w-4 h-4 text-[#2457A7] shrink-0" />
+          <BookOpen className="w-4 h-4 text-[#1E56A0] shrink-0" />
           <div>
             <div className="font-bold">Ruang Belajar</div>
-            <div className="text-[11px] text-[#17365D]/65">Modul keterampilan hidup &amp; regulasi</div>
+            <div className="text-[11px] text-[#516B8C]">Materi kelola emosi dan konflik</div>
           </div>
         </Link>
 
         <Link
           href="/growth-plan"
-          className="p-4 rounded-2xl bg-white border border-[#CCE1FF] hover:border-[#2457A7] transition-all flex items-center gap-3 text-xs text-[#17365D]"
+          className="cotton-sheet p-4 border border-[#9AC0EB] hover:bg-[#F4F9FF] transition-colors flex items-center gap-3 text-xs text-[#102542]"
         >
-          <Sparkles className="w-4 h-4 text-[#2457A7] shrink-0" />
+          <Sparkles className="w-4 h-4 text-[#1E56A0] shrink-0" />
           <div>
             <div className="font-bold">Rencana Langkah</div>
-            <div className="text-[11px] text-[#17365D]/65">Target kecil sukarela tanpa beban</div>
+            <div className="text-[11px] text-[#516B8C]">Target kecil sesuai kesiapanmu</div>
           </div>
         </Link>
       </div>
 
       {/* 5. Emergency Helpline Footer Banner */}
-      <div className="p-4 sm:p-5 rounded-2xl bg-[#EBF3FF] border border-[#CCE1FF] text-xs text-[#17365D]/85 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div className="cotton-sheet p-4 border border-[#9AC0EB] text-xs text-[#2B4566] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div className="flex items-center gap-2.5">
-          <PhoneCall className="w-4 h-4 text-[#2457A7] shrink-0" />
+          <PhoneCall className="w-4 h-4 text-[#1A6B5A] shrink-0" />
           <span>
-            Sedang dalam krisis mendesak? Hubungi Hotline Kemenkes <strong>119 ext 8 (SEJIWA)</strong> atau <strong>SAPA 129</strong>. Bebas pulsa 24 jam.
+            Butuh bantuan darurat? Hubungi <strong>SEJIWA 119 ext 8</strong> atau <strong>SAPA 129</strong> (bebas pulsa 24 jam).
           </span>
         </div>
         <Link
           href="/support"
-          className="text-xs font-bold text-[#2457A7] hover:underline whitespace-nowrap"
+          className="text-xs font-semibold text-[#1E56A0] hover:underline whitespace-nowrap"
         >
-          Lihat Jalur Bantuan →
+          Lihat daftar kontak darurat
         </Link>
       </div>
     </div>

@@ -228,33 +228,33 @@ export default function PracticeTalkDashboard() {
   return (
     <div className="space-y-5 max-w-4xl mx-auto py-2 animate-in fade-in duration-150">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#CCE1FF]/80 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#BFD8F5] pb-4">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#2457A7] px-2.5 py-0.5 rounded-full bg-[#EBF3FF]">
-            Pilar 3 · Practice Talk
+          <span className="font-mono-num text-[11px] font-semibold text-[#1E56A0] px-2.5 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
+            Tahap 03 — Practice Talk
           </span>
-          <h1 className="text-2xl font-extrabold text-[#17365D] tracking-tight mt-1">
-            Latihan Percakapan Interaktif
+          <h1 className="font-serif-display text-2xl sm:text-3xl font-medium text-[#102542] tracking-tight mt-2">
+            Latihan percakapan terpandu
           </h1>
-          <p className="text-xs sm:text-sm text-[#17365D]/75 mt-0.5">
-            Uji kalimat dan latih keberanian bicaramu dengan persona terpandu sebelum menghadapi situasi nyata.
+          <p className="text-xs sm:text-sm text-[#35527A] mt-1">
+            Uji kalimat pembukamu dengan lawan bicara simulasi sebelum bicara langsung.
           </p>
         </div>
 
         <button
           type="button"
           onClick={handleResetSession}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#CCE1FF] bg-white text-xs font-semibold text-[#17365D] hover:bg-[#EBF3FF] self-start sm:self-auto shadow-sm"
+          className="letterpress-cotton inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold self-start sm:self-auto"
         >
-          <RotateCcw className="w-3.5 h-3.5 text-[#2457A7]" />
-          Mulai Ulang Sesi
+          <RotateCcw className="w-3.5 h-3.5 text-[#1E56A0]" />
+          Mulai ulang sesi
         </button>
       </div>
 
       {/* Persona Selection Bar */}
-      <div className="space-y-2">
-        <span className="text-xs font-bold uppercase tracking-wider text-[#2457A7]">
-          Pilih Siapa Lawan Bicara yang Ingin Dilatih:
+      <div className="space-y-2.5">
+        <span className="text-xs font-semibold text-[#35527A]">
+          Pilih lawan bicara untuk latihan:
         </span>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
           {personas.map((p) => {
@@ -266,10 +266,10 @@ export default function PracticeTalkDashboard() {
                 type="button"
                 onClick={() => setSelectedPersonaKey(p.key)}
                 className={cn(
-                  "p-3.5 rounded-2xl border text-left transition-all flex flex-col justify-between",
+                  "p-3.5 rounded-2xl border text-left transition-colors flex flex-col justify-between",
                   isSelected
-                    ? "bg-[#2457A7] text-white border-[#2457A7] shadow-md font-semibold"
-                    : "bg-[#F7FAFF] text-[#17365D] border-[#CCE1FF] hover:border-[#2457A7]/50"
+                    ? "bg-[#1E56A0] text-[#FAFDFE] border-[#133A6E] shadow-sm font-semibold"
+                    : "bg-[#FAFDFE] text-[#102542] border-[#BFD8F5] hover:border-[#8AB6EB]"
                 )}
               >
                 <div className="flex items-center gap-2 mb-1.5">

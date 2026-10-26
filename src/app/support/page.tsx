@@ -83,23 +83,23 @@ export default function SupportPathwayPage() {
   return (
     <div className="space-y-6 max-w-4xl mx-auto py-2 animate-in fade-in duration-150">
       {/* Header */}
-      <div className="border-b border-[#CCE1FF]/80 pb-4">
-        <span className="text-xs font-semibold uppercase tracking-wider text-[#2457A7] px-2.5 py-0.5 rounded-full bg-[#EBF3FF]">
-          Pilar 4 · Support Pathway
+      <div className="border-b border-[#BFD8F5] pb-4">
+        <span className="font-mono-num text-[11px] font-semibold text-[#1E56A0] px-2.5 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
+          Tahap 04 — Support Pathway
         </span>
-        <h1 className="text-2xl font-extrabold text-[#17365D] tracking-tight mt-1">
-          Peta Jalur Dukungan Nyata
+        <h1 className="font-serif-display text-2xl sm:text-3xl font-medium text-[#102542] tracking-tight mt-2">
+          Peta jalur dukungan nyata
         </h1>
-        <p className="text-xs sm:text-sm text-[#17365D]/75 mt-0.5">
+        <p className="text-xs sm:text-sm text-[#35527A] mt-1">
           Daftar kontak bantuan resmi, faskes Puskesmas BPJS, dan pendamping sebaya gratis.
         </p>
       </div>
 
       {/* Free Access & Non-Paywall Commitment Banner */}
-      <div className="p-3.5 rounded-2xl bg-[#EBF3FF] border border-[#CCE1FF] flex items-start gap-2.5 text-xs text-[#17365D]">
-        <ShieldCheck className="w-4 h-4 text-[#2457A7] shrink-0 mt-0.5" />
-        <p className="text-[#17365D]/85 leading-snug">
-          <strong>Akses Terbuka:</strong> Semua kontak darurat dan panduan rujukan faskes di halaman ini <strong>selalu gratis tanpa paywall</strong>.
+      <div className="p-3.5 rounded-2xl bg-[#FAFDFE] border border-[#BFD8F5] flex items-start gap-2.5 text-xs text-[#102542]">
+        <ShieldCheck className="w-4 h-4 text-[#1E56A0] shrink-0 mt-0.5" />
+        <p className="text-[#35527A] leading-snug">
+          <strong className="text-[#102542]">Akses terbuka:</strong> Semua kontak darurat dan rujukan faskes di halaman ini selalu gratis tanpa paywall.
         </p>
       </div>
 
