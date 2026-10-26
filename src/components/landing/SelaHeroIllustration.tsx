@@ -146,15 +146,15 @@ export const SelaHeroIllustration: React.FC = () => {
         </g>
       </svg>
 
-      {/* Floating Insight Pill 1: Calm Breath Indicator */}
-      <div className="hidden sm:flex absolute -bottom-2 -left-3 items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-[#F7FAFF]/95 backdrop-blur-md border border-[#CCE1FF]/70 shadow-[6px_6px_14px_rgba(23,54,93,0.08),-4px_-4px_10px_rgba(255,255,255,0.9)] text-[#17365D]">
-        <span className="w-2.5 h-2.5 rounded-full bg-[#1F7A65] animate-pulse" />
+        {/* Floating Insight Pill 1: Calm Breath Indicator */}
+      <div className="hidden sm:flex absolute -bottom-2 -left-3 items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-[#FAFDFE]/95 backdrop-blur-md border border-[#BFD8F5] shadow-[0_8px_20px_rgba(16,37,66,0.08)] text-[#102542] sela-breathe-subtle">
+        <span className="w-2.5 h-2.5 rounded-full bg-[#0F6E56] animate-pulse" />
         <span className="text-xs font-medium tracking-tight">Ruang aman tanpa penilaian</span>
       </div>
 
       {/* Floating Insight Pill 2: Privacy Guarantee */}
-      <div className="hidden sm:flex absolute -top-1 -right-3 items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#F7FAFF]/95 backdrop-blur-md border border-[#CCE1FF]/70 shadow-[6px_6px_14px_rgba(23,54,93,0.08),-4px_-4px_10px_rgba(255,255,255,0.9)] text-[#17365D]">
-        <span className="text-[11px] font-semibold text-[#2457A7] uppercase tracking-wider">Refleksi Mandiri</span>
+      <div className="hidden sm:flex absolute -top-1 -right-3 items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#FAFDFE]/95 backdrop-blur-md border border-[#BFD8F5] shadow-[0_8px_20px_rgba(16,37,66,0.08)] text-[#102542] sela-breathe-subtle">
+        <span className="text-[11px] font-semibold text-[#1E56A0]">Refleksi Mandiri</span>
       </div>
     </div>
   );
