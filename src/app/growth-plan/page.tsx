@@ -64,31 +64,6 @@ export default function GrowthPlanPage() {
         }
       />
 
-      {/* Aura Menyemangati Companion Banner */}
-      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#FAFDFE] via-[#F4F8FF] to-[#E8F1FC] border border-[#BFD8F5] shadow-sm flex items-center gap-4 animate-in fade-in">
-        <div className="relative w-16 sm:w-20 h-16 sm:h-20 shrink-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/aura/aura-menyemangati.png"
-            alt="Sela tersenyum dengan pose penuh semangat"
-            className="w-full h-full object-contain drop-shadow-sm"
-          />
-        </div>
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2 mb-0.5">
-            <span className="font-mono-num text-[10px] font-semibold text-[#1E56A0] px-2.5 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
-              Sela Menyemangati
-            </span>
-            <span className="text-xs font-semibold text-[#102542]">
-              Langkah Kecil Tetap Berarti
-            </span>
-          </div>
-          <p className="text-xs text-[#35527A] leading-relaxed">
-            Sela tersenyum menemanimu. Mengambil waktu untuk istirahat atau menyelesaikan satu hal kecil sudah merupakan langkah yang patut dirayakan.
-          </p>
-        </div>
-      </div>
-
       {/* Main Focus & Circular Progress Card */}
       <NeuCard variant="raised" className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-center bg-surface">
         <div className="md:col-span-2 space-y-2 text-left">
