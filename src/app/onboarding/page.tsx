@@ -64,10 +64,10 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#E3EEFF] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 text-[#17365D]">
-      <div className="max-w-lg mx-auto w-full">
+    <div className="min-h-screen bg-[#E8F1FC] flex flex-col justify-center py-10 sm:py-16 px-4 sm:px-6 lg:px-8 text-[#102542]">
+      <div className="max-w-xl mx-auto w-full">
         {/* Brand Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <Link href="/" className="inline-block mb-3" aria-label="SELA.AI Beranda">
             <SelaLogo layout="horizontal" size="md" showTagline={false} showAiSuffix={true} />
           </Link>
@@ -76,7 +76,7 @@ export default function OnboardingPage() {
               <span
                 key={s}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
-                  s === step ? "w-8 bg-[#2457A7]" : s < step ? "w-3 bg-[#6FB1FF]" : "w-3 bg-[#CCE1FF]"
+                  s === step ? "w-8 bg-[#1E56A0]" : s < step ? "w-3 bg-[#6BA8FF]" : "w-3 bg-[#BFD8F5]"
                 }`}
               />
             ))}
@@ -84,36 +84,41 @@ export default function OnboardingPage() {
         </div>
 
         {/* Multi-Step Card */}
-        <div className="bg-[#F7FAFF] p-6 sm:p-10 rounded-3xl border border-[#CCE1FF] shadow-[6px_6px_16px_rgba(164,188,224,0.35),-6px_-6px_16px_rgba(255,255,255,0.95)]">
-          {/* STEP 1: Selamat Datang & Orientasi */}
+        <div className="bg-[#FAFDFE] p-6 sm:p-10 rounded-3xl border border-[#BFD8F5] shadow-[0_20px_50px_rgba(46,99,214,0.12)]">
+          {/* STEP 1: Selamat Datang & Orientasi — Aura Memandu */}
           {step === 1 && (
-            <div className="space-y-5 text-center animate-in fade-in duration-200">
-              <span className="text-xs font-semibold uppercase tracking-wider text-[#2457A7] px-3 py-1 rounded-full bg-[#EBF3FF]">
-                Langkah 1 dari 4
+            <div className="space-y-6 text-center animate-in fade-in duration-200">
+              <span className="font-mono-num text-[11px] font-semibold text-[#1E56A0] px-3 py-1 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
+                Langkah 1 dari 4 — Aura Memandu
               </span>
-              <div className="flex flex-col items-center gap-2 pt-1">
-                <div className="w-24 h-24 rounded-2xl bg-white border border-[#CCE1FF] shadow-sm overflow-hidden flex items-center justify-center p-1">
-                  <img
-                    src="/images/aura/aura-pose-halo.png"
-                    alt="Aura menyapa Halo!"
-                    className="w-full h-full object-contain"
-                  />
+
+              {/* Aura Memandu Illustration */}
+              <div className="flex flex-col items-center justify-center relative pt-2">
+                <div className="absolute w-44 h-44 rounded-full bg-gradient-to-tr from-[#6BA8FF]/20 via-[#D6E9FF]/40 to-transparent blur-xl -z-10" />
+                <img
+                  src="/images/aura/aura-memandu.png"
+                  alt="Aura memegang papan kecil checklist dan menunjuk ke langkah berikutnya"
+                  className="w-48 sm:w-56 h-auto object-contain drop-shadow-[0_12px_24px_rgba(30,86,160,0.16)] animate-in fade-in"
+                />
+                <div className="mt-2.5 px-3.5 py-1.5 rounded-full bg-[#FAFDFE] border border-[#BFD8F5] text-xs font-semibold text-[#1E56A0] shadow-sm">
+                  &ldquo;Hai! Aku Aura, teman memandumu di SELA.AI&rdquo;
                 </div>
-                <span className="text-xs font-bold text-[#2457A7]">
-                  &ldquo;Hai! Aku Aura, Temanmu di SELA.AI&rdquo;
-                </span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#17365D]">
-                Kamu tidak harus langsung tahu harus mulai dari mana.
-              </h1>
-              <p className="text-sm sm:text-base text-[#17365D]/85 leading-relaxed">
-                SELA.AI hadir sebagai ruang jeda yang tenang bersama Aura. Di sini, kamu boleh berhenti sejenak, mengurai apa yang terasa mengganjal, dan menyiapkan kata-kata sebelum berbicara dengan orang lain.
-              </p>
+
+              <div>
+                <h1 className="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[#102542] leading-snug">
+                  Kamu tidak harus langsung tahu harus mulai dari mana.
+                </h1>
+                <p className="mt-2 text-xs sm:text-sm text-[#35527A] leading-relaxed max-w-md mx-auto">
+                  SELA.AI hadir sebagai ruang jeda yang tenang bersama Aura. Di sini, kamu boleh berhenti sejenak, mengurai apa yang terasa mengganjal, dan menyiapkan kata-kata sebelum bicara.
+                </p>
+              </div>
+
               <div className="pt-2">
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="w-full inline-flex items-center justify-center rounded-full bg-[#2457A7] py-3.5 px-6 text-sm font-semibold text-white hover:bg-[#1C4477] transition-all shadow-md"
+                  className="letterpress-primary w-full inline-flex items-center justify-center rounded-full py-3.5 px-6 text-sm font-semibold transition-all shadow-md"
                 >
                   Lanjut: Batasan &amp; Keamanan SELA.AI
                   <ArrowRight className="w-4 h-4 ml-2" />
@@ -126,35 +131,38 @@ export default function OnboardingPage() {
           {step === 2 && (
             <div className="space-y-6 animate-in fade-in duration-200">
               <div className="text-center">
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#2457A7] px-3 py-1 rounded-full bg-[#EBF3FF]">
+                <span className="font-mono-num text-[11px] font-semibold text-[#1E56A0] px-3 py-1 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
                   Langkah 2 dari 4
                 </span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#17365D] mt-3">
+                <h2 className="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[#102542] mt-3">
                   Tiga Batasan Penting SELA.AI
                 </h2>
+                <p className="text-xs text-[#35527A] mt-1">
+                  Transparansi dan rasa amanmu adalah prioritas utama kami.
+                </p>
               </div>
 
-              <div className="space-y-3.5 text-xs sm:text-sm text-[#17365D]/85">
-                <div className="p-4 rounded-2xl bg-white border border-[#CCE1FF] flex items-start gap-3">
-                  <ShieldCheck className="w-5 h-5 text-[#2457A7] shrink-0 mt-0.5" />
+              <div className="space-y-3 text-xs sm:text-sm text-[#35527A]">
+                <div className="p-4 rounded-2xl bg-[#F4F8FF] border border-[#BFD8F5] flex items-start gap-3">
+                  <ShieldCheck className="w-5 h-5 text-[#1E56A0] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="block text-[#17365D]">Bukan Pengganti Psikolog/Dokter</strong>
+                    <strong className="block text-[#102542]">Bukan Pengganti Psikolog/Dokter</strong>
                     SELA.AI tidak membuat diagnosis medis atau meresepkan terapi. Kami adalah alat bantu refleksi mandiri.
                   </div>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-white border border-[#CCE1FF] flex items-start gap-3">
-                  <Sparkles className="w-5 h-5 text-[#2457A7] shrink-0 mt-0.5" />
+                <div className="p-4 rounded-2xl bg-[#F4F8FF] border border-[#BFD8F5] flex items-start gap-3">
+                  <Sparkles className="w-5 h-5 text-[#1E56A0] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="block text-[#17365D]">Mitra Latihan, Bukan Pengganti Manusia</strong>
+                    <strong className="block text-[#102542]">Mitra Latihan, Bukan Pengganti Manusia</strong>
                     Simulasi latihan ini tidak menggantikan kehangatan percakapan nyata dengan manusia tepercaya.
                   </div>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-white border border-[#CCE1FF] flex items-start gap-3">
-                  <Lock className="w-5 h-5 text-[#1F7A65] shrink-0 mt-0.5" />
+                <div className="p-4 rounded-2xl bg-[#F4F8FF] border border-[#BFD8F5] flex items-start gap-3">
+                  <Lock className="w-5 h-5 text-[#1A6B5A] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="block text-[#17365D]">Bantuan Keselamatan Bebas Akses</strong>
+                    <strong className="block text-[#102542]">Bantuan Keselamatan Bebas Akses</strong>
                     Informasi bantuan, nomor darurat, dan kontak rujukan tidak akan pernah dikunci di balik biaya.
                   </div>
                 </div>
@@ -164,14 +172,14 @@ export default function OnboardingPage() {
                 <button
                   type="button"
                   onClick={() => setStep(1)}
-                  className="px-5 py-3 rounded-full border border-[#CCE1FF] text-xs font-semibold text-[#17365D]/80 hover:bg-white"
+                  className="px-5 py-3 rounded-full border border-[#BFD8F5] text-xs font-semibold text-[#35527A] hover:bg-[#FAFDFE] transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4 mr-1 inline" /> Kembali
                 </button>
                 <button
                   type="button"
                   onClick={() => setStep(3)}
-                  className="flex-1 inline-flex items-center justify-center rounded-full bg-[#2457A7] py-3.5 px-4 text-sm font-semibold text-white hover:bg-[#1C4477] transition-all shadow-md"
+                  className="letterpress-primary flex-1 inline-flex items-center justify-center rounded-full py-3.5 px-4 text-sm font-semibold transition-all shadow-md"
                 >
                   Saya Paham, Lanjut
                   <ArrowRight className="w-4 h-4 ml-1.5" />
@@ -180,22 +188,36 @@ export default function OnboardingPage() {
             </div>
           )}
 
-          {/* STEP 3: Pilihan Tujuan Utama (Opsional) */}
+          {/* STEP 3: Pilihan Tujuan Utama (Opsional) — Aura Memandu */}
           {step === 3 && (
-            <div className="space-y-6 animate-in fade-in duration-200">
-              <div className="text-center">
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#2457A7] px-3 py-1 rounded-full bg-[#EBF3FF]">
-                  Langkah 3 dari 4
-                </span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#17365D] mt-3">
-                  Apa yang paling ingin kamu lakukan hari ini?
-                </h2>
-                <p className="text-xs text-[#17365D]/70 mt-1">
-                  Pilihan ini opsional dan boleh kamu lewati.
-                </p>
+            <div className="space-y-5 animate-in fade-in duration-200">
+              {/* Mini Aura Guide Header */}
+              <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-[#F4F8FF] border border-[#BFD8F5]">
+                <img
+                  src="/images/aura/aura-memandu.png"
+                  alt="Aura memandu pilihan tujuan"
+                  className="w-16 sm:w-20 h-16 sm:h-20 object-contain shrink-0 drop-shadow-sm"
+                />
+                <div className="min-w-0 flex-1">
+                  <span className="block text-xs font-bold text-[#1E56A0]">
+                    Panduan Aura
+                  </span>
+                  <p className="text-xs text-[#35527A] leading-tight mt-0.5">
+                    Pilih langkah yang paling nyaman untukmu hari ini. Pilihan ini opsional dan boleh kamu lewati kapan saja.
+                  </p>
+                </div>
               </div>
 
-              <div className="space-y-3">
+              <div className="text-center">
+                <span className="font-mono-num text-[11px] font-semibold text-[#1E56A0] px-3 py-1 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
+                  Langkah 3 dari 4 — Pemilihan Tujuan
+                </span>
+                <h2 className="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[#102542] mt-2">
+                  Apa yang paling ingin kamu lakukan hari ini?
+                </h2>
+              </div>
+
+              <div className="space-y-2.5">
                 {goals.map((g) => {
                   const Icon = g.icon;
                   const isSelected = selectedGoal === g.id;
@@ -204,20 +226,20 @@ export default function OnboardingPage() {
                       key={g.id}
                       type="button"
                       onClick={() => setSelectedGoal(isSelected ? null : g.id)}
-                      className={`w-full p-4 rounded-2xl border text-left flex items-center gap-3.5 transition-all ${
+                      className={`w-full p-3.5 rounded-2xl border text-left flex items-center gap-3.5 transition-all ${
                         isSelected
-                          ? "bg-[#EBF3FF] border-[#2457A7] shadow-sm font-medium"
-                          : "bg-white border-[#CCE1FF] hover:border-[#2457A7]/50"
+                          ? "bg-[#E8F1FC] border-[#1E56A0] shadow-sm font-medium"
+                          : "bg-[#FAFDFE] border-[#BFD8F5] hover:border-[#1E56A0]/50"
                       }`}
                     >
                       <div
-                        className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
-                          isSelected ? "bg-[#2457A7] text-white" : "bg-[#F7FAFF] text-[#2457A7]"
+                        className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
+                          isSelected ? "bg-[#1E56A0] text-white" : "bg-[#DCEAFB] text-[#1E56A0]"
                         }`}
                       >
-                        <Icon className="w-5 h-5" />
+                        <Icon className="w-4 h-4" />
                       </div>
-                      <span className="text-sm text-[#17365D] leading-snug">{g.label}</span>
+                      <span className="text-xs sm:text-sm text-[#102542] leading-snug">{g.label}</span>
                     </button>
                   );
                 })}
@@ -227,14 +249,14 @@ export default function OnboardingPage() {
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="px-5 py-3 rounded-full border border-[#CCE1FF] text-xs font-semibold text-[#17365D]/80 hover:bg-white"
+                  className="px-5 py-3 rounded-full border border-[#BFD8F5] text-xs font-semibold text-[#35527A] hover:bg-[#FAFDFE] transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4 mr-1 inline" /> Kembali
                 </button>
                 <button
                   type="button"
                   onClick={() => setStep(4)}
-                  className="flex-1 inline-flex items-center justify-center rounded-full bg-[#2457A7] py-3.5 px-4 text-sm font-semibold text-white hover:bg-[#1C4477] transition-all shadow-md"
+                  className="letterpress-primary flex-1 inline-flex items-center justify-center rounded-full py-3.5 px-4 text-sm font-semibold transition-all shadow-md"
                 >
                   {selectedGoal ? "Lanjut dengan Pilihan Ini" : "Lewati & Lanjut"}
                   <ArrowRight className="w-4 h-4 ml-1.5" />
@@ -243,18 +265,35 @@ export default function OnboardingPage() {
             </div>
           )}
 
-          {/* STEP 4: Nama Panggilan & Izin AI */}
+          {/* STEP 4: Nama Panggilan & Izin AI — Preferensi Pengguna */}
           {step === 4 && (
-            <div className="space-y-6 animate-in fade-in duration-200">
+            <div className="space-y-5 animate-in fade-in duration-200">
+              {/* Mini Aura Guide Header */}
+              <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-[#F4F8FF] border border-[#BFD8F5]">
+                <img
+                  src="/images/aura/aura-memandu.png"
+                  alt="Aura memandu preferensi nama"
+                  className="w-16 sm:w-20 h-16 sm:h-20 object-contain shrink-0 drop-shadow-sm"
+                />
+                <div className="min-w-0 flex-1">
+                  <span className="block text-xs font-bold text-[#1E56A0]">
+                    Satu Langkah Terakhir!
+                  </span>
+                  <p className="text-xs text-[#35527A] leading-tight mt-0.5">
+                    Beri tahu Aura nama sapaan ternyamanmu agar kita bisa saling menyapa dengan hangat di SELA.AI.
+                  </p>
+                </div>
+              </div>
+
               <div className="text-center">
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#2457A7] px-3 py-1 rounded-full bg-[#EBF3FF]">
-                  Langkah 4 dari 4
+                <span className="font-mono-num text-[11px] font-semibold text-[#1E56A0] px-3 py-1 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
+                  Langkah 4 dari 4 — Preferensi Sapaan
                 </span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#17365D] mt-3">
-                  Terakhir, Mau Dipanggil Apa?
+                <h2 className="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[#102542] mt-2">
+                  Mau Dipanggil Siapa?
                 </h2>
-                <p className="text-xs text-[#17365D]/70 mt-1">
-                  Boleh nama samaran agar kamu merasa lebih nyaman.
+                <p className="text-xs text-[#35527A] mt-1">
+                  Boleh nama samaran atau nama panggilan apa pun.
                 </p>
               </div>
 
@@ -264,21 +303,21 @@ export default function OnboardingPage() {
                   value={nickname}
                   onChange={(e) => setNickname(e.target.value)}
                   placeholder="Contoh: Alex atau Kawan"
-                  className="w-full rounded-2xl bg-white border border-[#CCE1FF] px-4 py-3.5 text-base text-[#17365D] placeholder:text-[#17365D]/40 focus:outline-none focus:ring-2 focus:ring-[#2457A7] shadow-inner text-center font-semibold"
+                  className="w-full rounded-2xl bg-[#FAFDFE] border border-[#BFD8F5] px-4 py-3.5 text-base text-[#102542] placeholder:text-[#516B8C]/60 focus:outline-none focus:ring-2 focus:ring-[#1E56A0] focus:border-transparent transition-all shadow-sm text-center font-semibold"
                 />
               </div>
 
               {/* Explicit Consent Checkbox */}
-              <div className="p-4 rounded-2xl bg-[#EBF3FF] border border-[#CCE1FF]/80 text-xs text-[#17365D]/85">
+              <div className="p-4 rounded-2xl bg-[#F4F8FF] border border-[#BFD8F5] text-xs text-[#35527A]">
                 <label className="flex items-start gap-2.5 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={aiConsent}
                     onChange={(e) => setAiConsent(e.target.checked)}
-                    className="mt-0.5 rounded text-[#2457A7] focus:ring-[#2457A7]"
+                    className="mt-0.5 rounded text-[#1E56A0] focus:ring-[#1E56A0]"
                   />
                   <span>
-                    Saya memahami batas layanan nonklinis dan menyetujui pemrosesan cerita latihan secara aman di SELA.AI.
+                    Saya memahami batas layanan nonklinis dan menyetujui pemrosesan cerita latihan secara aman bersama Aura di SELA.AI.
                   </span>
                 </label>
               </div>
@@ -287,7 +326,7 @@ export default function OnboardingPage() {
                 <button
                   type="button"
                   onClick={() => setStep(3)}
-                  className="px-5 py-3 rounded-full border border-[#CCE1FF] text-xs font-semibold text-[#17365D]/80 hover:bg-white"
+                  className="px-5 py-3 rounded-full border border-[#BFD8F5] text-xs font-semibold text-[#35527A] hover:bg-[#FAFDFE] transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4 mr-1 inline" /> Kembali
                 </button>
@@ -295,7 +334,7 @@ export default function OnboardingPage() {
                   type="button"
                   onClick={handleFinish}
                   disabled={isSubmitting}
-                  className="flex-1 inline-flex items-center justify-center rounded-full bg-[#2457A7] py-3.5 px-4 text-sm font-semibold text-white hover:bg-[#1C4477] transition-all shadow-md disabled:opacity-50"
+                  className="letterpress-primary flex-1 inline-flex items-center justify-center rounded-full py-3.5 px-4 text-sm font-semibold transition-all shadow-md disabled:opacity-50"
                 >
                   {isSubmitting ? "Menyiapkan Ruangmu..." : "Mulai Masuk ke SELA.AI"}
                   <ArrowRight className="w-4 h-4 ml-1.5" />

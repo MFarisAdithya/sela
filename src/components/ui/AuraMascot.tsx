@@ -32,7 +32,7 @@ export const AURA_PRODUCT_CARDS = {
     title: "Panduan Langkah",
     subtitle: "Susun Kartu Cerita Bertahap",
     desc: "Ikuti 4 langkah ringan bersama Aura untuk merumuskan situasi, perasaan, kebutuhan, dan kalimat pembuka.",
-    src: "/images/aura/aura-panduan-langkah.png",
+    src: "/images/aura/aura-memandu.png",
   },
   progress: {
     title: "Progress & Pencapaian",
