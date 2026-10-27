@@ -101,13 +101,13 @@ export default function RiwayatPembayaranPage() {
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF3FF] border border-[#CCE1FF] text-xs font-semibold text-[#2457A7] uppercase tracking-wider mb-2">
             <CreditCard className="w-3.5 h-3.5" />
-            <span>Faktur &amp; Catatan Transaksi</span>
+            <span>Riwayat Pembayaran</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#17365D]">
-            Riwayat Transaksi Dukungan
+            Riwayat Pembayaran
           </h1>
           <p className="mt-1 text-sm text-[#17365D]/75">
-            Daftar lengkap kontribusi dan status aktivasi paket SELA Supporter pada akunmu.
+            Catatan pembayaran dan status supporter kamu di SELA.AI.
           </p>
         </div>
 
@@ -117,13 +117,13 @@ export default function RiwayatPembayaranPage() {
             className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-[#CCE1FF] bg-white text-xs font-semibold text-[#17365D] hover:bg-[#EBF3FF] transition-colors shadow-sm"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Paket &amp; Langganan</span>
+            <span>Pilihan Paket</span>
           </Link>
           <button
             type="button"
             onClick={fetchTransactions}
             className="p-2.5 rounded-full border border-[#CCE1FF] bg-white text-[#2457A7] hover:bg-[#EBF3FF] transition-colors shadow-sm"
-            aria-label="Segarkan riwayat transaksi"
+            aria-label="Segarkan riwayat pembayaran"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? "animate-spin" : ""}`} />
           </button>
@@ -158,16 +158,16 @@ export default function RiwayatPembayaranPage() {
                 className="w-full h-full object-contain drop-shadow-sm"
               />
             </div>
-            <h3 className="font-bold text-base text-[#17365D]">Belum Ada Riwayat Transaksi</h3>
+            <h3 className="font-bold text-base text-[#17365D]">Belum ada catatan di sini.</h3>
             <p className="text-xs text-[#17365D]/70 max-w-sm mx-auto leading-relaxed">
-              Aura duduk tenang menemanimu. Kamu saat ini menggunakan paket Akses Bebas (Free) tanpa beban biaya. Jika ingin mendukung operasional server, kamu dapat memilih paket Supporter.
+              Sela menemanimu dengan tenang. Kamu saat ini menggunakan Sela Gratis tanpa biaya apa pun.
             </p>
             <div className="pt-2">
               <Link
                 href="/app/paket"
                 className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#2457A7] text-white text-xs font-semibold hover:bg-[#1f4a8f] shadow-sm transition-all"
               >
-                Lihat Opsi Supporter
+                Lihat Paket Supporter
               </Link>
             </div>
           </div>

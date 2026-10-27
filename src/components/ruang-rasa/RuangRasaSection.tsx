@@ -190,7 +190,7 @@ export const RuangRasaSection: React.FC<RuangRasaSectionProps> = ({
               </div>
               <div className="min-w-0 space-y-0.5">
                 <span className="font-bold text-[#2563EB] block text-xs tracking-wider">
-                  Pesan Aura
+                  Pesan Sela
                 </span>
                 <p className="text-xs sm:text-[13px] text-[#102542]/90 leading-snug">
                   {getAuraReflectionMessage(selectedIds)}

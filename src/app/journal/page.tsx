@@ -162,12 +162,12 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
       {/* Header with Aura Mascot */}
       <AuraModuleHeader
         productKey={activeTab === "free_journal" ? "jurnal-reflektif" : "kartu-cerita"}
-        eyebrow={activeTab === "free_journal" ? "Jurnal Reflektif" : "Kartu Cerita Pribadi"}
-        title={activeTab === "free_journal" ? "Jurnal Reflektif Pribadi" : "Kartu Cerita Pribadi"}
+        eyebrow={activeTab === "free_journal" ? "Catatan Refleksiku" : "Cerita & Jurnal"}
+        title={activeTab === "free_journal" ? "Catatan Refleksiku" : "Cerita & Jurnal"}
         description={
           activeTab === "free_journal"
-            ? "Aura duduk tenang menemanimu menulis di jurnal kecil. Tuangkan pikiranmu dengan teduh dan tanpa tergesa-gesa."
-            : "Cerita yang awalnya terasa rumit mulai tersusun menjadi lebih jelas bersama Aura."
+            ? "Ruang tenangmu untuk menulis bebas tanpa beban. Sela menemanimu dengan teduh."
+            : "Susun ceritamu jadi pegangan ngobrol yang tenang dan jelas bersama Sela."
         }
         rightSlot={
           <div className="flex items-center gap-1.5 p-1 bg-[#E3EEFF] rounded-2xl border border-[#CCE1FF] self-start sm:self-auto">
@@ -182,7 +182,7 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
               )}
             >
               <FileText className="w-3.5 h-3.5" />
-              Kartu Cerita ({storyCards.length})
+              Cerita ({storyCards.length})
             </button>
             <button
               type="button"
@@ -229,7 +229,7 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-2xl bg-white border border-[#2457A7] text-[#2457A7] hover:bg-[#EBF3FF] text-xs font-semibold shadow-sm shrink-0 self-start sm:self-auto"
             >
               <Plus className="w-3.5 h-3.5" />
-              Buat Cerita Baru di Guided Story
+              Susun Cerita Baru
             </Link>
           </div>
 
@@ -408,9 +408,9 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
               <div className="pt-4 border-t border-[#CCE1FF]/70 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#E3EEFF]/50 p-4 rounded-2xl border border-[#CCE1FF]">
                 <div className="text-xs text-[#17365D]/85">
                   <strong className="block text-[#17365D] font-bold">
-                    Siap Menguji Kata-katamu Sebelum Obrolan Nyata?
+                    Siap mencoba kata-katamu sebelum bicara sungguhan?
                   </strong>
-                  Gunakan kartu ini sebagai contekan dalam simulasi latihan percakapan interaktif (Practice Talk).
+                  Gunakan catatan ini sebagai panduan saat latihan ngobrol santai bersama Sela.
                 </div>
 
                 <button
@@ -419,7 +419,7 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#2457A7] text-white text-xs sm:text-sm font-semibold hover:bg-[#1C4477] transition-all shadow-md shrink-0"
                 >
                   <Sparkles className="w-4 h-4" />
-                  Latih di Practice Talk
+                  Yuk, Latihan Ngobrol
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -430,13 +430,13 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/images/aura/aura-empty-state.png"
-                  alt="Aura duduk tenang untuk halaman yang belum memiliki kartu cerita"
+                  alt="Sela duduk tenang untuk halaman yang belum memiliki cerita"
                   className="w-full h-full object-contain drop-shadow-sm"
                 />
               </div>
-              <h3 className="text-base sm:text-lg font-bold text-[#17365D]">Belum Ada Kartu Cerita</h3>
+              <h3 className="text-base sm:text-lg font-bold text-[#17365D]">Belum ada catatan di sini.</h3>
               <p className="text-xs sm:text-sm text-[#17365D]/70 max-w-sm mx-auto leading-relaxed">
-                Aura duduk tenang menunggumu. Mulai dari Guided Story untuk merapikan situasi yang mengganjal ke dalam 4 dimensi persiapan bicara.
+                Sela menemanimu dengan tenang. Yuk, mulai susun ceritamu pelan-pelan bersama Sela!
               </p>
               <div className="pt-1">
                 <Link
@@ -444,7 +444,7 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
                   className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#2457A7] text-white text-xs sm:text-sm font-semibold shadow-md hover:bg-[#1f4a8f] transition-all"
                 >
                   <Sparkles className="w-4 h-4" />
-                  Mulai Urai Cerita Sekarang
+                  Yuk, Susun Ceritamu
                 </Link>
               </div>
             </div>
@@ -553,9 +553,9 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
                   className="w-full h-full object-contain drop-shadow-sm"
                 />
               </div>
-              <h3 className="text-sm sm:text-base font-bold text-[#17365D]">Belum Ada Catatan Jurnal</h3>
+              <h3 className="text-sm sm:text-base font-bold text-[#17365D]">Belum ada catatan di sini.</h3>
               <p className="text-xs text-[#17365D]/70 max-w-sm mx-auto leading-relaxed">
-                Aura duduk tenang menemanimu. Tuangkan uneg-uneg atau hal kecil yang kamu rasakan hari ini di kotak atas kapan pun kamu siap.
+                Sela menemanimu dengan tenang. Tulis hal kecil apa pun yang sedang kamu rasakan di kotak atas kapan pun kamu siap.
               </p>
             </div>
           )}

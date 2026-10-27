@@ -159,7 +159,7 @@ export const TEMAN_RASA_CHARACTERS: TemanRasaCharacter[] = [
  */
 export function getAuraReflectionMessage(selectedIds: string[]): string {
   if (!selectedIds || selectedIds.length === 0) {
-    return "Pilih satu atau beberapa perasaan yang paling menggambarkan diri kamu hari ini. Aku di sini untuk menemanimu.";
+    return "Pilih satu atau beberapa perasaan yang paling menggambarkan dirimu hari ini. Sela di sini menemanimu.";
   }
 
   if (selectedIds.length === 1) {

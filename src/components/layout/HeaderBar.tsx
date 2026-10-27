@@ -77,11 +77,11 @@ export const HeaderBar: React.FC = () => {
           <Link
             href="/app/pengaturan"
             className="flex items-center gap-1.5 p-1 pl-1.5 pr-2.5 rounded-full bg-white border border-[#BFD8F5] text-xs font-semibold text-[#102542] hover:border-[#2E63D6] transition-colors shadow-sm"
-            title="Pengaturan Akun & Profil"
-            aria-label="Pengaturan Akun"
+            title="Akun Saya"
+            aria-label="Akun Saya"
           >
             <AuraAvatar size="xs" />
-            <span className="hidden sm:inline">Profil</span>
+            <span className="hidden sm:inline">Akun Saya</span>
           </Link>
         </div>
       </div>

@@ -27,13 +27,13 @@ export default function AppDashboardPage() {
           <AuraAvatar size="lg" />
           <div>
             <span className="text-[11px] font-bold text-[#2E63D6] bg-[#D6E9FF] px-2.5 py-0.5 rounded-full">
-              Aura · Temanmu di SELA.AI
+              Sela · Temanmu di SELA.AI
             </span>
             <h1 className="font-serif-display text-2xl sm:text-3xl font-medium text-[#102542] mt-1">
               {greeting}, {displayName}.
             </h1>
             <p className="text-xs sm:text-sm text-[#2B4566]">
-              Meja persiapan obrolan dan catatan reflektif pribadimu.
+              Ruang amanmu untuk merapikan pikiran dan bersiap ngobrol pelan-pelan.
             </p>
           </div>
         </div>
@@ -45,10 +45,10 @@ export default function AppDashboardPage() {
           >
             <Sparkles className="w-3.5 h-3.5 text-[#1E56A0]" />
             <span>
-              {user?.plan === "premium" ? "SELA Supporter Aktif" : "Paket Gratis"}
+              {user?.plan === "premium" ? "SELA Supporter Aktif" : "Sela Gratis"}
             </span>
             <span className="text-[#1E56A0] font-semibold underline underline-offset-2 ml-1">
-              Kelola paket
+              Pilihan paket
             </span>
           </Link>
         </div>

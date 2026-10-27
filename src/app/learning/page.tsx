@@ -46,14 +46,14 @@ export default function LearningPage() {
       {/* Header with Aura Mascot */}
       <AuraModuleHeader
         productKey="materi-edukasi"
-        eyebrow="Sudut Baca & Refleksi"
-        title={copy.learning.title}
-        description="Hal-hal kecil tentang menghadapi orang lain dan memahami diri bersama Aura."
+        eyebrow="Belajar & Kenali Diri"
+        title="Belajar & Kenali Diri"
+        description="Tips ringan dan hal-hal kecil untuk membantumu memahami diri dan menghadapi orang lain."
         rightSlot={
           <div className="w-full sm:w-56 space-y-1">
             <ProgressBar
               value={progressPct}
-              label={`Progres: ${completedModules.length} dari ${LEARNING_MODULES.length} selesai`}
+              label={`Langkahmu: ${completedModules.length} dari ${LEARNING_MODULES.length} selesai`}
               showPercentage
             />
           </div>
@@ -65,21 +65,21 @@ export default function LearningPage() {
         <div className="relative w-16 sm:w-20 h-16 sm:h-20 shrink-0">
           <img
             src="/images/aura/aura-ruang-belajar.png"
-            alt="Aura membaca buku terbuka dengan bintang kecil di atas kepalanya"
+            alt="Sela membaca buku terbuka dengan bintang kecil di atas kepalanya"
             className="w-full h-full object-contain drop-shadow-sm"
           />
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 mb-0.5">
             <span className="font-mono-num text-[10px] font-semibold text-[#1E56A0] px-2 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
-              Aura Belajar
+              Sela Belajar
             </span>
             <span className="text-xs font-semibold text-[#102542]">
-              Sudut Baca &amp; Keterampilan Hidup
+              Sudut Belajar &amp; Kenali Diri
             </span>
           </div>
           <p className="text-xs text-[#35527A] leading-relaxed">
-            Belajar mengenali emosi, meredakan ketegangan fisik lewat teknik napas, dan melatih komunikasi asertif. Pelajari topik-topik ringkas ini kapan pun kamu butuh panduan santai.
+            Belajar mengenali emosi, meredakan ketegangan, dan melatih komunikasi santai. Pelajari topik-topik ringkas ini kapan pun kamu butuh panduan santai.
           </p>
         </div>
       </div>

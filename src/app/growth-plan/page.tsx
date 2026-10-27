@@ -48,9 +48,9 @@ export default function GrowthPlanPage() {
       {/* Header with Aura Mascot */}
       <AuraModuleHeader
         productKey="progress"
-        eyebrow="Aura Menyemangati · Langkah Kecil"
-        title="Rencana Langkah Kecil & Progress"
-        description="Menghargai kemajuan kecil tanpa membuat pengguna merasa harus selalu produktif. Selesaikan langkah ringan sesuai kesiapanmu."
+        eyebrow="Langkah Kecilku"
+        title="Langkah Kecilku"
+        description="Lihat langkah kecilmu hari ini. Nggak perlu buru-buru, satu langkah kecil sudah sangat berarti."
         rightSlot={
           <NeuButton
             size="sm"
@@ -59,7 +59,7 @@ export default function GrowthPlanPage() {
             leftIcon={<Plus className="w-4 h-4" />}
             className="self-start sm:self-auto"
           >
-            {isAdding ? "Batal" : "Tambah target"}
+            {isAdding ? "Batal" : "Tambah langkah kecil"}
           </NeuButton>
         }
       />
@@ -70,21 +70,21 @@ export default function GrowthPlanPage() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/aura/aura-menyemangati.png"
-            alt="Aura tersenyum dengan pose penuh semangat, ditemani panah naik dan bintang kecil"
+            alt="Sela tersenyum dengan pose penuh semangat"
             className="w-full h-full object-contain drop-shadow-sm"
           />
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 mb-0.5">
             <span className="font-mono-num text-[10px] font-semibold text-[#1E56A0] px-2.5 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
-              Aura Menyemangati
+              Sela Menyemangati
             </span>
             <span className="text-xs font-semibold text-[#102542]">
-              Kemajuan Kecil Tetap Berarti
+              Langkah Kecil Tetap Berarti
             </span>
           </div>
           <p className="text-xs text-[#35527A] leading-relaxed">
-            Aura tersenyum dengan pose penuh semangat untuk mengapresiasi usahamu. Mengambil waktu untuk beristirahat atau menyelesaikan satu target kecil sudah merupakan kemajuan nyata yang patut dirayakan.
+            Sela tersenyum menemanimu. Mengambil waktu untuk istirahat atau menyelesaikan satu hal kecil sudah merupakan langkah yang patut dirayakan.
           </p>
         </div>
       </div>
@@ -118,12 +118,12 @@ export default function GrowthPlanPage() {
       {isAdding && (
         <NeuCard variant="raised-sm" className="p-4 space-y-3 animate-in fade-in">
           <h3 className="text-xs font-bold text-brand-900 uppercase tracking-wider">
-            Tambah Target Baru
+            Tambah Langkah Baru
           </h3>
           <form onSubmit={handleAddTask} className="flex flex-col sm:flex-row gap-2">
             <div className="flex-1">
               <NeuInput
-                placeholder="Tuliskan 1 langkah kecil yang ingin kamu capai..."
+                placeholder="Tuliskan 1 langkah kecil yang ingin kamu coba..."
                 value={newTaskTitle}
                 onChange={(e) => setNewTaskTitle(e.target.value)}
                 required
@@ -139,7 +139,7 @@ export default function GrowthPlanPage() {
       {/* Tasks Checklist */}
       <div className="space-y-3">
         <h3 className="text-sm font-bold text-brand-900 uppercase tracking-wider">
-          Daftar Langkah Mingguan
+          Daftar Langkahku
         </h3>
 
         <div className="space-y-2.5">
@@ -149,13 +149,13 @@ export default function GrowthPlanPage() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/images/aura/aura-empty-state.png"
-                  alt="Aura duduk tenang menunggu target langkahmu"
+                  alt="Sela duduk tenang menunggu langkahmu"
                   className="w-full h-full object-contain drop-shadow-sm"
                 />
               </div>
-              <h3 className="text-sm sm:text-base font-bold text-[#17365D]">Belum Ada Target Langkah</h3>
+              <h3 className="text-sm sm:text-base font-bold text-[#17365D]">Belum ada catatan di sini.</h3>
               <p className="text-xs text-[#17365D]/70 max-w-sm mx-auto leading-relaxed">
-                Aura duduk tenang menemanimu. Klik &ldquo;Tambah target&rdquo; di atas untuk menetapkan satu langkah kecil yang santai tanpa beban produktivitas.
+                Sela menemanimu dengan santai. Klik &ldquo;Tambah langkah kecil&rdquo; untuk mulai dari satu hal kecil, ya.
               </p>
             </div>
           ) : (

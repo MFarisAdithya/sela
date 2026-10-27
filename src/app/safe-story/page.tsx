@@ -282,8 +282,8 @@ export default function SafeStoryPage() {
       {/* Top Header with Aura Mascot */}
       <AuraModuleHeader
         productKey={activeTab === "guided_steps" ? "panduan-langkah" : "chat-assistant"}
-        title="Urai Cerita Pribadi"
-        description="Berceritalah pelan-pelan tanpa harus merangkai semuanya sekaligus bersama Aura."
+        title="Ngobrol sama Sela"
+        description="Yuk, ceritakan pelan-pelan tanpa harus merangkai semuanya sekaligus. Sela di sini menemanimu."
         rightSlot={
           <div className="sky-groove flex items-center gap-1 self-start sm:self-auto">
             <button
@@ -297,7 +297,7 @@ export default function SafeStoryPage() {
               )}
             >
               <Layers className="w-3.5 h-3.5 text-[#1E56A0]" />
-              Langkah Terpadu
+              Panduan Langkah
             </button>
             <button
               type="button"
@@ -310,7 +310,7 @@ export default function SafeStoryPage() {
               )}
             >
               <MessageSquare className="w-3.5 h-3.5 text-[#1E56A0]" />
-              Obrolan Reflektif
+              Ngobrol Bebas
             </button>
           </div>
         }
@@ -320,7 +320,7 @@ export default function SafeStoryPage() {
       <div className="p-3.5 rounded-2xl bg-[#F7FAFF] border border-[#CCE1FF] flex items-start gap-3 text-xs text-[#17365D]/80">
         <AlertCircle className="w-4 h-4 text-[#2457A7] shrink-0 mt-0.5" />
         <p className="leading-relaxed">
-          <strong>Ruang Nonklinis Aman:</strong> Cerita yang kamu tulis tidak akan dihakimi atau dinilai. SELA.AI tidak membuat diagnosis medis. Jika situasi melibatkan bahaya fisik atau krisis darurat, silakan segera akses saluran bantuan bebas biaya di pojok kanan bawah atau hubungi <strong>119 ext 8 (SEJIWA)</strong>.
+          <strong>Ruang Amanmu:</strong> Cerita yang kamu tulis tidak akan dihakimi. Sela adalah teman latihanmu dan bukan pengganti konseling klinis atau layanan darurat medis. Kamu boleh memilih untuk lanjut, melewati, atau berhenti kapan saja. Jika butuh bantuan krisis resmi, hubungi <strong>119 ext 8 (SEJIWA)</strong> atau SAPA 129.
         </p>
       </div>
 
@@ -665,7 +665,7 @@ export default function SafeStoryPage() {
                     ) : (
                       <>
                         <FileText className="w-4 h-4" />
-                        Simpan &amp; Buat Kartu Cerita
+                        Simpan &amp; Susun Ceritamu
                         <ArrowRight className="w-4 h-4 ml-1" />
                       </>
                     )}
@@ -683,7 +683,7 @@ export default function SafeStoryPage() {
           {/* Action to convert free chat to Story Card */}
           <div className="flex items-center justify-between px-1">
             <span className="text-[11px] text-[#17365D]/70">
-              Bercerita bebas di ruang refleksi SELA.
+              Ceritakan apa pun dengan bebas bersama Sela.
             </span>
             <button
               type="button"
@@ -691,7 +691,7 @@ export default function SafeStoryPage() {
               className="inline-flex items-center gap-1 text-xs font-semibold text-[#2457A7] hover:underline"
             >
               <FileText className="w-3.5 h-3.5" />
-              Ekstrak Obrolan Ini ke Kartu Cerita →
+              Simpan ke Cerita &amp; Jurnal →
             </button>
           </div>
 
@@ -808,8 +808,8 @@ export default function SafeStoryPage() {
 
             {isLoading && (
               <AuraLoadingIndicator
-                message="Aura sedang merenungkan ceritamu..."
-                subMessage="Menyiapkan tanggapan yang tenang dan tidak menghakimi."
+                message="Sebentar ya, Sela sedang menyiapkan ini..."
+                subMessage="Merapikan tanggapan yang tenang dan suportif buatmu."
                 className="w-fit max-w-sm"
               />
             )}
@@ -850,7 +850,7 @@ export default function SafeStoryPage() {
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="Ketikkan apa yang sedang mengganjal pikiranmu..."
+                  placeholder="Tulis apa yang sedang kamu rasakan atau pikirkan..."
                   maxLength={1000}
                   disabled={isLoading}
                   className="w-full px-4 py-3 text-xs sm:text-sm rounded-2xl bg-white shadow-inner text-[#17365D] border border-[#CCE1FF] focus:outline-none focus:ring-2 focus:ring-[#2457A7] placeholder:text-[#17365D]/40"

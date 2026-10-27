@@ -22,19 +22,19 @@ import {
 import { NeuCard } from "@/components/ui/NeuCard";
 
 const mainMobileTabs = [
-  { label: "Dashboard", href: "/app", icon: LayoutDashboard },
-  { label: "Guided Story", href: "/safe-story", icon: MessageSquareHeart },
-  { label: "Kartu Cerita", href: "/journal", icon: Compass },
-  { label: "Practice Talk", href: "/dashboard", icon: MessageCircle },
+  { label: "Beranda", href: "/app", icon: LayoutDashboard },
+  { label: "Ngobrol sama Sela", href: "/safe-story", icon: MessageSquareHeart },
+  { label: "Cerita & Jurnal", href: "/journal", icon: Compass },
+  { label: "Latihan Ngobrol", href: "/dashboard", icon: MessageCircle },
 ];
 
 const secondaryMobileTabs = [
-  { label: "Support Pathway", href: "/support", icon: Users, desc: "Pilihan bantuan nyata tanpa biaya" },
-  { label: "Jurnal Reflektif", href: "/journal", icon: PenLine, desc: "Catatan pribadi tersimpan lokal" },
-  { label: "Ruang Belajar", href: "/learning", icon: GraduationCap, desc: "Modul keterampilan hidup & emosi" },
-  { label: "Rencana Langkah", href: "/growth-plan", icon: TrendingUp, desc: "Target kecil sukarela mandiri" },
-  { label: "Riwayat Transaksi", href: "/app/pembayaran", icon: CreditCard, desc: "Faktur dan catatan pembayaran" },
-  { label: "Pengaturan Akun", href: "/app/pengaturan", icon: ShieldCheck, desc: "Profil, privasi, dan hapus akun" },
+  { label: "Cek Perasaanku", href: "/app/cek-rasa", icon: Sparkles, desc: "Check-in suasana hatimu hari ini" },
+  { label: "Cari Dukungan", href: "/support", icon: Users, desc: "Pilihan bantuan nyata tanpa biaya" },
+  { label: "Belajar & Kenali Diri", href: "/learning", icon: GraduationCap, desc: "Modul keterampilan hidup & emosi" },
+  { label: "Langkah Kecilku", href: "/growth-plan", icon: TrendingUp, desc: "Target kecil sukarela mandiri" },
+  { label: "Riwayat Pembayaran", href: "/app/pembayaran", icon: CreditCard, desc: "Faktur dan catatan pembayaran" },
+  { label: "Akun Saya", href: "/app/pengaturan", icon: ShieldCheck, desc: "Profil, privasi, dan hapus akun" },
 ];
 
 export const MobileBottomNav: React.FC = () => {

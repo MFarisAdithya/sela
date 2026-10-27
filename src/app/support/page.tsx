@@ -86,9 +86,9 @@ export default function SupportPathwayPage() {
       {/* Header with Aura Mascot */}
       <AuraModuleHeader
         productKey="rencana-dukungan"
-        eyebrow="Support Pathway"
-        title="Peta Jalur Dukungan Nyata"
-        description="Membantu memahami pilihan untuk mencari dukungan di dunia nyata bersama Aura."
+        eyebrow="Cari Dukungan"
+        title="Cari Orang yang Bisa Diajak Bicara"
+        description="Cari orang yang bisa kamu ajak bicara saat kamu membutuhkan bantuan nyata atau teman mendengar."
       />
 
       {/* Aura Menunjukkan Jalan Companion Banner */}
@@ -96,21 +96,21 @@ export default function SupportPathwayPage() {
         <div className="relative w-16 sm:w-20 h-16 sm:h-20 shrink-0">
           <img
             src="/images/aura/aura-menunjukkan-jalan.png"
-            alt="Aura memegang peta kecil menunjukkan jalur dan penanda lokasi dukungan"
+            alt="Sela memegang peta kecil menunjukkan jalur dan penanda lokasi dukungan"
             className="w-full h-full object-contain drop-shadow-sm"
           />
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 mb-0.5">
             <span className="font-mono-num text-[10px] font-semibold text-[#1E56A0] px-2 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
-              Aura Menunjukkan Jalan
+              Sela Menunjukkan Jalan
             </span>
             <span className="text-xs font-semibold text-[#102542]">
               Peta Dukungan Nyata
             </span>
           </div>
           <p className="text-xs text-[#35527A] leading-relaxed">
-            Meminta pertolongan adalah tanda keberanian, bukan kelemahan. Di sini kamu bisa menjelajahi berbagai pilihan dukungan di dunia nyata—mulai dari hotline krisis 24 jam bebas pulsa, psikolog Puskesmas BPJS, Guru BK di kampus, hingga lingkaran sahabat terdekatmu.
+            Mencari bantuan adalah tanda keberanian. Di sini kamu bisa melihat pilihan dukungan di dunia nyata—mulai dari layanan darurat 24 jam, Puskesmas, guru BK, hingga teman terdekatmu.
           </p>
         </div>
       </div>

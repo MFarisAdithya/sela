@@ -92,10 +92,10 @@ export default function PengaturanAkunPage() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-border-subtle/80">
         <div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#17365D]">
-            Pengaturan Akun &amp; Privasi
+            Akun Saya
           </h1>
           <p className="mt-1 text-sm text-[#17365D]/75">
-            Kontrol profil, status persetujuan, ekspor catatan, dan keamanan datamu.
+            Kelola profil, privasi, dan akunmu dengan aman.
           </p>
         </div>
 
@@ -105,14 +105,14 @@ export default function PengaturanAkunPage() {
           className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#CCE1FF] bg-white text-xs font-semibold text-[#B42332] hover:bg-[#FFEBEB] transition-colors shadow-sm self-start sm:self-auto"
         >
           <LogOut className="w-3.5 h-3.5" />
-          <span>Keluar (Logout)</span>
+          <span>Keluar</span>
         </button>
       </div>
 
       {saveNotice && (
         <div className="p-4 rounded-2xl bg-[#E6F4EA] border border-[#B7E1CD] text-xs sm:text-sm text-[#1F7A65] flex items-center gap-2.5">
           <CheckCircle2 className="w-4 h-4 shrink-0" />
-          <span>Profil dan preferensi privasimu berhasil diperbarui!</span>
+          <span>Profil dan pengaturan privasimu berhasil disimpan!</span>
         </div>
       )}
 
@@ -121,7 +121,7 @@ export default function PengaturanAkunPage() {
         <div className="space-y-2">
           <div className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-[#2457A7]" />
-            <h2 className="text-lg font-bold text-[#17365D]">Paket &amp; Kontribusi Supporter</h2>
+            <h2 className="text-lg font-bold text-[#17365D]">Pilihan Paket &amp; Supporter</h2>
             <span
               className={`text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
                 user?.plan === "premium"
@@ -129,13 +129,13 @@ export default function PengaturanAkunPage() {
                   : "bg-[#EBF3FF] text-[#2457A7] border border-[#CCE1FF]"
               }`}
             >
-              {user?.plan === "premium" ? "Supporter Aktif ⭐" : "Paket Free"}
+              {user?.plan === "premium" ? "Supporter Aktif ⭐" : "Sela Gratis"}
             </span>
           </div>
           <p className="text-xs sm:text-sm text-[#17365D]/75 max-w-lg leading-relaxed">
             {user?.plan === "premium"
-              ? "Akunmu aktif sebagai SELA Supporter dengan kapasitas Kartu Cerita luas dan akses penuh ke seluruh modul premium."
-              : "Kamu menggunakan akses dasar SELA.AI. Bantuan darurat dan Support Pathway selalu dapat diakses gratis."}
+              ? "Akunmu aktif sebagai SELA Supporter dengan akses penuh ke seluruh fitur."
+              : "Kamu menggunakan Sela Gratis. Bantuan dan pilihan dukungan selalu dapat diakses gratis."}
           </p>
         </div>
 
@@ -145,7 +145,7 @@ export default function PengaturanAkunPage() {
             className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full bg-[#2457A7] text-white text-xs font-semibold hover:bg-[#1C4477] transition-all shadow-sm"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Lihat Paket Langganan</span>
+            <span>Pilihan Paket</span>
             <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
           </Link>
           <Link
@@ -153,7 +153,7 @@ export default function PengaturanAkunPage() {
             className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full border border-[#CCE1FF] bg-white text-xs font-semibold text-[#17365D] hover:bg-[#EBF3FF] transition-colors"
           >
             <CreditCard className="w-3.5 h-3.5" />
-            <span>Riwayat Transaksi</span>
+            <span>Riwayat Pembayaran</span>
           </Link>
         </div>
       </div>
@@ -278,7 +278,7 @@ export default function PengaturanAkunPage() {
             disabled={isSaving}
             className="inline-flex items-center justify-center rounded-full bg-[#2457A7] py-3 px-6 text-sm font-semibold text-white hover:bg-[#1C4477] transition-all shadow-md disabled:opacity-50"
           >
-            {isSaving ? "Menyimpan..." : "Simpan Perubahan"}
+            {isSaving ? "Sebentar ya, Sela sedang menyiapkan ini..." : "Simpan"}
           </button>
         </div>
       </form>

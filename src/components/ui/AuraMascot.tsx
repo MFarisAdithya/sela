@@ -178,8 +178,8 @@ export const AuraLoadingIndicator: React.FC<{
   size?: "sm" | "md" | "lg";
   className?: string;
 }> = ({
-  message = "Aura sedang merenungkan ceritamu...",
-  subMessage,
+  message = "Sebentar ya, Sela sedang menyiapkan ini...",
+  subMessage = "Menyiapkan tanggapan yang tenang dan suportif buatmu.",
   size = "sm",
   className,
 }) => {

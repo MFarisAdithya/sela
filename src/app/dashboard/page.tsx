@@ -231,9 +231,9 @@ export default function PracticeTalkDashboard() {
       {/* Top Header with Aura Mascot */}
       <AuraModuleHeader
         productKey="practice-talk"
-        eyebrow="Practice Talk"
-        title="Latihan Percakapan Terpandu"
-        description="Mencoba menyampaikan cerita dengan lawan bicara simulasi sebelum benar-benar bicara langsung."
+        eyebrow="Latihan Ngobrol"
+        title="Latihan Ngobrol"
+        description="Yuk, latihan ngobrol dan coba kalimat pembukamu sebelum bicara sungguhan."
         rightSlot={
           <button
             type="button"
@@ -410,7 +410,7 @@ export default function PracticeTalkDashboard() {
                     <div className="mt-3 p-3 rounded-xl bg-[#EBF3FF] border border-[#CCE1FF] text-xs text-[#17365D] space-y-1.5">
                       <div className="flex items-center gap-2 text-[11px] font-bold text-[#2457A7]">
                         <AuraAvatar size="xs" />
-                        <span>Tips Komunikasi dari Aura:</span>
+                        <span>Tips dari Sela:</span>
                       </div>
                       <p className="text-[11px] text-[#17365D]/85 leading-relaxed">{msg.tip}</p>
                     </div>
@@ -427,7 +427,7 @@ export default function PracticeTalkDashboard() {
           {isLoading && (
             <AuraLoadingIndicator
               message={`${currentPersona.roleTitle} sedang merespons...`}
-              subMessage="Menunggu sejenak dengan tenang, tanpa terburu-buru."
+              subMessage="Sebentar ya, Sela sedang menyiapkan ini..."
               className="w-fit max-w-sm"
             />
           )}
@@ -471,10 +471,10 @@ export default function PracticeTalkDashboard() {
       <div className="p-5 rounded-3xl bg-[#E3EEFF] border border-[#CCE1FF] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="text-xs sm:text-sm text-[#17365D]/85 space-y-1">
           <strong className="block text-[#17365D] font-bold text-sm sm:text-base">
-            Siap Bicara di Dunia Nyata atau Butuh Bantuan Profesional?
+            Butuh teman bicara nyata atau bantuan lebih lanjut?
           </strong>
           <p className="text-xs text-[#17365D]/75">
-            Latihan adalah langkah awal. Saat kamu merasa butuh pendamping nyata, layanan konseling profesional, atau bantuan krisis darurat, jalur dukungan selalu terbuka tanpa biaya.
+            Latihan ini adalah langkah awal. Saat kamu butuh teman mendengar atau bantuan nyata, kamu nggak sendirian.
           </p>
         </div>
 
@@ -483,7 +483,7 @@ export default function PracticeTalkDashboard() {
           className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#1F7A65] hover:bg-[#18604F] text-white text-xs sm:text-sm font-semibold transition-all shadow-md shrink-0 self-start sm:self-auto"
         >
           <ShieldCheck className="w-4 h-4" />
-          Lihat Support Pathway
+          Cari Dukungan
           <ArrowRight className="w-4 h-4" />
         </Link>
       </div>

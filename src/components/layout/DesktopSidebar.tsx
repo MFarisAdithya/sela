@@ -21,21 +21,22 @@ import { SelaLogo } from "@/components/ui/SelaLogo";
 import { AuraAvatar } from "@/components/ui/AuraMascot";
 
 const coreNavItems = [
-  { label: "Ringkasan Ruang", href: "/app", icon: LayoutDashboard },
-  { label: "Guided Story", href: "/safe-story", icon: MessageSquareHeart },
-  { label: "Kartu Cerita & Jurnal", href: "/journal", icon: Compass },
-  { label: "Practice Talk", href: "/dashboard", icon: MessageCircle },
-  { label: "Support Pathway", href: "/support", icon: Users },
+  { label: "Beranda", href: "/app", icon: LayoutDashboard },
+  { label: "Cek Perasaanku", href: "/app/cek-rasa", icon: Sparkles },
+  { label: "Ngobrol sama Sela", href: "/safe-story", icon: MessageSquareHeart },
+  { label: "Cerita & Jurnal", href: "/journal", icon: Compass },
+  { label: "Latihan Ngobrol", href: "/dashboard", icon: MessageCircle },
+  { label: "Cari Dukungan", href: "/support", icon: Users },
 ];
 
 const secondaryNavItems = [
-  { label: "Ruang Belajar", href: "/learning", icon: GraduationCap },
-  { label: "Rencana Langkah", href: "/growth-plan", icon: TrendingUp },
+  { label: "Belajar & Kenali Diri", href: "/learning", icon: GraduationCap },
+  { label: "Langkah Kecilku", href: "/growth-plan", icon: TrendingUp },
 ];
 
 const accountNavItems = [
-  { label: "Riwayat Transaksi", href: "/app/pembayaran", icon: CreditCard },
-  { label: "Pengaturan Akun", href: "/app/pengaturan", icon: ShieldCheck },
+  { label: "Riwayat Pembayaran", href: "/app/pembayaran", icon: CreditCard },
+  { label: "Akun Saya", href: "/app/pengaturan", icon: ShieldCheck },
 ];
 
 export const DesktopSidebar: React.FC = () => {
@@ -77,9 +78,9 @@ export const DesktopSidebar: React.FC = () => {
         {/* 1. Core Navigator Navigation */}
         <div>
           <span className="px-2.5 text-xs font-semibold text-[#516B8C] block mb-2">
-            Alur persiapan bicara
+            Mulai di Sini
           </span>
-          <nav className="space-y-1" aria-label="Alur utama">
+          <nav className="space-y-1" aria-label="Mulai di Sini">
             {coreNavItems.map((item) => {
               const Icon = item.icon;
               const isActive =
@@ -114,9 +115,9 @@ export const DesktopSidebar: React.FC = () => {
         {/* 2. Secondary Tools Navigation */}
         <div>
           <span className="px-2.5 text-xs font-semibold text-[#516B8C] block mb-2">
-            Materi dan target
+            Belajar &amp; Bertumbuh
           </span>
-          <nav className="space-y-1" aria-label="Materi dan target">
+          <nav className="space-y-1" aria-label="Belajar &amp; Bertumbuh">
             {secondaryNavItems.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
@@ -148,9 +149,9 @@ export const DesktopSidebar: React.FC = () => {
         {/* 3. Account & Billing */}
         <div>
           <span className="px-2.5 text-xs font-semibold text-[#516B8C] block mb-2">
-            Akun dan paket
+            Akun Saya
           </span>
-          <nav className="space-y-1" aria-label="Akun dan paket">
+          <nav className="space-y-1" aria-label="Akun Saya">
             {accountNavItems.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href || pathname.startsWith(item.href + "/");

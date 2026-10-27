@@ -73,7 +73,7 @@ export default function PaketDanKuotaPage() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#BFD8F5] bg-white text-xs font-semibold text-[#1E56A0] hover:bg-[#F4F8FF] transition-colors shadow-sm self-start sm:self-auto"
         >
           <CreditCard className="w-3.5 h-3.5" />
-          <span>Riwayat Transaksi →</span>
+          <span>Riwayat Pembayaran →</span>
         </Link>
       </div>
 
