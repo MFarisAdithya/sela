@@ -86,7 +86,7 @@ export default function SupportPathwayPage() {
       {/* Header with Aura Mascot */}
       <AuraModuleHeader
         productKey="rencana-dukungan"
-        eyebrow="Tahap 04 — Support Pathway"
+        eyebrow="Support Pathway"
         title="Peta Jalur Dukungan Nyata"
         description="Membantu memahami pilihan untuk mencari dukungan di dunia nyata bersama Aura."
       />

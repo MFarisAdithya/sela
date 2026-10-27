@@ -132,13 +132,6 @@ export default function LandingPage() {
                       />
                     </div>
 
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-mono-num text-xs font-bold px-2.5 py-0.5 rounded-full bg-[#D6E9FF] text-[#2E63D6]">
-                        Tahap {step.number}
-                      </span>
-                      <span className="w-2 h-2 rounded-full bg-[#2E63D6]" />
-                    </div>
-
                     <h3 className="text-lg font-bold text-[#102542] tracking-tight mb-1">
                       {step.title}
                     </h3>

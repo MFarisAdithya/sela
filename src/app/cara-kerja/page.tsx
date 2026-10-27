@@ -42,7 +42,7 @@ export default function CaraKerjaPage() {
                     {item.step}
                   </span>
                   <span className="text-xs text-[#17365D]/60 font-medium">
-                    Tahap {index + 1} dari 4
+                    Langkah {index + 1} dari 4
                   </span>
                 </div>
 

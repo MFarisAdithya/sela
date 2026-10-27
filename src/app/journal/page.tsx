@@ -162,7 +162,7 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
       {/* Header with Aura Mascot */}
       <AuraModuleHeader
         productKey={activeTab === "free_journal" ? "jurnal-reflektif" : "kartu-cerita"}
-        eyebrow={activeTab === "free_journal" ? "Pilar 2 — Jurnal Reflektif" : "Tahap 02 — Kartu Cerita"}
+        eyebrow={activeTab === "free_journal" ? "Jurnal Reflektif" : "Kartu Cerita Pribadi"}
         title={activeTab === "free_journal" ? "Jurnal Reflektif Pribadi" : "Kartu Cerita Pribadi"}
         description={
           activeTab === "free_journal"

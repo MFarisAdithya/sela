@@ -231,7 +231,7 @@ export default function PracticeTalkDashboard() {
       {/* Top Header with Aura Mascot */}
       <AuraModuleHeader
         productKey="practice-talk"
-        eyebrow="Tahap 03 — Practice Talk"
+        eyebrow="Practice Talk"
         title="Latihan Percakapan Terpandu"
         description="Mencoba menyampaikan cerita dengan lawan bicara simulasi sebelum benar-benar bicara langsung."
         rightSlot={
