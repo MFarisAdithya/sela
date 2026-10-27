@@ -13,6 +13,10 @@ export const HeaderBar: React.FC = () => {
   const pathname = usePathname();
   const { user } = useAuth();
 
+  const isPremium =
+    user?.plan === "premium" &&
+    (!user.premiumUntil || new Date(user.premiumUntil).getTime() > Date.now());
+
   const isPublicOrOnboarding =
     pathname === "/" ||
     pathname === "/onboarding" ||
@@ -59,20 +63,17 @@ export const HeaderBar: React.FC = () => {
             <span className="hidden xs:inline">Aura Aktif</span>
           </Link>
 
-          {/* Upgrade Button */}
-          <Link
-            href="/app/paket"
-            className={cn(
-              "inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all shadow-sm active:scale-95",
-              user?.plan === "premium"
-                ? "bg-[#102542] text-[#FAFDFE] border border-[#1E56A0] hover:bg-[#1E56A0]"
-                : "bg-[#2457A7] text-white hover:bg-[#1C4477] shadow-[0_2px_8px_rgba(36,87,167,0.25)]"
-            )}
-            title="Upgrade Paket SELA.AI"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#DCEAFB]" />
-            <span>Upgrade</span>
-          </Link>
+          {/* Upgrade Button (hanya muncul saat pengguna belum berlangganan supporter) */}
+          {!isPremium && (
+            <Link
+              href="/app/paket"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#2457A7] text-white hover:bg-[#1C4477] shadow-[0_2px_8px_rgba(36,87,167,0.25)] transition-all shadow-sm active:scale-95"
+              title="Upgrade Paket SELA.AI"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#DCEAFB]" />
+              <span>Upgrade</span>
+            </Link>
+          )}
 
           <Link
             href="/app/pengaturan"
