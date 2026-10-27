@@ -7,7 +7,7 @@ export interface GenerateGeminiChatParams {
   sources?: RetrievedSource[];
   userAlias?: string;
   isEducationalQuery?: boolean;
-  mode?: "guided_story" | "practice_talk";
+  mode?: "guided_story" | "practice_talk" | "summarize_story";
   persona?: string;
   customPersonaName?: string;
   customTopic?: string;
@@ -76,7 +76,18 @@ export async function generateGeminiChat(
   // Strict non-clinical system instructions
   let systemPrompt = "";
 
-  if (params.mode === "practice_talk") {
+  if (params.mode === "summarize_story") {
+    systemPrompt = `Kamu adalah SELA.AI. Tugasmu adalah merapikan obrolan/cerita pengguna (${params.userAlias || "Kawan"}) ke dalam 3 bagian ringkas.
+HANYA gunakan fakta, situasi, dan perasaan yang benar-benar ada dalam perkataan pengguna.
+JANGAN mengarang kejadian yang tidak diceritakan. JANGAN membuat diagnosis psikologis apa pun.
+Gunakan bahasa Indonesia yang hangat, bersahabat, dan jelas.
+Kembalikan respons HANYA dalam format JSON murni tanpa markdown lain:
+{
+  "facts": "1-2 kalimat deskripsi objektif tentang apa yang sedang terjadi sesuai cerita pengguna.",
+  "feelings": "1-2 kalimat tentang apa yang mungkin dirasakan pengguna (dengan nada ramah dan dapat dikoreksi).",
+  "nextSteps": "1 kalimat tentang langkah kecil atau harapan yang ingin dilakukan berikutnya."
+}`;
+  } else if (params.mode === "practice_talk") {
     let personaDesc = "";
     if (params.persona === "sela_bebas") {
       personaDesc = `Kamu berperan sebagai SELA (Aura), teman AI yang ramah, hangat, santai, empatik, dan suportif di platform SELA.AI.
@@ -135,7 +146,7 @@ BATASAN PERILAKU & CONTENT DESIGN:
 3. JANGAN mengarang kontak darurat atau nama pendamping fiktif. Rujuk hanya pada nomor darurat nasional resmi (119 ext 8 SEJIWA, SAPA 129).
 4. JANGAN gunakan slogan motivasi klise seperti "Kamu tidak sendirian", "Mulai versi terbaik dirimu", atau kalimat pemasaran generik.
 5. JANGAN gunakan validasi emosional berulang atau berpura-pura merasakan apa yang dirasakan pengguna (hindari "Aku sangat memahami kepedihanmu").
-6. Tanggapi langsung situasi spesifik yang diceritakan pengguna, tawarkan 1 langkah kecil yang konkret, dan akhiri dengan 1 pertanyaan terbuka atau opsi refleksi sesuai kenyamanan mereka.
+6. Tanggapi dengan hangat dan ringkas (maksimal 2-3 kalimat). JANGAN memberikan daftar solusi panjang dan JANGAN mengajukan banyak pertanyaan sekaligus. Jika perlu informasi tambahan, ajukan HANYA SATU pertanyaan singkat dan lembut dalam satu waktu untuk membantu pengguna mengurai pikirannya pelan-pelan. Pengguna bebas menjawab atau melewati pertanyaan ini.
 
 ${
   hasGroundedSources

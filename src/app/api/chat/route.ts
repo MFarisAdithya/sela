@@ -8,7 +8,7 @@ import { generateGeminiChat, getGeminiConfigStatus } from "@/lib/ai/geminiServic
 const ChatRequestSchema = z.object({
   message: z.string().min(1, "Pesan tidak boleh kosong").max(1000, "Pesan maksimal 1.000 karakter"),
   userAlias: z.string().optional().default("Alex"),
-  mode: z.enum(["guided_story", "practice_talk"]).optional().default("guided_story"),
+  mode: z.enum(["guided_story", "practice_talk", "summarize_story"]).optional().default("guided_story"),
   persona: z.string().optional().default("sela_bebas"),
   customPersonaName: z.string().optional(),
   customTopic: z.string().optional(),
@@ -142,6 +142,18 @@ export async function POST(req: NextRequest) {
 
     const configStatus = getGeminiConfigStatus();
     if (!configStatus.isConfigured) {
+      if (mode === "summarize_story") {
+        return NextResponse.json({
+          status: "summary_reply",
+          isAiGenerated: false,
+          summary: {
+            facts: sanitizedMessage.substring(0, 300),
+            feelings: "Merasa banyak pikiran, lelah, dan butuh ruang tenang untuk merapikannya.",
+            nextSteps: "Menyusun cerita ini jadi pegangan tenang untuk persiapan bicara.",
+          },
+        });
+      }
+
       if (mode === "practice_talk") {
         return NextResponse.json({
           status: "simulation_reply",
@@ -178,6 +190,18 @@ export async function POST(req: NextRequest) {
     });
 
     if (aiResult.error) {
+      if (mode === "summarize_story") {
+        return NextResponse.json({
+          status: "summary_reply",
+          isAiGenerated: false,
+          summary: {
+            facts: sanitizedMessage.substring(0, 300),
+            feelings: "Merasa banyak pikiran, lelah, dan butuh ruang tenang untuk merapikannya.",
+            nextSteps: "Menyusun cerita ini jadi pegangan tenang untuk persiapan bicara.",
+          },
+        });
+      }
+
       if (mode === "practice_talk") {
         return NextResponse.json({
           status: "simulation_reply",
@@ -195,6 +219,28 @@ export async function POST(req: NextRequest) {
         sources: rag.sources,
         hasGroundedSources: rag.hasMatch,
         safety,
+      });
+    }
+
+    if (mode === "summarize_story") {
+      let parsedSummary = null;
+      try {
+        const jsonMatch = aiResult.reply.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          parsedSummary = JSON.parse(jsonMatch[0]);
+        }
+      } catch {
+        // fallback
+      }
+
+      return NextResponse.json({
+        status: "summary_reply",
+        isAiGenerated: true,
+        summary: parsedSummary || {
+          facts: sanitizedMessage.substring(0, 300),
+          feelings: "Merasa banyak pikiran dan butuh ruang tenang untuk berpikir.",
+          nextSteps: "Menyiapkan kata-kata dengan tenang dan beristirahat sejenak.",
+        },
       });
     }
 
