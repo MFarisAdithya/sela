@@ -23,10 +23,10 @@ export const AURA_EXPRESSIONS = [
 
 export const AURA_PRODUCT_CARDS = {
   "chat-assistant": {
-    title: "Chat Assistant",
-    subtitle: "Teman Refleksi Bersama Aura",
-    desc: "Ceritakan uneg-unegmu dengan tenang. Aura mendengarkan dan membantumu mengurai benang kusut di kepala.",
-    src: "/images/aura/aura-chat-assistant.png",
+    title: "Aura Mendengarkan",
+    subtitle: "Teman Refleksi & Menyimak Empatik",
+    desc: "Aura duduk menyimak dengan empati sambil membawa buku catatan kecil. Kamu boleh bercerita pelan-pelan tanpa harus merangkai semuanya sekaligus.",
+    src: "/images/aura/aura-mendengarkan.png",
   },
   "panduan-langkah": {
     title: "Panduan Langkah",
@@ -102,12 +102,12 @@ export const AuraModuleHeader: React.FC<{
     <div className="cotton-sheet rounded-3xl p-4 sm:p-6 border border-[#BFD8F5] bg-gradient-to-r from-[#FAFDFE] via-[#F4F8FF] to-[#E8F2FF]">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="w-20 h-16 sm:w-28 sm:h-22 rounded-2xl overflow-hidden border border-[#BFD8F5] bg-[#EAF3FF] shrink-0 shadow-sm">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border border-[#BFD8F5] bg-[#FAFDFE] shrink-0 shadow-sm flex items-center justify-center p-1.5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={card.src}
               alt={card.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
           <div>

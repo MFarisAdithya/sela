@@ -284,7 +284,7 @@ export default function SafeStoryPage() {
         productKey={activeTab === "guided_steps" ? "panduan-langkah" : "chat-assistant"}
         eyebrow="Tahap 01 — Guided Story"
         title="Urai Cerita Pribadi"
-        description="Rapikan uneg-uneg ke dalam 4 bagian Kartu Cerita bersama Aura sebelum kamu bicara."
+        description="Berceritalah pelan-pelan tanpa harus merangkai semuanya sekaligus bersama Aura."
         rightSlot={
           <div className="sky-groove flex items-center gap-1 self-start sm:self-auto">
             <button
@@ -698,6 +698,32 @@ export default function SafeStoryPage() {
 
           {/* Messages Scroll Area */}
           <div className="flex-1 overflow-y-auto space-y-4 pr-1 min-h-0 bg-[#F7FAFF] p-4 rounded-3xl border border-[#CCE1FF] shadow-inner">
+            {/* Aura Mendengarkan Welcoming Card */}
+            {messages.length <= 2 && (
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#FAFDFE] via-[#F4F8FF] to-[#E8F1FC] border border-[#BFD8F5] shadow-sm flex items-center gap-4 mb-2 animate-in fade-in">
+                <div className="relative w-20 sm:w-24 h-20 sm:h-24 shrink-0">
+                  <img
+                    src="/images/aura/aura-mendengarkan.png"
+                    alt="Aura mendengarkan dengan empati sambil membawa buku catatan kecil"
+                    className="w-full h-full object-contain drop-shadow-sm"
+                  />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-mono-num text-[10px] font-semibold text-[#1E56A0] px-2 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
+                      Aura Mendengarkan
+                    </span>
+                  </div>
+                  <h3 className="font-serif-display text-base sm:text-lg font-medium text-[#102542] leading-snug">
+                    Berceritalah pelan-pelan, satu per satu.
+                  </h3>
+                  <p className="text-xs text-[#35527A] mt-1 leading-relaxed">
+                    Kamu tidak harus merangkai semuanya sekaligus dengan sempurna. Tulis saja apa yang terlintas di benakmu sekarang—Aura menyimak dengan tenang tanpa menghakimi.
+                  </p>
+                </div>
+              </div>
+            )}
+
             {messages.map((msg) => {
               const isUser = msg.sender === "user";
               const isSystem = msg.sender === "system";
