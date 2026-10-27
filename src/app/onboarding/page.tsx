@@ -17,18 +17,12 @@ import {
 } from "lucide-react";
 import { SelaLogo } from "@/components/ui/SelaLogo";
 import { useAuth } from "@/context/AuthContext";
-import { useApp } from "@/context/AppContext";
-
 export default function OnboardingPage() {
   const router = useRouter();
-  const { user, updateProfile, updateConsent } = useAuth();
-  const { setUserName } = useApp();
+  const { user } = useAuth();
 
   const [step, setStep] = useState(1);
   const [selectedGoal, setSelectedGoal] = useState<string | null>(null);
-  const [nickname, setNickname] = useState(user?.displayName || "Alex");
-  const [aiConsent, setAiConsent] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const goals = [
     { id: "story", label: "Menyusun cerita yang kusut di kepala", icon: MessageSquareHeart },
@@ -37,30 +31,21 @@ export default function OnboardingPage() {
     { id: "learn", label: "Belajar keterampilan mengelola emosi & hidup", icon: BookOpen },
   ];
 
-  const handleFinish = async () => {
-    setIsSubmitting(true);
-    const finalName = nickname.trim() || "Kawan";
-    setUserName(finalName);
-
+  const handleProceedToAuth = (target: "daftar" | "masuk" = "daftar") => {
     try {
-      sessionStorage.setItem("sela:nickname", finalName);
+      if (selectedGoal) {
+        sessionStorage.setItem("sela:selected_goal", selectedGoal);
+      }
       sessionStorage.setItem("sela_chat_consent", "true");
     } catch {
       // safe fallback
     }
 
     if (user) {
-      await updateProfile({
-        displayName: finalName,
-        onboardingCompleted: true,
-      });
-      await updateConsent({
-        aiProcessingConsent: aiConsent,
-      });
+      window.location.href = "/app";
+    } else {
+      router.push(`/${target}`);
     }
-
-    setIsSubmitting(false);
-    window.location.href = "/app";
   };
 
   return (
@@ -81,9 +66,9 @@ export default function OnboardingPage() {
             role="progressbar"
             aria-valuenow={step}
             aria-valuemin={1}
-            aria-valuemax={4}
+            aria-valuemax={3}
           >
-            {[1, 2, 3, 4].map((s) => (
+            {[1, 2, 3].map((s) => (
               <div
                 key={s}
                 className={`h-2 flex-1 rounded-full transition-all duration-300 ${
@@ -243,97 +228,33 @@ export default function OnboardingPage() {
                 })}
               </div>
 
-              <div className="flex items-center gap-3 pt-2">
-                <button
-                  type="button"
-                  onClick={() => setStep(2)}
-                  className="px-5 py-3 rounded-full border border-[#BFD8F5] text-xs font-semibold text-[#35527A] hover:bg-[#FAFDFE] transition-colors"
-                >
-                  <ArrowLeft className="w-4 h-4 mr-1 inline" /> Kembali
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setStep(4)}
-                  className="letterpress-primary flex-1 inline-flex items-center justify-center rounded-full py-3.5 px-4 text-sm font-semibold transition-all shadow-md"
-                >
-                  {selectedGoal ? "Lanjut dengan Pilihan Ini" : "Lewati & Lanjut"}
-                  <ArrowRight className="w-4 h-4 ml-1.5" />
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* STEP 4: Nama Panggilan & Izin AI — Preferensi Pengguna */}
-          {step === 4 && (
-            <div className="space-y-5 animate-in fade-in duration-200">
-              {/* Mini Aura Guide Header */}
-              <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-[#F4F8FF] border border-[#BFD8F5]">
-                <img
-                  src="/images/aura/aura-memandu.png"
-                  alt="Aura memandu preferensi nama"
-                  className="w-16 sm:w-20 h-16 sm:h-20 object-contain shrink-0 drop-shadow-sm"
-                />
-                <div className="min-w-0 flex-1">
-                  <span className="block text-xs font-bold text-[#1E56A0]">
-                    Satu Langkah Terakhir!
-                  </span>
-                  <p className="text-xs text-[#35527A] leading-tight mt-0.5">
-                    Beri tahu Aura nama sapaan ternyamanmu agar kita bisa saling menyapa dengan hangat di SELA.AI.
-                  </p>
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setStep(2)}
+                    className="px-5 py-3 rounded-full border border-[#BFD8F5] text-xs font-semibold text-[#35527A] hover:bg-[#FAFDFE] transition-colors"
+                  >
+                    <ArrowLeft className="w-4 h-4 mr-1 inline" /> Kembali
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleProceedToAuth("daftar")}
+                    className="letterpress-primary flex-1 inline-flex items-center justify-center rounded-full py-3.5 px-4 text-sm font-semibold transition-all shadow-md"
+                  >
+                    {selectedGoal ? "Lanjut Buat Akun" : "Daftar Akun SELA.AI"}
+                    <ArrowRight className="w-4 h-4 ml-1.5" />
+                  </button>
                 </div>
-              </div>
-
-              <div className="text-center">
-                <h2 className="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[#102542]">
-                  Mau Dipanggil Siapa?
-                </h2>
-                <p className="text-xs text-[#35527A] mt-1">
-                  Boleh nama samaran atau nama panggilan apa pun.
-                </p>
-              </div>
-
-              <div>
-                <input
-                  type="text"
-                  value={nickname}
-                  onChange={(e) => setNickname(e.target.value)}
-                  placeholder="Contoh: Alex atau Kawan"
-                  className="w-full rounded-2xl bg-[#FAFDFE] border border-[#BFD8F5] px-4 py-3.5 text-base text-[#102542] placeholder:text-[#516B8C]/60 focus:outline-none focus:ring-2 focus:ring-[#1E56A0] focus:border-transparent transition-all shadow-sm text-center font-semibold"
-                />
-              </div>
-
-              {/* Explicit Consent Checkbox */}
-              <div className="p-4 rounded-2xl bg-[#F4F8FF] border border-[#BFD8F5] text-xs text-[#35527A]">
-                <label className="flex items-start gap-2.5 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={aiConsent}
-                    onChange={(e) => setAiConsent(e.target.checked)}
-                    className="mt-0.5 rounded text-[#1E56A0] focus:ring-[#1E56A0]"
-                  />
-                  <span>
-                    Saya memahami batas layanan nonklinis dan menyetujui pemrosesan cerita latihan secara aman bersama Aura di SELA.AI.
-                  </span>
-                </label>
-              </div>
-
-              <div className="flex items-center gap-3 pt-2">
-                <button
-                  type="button"
-                  onClick={() => setStep(3)}
-                  className="px-5 py-3 rounded-full border border-[#BFD8F5] text-xs font-semibold text-[#35527A] hover:bg-[#FAFDFE] transition-colors"
-                >
-                  <ArrowLeft className="w-4 h-4 mr-1 inline" /> Kembali
-                </button>
-                <button
-                  type="button"
-                  onClick={handleFinish}
-                  disabled={isSubmitting}
-                  className="letterpress-primary flex-1 inline-flex items-center justify-center rounded-full py-3.5 px-4 text-sm font-semibold transition-all shadow-md disabled:opacity-50"
-                >
-                  {isSubmitting ? "Menyiapkan Ruangmu..." : "Mulai Masuk ke SELA.AI"}
-                  <ArrowRight className="w-4 h-4 ml-1.5" />
-                </button>
+                <div className="text-center pt-1">
+                  <button
+                    type="button"
+                    onClick={() => handleProceedToAuth("masuk")}
+                    className="text-xs font-semibold text-[#1E56A0] hover:text-[#102542] hover:underline transition-colors"
+                  >
+                    Sudah punya akun? Masuk di sini
+                  </button>
+                </div>
               </div>
             </div>
           )}
