@@ -161,10 +161,14 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
     <div className="space-y-6 max-w-4xl mx-auto py-2 animate-in fade-in duration-150">
       {/* Header with Aura Mascot */}
       <AuraModuleHeader
-        productKey="kartu-cerita"
-        eyebrow="Tahap 02 — Kartu Cerita"
-        title="Kartu Cerita Pribadi"
-        description="Cerita yang awalnya terasa rumit mulai tersusun menjadi lebih jelas bersama Aura."
+        productKey={activeTab === "free_journal" ? "jurnal-reflektif" : "kartu-cerita"}
+        eyebrow={activeTab === "free_journal" ? "Pilar 2 — Jurnal Reflektif" : "Tahap 02 — Kartu Cerita"}
+        title={activeTab === "free_journal" ? "Jurnal Reflektif Pribadi" : "Kartu Cerita Pribadi"}
+        description={
+          activeTab === "free_journal"
+            ? "Aura duduk tenang menemanimu menulis di jurnal kecil. Tuangkan pikiranmu dengan teduh dan tanpa tergesa-gesa."
+            : "Cerita yang awalnya terasa rumit mulai tersusun menjadi lebih jelas bersama Aura."
+        }
         rightSlot={
           <div className="flex items-center gap-1.5 p-1 bg-[#E3EEFF] rounded-2xl border border-[#CCE1FF] self-start sm:self-auto">
             <button
@@ -441,6 +445,30 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
       {/* TAB 2: FREE JOURNAL NOTES */}
       {activeTab === "free_journal" && (
         <div className="space-y-6">
+          {/* Aura Menulis Companion Banner */}
+          <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#FAFDFE] via-[#F4F8FF] to-[#E8F1FC] border border-[#BFD8F5] shadow-sm flex items-center gap-4 animate-in fade-in">
+            <div className="relative w-16 sm:w-20 h-16 sm:h-20 shrink-0">
+              <img
+                src="/images/aura/aura-menulis-jurnal.png"
+                alt="Aura duduk tenang sambil menulis di jurnal kecil"
+                className="w-full h-full object-contain drop-shadow-sm"
+              />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2 mb-0.5">
+                <span className="font-mono-num text-[10px] font-semibold text-[#1E56A0] px-2 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
+                  Aura Menulis
+                </span>
+                <span className="text-xs font-semibold text-[#102542]">
+                  Ruang Kontemplasi Tenang
+                </span>
+              </div>
+              <p className="text-xs text-[#35527A] leading-relaxed">
+                Ambil napas dalam-dalam. Tuliskan apa saja yang melintas di pikiranmu saat ini—perasaan, pertanyaan, atau refleksi pribadi. Catatan ini tersimpan aman di perangkatmu.
+              </p>
+            </div>
+          </div>
+
           <div className="bg-[#F7FAFF] p-6 sm:p-8 rounded-3xl border border-[#CCE1FF] shadow-[6px_6px_16px_rgba(164,188,224,0.35),-6px_-6px_16px_rgba(255,255,255,0.95)] space-y-4">
             <div>
               <span className="text-xs font-semibold uppercase tracking-wider text-[#2457A7]">

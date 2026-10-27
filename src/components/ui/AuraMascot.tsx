@@ -40,6 +40,12 @@ export const AURA_PRODUCT_CARDS = {
     desc: "Aura memegang kartu putih-biru 4 pilar. Cerita yang awalnya terasa rumit mulai tersusun menjadi lebih jelas.",
     src: "/images/aura/aura-merangkum-kartu.png",
   },
+  "jurnal-reflektif": {
+    title: "Aura Menulis",
+    subtitle: "Jurnal Reflektif & Kontemplasi",
+    desc: "Aura duduk tenang sambil menulis di jurnal kecil. Menuangkan pikiran dengan teduh dan tanpa tergesa-gesa.",
+    src: "/images/aura/aura-menulis-jurnal.png",
+  },
   progress: {
     title: "Progress & Pencapaian",
     subtitle: "Langkah Kecil yang Berarti",
