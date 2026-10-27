@@ -1,12 +1,5 @@
-"use client";
-
-import React from "react";
-import { RuangRasaSection } from "@/components/ruang-rasa/RuangRasaSection";
+import { redirect } from "next/navigation";
 
 export default function CekPerasaankuPage() {
-  return (
-    <div className="py-2">
-      <RuangRasaSection />
-    </div>
-  );
+  redirect("/app");
 }

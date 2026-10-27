@@ -15,7 +15,6 @@ import {
   ShieldCheck,
   Compass,
   MessageCircle,
-  Sparkles,
   CreditCard,
   User,
   X,
@@ -30,7 +29,6 @@ const mainMobileTabs = [
 ];
 
 const secondaryMobileTabs = [
-  { label: "Cek Perasaanku", href: "/app/cek-rasa", icon: Sparkles, desc: "Check-in suasana hatimu hari ini" },
   { label: "Cari Dukungan", href: "/support", icon: Users, desc: "Pilihan bantuan nyata tanpa biaya" },
   { label: "Belajar & Kenali Diri", href: "/learning", icon: GraduationCap, desc: "Modul keterampilan hidup & emosi" },
   { label: "Langkah Kecilku", href: "/growth-plan", icon: TrendingUp, desc: "Target kecil sukarela mandiri" },

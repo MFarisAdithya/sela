@@ -13,7 +13,6 @@ import {
   ShieldCheck,
   Compass,
   MessageCircle,
-  Sparkles,
   CreditCard,
   PhoneCall,
   User,
@@ -23,7 +22,6 @@ import { AuraAvatar } from "@/components/ui/AuraMascot";
 
 const coreNavItems = [
   { label: "Beranda", href: "/app", icon: LayoutDashboard },
-  { label: "Cek Perasaanku", href: "/app/cek-rasa", icon: Sparkles },
   { label: "Ngobrol sama Sela", href: "/safe-story", icon: MessageSquareHeart },
   { label: "Cerita & Jurnal", href: "/journal", icon: Compass },
   { label: "Latihan Ngobrol", href: "/dashboard", icon: MessageCircle },
