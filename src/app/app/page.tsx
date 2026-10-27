@@ -5,16 +5,14 @@ import Link from "next/link";
 import { Sparkles } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { greetingFor } from "@/lib/copy";
-import { AURA_EXPRESSIONS, AuraAvatar } from "@/components/ui/AuraMascot";
-import { cn } from "@/lib/utils";
+import { AuraAvatar } from "@/components/ui/AuraMascot";
+import { RuangRasaSection } from "@/components/ruang-rasa/RuangRasaSection";
 
 export default function AppDashboardPage() {
   const { user } = useAuth();
   const [greeting, setGreeting] = useState("Selamat datang");
-  const [selectedExpId, setSelectedExpId] = useState<string>("tenang");
 
   const displayName = user?.displayName || "Kawan";
-  const currentExp = AURA_EXPRESSIONS.find((e) => e.id === selectedExpId) || AURA_EXPRESSIONS[3];
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -56,47 +54,8 @@ export default function AppDashboardPage() {
         </div>
       </div>
 
-      {/* 1B. Interactive Mood Check-in with Aura's 6 Facial Expressions */}
-      <div className="cotton-sheet rounded-2xl p-4 sm:p-5 border border-[#BFD8F5]">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-          <span className="text-xs font-bold text-[#102542]">
-            Bagaimana rasanya hari ini? Pilih ekspresi Aura yang paling pas:
-          </span>
-          <span className="text-[11px] text-[#5B789E]">Check-in suasana hati harian</span>
-        </div>
-        <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
-          {AURA_EXPRESSIONS.map((exp) => {
-            const isSelected = exp.id === selectedExpId;
-            return (
-              <button
-                key={exp.id}
-                type="button"
-                onClick={() => setSelectedExpId(exp.id)}
-                className={cn(
-                  "flex flex-col items-center p-2 rounded-xl border transition-colors",
-                  isSelected
-                    ? "bg-[#D6E9FF] border-[#2E63D6] shadow-sm"
-                    : "bg-[#F4F8FF] border-[#D6E9FF] hover:border-[#6BA8FF]"
-                )}
-              >
-                <div className="w-11 h-11 rounded-lg overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={exp.src} alt={exp.label} className="w-full h-full object-contain" />
-                </div>
-                <span className={cn("text-[11px] mt-1 font-semibold", isSelected ? "text-[#2E63D6]" : "text-[#35527A]")}>
-                  {exp.label}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-        <div className="mt-3 p-3 rounded-xl bg-[#F4F8FF] border border-[#D6E9FF] flex items-center gap-2.5 text-xs text-[#102542]">
-          <AuraAvatar size="xs" />
-          <p className="leading-snug">
-            <strong className="text-[#2E63D6]">Pesan Aura:</strong> {currentExp.reply}
-          </p>
-        </div>
-      </div>
+      {/* 2. Ruang Rasa Mood Check-in with 8 Teman Rasa Characters */}
+      <RuangRasaSection />
     </div>
   );
 }

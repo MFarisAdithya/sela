@@ -213,7 +213,7 @@ export const AuraLoadingIndicator: React.FC<{
   );
 };
 
-export const AuraShowcaseSection: React.FC<{ compact?: boolean }> = ({ compact = false }) => {
+export const AuraShowcaseSection: React.FC<{ compact?: boolean; className?: string }> = ({ compact = false, className }) => {
   const traits = [
     { icon: Heart, label: "Ramah & menenangkan", color: "text-[#E15B8C] bg-[#FFE9F1]" },
     { icon: Sparkles, label: "Selalu mendukung", color: "text-[#D9822B] bg-[#FFD8BB]/60" },
@@ -222,7 +222,7 @@ export const AuraShowcaseSection: React.FC<{ compact?: boolean }> = ({ compact =
   ];
 
   return (
-    <div className="space-y-8">
+    <div className={cn("space-y-8", className)}>
       {/* Main Aura Introduction Card */}
       <div className="cotton-sheet rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#BFD8F5] bg-gradient-to-br from-[#F4F8FF] via-[#FAFDFE] to-[#D6E9FF]/60 overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
