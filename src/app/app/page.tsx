@@ -50,7 +50,7 @@ export default function AppDashboardPage() {
               {user?.plan === "premium" ? "SELA Supporter Aktif" : "Paket Gratis"}
             </span>
             <span className="text-[#1E56A0] font-semibold underline underline-offset-2 ml-1">
-              Kelola kuota
+              Kelola paket
             </span>
           </Link>
         </div>

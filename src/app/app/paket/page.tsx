@@ -4,26 +4,16 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Sparkles,
-  ShieldCheck,
-  CheckCircle2,
-  Calendar,
   CreditCard,
-  ArrowRight,
-  TrendingUp,
-  MessageCircle,
-  Compass,
   HeartHandshake,
-  Clock,
   Info,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
-import { useApp } from "@/context/AppContext";
 import { UserEntitlements } from "@/types/payment";
 import { CheckoutModal } from "@/components/payment/CheckoutModal";
 
 export default function PaketDanKuotaPage() {
   const { user } = useAuth();
-  const { storyCards } = useApp();
 
   const [entitlements, setEntitlements] = useState<UserEntitlements | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -50,12 +40,6 @@ export default function PaketDanKuotaPage() {
   }, [user]);
 
   const isPremium = entitlements?.isPremiumActive ?? (user?.plan === "premium");
-  const aiUsed = entitlements?.monthlyAiUsed ?? 3;
-  const aiLimit = entitlements?.monthlyAiLimit ?? (isPremium ? 100 : 10);
-  const practiceUsed = entitlements?.monthlyPracticeTalkUsed ?? 1;
-  const practiceLimit = entitlements?.monthlyPracticeTalkLimit ?? (isPremium ? 10 : 2);
-  const cardLimit = entitlements?.maxActiveStoryCards ?? (isPremium ? 20 : 1);
-  const activeCardCount = storyCards.length;
 
   const formatDate = (isoStr?: string) => {
     if (!isoStr) return "—";
@@ -80,10 +64,10 @@ export default function PaketDanKuotaPage() {
             <span>Manajemen Langganan</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#17365D]">
-            Paket &amp; Penggunaan Kuota
+            Paket &amp; Langganan
           </h1>
           <p className="mt-1 text-sm text-[#17365D]/75">
-            Pantau status langganan, kuota refleksi bulanan, dan opsi kontribusi untuk mendukung SELA.AI.
+            Pantau status langganan dan opsi kontribusi untuk mendukung SELA.AI.
           </p>
         </div>
 
@@ -161,100 +145,6 @@ export default function PaketDanKuotaPage() {
         </div>
       </div>
 
-      {/* QUOTA MONITORING GRID */}
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold text-[#17365D]">Penggunaan Kuota Periode Ini</h2>
-          <span className="text-xs text-[#17365D]/60 flex items-center gap-1">
-            <Clock className="w-3.5 h-3.5" />
-            <span>Reset otomatis awal bulan depan</span>
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* 1. Respons Guided Story */}
-          <div className="p-5 rounded-3xl bg-[#F7FAFF] border border-[#CCE1FF] shadow-sm space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-[#2457A7] uppercase tracking-wider">
-                Guided Story
-              </span>
-              <Sparkles className="w-4 h-4 text-[#2457A7]" />
-            </div>
-
-            <div className="flex items-baseline gap-1">
-              <span className="text-3xl font-extrabold text-[#17365D]">{aiUsed}</span>
-              <span className="text-xs text-[#17365D]/60 font-medium">/ {aiLimit} respons</span>
-            </div>
-
-            {/* Progress bar */}
-            <div className="w-full bg-[#EBF3FF] h-2 rounded-full overflow-hidden">
-              <div
-                className="bg-[#2457A7] h-full rounded-full transition-all duration-300"
-                style={{ width: `${Math.min(100, (aiUsed / aiLimit) * 100)}%` }}
-              />
-            </div>
-
-            <p className="text-[11px] text-[#17365D]/70 leading-relaxed">
-              Digunakan saat mengurai cerita terpandu di ruang refleksi.
-            </p>
-          </div>
-
-          {/* 2. Sesi Practice Talk */}
-          <div className="p-5 rounded-3xl bg-[#F7FAFF] border border-[#CCE1FF] shadow-sm space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-[#2457A7] uppercase tracking-wider">
-                Practice Talk
-              </span>
-              <MessageCircle className="w-4 h-4 text-[#2457A7]" />
-            </div>
-
-            <div className="flex items-baseline gap-1">
-              <span className="text-3xl font-extrabold text-[#17365D]">{practiceUsed}</span>
-              <span className="text-xs text-[#17365D]/60 font-medium">/ {practiceLimit} sesi</span>
-            </div>
-
-            {/* Progress bar */}
-            <div className="w-full bg-[#EBF3FF] h-2 rounded-full overflow-hidden">
-              <div
-                className="bg-[#1F7A65] h-full rounded-full transition-all duration-300"
-                style={{ width: `${Math.min(100, (practiceUsed / practiceLimit) * 100)}%` }}
-              />
-            </div>
-
-            <p className="text-[11px] text-[#17365D]/70 leading-relaxed">
-              Simulasi percakapan turn-by-turn dengan lawan bicara pilihan.
-            </p>
-          </div>
-
-          {/* 3. Kartu Cerita Aktif */}
-          <div className="p-5 rounded-3xl bg-[#F7FAFF] border border-[#CCE1FF] shadow-sm space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-[#2457A7] uppercase tracking-wider">
-                Kartu Cerita Aktif
-              </span>
-              <Compass className="w-4 h-4 text-[#2457A7]" />
-            </div>
-
-            <div className="flex items-baseline gap-1">
-              <span className="text-3xl font-extrabold text-[#17365D]">{activeCardCount}</span>
-              <span className="text-xs text-[#17365D]/60 font-medium">/ {cardLimit} kartu</span>
-            </div>
-
-            {/* Progress bar */}
-            <div className="w-full bg-[#EBF3FF] h-2 rounded-full overflow-hidden">
-              <div
-                className="bg-[#2457A7] h-full rounded-full transition-all duration-300"
-                style={{ width: `${Math.min(100, (activeCardCount / cardLimit) * 100)}%` }}
-              />
-            </div>
-
-            <p className="text-[11px] text-[#17365D]/70 leading-relaxed">
-              Ringkasan 4 kuadran yang tersimpan untuk persiapan bicara.
-            </p>
-          </div>
-        </div>
-      </div>
-
       {/* NON-PAYWALLED SAFETY COMMITMENT */}
       <div className="p-6 rounded-3xl bg-[#E6F4EA]/80 border border-[#B7E1CD] text-[#17365D] flex items-start gap-4">
         <HeartHandshake className="w-6 h-6 text-[#1F7A65] shrink-0 mt-1" />
@@ -263,7 +153,7 @@ export default function PaketDanKuotaPage() {
             Jaminan Etika SELA.AI: Bantuan Darurat &amp; Keselamatan Tidak Pernah Dikunci
           </h3>
           <p className="text-xs text-[#17365D]/85 leading-relaxed">
-            Meskipun kuota latihan bulananmu habis, kamu tetap dapat mengakses <strong>Support Pathway</strong>,
+            Meskipun dalam status paket bebas (free), kamu selalu dapat mengakses <strong>Support Pathway</strong>,
             hotline krisis resmi Kemenkes (SEJIWA 119 ext 8, SAPA 129), dan membaca seluruh Kartu Cerita yang telah dibuat.
             SELA.AI tidak pernah mengunci pertolongan darurat di balik pintu berbayar.
           </p>

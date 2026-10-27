@@ -117,7 +117,7 @@ export default function RiwayatPembayaranPage() {
             className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-[#CCE1FF] bg-white text-xs font-semibold text-[#17365D] hover:bg-[#EBF3FF] transition-colors shadow-sm"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Paket &amp; Kuota</span>
+            <span>Paket &amp; Langganan</span>
           </Link>
           <button
             type="button"

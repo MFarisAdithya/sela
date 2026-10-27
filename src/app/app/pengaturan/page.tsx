@@ -133,7 +133,7 @@ export default function PengaturanAkunPage() {
           </div>
           <p className="text-xs sm:text-sm text-[#17365D]/75 max-w-lg leading-relaxed">
             {user?.plan === "premium"
-              ? "Akunmu aktif sebagai SELA Supporter dengan kuota latihan lebih besar, kapasitas Kartu Cerita luas, dan akses penuh ke seluruh modul premium."
+              ? "Akunmu aktif sebagai SELA Supporter dengan kapasitas Kartu Cerita luas dan akses penuh ke seluruh modul premium."
               : "Kamu menggunakan akses dasar SELA.AI. Bantuan darurat dan Support Pathway selalu dapat diakses gratis."}
           </p>
         </div>
@@ -144,7 +144,7 @@ export default function PengaturanAkunPage() {
             className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full bg-[#2457A7] text-white text-xs font-semibold hover:bg-[#1C4477] transition-all shadow-sm"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Lihat Kuota &amp; Paket</span>
+            <span>Lihat Paket Langganan</span>
             <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
           </Link>
           <Link

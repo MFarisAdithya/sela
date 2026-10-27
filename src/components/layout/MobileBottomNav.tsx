@@ -33,7 +33,7 @@ const secondaryMobileTabs = [
   { label: "Jurnal Reflektif", href: "/journal", icon: PenLine, desc: "Catatan pribadi tersimpan lokal" },
   { label: "Ruang Belajar", href: "/learning", icon: GraduationCap, desc: "Modul keterampilan hidup & emosi" },
   { label: "Rencana Langkah", href: "/growth-plan", icon: TrendingUp, desc: "Target kecil sukarela mandiri" },
-  { label: "Paket & Kuota", href: "/app/paket", icon: Sparkles, desc: "Status langganan dan kuota latihan" },
+  { label: "Paket & Langganan", href: "/app/paket", icon: Sparkles, desc: "Status langganan dan paket" },
   { label: "Riwayat Transaksi", href: "/app/pembayaran", icon: CreditCard, desc: "Faktur dan catatan pembayaran" },
   { label: "Pengaturan Akun", href: "/app/pengaturan", icon: ShieldCheck, desc: "Profil, privasi, dan hapus akun" },
 ];
