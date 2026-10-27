@@ -38,12 +38,6 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
               {/* Kolom Kiri: Copy Singkat & CTA */}
               <div className="lg:col-span-7 flex flex-col items-start text-left">
-                {/* Eyebrow Label */}
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAFDFE] border border-[#BFD8F5] text-xs font-semibold text-[#1E56A0] mb-6 shadow-sm">
-                  <span className="w-2 h-2 rounded-full bg-[#1E56A0] animate-pulse" />
-                  <span>{t.eyebrow}</span>
-                </div>
-
                 {/* Primary Editorial Headline */}
                 <h1 className="font-serif-display text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-[#102542] leading-[1.12]">
                   {t.headlinePart1}

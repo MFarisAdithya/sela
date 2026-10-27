@@ -27,7 +27,7 @@ export const copy = {
     headlinePart1: "Kamu nggak sendiri ",
     headlineAccent: "untuk cerita.",
     description: "Urai uneg-uneg, latih caramu bicara, dan temukan bantuan saat kamu siap.",
-    cta: "Mulai Gratis",
+    cta: "Mulai",
     secondaryCta: "Lihat Cara Kerja",
     trustNotes: [
       "Bukan alat diagnosis",
