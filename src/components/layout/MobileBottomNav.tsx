@@ -95,9 +95,10 @@ export const MobileBottomNav: React.FC = () => {
                     <Link
                       key={item.href}
                       href={item.href}
+                      prefetch={true}
                       onClick={() => setIsMenuOpen(false)}
                       className={cn(
-                        "flex items-start gap-3 p-2.5 rounded-xl text-left transition-all",
+                        "flex items-start gap-3 p-2.5 rounded-xl text-left transition-colors duration-75 active:scale-[0.98] active:duration-40 cursor-pointer",
                         isActive
                           ? "bg-brand-100 text-brand-900 font-semibold border border-brand-200"
                           : "text-text-muted hover:text-brand-900 hover:bg-brand-50"
@@ -143,8 +144,9 @@ export const MobileBottomNav: React.FC = () => {
               <Link
                 key={tab.href}
                 href={tab.href}
+                prefetch={true}
                 className={cn(
-                  "flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all relative min-w-[56px]",
+                  "flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-colors duration-75 active:scale-90 active:duration-40 cursor-pointer relative min-w-[56px]",
                   isActive
                     ? "text-brand-700 font-bold"
                     : "text-text-muted hover:text-brand-900"
@@ -152,7 +154,7 @@ export const MobileBottomNav: React.FC = () => {
               >
                 <div
                   className={cn(
-                    "p-1.5 rounded-xl transition-all",
+                    "p-1.5 rounded-xl transition-colors duration-75",
                     isActive
                       ? "bg-brand-100 shadow-neu-inset text-brand-700"
                       : "hover:bg-brand-50"

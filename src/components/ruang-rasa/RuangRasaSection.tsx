@@ -117,27 +117,28 @@ export const RuangRasaSection: React.FC<RuangRasaSectionProps> = ({
           const isSelected = selectedIds.includes(char.id);
 
           return (
-            <div
+            <button
+              type="button"
               key={char.id}
               role="checkbox"
               aria-checked={isSelected}
-              tabIndex={0}
               onClick={() => toggleEmotion(char.id)}
               onKeyDown={(e) => handleKeyDown(e, char.id)}
               className={cn(
-                "group relative flex flex-col items-center justify-between p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 cursor-pointer select-none",
+                "group relative flex flex-col items-center justify-between p-3.5 sm:p-4 rounded-2xl border text-center select-none cursor-pointer",
+                "transition-colors duration-100 active:scale-[0.97] active:duration-40",
                 "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-2",
                 isSelected
-                  ? "bg-gradient-to-b from-[#EBF3FF] to-white border-[#2563EB] shadow-[0_8px_20px_rgba(37,99,235,0.16)] ring-2 ring-[#2563EB]/25 scale-[1.01]"
-                  : `bg-gradient-to-b ${char.theme.bgGradient} border-[#DCEAFB] hover:border-[#93C5FD] hover:shadow-sm hover:scale-[1.005]`
+                  ? "bg-gradient-to-b from-[#EBF3FF] to-white border-[#2563EB] shadow-[0_4px_16px_rgba(37,99,235,0.18)] ring-2 ring-[#2563EB]/30"
+                  : `bg-gradient-to-b ${char.theme.bgGradient} border-[#DCEAFB] hover:border-[#93C5FD] hover:shadow-xs`
               )}
             >
               {/* Checkbox circle in Top Right */}
               <div
                 className={cn(
-                  "absolute top-2.5 right-2.5 w-5 h-5 rounded-full flex items-center justify-center transition-all duration-150",
+                  "absolute top-2.5 right-2.5 w-5 h-5 rounded-full flex items-center justify-center transition-colors duration-75",
                   isSelected
-                    ? "bg-[#2563EB] text-white border border-[#2563EB] shadow-sm"
+                    ? "bg-[#2563EB] text-white border border-[#2563EB] shadow-xs"
                     : "border border-[#BFD8F5] bg-white/90 text-transparent"
                 )}
                 aria-hidden="true"
@@ -152,7 +153,7 @@ export const RuangRasaSection: React.FC<RuangRasaSectionProps> = ({
                   <img
                     src={char.imageSrc}
                     alt={char.name}
-                    className="w-28 h-20 sm:w-32 sm:h-22 object-contain select-none transition-transform duration-200 group-hover:scale-105"
+                    className="w-28 h-20 sm:w-32 sm:h-22 object-contain select-none transition-transform duration-100 group-hover:-translate-y-0.5"
                   />
                 ) : (
                   <TemanRasaAvatar character={char} isSelected={isSelected} size="md" />
@@ -160,15 +161,15 @@ export const RuangRasaSection: React.FC<RuangRasaSectionProps> = ({
               </div>
 
               {/* Card Title & Subtitle */}
-              <div className="text-center pt-1 pb-0.5">
-                <h3 className="font-bold text-sm sm:text-base text-[#102542] group-hover:text-[#2563EB] transition-colors leading-tight">
+              <div className="text-center pt-1 pb-0.5 w-full">
+                <h3 className="font-bold text-sm sm:text-base text-[#102542] group-hover:text-[#2563EB] transition-colors duration-75 leading-tight">
                   {char.name}
                 </h3>
                 <p className="text-[11px] sm:text-xs text-[#516B8C] mt-0.5 leading-tight">
                   {char.emotion}
                 </p>
               </div>
-            </div>
+            </button>
           );
         })}
       </div>
@@ -177,7 +178,7 @@ export const RuangRasaSection: React.FC<RuangRasaSectionProps> = ({
       <div className="space-y-3 pt-2">
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-4">
           {/* Pesan Aura Panel */}
-          <div className="flex-1 rounded-2xl bg-[#EBF3FF] border border-[#BFD8F5] p-3 sm:p-3.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm transition-all duration-300">
+          <div className="flex-1 rounded-2xl bg-[#EBF3FF] border border-[#BFD8F5] p-3 sm:p-3.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm transition-colors duration-100">
             <div className="flex items-center gap-3 min-w-0">
               {/* Bottom Aura Avatar */}
               <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl overflow-hidden shrink-0 shadow-sm border border-[#BFD8F5] bg-white flex items-center justify-center">
@@ -207,7 +208,7 @@ export const RuangRasaSection: React.FC<RuangRasaSectionProps> = ({
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="text-[11px] font-semibold text-[#516B8C] hover:text-[#2563EB] inline-flex items-center gap-1 transition-colors"
+                  className="text-[11px] font-semibold text-[#516B8C] hover:text-[#2563EB] inline-flex items-center gap-1 transition-colors duration-75 active:scale-95"
                   title="Reset pilihan"
                 >
                   <RotateCcw className="w-3 h-3" />
@@ -222,7 +223,7 @@ export const RuangRasaSection: React.FC<RuangRasaSectionProps> = ({
             <button
               type="button"
               onClick={handleSkip}
-              className="px-5 py-2.5 rounded-full border border-[#93C5FD] bg-white text-xs sm:text-sm font-semibold text-[#2563EB] hover:bg-[#F0F7FF] transition-all shadow-xs active:scale-95"
+              className="px-5 py-2.5 rounded-full border border-[#93C5FD] bg-white text-xs sm:text-sm font-semibold text-[#2563EB] hover:bg-[#F0F7FF] transition-colors duration-75 shadow-xs active:scale-95 cursor-pointer"
             >
               Lewati Dulu
             </button>
@@ -232,10 +233,10 @@ export const RuangRasaSection: React.FC<RuangRasaSectionProps> = ({
               onClick={handleContinue}
               disabled={selectedIds.length === 0}
               className={cn(
-                "inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-sm active:scale-95",
+                "inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-colors duration-75 shadow-sm active:scale-95",
                 selectedIds.length > 0
                   ? "bg-[#2563EB] text-white hover:bg-[#1D4ED8] shadow-[0_4px_12px_rgba(37,99,235,0.25)] cursor-pointer"
-                  : "bg-[#BFDBFE] text-white cursor-not-allowed"
+                  : "bg-[#BFDBFE] text-white cursor-not-allowed opacity-75"
               )}
             >
               <span>Lanjutkan Refleksi</span>

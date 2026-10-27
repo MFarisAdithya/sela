@@ -56,7 +56,8 @@ export const HeaderBar: React.FC = () => {
         <div className="flex items-center gap-2.5">
           <Link
             href="/safe-story"
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/95 border border-[#BFD8F5] text-xs font-bold text-[#1E56A0] hover:border-[#2E63D6] transition-all shadow-sm"
+            prefetch={true}
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/95 border border-[#BFD8F5] text-xs font-bold text-[#1E56A0] hover:border-[#2E63D6] transition-colors duration-75 active:scale-95 shadow-sm cursor-pointer"
             title="Bicara dengan Aura"
           >
             <AuraAvatar size="xs" />
@@ -67,7 +68,8 @@ export const HeaderBar: React.FC = () => {
           {!isPremium && (
             <Link
               href="/app/paket"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#2457A7] text-white hover:bg-[#1C4477] shadow-[0_2px_8px_rgba(36,87,167,0.25)] transition-all shadow-sm active:scale-95"
+              prefetch={true}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#2457A7] text-white hover:bg-[#1C4477] shadow-[0_2px_8px_rgba(36,87,167,0.25)] transition-colors duration-75 shadow-sm active:scale-95 cursor-pointer"
               title="Upgrade Paket SELA.AI"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#DCEAFB]" />
@@ -77,7 +79,8 @@ export const HeaderBar: React.FC = () => {
 
           <Link
             href="/app/pengaturan"
-            className="flex items-center gap-2 p-1 pl-1.5 pr-2.5 rounded-full bg-white border border-[#BFD8F5] text-xs font-semibold text-[#102542] hover:border-[#2E63D6] transition-colors shadow-sm"
+            prefetch={true}
+            className="flex items-center gap-2 p-1 pl-1.5 pr-2.5 rounded-full bg-white border border-[#BFD8F5] text-xs font-semibold text-[#102542] hover:border-[#2E63D6] transition-colors duration-75 active:scale-95 shadow-sm cursor-pointer"
             title="Akun Saya"
             aria-label="Akun Saya"
           >

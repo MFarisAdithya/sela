@@ -91,8 +91,9 @@ export const DesktopSidebar: React.FC = () => {
                 <Link
                   key={item.href}
                   href={item.href}
+                  prefetch={true}
                   className={cn(
-                    "flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors",
+                    "flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors duration-75 active:scale-[0.98] active:duration-40 cursor-pointer",
                     isActive
                       ? "bg-[#FAFDFE] text-[#102542] font-semibold border border-[#9AC0EB] shadow-sm"
                       : "text-[#2B4566] hover:text-[#102542] hover:bg-[#E8F1FC]/70 border border-transparent"
@@ -125,8 +126,9 @@ export const DesktopSidebar: React.FC = () => {
                 <Link
                   key={item.href}
                   href={item.href}
+                  prefetch={true}
                   className={cn(
-                    "flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors",
+                    "flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors duration-75 active:scale-[0.98] active:duration-40 cursor-pointer",
                     isActive
                       ? "bg-[#FAFDFE] text-[#102542] font-semibold border border-[#9AC0EB] shadow-sm"
                       : "text-[#2B4566] hover:text-[#102542] hover:bg-[#E8F1FC]/70 border border-transparent"
@@ -159,8 +161,9 @@ export const DesktopSidebar: React.FC = () => {
                 <Link
                   key={item.href}
                   href={item.href}
+                  prefetch={true}
                   className={cn(
-                    "flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors",
+                    "flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors duration-75 active:scale-[0.98] active:duration-40 cursor-pointer",
                     isActive
                       ? "bg-[#FAFDFE] text-[#102542] font-semibold border border-[#9AC0EB] shadow-sm"
                       : "text-[#2B4566] hover:text-[#102542] hover:bg-[#E8F1FC]/70 border border-transparent"

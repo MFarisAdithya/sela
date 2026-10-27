@@ -50,7 +50,7 @@ export const NeuButton = React.forwardRef<HTMLButtonElement, NeuButtonProps>(
         ref={ref}
         disabled={disabled || isLoading}
         className={cn(
-          "inline-flex items-center justify-center font-medium transition-all duration-150 select-none",
+          "inline-flex items-center justify-center font-medium select-none cursor-pointer active:scale-[0.98] active:duration-40 transition-all duration-75",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           "disabled:opacity-50 disabled:pointer-events-none disabled:shadow-none",
           sizeClasses[size],

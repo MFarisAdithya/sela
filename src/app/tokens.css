@@ -76,8 +76,8 @@
   --shadow-inset: var(--press-groove);
   --shadow-pressed: inset 0 2px 4px rgba(16, 37, 66, 0.14);
 
-  /* Motion Curves */
-  --dur-fast: 140ms;
-  --dur-med: 220ms;
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Motion Curves - Optimized for instant responsive clicks */
+  --dur-fast: 90ms;
+  --dur-med: 160ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }

@@ -426,7 +426,7 @@ export default function SafeStoryPage() {
                     key={idx}
                     type="button"
                     onClick={() => handleSendMessage(suggestion)}
-                    className="px-3.5 py-2 rounded-xl bg-white border border-[#BFD8F5] hover:border-[#2563EB] hover:bg-[#F0F7FF] text-xs text-[#2B4566] hover:text-[#2563EB] font-medium transition-all shadow-xs text-left"
+                    className="px-3.5 py-2 rounded-xl bg-white border border-[#BFD8F5] hover:border-[#2563EB] hover:bg-[#F0F7FF] text-xs text-[#2B4566] hover:text-[#2563EB] font-medium transition-colors duration-75 active:scale-95 active:duration-40 shadow-xs text-left cursor-pointer"
                   >
                     {suggestion}
                   </button>

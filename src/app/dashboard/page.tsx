@@ -395,9 +395,10 @@ export default function PracticeTalkDashboard() {
                 type="button"
                 onClick={() => setSelectedPersonaKey(p.key)}
                 className={cn(
-                  "p-3.5 rounded-2xl border text-left transition-all flex flex-col justify-between relative group",
+                  "p-3.5 rounded-2xl border text-left flex flex-col justify-between relative group cursor-pointer select-none",
+                  "transition-colors duration-100 active:scale-[0.98] active:duration-40",
                   isSelected
-                    ? "bg-[#1E56A0] text-[#FAFDFE] border-[#133A6E] shadow-sm font-semibold scale-[1.01]"
+                    ? "bg-[#1E56A0] text-[#FAFDFE] border-[#133A6E] shadow-sm font-semibold"
                     : "bg-[#FAFDFE] text-[#102542] border-[#BFD8F5] hover:border-[#8AB6EB] hover:shadow-xs"
                 )}
               >
@@ -514,7 +515,7 @@ export default function PracticeTalkDashboard() {
                   key={idx}
                   type="button"
                   onClick={() => setInputValue(item.text)}
-                  className="px-3 py-1.5 rounded-xl bg-white border border-[#CCE1FF] hover:border-[#2457A7] text-xs font-medium text-[#17365D] hover:text-[#2457A7] hover:bg-[#F7FAFF] transition-all shadow-xs"
+                  className="px-3 py-1.5 rounded-xl bg-white border border-[#CCE1FF] hover:border-[#2457A7] text-xs font-medium text-[#17365D] hover:text-[#2457A7] hover:bg-[#F7FAFF] transition-colors duration-75 active:scale-95 active:duration-40 cursor-pointer shadow-xs"
                 >
                   {item.label}
                 </button>
