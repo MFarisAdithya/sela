@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, HeartHandshake, Target, ShieldCheck, Users, Sparkles } from "lucide-react";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { PublicFooter } from "@/components/layout/PublicFooter";
+import { AuraShowcaseSection } from "@/components/ui/AuraMascot";
 import { copy } from "@/lib/copy";
 
 export default function TentangPage() {
@@ -75,6 +76,9 @@ export default function TentangPage() {
               </p>
             </div>
           </div>
+
+          {/* Aura Mascot Showcase in Tentang */}
+          <AuraShowcaseSection className="mb-14" />
 
           {/* Bottom Action */}
           <div className="text-center">

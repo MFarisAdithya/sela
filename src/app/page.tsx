@@ -13,6 +13,14 @@ import { copy } from "@/lib/copy";
 import { SelaHeroIllustration } from "@/components/landing/SelaHeroIllustration";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { PublicFooter } from "@/components/layout/PublicFooter";
+import { AuraShowcaseSection } from "@/components/ui/AuraMascot";
+
+const STEP_AURA_IMAGES: Record<string, string> = {
+  "01": "/images/aura/aura-chat-assistant.png",
+  "02": "/images/aura/aura-panduan-langkah.png",
+  "03": "/images/aura/aura-practice-talk.png",
+  "04": "/images/aura/aura-rencana-dukungan.png",
+};
 
 export default function LandingPage() {
   const t = copy.landing;
@@ -106,25 +114,34 @@ export default function LandingPage() {
               </p>
             </div>
 
-            {/* 4 Cards Grid */}
+            {/* 4 Cards Grid with Aura Product Illustrations */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {t.fourSteps.map((step) => (
                 <div
                   key={step.number}
-                  className="cotton-sheet flex flex-col justify-between p-6 sm:p-7 rounded-3xl hover:border-[#8AB6EB] transition-colors group"
+                  className="cotton-sheet flex flex-col justify-between p-5 sm:p-6 rounded-3xl hover:border-[#6BA8FF] transition-colors group"
                 >
                   <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="font-mono-num text-3xl font-semibold text-[#1E56A0]/35 group-hover:text-[#1E56A0] transition-colors">
-                        {step.number}
+                    <div className="w-full h-36 rounded-2xl overflow-hidden bg-[#EAF3FF] border border-[#BFD8F5] mb-4">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={STEP_AURA_IMAGES[step.number] || "/images/aura/aura-chat-assistant.png"}
+                        alt={step.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-mono-num text-xs font-bold px-2.5 py-0.5 rounded-full bg-[#D6E9FF] text-[#2E63D6]">
+                        Tahap {step.number}
                       </span>
-                      <span className="w-2 h-2 rounded-full bg-[#1E56A0]" />
+                      <span className="w-2 h-2 rounded-full bg-[#2E63D6]" />
                     </div>
 
                     <h3 className="text-lg font-bold text-[#102542] tracking-tight mb-1">
                       {step.title}
                     </h3>
-                    <p className="text-xs font-semibold text-[#1E56A0] mb-2.5">
+                    <p className="text-xs font-semibold text-[#2E63D6] mb-2">
                       {step.subtitle}
                     </p>
                     <p className="text-sm text-[#35527A] leading-relaxed">
@@ -132,10 +149,10 @@ export default function LandingPage() {
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-[#BFD8F5]/70">
+                  <div className="mt-5 pt-3.5 border-t border-[#BFD8F5]/70">
                     <Link
                       href={step.href}
-                      className="inline-flex items-center text-xs font-semibold text-[#1E56A0] group-hover:text-[#102542] transition-colors"
+                      className="inline-flex items-center text-xs font-semibold text-[#2E63D6] group-hover:text-[#102542] transition-colors"
                     >
                       Pelajari alur ini
                       <ArrowRight className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" />
@@ -148,10 +165,15 @@ export default function LandingPage() {
             <div className="mt-10 text-center">
               <Link
                 href="/cara-kerja"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1E56A0] hover:text-[#102542] underline underline-offset-4"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2E63D6] hover:text-[#102542] underline underline-offset-4"
               >
                 Lihat rincian lengkap cara kerja SELA.AI
               </Link>
+            </div>
+
+            {/* AURA MASCOT SHOWCASE SECTION */}
+            <div className="mt-16">
+              <AuraShowcaseSection />
             </div>
           </div>
         </section>

@@ -87,17 +87,29 @@ export default function OnboardingPage() {
         <div className="bg-[#F7FAFF] p-6 sm:p-10 rounded-3xl border border-[#CCE1FF] shadow-[6px_6px_16px_rgba(164,188,224,0.35),-6px_-6px_16px_rgba(255,255,255,0.95)]">
           {/* STEP 1: Selamat Datang & Orientasi */}
           {step === 1 && (
-            <div className="space-y-6 text-center animate-in fade-in duration-200">
+            <div className="space-y-5 text-center animate-in fade-in duration-200">
               <span className="text-xs font-semibold uppercase tracking-wider text-[#2457A7] px-3 py-1 rounded-full bg-[#EBF3FF]">
                 Langkah 1 dari 4
               </span>
+              <div className="flex flex-col items-center gap-2 pt-1">
+                <div className="w-24 h-24 rounded-2xl bg-white border border-[#CCE1FF] shadow-sm overflow-hidden flex items-center justify-center p-1">
+                  <img
+                    src="/images/aura/aura-pose-halo.png"
+                    alt="Aura menyapa Halo!"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <span className="text-xs font-bold text-[#2457A7]">
+                  &ldquo;Hai! Aku Aura, Temanmu di SELA.AI&rdquo;
+                </span>
+              </div>
               <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#17365D]">
                 Kamu tidak harus langsung tahu harus mulai dari mana.
               </h1>
               <p className="text-sm sm:text-base text-[#17365D]/85 leading-relaxed">
-                SELA.AI hadir sebagai ruang jeda yang tenang. Di sini, kamu boleh berhenti sejenak, mengurai apa yang terasa mengganjal, dan menyiapkan kata-kata sebelum berbicara dengan orang lain.
+                SELA.AI hadir sebagai ruang jeda yang tenang bersama Aura. Di sini, kamu boleh berhenti sejenak, mengurai apa yang terasa mengganjal, dan menyiapkan kata-kata sebelum berbicara dengan orang lain.
               </p>
-              <div className="pt-4">
+              <div className="pt-2">
                 <button
                   type="button"
                   onClick={() => setStep(2)}

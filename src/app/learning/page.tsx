@@ -15,6 +15,7 @@ import { NeuCard } from "@/components/ui/NeuCard";
 import { NeuButton } from "@/components/ui/NeuButton";
 import { Badge } from "@/components/ui/Badge";
 import { ProgressBar } from "@/components/ui/ProgressBar";
+import { AuraModuleHeader } from "@/components/ui/AuraMascot";
 import { useApp } from "@/context/AppContext";
 import { LEARNING_MODULES, LearningModule } from "@/data/learningModules";
 import { copy } from "@/lib/copy";
@@ -42,28 +43,22 @@ export default function LearningPage() {
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto py-2 animate-in fade-in duration-150">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border-subtle/80 pb-5">
-        <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-            Sudut Baca & Refleksi
-          </span>
-          <h1 className="text-2xl font-extrabold text-brand-900 tracking-tight">
-            {copy.learning.title}
-          </h1>
-          <p className="text-xs text-text-muted mt-0.5">
-            Hal-hal kecil tentang menghadapi orang lain dan memahami diri.
-          </p>
-        </div>
-
-        <div className="w-full sm:w-56 space-y-1">
-          <ProgressBar
-            value={progressPct}
-            label={`Progres: ${completedModules.length} dari ${LEARNING_MODULES.length} selesai`}
-            showPercentage
-          />
-        </div>
-      </div>
+      {/* Header with Aura Mascot */}
+      <AuraModuleHeader
+        productKey="materi-edukasi"
+        eyebrow="Sudut Baca & Refleksi"
+        title={copy.learning.title}
+        description="Hal-hal kecil tentang menghadapi orang lain dan memahami diri bersama Aura."
+        rightSlot={
+          <div className="w-full sm:w-56 space-y-1">
+            <ProgressBar
+              value={progressPct}
+              label={`Progres: ${completedModules.length} dari ${LEARNING_MODULES.length} selesai`}
+              showPercentage
+            />
+          </div>
+        }
+      />
 
       {/* Category Filter Pills */}
       <div className="flex items-center gap-2 overflow-x-auto pb-1">

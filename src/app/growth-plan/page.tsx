@@ -15,6 +15,7 @@ import { NeuButton } from "@/components/ui/NeuButton";
 import { NeuInput } from "@/components/ui/NeuInput";
 import { CircularProgress } from "@/components/ui/ProgressBar";
 import { Badge } from "@/components/ui/Badge";
+import { AuraModuleHeader } from "@/components/ui/AuraMascot";
 import { useApp } from "@/context/AppContext";
 
 export default function GrowthPlanPage() {
@@ -44,30 +45,24 @@ export default function GrowthPlanPage() {
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto py-2">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-border-subtle/80 pb-4">
-        <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-            Rencana Mandiri
-          </span>
-          <h1 className="text-2xl font-extrabold text-brand-900 tracking-tight">
-            Rencana bertumbuh
-          </h1>
-          <p className="text-xs text-text-muted mt-0.5">
-            Langkah mingguan sukarela untuk melatih kebiasaan sehat tanpa tekanan batas waktu kaku.
-          </p>
-        </div>
-
-        <NeuButton
-          size="sm"
-          variant="primary"
-          onClick={() => setIsAdding(!isAdding)}
-          leftIcon={<Plus className="w-4 h-4" />}
-          className="self-start sm:self-auto"
-        >
-          {isAdding ? "Batal" : "Tambah target"}
-        </NeuButton>
-      </div>
+      {/* Header with Aura Mascot */}
+      <AuraModuleHeader
+        productKey="progress"
+        eyebrow="Rencana Mandiri"
+        title="Rencana Bertumbuh"
+        description="Langkah mingguan sukarela untuk melatih kebiasaan sehat bersama Aura tanpa tekanan batas waktu kaku."
+        rightSlot={
+          <NeuButton
+            size="sm"
+            variant="primary"
+            onClick={() => setIsAdding(!isAdding)}
+            leftIcon={<Plus className="w-4 h-4" />}
+            className="self-start sm:self-auto"
+          >
+            {isAdding ? "Batal" : "Tambah target"}
+          </NeuButton>
+        }
+      />
 
       {/* Main Focus & Circular Progress Card */}
       <NeuCard variant="raised" className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-center bg-surface">

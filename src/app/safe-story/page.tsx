@@ -25,6 +25,7 @@ import { NeuButton } from "@/components/ui/NeuButton";
 import { NeuModal } from "@/components/ui/NeuModal";
 import { Badge } from "@/components/ui/Badge";
 import { SourceCitation } from "@/components/chat/SourceCitation";
+import { AuraModuleHeader, AuraAvatar } from "@/components/ui/AuraMascot";
 import { useApp, StoryCard } from "@/context/AppContext";
 import { RetrievedSource } from "@/types/knowledge";
 import { cn } from "@/lib/utils";
@@ -278,50 +279,43 @@ export default function SafeStoryPage() {
 
   return (
     <div className="space-y-5 max-w-4xl mx-auto py-2">
-      {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#C6DCF5] pb-4">
-        <div>
-          <span className="font-mono-num text-xs font-semibold text-[#1E56A0] block mb-0.5">
-            Tahap 01 — Guided Story
-          </span>
-          <h1 className="font-display-serif text-2xl sm:text-3xl font-medium text-[#102542]">
-            Urai Cerita Pribadi
-          </h1>
-          <p className="text-xs sm:text-sm text-[#2B4566] mt-0.5">
-            Rapikan uneg-uneg ke dalam 4 bagian Kartu Cerita sebelum kamu bicara.
-          </p>
-        </div>
-
-        {/* Mode Selector Groove */}
-        <div className="sky-groove flex items-center gap-1 self-start sm:self-auto">
-          <button
-            type="button"
-            onClick={() => setActiveTab("guided_steps")}
-            className={cn(
-              "px-3.5 py-1.5 rounded-md text-xs font-semibold transition-colors flex items-center gap-1.5",
-              activeTab === "guided_steps"
-                ? "bg-[#FAFDFE] text-[#102542] shadow-sm border border-[#9AC0EB]"
-                : "text-[#2B4566] hover:text-[#102542]"
-            )}
-          >
-            <Layers className="w-3.5 h-3.5 text-[#1E56A0]" />
-            Langkah Terpadu
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("free_chat")}
-            className={cn(
-              "px-3.5 py-1.5 rounded-md text-xs font-semibold transition-colors flex items-center gap-1.5",
-              activeTab === "free_chat"
-                ? "bg-[#FAFDFE] text-[#102542] shadow-sm border border-[#9AC0EB]"
-                : "text-[#2B4566] hover:text-[#102542]"
-            )}
-          >
-            <MessageSquare className="w-3.5 h-3.5 text-[#1E56A0]" />
-            Obrolan Reflektif
-          </button>
-        </div>
-      </div>
+      {/* Top Header with Aura Mascot */}
+      <AuraModuleHeader
+        productKey={activeTab === "guided_steps" ? "panduan-langkah" : "chat-assistant"}
+        eyebrow="Tahap 01 — Guided Story"
+        title="Urai Cerita Pribadi"
+        description="Rapikan uneg-uneg ke dalam 4 bagian Kartu Cerita bersama Aura sebelum kamu bicara."
+        rightSlot={
+          <div className="sky-groove flex items-center gap-1 self-start sm:self-auto">
+            <button
+              type="button"
+              onClick={() => setActiveTab("guided_steps")}
+              className={cn(
+                "px-3.5 py-1.5 rounded-md text-xs font-semibold transition-colors flex items-center gap-1.5",
+                activeTab === "guided_steps"
+                  ? "bg-[#FAFDFE] text-[#102542] shadow-sm border border-[#9AC0EB]"
+                  : "text-[#2B4566] hover:text-[#102542]"
+              )}
+            >
+              <Layers className="w-3.5 h-3.5 text-[#1E56A0]" />
+              Langkah Terpadu
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("free_chat")}
+              className={cn(
+                "px-3.5 py-1.5 rounded-md text-xs font-semibold transition-colors flex items-center gap-1.5",
+                activeTab === "free_chat"
+                  ? "bg-[#FAFDFE] text-[#102542] shadow-sm border border-[#9AC0EB]"
+                  : "text-[#2B4566] hover:text-[#102542]"
+              )}
+            >
+              <MessageSquare className="w-3.5 h-3.5 text-[#1E56A0]" />
+              Obrolan Reflektif
+            </button>
+          </div>
+        }
+      />
 
       {/* Safety & Non-Clinical Disclaimer */}
       <div className="p-3.5 rounded-2xl bg-[#F7FAFF] border border-[#CCE1FF] flex items-start gap-3 text-xs text-[#17365D]/80">
@@ -749,6 +743,14 @@ export default function SafeStoryPage() {
                   key={msg.id}
                   className={cn("flex flex-col animate-in fade-in duration-150", isUser ? "items-end" : "items-start")}
                 >
+                  {!isUser && (
+                    <div className="flex items-center gap-2 mb-1.5 px-1">
+                      <AuraAvatar size="xs" />
+                      <span className="text-[11px] font-bold text-[#1E56A0]">
+                        Aura · Teman Refleksi
+                      </span>
+                    </div>
+                  )}
                   <div
                     className={cn(
                       "max-w-[88%] sm:max-w-[80%] rounded-2xl p-4 text-xs sm:text-sm leading-relaxed",

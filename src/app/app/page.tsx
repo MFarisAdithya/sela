@@ -15,14 +15,18 @@ import {
 import { useAuth } from "@/context/AuthContext";
 import { useApp } from "@/context/AppContext";
 import { greetingFor } from "@/lib/copy";
+import { AURA_EXPRESSIONS, AuraAvatar } from "@/components/ui/AuraMascot";
+import { cn } from "@/lib/utils";
 
 export default function AppDashboardPage() {
   const { user } = useAuth();
   const { storyCards, activeStoryCard } = useApp();
   const [greeting, setGreeting] = useState("Selamat datang");
+  const [selectedExpId, setSelectedExpId] = useState<string>("tenang");
 
   const displayName = user?.displayName || "Kawan";
   const featuredCard = activeStoryCard || storyCards[0];
+  const currentExp = AURA_EXPRESSIONS.find((e) => e.id === selectedExpId) || AURA_EXPRESSIONS[3];
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -37,6 +41,7 @@ export default function AppDashboardPage() {
       desc: "Jawab pertanyaan santai untuk merapikan uneg-uneg di kepala.",
       href: "/safe-story",
       icon: MessageSquareHeart,
+      auraImg: "/images/aura/aura-chat-assistant.png",
     },
     {
       code: "02",
@@ -45,6 +50,7 @@ export default function AppDashboardPage() {
       desc: "Lihat dan edit draf ringkasan 4 kuadran sebelum mulai bicara.",
       href: "/journal",
       icon: Compass,
+      auraImg: "/images/aura/aura-panduan-langkah.png",
     },
     {
       code: "03",
@@ -53,6 +59,7 @@ export default function AppDashboardPage() {
       desc: "Latih kalimat pembukamu bareng peran orang tua, dosen, atau teman.",
       href: "/dashboard",
       icon: MessageCircle,
+      auraImg: "/images/aura/aura-practice-talk.png",
     },
     {
       code: "04",
@@ -61,26 +68,33 @@ export default function AppDashboardPage() {
       desc: "Daftar kontak darurat, panduan Puskesmas BPJS, dan checklist bicara.",
       href: "/support",
       icon: Users,
+      auraImg: "/images/aura/aura-rencana-dukungan.png",
     },
   ];
 
   return (
     <div className="space-y-7 py-2 text-[#102542]">
-      {/* 1. Header Greeting & Status Paket */}
+      {/* 1. Header Greeting with Aura & Status Paket */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-5 border-b border-[#C6DCF5]">
-        <div>
-          <h1 className="font-display-serif text-2xl sm:text-3xl font-medium text-[#102542]">
-            {greeting}, {displayName}.
-          </h1>
-          <p className="mt-1 text-sm text-[#2B4566]">
-            Meja persiapan obrolan dan catatan reflektif pribadimu.
-          </p>
+        <div className="flex items-center gap-3.5">
+          <AuraAvatar size="lg" />
+          <div>
+            <span className="text-[11px] font-bold text-[#2E63D6] bg-[#D6E9FF] px-2.5 py-0.5 rounded-full">
+              Aura · Temanmu di SELA.AI
+            </span>
+            <h1 className="font-serif-display text-2xl sm:text-3xl font-medium text-[#102542] mt-1">
+              {greeting}, {displayName}.
+            </h1>
+            <p className="text-xs sm:text-sm text-[#2B4566]">
+              Meja persiapan obrolan dan catatan reflektif pribadimu.
+            </p>
+          </div>
         </div>
 
         <div className="flex items-center gap-2.5">
           <Link
             href="/app/paket"
-            className="letterpress-cotton inline-flex items-center gap-2 px-3.5 py-2 text-xs"
+            className="letterpress-cotton inline-flex items-center gap-2 px-3.5 py-2 text-xs rounded-xl"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#1E56A0]" />
             <span>
@@ -90,6 +104,48 @@ export default function AppDashboardPage() {
               Kelola kuota
             </span>
           </Link>
+        </div>
+      </div>
+
+      {/* 1B. Interactive Mood Check-in with Aura's 6 Facial Expressions */}
+      <div className="cotton-sheet rounded-2xl p-4 sm:p-5 border border-[#BFD8F5]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+          <span className="text-xs font-bold text-[#102542]">
+            Bagaimana rasanya hari ini? Pilih ekspresi Aura yang paling pas:
+          </span>
+          <span className="text-[11px] text-[#5B789E]">Check-in suasana hati harian</span>
+        </div>
+        <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+          {AURA_EXPRESSIONS.map((exp) => {
+            const isSelected = exp.id === selectedExpId;
+            return (
+              <button
+                key={exp.id}
+                type="button"
+                onClick={() => setSelectedExpId(exp.id)}
+                className={cn(
+                  "flex flex-col items-center p-2 rounded-xl border transition-colors",
+                  isSelected
+                    ? "bg-[#D6E9FF] border-[#2E63D6] shadow-sm"
+                    : "bg-[#F4F8FF] border-[#D6E9FF] hover:border-[#6BA8FF]"
+                )}
+              >
+                <div className="w-11 h-11 rounded-lg overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={exp.src} alt={exp.label} className="w-full h-full object-contain" />
+                </div>
+                <span className={cn("text-[11px] mt-1 font-semibold", isSelected ? "text-[#2E63D6]" : "text-[#35527A]")}>
+                  {exp.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+        <div className="mt-3 p-3 rounded-xl bg-[#F4F8FF] border border-[#D6E9FF] flex items-center gap-2.5 text-xs text-[#102542]">
+          <AuraAvatar size="xs" />
+          <p className="leading-snug">
+            <strong className="text-[#2E63D6]">Pesan Aura:</strong> {currentExp.reply}
+          </p>
         </div>
       </div>
 
@@ -147,74 +203,46 @@ export default function AppDashboardPage() {
           </p>
         </div>
 
-        <div className="cotton-sheet border-t-2 border-t-[#102542] border border-[#9AC0EB] overflow-hidden">
-          <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-[#C6DCF5]">
-            {coreActions.slice(0, 2).map((action) => {
-              const Icon = action.icon;
-              return (
-                <Link
-                  key={action.code}
-                  href={action.href}
-                  className="p-5 hover:bg-[#F4F9FF] transition-colors flex flex-col justify-between group"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-[#C6DCF5]">
-                      <span className="font-mono-num text-lg font-semibold text-[#1E56A0]">
-                        {action.code}
-                      </span>
-                      <span className="text-xs font-medium px-2.5 py-0.5 rounded bg-[#E8F1FC] text-[#2B4566] border border-[#C6DCF5]">
-                        {action.subtitle}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <Icon className="w-4 h-4 text-[#1E56A0]" />
-                      <h3 className="text-base font-bold text-[#102542]">{action.title}</h3>
-                    </div>
-                    <p className="text-xs sm:text-sm text-[#2B4566] leading-relaxed">
-                      {action.desc}
-                    </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {coreActions.map((action) => {
+            const Icon = action.icon;
+            return (
+              <Link
+                key={action.code}
+                href={action.href}
+                className="cotton-sheet rounded-2xl p-4 hover:border-[#2E63D6] transition-colors flex flex-col justify-between group"
+              >
+                <div>
+                  <div className="w-full h-28 rounded-xl overflow-hidden bg-[#EAF3FF] border border-[#BFD8F5] mb-3">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={action.auraImg}
+                      alt={action.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
-                  <div className="mt-4 pt-2.5 border-t border-[#E8F1FC] text-xs font-semibold text-[#1E56A0] group-hover:underline">
-                    Buka {action.title}
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-mono-num text-xs font-bold px-2 py-0.5 rounded bg-[#D6E9FF] text-[#2E63D6]">
+                      Tahap {action.code}
+                    </span>
+                    <span className="text-[11px] font-medium text-[#516B8C]">
+                      {action.subtitle}
+                    </span>
                   </div>
-                </Link>
-              );
-            })}
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-[#C6DCF5] border-t border-[#C6DCF5]">
-            {coreActions.slice(2, 4).map((action) => {
-              const Icon = action.icon;
-              return (
-                <Link
-                  key={action.code}
-                  href={action.href}
-                  className="p-5 hover:bg-[#F4F9FF] transition-colors flex flex-col justify-between group"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-[#C6DCF5]">
-                      <span className="font-mono-num text-lg font-semibold text-[#1E56A0]">
-                        {action.code}
-                      </span>
-                      <span className="text-xs font-medium px-2.5 py-0.5 rounded bg-[#E8F1FC] text-[#2B4566] border border-[#C6DCF5]">
-                        {action.subtitle}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <Icon className="w-4 h-4 text-[#1E56A0]" />
-                      <h3 className="text-base font-bold text-[#102542]">{action.title}</h3>
-                    </div>
-                    <p className="text-xs sm:text-sm text-[#2B4566] leading-relaxed">
-                      {action.desc}
-                    </p>
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <Icon className="w-4 h-4 text-[#2E63D6]" />
+                    <h3 className="text-sm font-bold text-[#102542]">{action.title}</h3>
                   </div>
-                  <div className="mt-4 pt-2.5 border-t border-[#E8F1FC] text-xs font-semibold text-[#1E56A0] group-hover:underline">
-                    Buka {action.title}
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+                  <p className="text-xs text-[#2B4566] leading-relaxed">
+                    {action.desc}
+                  </p>
+                </div>
+                <div className="mt-3 pt-2 border-t border-[#E8F1FC] text-xs font-semibold text-[#2E63D6] group-hover:underline">
+                  Buka {action.title}
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
 

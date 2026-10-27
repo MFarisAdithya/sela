@@ -23,6 +23,7 @@ import {
   Share2,
 } from "lucide-react";
 import { useApp, StoryCard } from "@/context/AppContext";
+import { AuraModuleHeader } from "@/components/ui/AuraMascot";
 import { cn } from "@/lib/utils";
 
 export default function StoryCardHubPage() {
@@ -158,50 +159,43 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto py-2 animate-in fade-in duration-150">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#CCE1FF]/80 pb-4">
-        <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#2457A7] px-2.5 py-0.5 rounded-full bg-[#EBF3FF]">
-            Pilar 2 · Kartu Cerita
-          </span>
-          <h1 className="text-2xl font-extrabold text-[#17365D] tracking-tight mt-1">
-            Kartu Cerita Pribadi
-          </h1>
-          <p className="text-xs sm:text-sm text-[#17365D]/75 mt-0.5">
-            Jembatan konkret dari situasi yang kusut menjadi poin bicara yang siap diucapkan.
-          </p>
-        </div>
-
-        {/* View Toggle */}
-        <div className="flex items-center gap-1.5 p-1 bg-[#E3EEFF] rounded-2xl border border-[#CCE1FF] self-start sm:self-auto">
-          <button
-            type="button"
-            onClick={() => setActiveTab("story_cards")}
-            className={cn(
-              "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5",
-              activeTab === "story_cards"
-                ? "bg-[#2457A7] text-white shadow-sm"
-                : "text-[#17365D]/70 hover:text-[#17365D]"
-            )}
-          >
-            <FileText className="w-3.5 h-3.5" />
-            Kartu Cerita ({storyCards.length})
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("free_journal")}
-            className={cn(
-              "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5",
-              activeTab === "free_journal"
-                ? "bg-[#2457A7] text-white shadow-sm"
-                : "text-[#17365D]/70 hover:text-[#17365D]"
-            )}
-          >
-            <BookOpen className="w-3.5 h-3.5" />
-            Catatan Bebas ({journalEntries.length})
-          </button>
-        </div>
-      </div>
+      {/* Header with Aura Mascot */}
+      <AuraModuleHeader
+        productKey="panduan-langkah"
+        eyebrow="Tahap 02 — Kartu Cerita"
+        title="Kartu Cerita Pribadi"
+        description="Jembatan konkret dari situasi yang kusut menjadi poin bicara yang siap diucapkan bersama Aura."
+        rightSlot={
+          <div className="flex items-center gap-1.5 p-1 bg-[#E3EEFF] rounded-2xl border border-[#CCE1FF] self-start sm:self-auto">
+            <button
+              type="button"
+              onClick={() => setActiveTab("story_cards")}
+              className={cn(
+                "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5",
+                activeTab === "story_cards"
+                  ? "bg-[#2457A7] text-white shadow-sm"
+                  : "text-[#17365D]/70 hover:text-[#17365D]"
+              )}
+            >
+              <FileText className="w-3.5 h-3.5" />
+              Kartu Cerita ({storyCards.length})
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("free_journal")}
+              className={cn(
+                "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5",
+                activeTab === "free_journal"
+                  ? "bg-[#2457A7] text-white shadow-sm"
+                  : "text-[#17365D]/70 hover:text-[#17365D]"
+              )}
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              Catatan Bebas ({journalEntries.length})
+            </button>
+          </div>
+        }
+      />
 
       {/* TAB 1: STORY CARDS */}
       {activeTab === "story_cards" && (

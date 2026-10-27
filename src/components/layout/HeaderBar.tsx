@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Shield, Sparkles } from "lucide-react";
 import { SelaMark } from "@/components/ui/SelaLogo";
+import { AuraAvatar } from "@/components/ui/AuraMascot";
 import { useAuth } from "@/context/AuthContext";
 import { cn } from "@/lib/utils";
 
@@ -47,8 +48,17 @@ export const HeaderBar: React.FC = () => {
           </Link>
         </div>
 
-        {/* Right: Plan Pill & Quick Settings */}
-        <div className="flex items-center gap-3">
+        {/* Right: Aura Companion Pill, Plan Pill & Quick Settings */}
+        <div className="flex items-center gap-2.5">
+          <Link
+            href="/safe-story"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/95 border border-[#BFD8F5] text-xs font-bold text-[#1E56A0] hover:border-[#2E63D6] transition-all shadow-sm"
+            title="Bicara dengan Aura"
+          >
+            <AuraAvatar size="xs" />
+            <span className="hidden xs:inline">Aura Aktif</span>
+          </Link>
+
           <Link
             href="/app/paket"
             className={cn(

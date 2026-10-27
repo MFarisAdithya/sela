@@ -18,6 +18,7 @@ import {
   PhoneCall,
 } from "lucide-react";
 import { SelaLogo } from "@/components/ui/SelaLogo";
+import { AuraAvatar } from "@/components/ui/AuraMascot";
 
 const coreNavItems = [
   { code: "00", label: "Ringkasan Ruang", href: "/app", icon: LayoutDashboard },
@@ -190,8 +191,23 @@ export const DesktopSidebar: React.FC = () => {
         </div>
       </div>
 
-      {/* Safety hotline footer card */}
-      <div className="pt-4 border-t border-[#C6DCF5]">
+      {/* Aura Companion & Safety hotline footer card */}
+      <div className="pt-4 border-t border-[#C6DCF5] space-y-2.5">
+        <Link
+          href="/safe-story"
+          className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/95 border border-[#B8D7FA] shadow-sm hover:border-[#2E63D6] transition-all group"
+        >
+          <AuraAvatar size="sm" />
+          <div className="min-w-0 flex-1">
+            <span className="block text-xs font-extrabold text-[#102542] group-hover:text-[#1E56A0] truncate">
+              Aura · Temanmu
+            </span>
+            <span className="block text-[10px] text-[#516B8C] truncate">
+              Si Cahaya Kecil dari SELA.AI
+            </span>
+          </div>
+        </Link>
+
         <div className="p-3 rounded-xl bg-[#FAFDFE] border border-[#9AC0EB] shadow-sm">
           <div className="flex items-center justify-between text-xs font-semibold text-[#102542]">
             <span className="flex items-center gap-1.5">

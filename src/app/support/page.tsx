@@ -22,6 +22,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 import { useApp, SupportContact } from "@/context/AppContext";
+import { AuraModuleHeader } from "@/components/ui/AuraMascot";
 import { cn } from "@/lib/utils";
 
 export default function SupportPathwayPage() {
@@ -82,18 +83,13 @@ export default function SupportPathwayPage() {
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto py-2 animate-in fade-in duration-150">
-      {/* Header */}
-      <div className="border-b border-[#BFD8F5] pb-4">
-        <span className="font-mono-num text-[11px] font-semibold text-[#1E56A0] px-2.5 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
-          Tahap 04 — Support Pathway
-        </span>
-        <h1 className="font-serif-display text-2xl sm:text-3xl font-medium text-[#102542] tracking-tight mt-2">
-          Peta jalur dukungan nyata
-        </h1>
-        <p className="text-xs sm:text-sm text-[#35527A] mt-1">
-          Daftar kontak bantuan resmi, faskes Puskesmas BPJS, dan pendamping sebaya gratis.
-        </p>
-      </div>
+      {/* Header with Aura Mascot */}
+      <AuraModuleHeader
+        productKey="rencana-dukungan"
+        eyebrow="Tahap 04 — Support Pathway"
+        title="Peta Jalur Dukungan Nyata"
+        description="Daftar kontak bantuan resmi, faskes Puskesmas BPJS, dan pendamping sebaya gratis bersama Aura."
+      />
 
       {/* Free Access & Non-Paywall Commitment Banner */}
       <div className="p-3.5 rounded-2xl bg-[#FAFDFE] border border-[#BFD8F5] flex items-start gap-2.5 text-xs text-[#102542]">

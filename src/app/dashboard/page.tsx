@@ -22,6 +22,7 @@ import {
   Sparkle,
 } from "lucide-react";
 import { useApp, StoryCard } from "@/context/AppContext";
+import { AuraModuleHeader, AuraAvatar } from "@/components/ui/AuraMascot";
 import { cn } from "@/lib/utils";
 
 interface PracticeMessage {
@@ -227,29 +228,23 @@ export default function PracticeTalkDashboard() {
 
   return (
     <div className="space-y-5 max-w-4xl mx-auto py-2 animate-in fade-in duration-150">
-      {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#BFD8F5] pb-4">
-        <div>
-          <span className="font-mono-num text-[11px] font-semibold text-[#1E56A0] px-2.5 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
-            Tahap 03 — Practice Talk
-          </span>
-          <h1 className="font-serif-display text-2xl sm:text-3xl font-medium text-[#102542] tracking-tight mt-2">
-            Latihan percakapan terpandu
-          </h1>
-          <p className="text-xs sm:text-sm text-[#35527A] mt-1">
-            Uji kalimat pembukamu dengan lawan bicara simulasi sebelum bicara langsung.
-          </p>
-        </div>
-
-        <button
-          type="button"
-          onClick={handleResetSession}
-          className="letterpress-cotton inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold self-start sm:self-auto"
-        >
-          <RotateCcw className="w-3.5 h-3.5 text-[#1E56A0]" />
-          Mulai ulang sesi
-        </button>
-      </div>
+      {/* Top Header with Aura Mascot */}
+      <AuraModuleHeader
+        productKey="practice-talk"
+        eyebrow="Tahap 03 — Practice Talk"
+        title="Latihan Percakapan Terpandu"
+        description="Uji kalimat pembukamu dengan lawan bicara simulasi dan dapatkan tips komunikasi dari Aura."
+        rightSlot={
+          <button
+            type="button"
+            onClick={handleResetSession}
+            className="letterpress-cotton inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold self-start sm:self-auto"
+          >
+            <RotateCcw className="w-3.5 h-3.5 text-[#1E56A0]" />
+            Mulai ulang sesi
+          </button>
+        }
+      />
 
       {/* Persona Selection Bar */}
       <div className="space-y-2.5">
@@ -386,10 +381,10 @@ export default function PracticeTalkDashboard() {
 
                   {/* Communication Coaching Tip Note */}
                   {msg.tip && (
-                    <div className="mt-3 p-3 rounded-xl bg-[#EBF3FF] border border-[#CCE1FF] text-xs text-[#17365D] space-y-1">
-                      <div className="flex items-center gap-1 text-[11px] font-bold text-[#2457A7]">
-                        <Sparkles className="w-3.5 h-3.5" />
-                        <span>Tinjauan Komunikasi Asertif:</span>
+                    <div className="mt-3 p-3 rounded-xl bg-[#EBF3FF] border border-[#CCE1FF] text-xs text-[#17365D] space-y-1.5">
+                      <div className="flex items-center gap-2 text-[11px] font-bold text-[#2457A7]">
+                        <AuraAvatar size="xs" />
+                        <span>Tips Komunikasi dari Aura:</span>
                       </div>
                       <p className="text-[11px] text-[#17365D]/85 leading-relaxed">{msg.tip}</p>
                     </div>
