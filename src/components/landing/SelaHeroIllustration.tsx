@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { Heart, Sparkles } from "lucide-react";
 
 export const SelaHeroIllustration: React.FC = () => {
   return (
@@ -10,9 +9,6 @@ export const SelaHeroIllustration: React.FC = () => {
         @media (prefers-reduced-motion: no-preference) {
           .sela-orbit-slow {
             animation: sela-orbit 32s linear infinite;
-          }
-          .sela-breathe-subtle {
-            animation: sela-breathe-subtle 6s ease-in-out infinite;
           }
           .sela-float-gentle {
             animation: sela-float-gentle 4.5s ease-in-out infinite;
@@ -30,10 +26,6 @@ export const SelaHeroIllustration: React.FC = () => {
         @keyframes sela-orbit {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
-        }
-        @keyframes sela-breathe-subtle {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.03); }
         }
         @keyframes sela-float-gentle {
           0%, 100% { transform: translateY(0px); }
@@ -108,29 +100,6 @@ export const SelaHeroIllustration: React.FC = () => {
           alt="Aura menyambut sambil melambaikan tangan dengan sayap daun biru terbuka"
           className="w-full h-full object-contain drop-shadow-[0_18px_36px_rgba(30,86,160,0.18)]"
         />
-      </div>
-
-      {/* Top Right Greeting Badge: "Hai! Aku Aura" */}
-      <div className="z-20 flex absolute top-2 right-0 sm:-right-2 items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#FAFDFE]/95 backdrop-blur-md border border-[#9AC0EB] shadow-[0_10px_24px_rgba(16,37,66,0.1)] text-[#102542] sela-breathe-subtle">
-        <Sparkles className="w-4 h-4 text-[#D9822B] shrink-0" />
-        <div className="text-left leading-tight">
-          <span className="block text-xs font-extrabold text-[#2E63D6]">Hai! Aku Aura</span>
-          <span className="block text-[10px] font-medium text-[#35527A]">Temanmu di SELA.AI</span>
-        </div>
-      </div>
-
-      {/* Bottom Left Floating Pill: Ramah & Menenangkan */}
-      <div className="z-20 hidden sm:flex absolute bottom-3 -left-2 items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-[#FAFDFE]/95 backdrop-blur-md border border-[#9AC0EB] shadow-[0_10px_24px_rgba(16,37,66,0.1)] text-[#102542] sela-breathe-subtle">
-        <span className="w-6 h-6 rounded-full bg-[#FFE9F1] text-[#E15B8C] flex items-center justify-center">
-          <Heart className="w-3.5 h-3.5 fill-current" />
-        </span>
-        <span className="text-xs font-semibold tracking-tight">Ramah &amp; menenangkan</span>
-      </div>
-
-      {/* Bottom Right Floating Pill: Ruang Aman */}
-      <div className="z-20 hidden sm:flex absolute bottom-8 -right-4 items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#FAFDFE]/95 backdrop-blur-md border border-[#9AC0EB] shadow-[0_10px_24px_rgba(16,37,66,0.1)] text-[#102542]">
-        <span className="w-2.5 h-2.5 rounded-full bg-[#0F6E56] animate-pulse" />
-        <span className="text-[11px] font-semibold text-[#102542]">Memberikan rasa aman</span>
       </div>
     </div>
   );
