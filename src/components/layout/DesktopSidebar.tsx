@@ -34,7 +34,6 @@ const secondaryNavItems = [
 ];
 
 const accountNavItems = [
-  { label: "Paket & Langganan", href: "/app/paket", icon: Sparkles },
   { label: "Riwayat Transaksi", href: "/app/pembayaran", icon: CreditCard },
   { label: "Pengaturan Akun", href: "/app/pengaturan", icon: ShieldCheck },
 ];

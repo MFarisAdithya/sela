@@ -5,18 +5,20 @@ import Link from "next/link";
 import {
   Sparkles,
   CreditCard,
+  Check,
   HeartHandshake,
   Info,
+  ArrowRight,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { UserEntitlements } from "@/types/payment";
 import { CheckoutModal } from "@/components/payment/CheckoutModal";
+import { copy } from "@/lib/copy";
 
 export default function PaketDanKuotaPage() {
   const { user } = useAuth();
 
   const [entitlements, setEntitlements] = useState<UserEntitlements | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   const fetchEntitlements = async () => {
@@ -30,8 +32,6 @@ export default function PaketDanKuotaPage() {
       }
     } catch (err) {
       console.error("Failed to load entitlements:", err);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -40,6 +40,7 @@ export default function PaketDanKuotaPage() {
   }, [user]);
 
   const isPremium = entitlements?.isPremiumActive ?? (user?.plan === "premium");
+  const t = copy.landing;
 
   const formatDate = (isoStr?: string) => {
     if (!isoStr) return "—";
@@ -55,176 +56,162 @@ export default function PaketDanKuotaPage() {
   };
 
   return (
-    <div className="space-y-8 max-w-4xl mx-auto py-2 text-[#17365D]">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-[#CCE1FF]/80">
+    <div className="space-y-8 max-w-4xl mx-auto py-2 text-[#102542]">
+      {/* 1. Header Bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-5 border-b border-[#BFD8F5]">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF3FF] border border-[#CCE1FF] text-xs font-semibold text-[#2457A7] uppercase tracking-wider mb-2">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Manajemen Langganan</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#17365D]">
-            Paket &amp; Langganan
+          <h1 className="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[#102542]">
+            {t.pricingTeaserTitle}
           </h1>
-          <p className="mt-1 text-sm text-[#17365D]/75">
-            Pantau status langganan dan opsi kontribusi untuk mendukung SELA.AI.
+          <p className="mt-1 text-xs sm:text-sm text-[#35527A]">
+            {t.pricingTeaserDesc}
           </p>
         </div>
 
         <Link
           href="/app/pembayaran"
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-[#CCE1FF] bg-white text-xs font-semibold text-[#2457A7] hover:bg-[#EBF3FF] transition-colors shadow-sm self-start sm:self-auto"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#BFD8F5] bg-white text-xs font-semibold text-[#1E56A0] hover:bg-[#F4F8FF] transition-colors shadow-sm self-start sm:self-auto"
         >
           <CreditCard className="w-3.5 h-3.5" />
           <span>Riwayat Transaksi →</span>
         </Link>
       </div>
 
-      {/* PLAN STATUS HERO CARD */}
-      <div
-        className={`p-6 sm:p-8 rounded-3xl border transition-all ${
-          isPremium
-            ? "bg-gradient-to-br from-[#17365D] to-[#2457A7] text-white border-[#2457A7] shadow-[8px_8px_24px_rgba(23,54,93,0.3)]"
-            : "bg-[#F7FAFF] text-[#17365D] border-[#CCE1FF] shadow-[6px_6px_16px_rgba(164,188,224,0.35),-6px_-6px_16px_rgba(255,255,255,0.95)]"
-        }`}
-      >
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-          <div className="flex items-start sm:items-center gap-4 sm:gap-5">
-            <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border p-1.5 shrink-0 shadow-sm flex items-center justify-center ${
-              isPremium
-                ? "bg-white/10 backdrop-blur-sm border-white/20"
-                : "bg-white border-[#CCE1FF]"
-            }`}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/aura/aura-supporter.png"
-                alt="Aura mengenakan pin bintang kecil berwarna biru dengan pose apresiatif"
-                className="w-full h-full object-contain"
-              />
+      {/* 2. Dua Kartu Paket: Paket Gratis vs SELA Supporter */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+        {/* Kartu 1: Paket Gratis */}
+        <div className="cotton-sheet rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-[#BFD8F5] shadow-sm relative">
+          <div>
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-bold text-[#102542]">{t.freePlan.name}</h2>
+              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#DCEAFB] text-[#1E56A0]">
+                {isPremium ? "Dasar" : "Paket Saat Ini"}
+              </span>
             </div>
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-2.5">
-                <span
-                  className={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full ${
-                    isPremium
-                      ? "bg-[#6FB1FF]/20 text-[#CCE1FF] border border-[#6FB1FF]/40"
-                      : "bg-[#EBF3FF] text-[#2457A7] border border-[#CCE1FF]"
-                  }`}
-                >
-                  {isPremium ? "SELA Supporter Aktif" : "Paket Bebas (Free)"}
-                </span>
-                {isPremium ? (
-                  <span className="text-xs bg-[#E6F4EA] text-[#1F7A65] font-semibold px-2.5 py-0.5 rounded-full border border-[#B7E1CD]">
-                    Pin Bintang Biru Aktif ⭐
-                  </span>
-                ) : (
-                  <span className="text-xs bg-[#EBF3FF] text-[#2457A7] font-semibold px-2.5 py-0.5 rounded-full border border-[#CCE1FF]">
-                    Aura Menemani
+
+            <div className="mt-4 flex items-baseline gap-2">
+              <span className="font-mono-num text-4xl font-bold text-[#102542]">
+                {t.freePlan.price}
+              </span>
+              <span className="text-xs text-[#5B789E]">{t.freePlan.period}</span>
+            </div>
+
+            <p className="mt-2 text-xs sm:text-sm text-[#35527A] leading-relaxed">
+              {t.freePlan.desc}
+            </p>
+
+            <ul className="mt-6 space-y-3 border-t border-[#BFD8F5]/80 pt-6">
+              {t.freePlan.features.map((item, idx) => (
+                <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#102542]">
+                  <Check className="w-4 h-4 text-[#0F6E56] shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-[#BFD8F5]/80">
+            <button
+              type="button"
+              disabled={!isPremium}
+              className={`w-full py-3 rounded-full text-xs sm:text-sm font-semibold transition-all text-center ${
+                !isPremium
+                  ? "bg-[#DCEAFB] text-[#1E56A0] cursor-default font-bold"
+                  : "border border-[#BFD8F5] text-[#35527A] hover:bg-[#F4F8FF]"
+              }`}
+            >
+              {!isPremium ? "✓ Paket Aktif Saat Ini" : "Bebas Digunakan"}
+            </button>
+          </div>
+        </div>
+
+        {/* Kartu 2: SELA Supporter */}
+        <div className="rounded-3xl bg-[#102542] text-[#FAFDFE] p-6 sm:p-8 border border-[#1E56A0] shadow-[0_14px_32px_rgba(16,37,66,0.18)] flex flex-col justify-between relative overflow-hidden">
+          <div>
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <h2 className="text-xl font-bold text-[#FAFDFE]">{t.premiumPlan.name}</h2>
+                {isPremium && (
+                  <span className="text-xs bg-[#E6F4EA] text-[#1F7A65] font-semibold px-2 py-0.5 rounded-full">
+                    Aktif ⭐
                   </span>
                 )}
               </div>
-
-              <h2 className="text-2xl sm:text-3xl font-black">
-                {isPremium ? "Paket SELA Supporter Premium" : "Paket Akses Bebas (Free)"}
-              </h2>
-
-              <p
-                className={`text-xs sm:text-sm max-w-xl leading-relaxed ${
-                  isPremium ? "text-white/85" : "text-[#17365D]/80"
-                }`}
-              >
-                {isPremium
-                  ? "Terima kasih telah berkontribusi menjaga SELA.AI tetap mandiri dan aman. Pin bintang birumu aktif sebagai apresiasi identitas Supporter."
-                  : "Kamu menggunakan akses dasar SELA.AI dengan penuh penghargaan. Seluruh alat bantu esensial, keselamatan, dan kontak darurat dapat digunakan gratis tanpa rasa dibedakan."}
-              </p>
+              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#1E56A0] text-[#DCEAFB] border border-[#BFD8F5]/30">
+                Pilihan Supporter
+              </span>
             </div>
+
+            <div className="mt-4 flex items-baseline gap-2">
+              <span className="font-mono-num text-4xl font-bold text-[#FAFDFE]">
+                {t.premiumPlan.price}
+              </span>
+              <span className="text-xs text-[#DCEAFB]/80">{t.premiumPlan.period}</span>
+            </div>
+
+            <p className="mt-2 text-xs sm:text-sm text-[#DCEAFB]/90 leading-relaxed">
+              {t.premiumPlan.desc}
+            </p>
+
+            <ul className="mt-6 space-y-3 border-t border-white/15 pt-6">
+              {t.premiumPlan.features.map((item, idx) => (
+                <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#FAFDFE]/95">
+                  <Check className="w-4 h-4 text-[#8AB6EB] shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <div className="shrink-0 flex flex-col gap-2">
+          <div className="mt-8 pt-6 border-t border-white/15 space-y-2">
             <button
               type="button"
               onClick={() => setIsCheckoutOpen(true)}
-              className={`px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-md inline-flex items-center justify-center gap-2 ${
-                isPremium
-                  ? "bg-white text-[#17365D] hover:bg-[#F7FAFF]"
-                  : "bg-[#2457A7] text-white hover:bg-[#1f4a8f]"
-              }`}
+              className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#2457A7] py-3 text-xs sm:text-sm font-semibold text-[#FAFDFE] hover:bg-[#2A6BC2] transition-all shadow-md active:scale-[0.99]"
             >
-              <Sparkles className="w-4 h-4" />
-              <span>{isPremium ? "Perpanjang Masa Aktif" : "Tingkatkan ke Supporter (Rp19.000)"}</span>
+              <Sparkles className="w-4 h-4 text-[#DCEAFB]" />
+              <span>{isPremium ? "Perpanjang Masa Aktif" : "Pilih Supporter (Rp19.000)"}</span>
+              <ArrowRight className="w-4 h-4 ml-1" />
             </button>
 
             {isPremium && (
-              <span className="text-[11px] text-center text-white/70">
-                Berlaku hingga: {formatDate(entitlements?.premiumUntil || user?.premiumUntil)}
-              </span>
+              <p className="text-[11px] text-center text-[#DCEAFB]/70">
+                Masa aktif berlaku hingga: {formatDate(entitlements?.premiumUntil || user?.premiumUntil)}
+              </p>
             )}
           </div>
         </div>
       </div>
 
-      {/* Aura Supporter Identity Card */}
-      <div className="p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-[#FAFDFE] via-[#F4F8FF] to-[#E8F1FC] border border-[#BFD8F5] shadow-sm flex flex-col sm:flex-row items-center gap-5">
-        <div className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-2xl bg-white border border-[#BFD8F5] p-2 flex items-center justify-center shadow-sm">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/aura/aura-supporter.png"
-            alt="Aura mengenakan pin bintang kecil berwarna biru dengan pose apresiatif"
-            className="w-full h-full object-contain"
-          />
-        </div>
-        <div className="flex-1 space-y-1 text-center sm:text-left">
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-            <span className="font-mono-num text-[11px] font-semibold text-[#1E56A0] px-2.5 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
-              Aura Supporter
-            </span>
-            <span className="text-xs font-semibold text-[#102542]">
-              Pin Bintang Biru &amp; Identitas Apresiatif
-            </span>
-          </div>
-          <h3 className="text-base sm:text-lg font-bold text-[#102542]">
-            Memberi Identitas Premium Tanpa Mengurangi Penghargaan Pengguna Bebas
-          </h3>
-          <p className="text-xs text-[#35527A] leading-relaxed">
-            Aura mengenakan pin bintang kecil berwarna biru dengan pose apresiatif. Makna dari identitas ini adalah merayakan kebaikan hati para supporter yang menopang biaya operasional server dan infrastruktur enkripsi, tanpa pernah membuat pengguna paket Bebas merasa dikesampingkan atau kehilangan rasa aman.
-          </p>
-        </div>
+      {/* 3. Catatan Reassurance & Transparansi */}
+      <div className="text-center text-xs text-[#5B789E] max-w-lg mx-auto">
+        Sekali bayar tanpa tagihan otomatis. Bantuan krisis dan Support Pathway selalu gratis.
       </div>
 
-      {/* NON-PAYWALLED SAFETY COMMITMENT */}
-      <div className="p-6 rounded-3xl bg-[#E6F4EA]/80 border border-[#B7E1CD] text-[#17365D] flex items-start gap-4">
-        <HeartHandshake className="w-6 h-6 text-[#1F7A65] shrink-0 mt-1" />
-        <div className="space-y-1.5">
-          <h3 className="font-bold text-sm text-[#1F7A65]">
+      {/* 4. Jaminan Etika & Privasi Tanpa Paywall */}
+      <div className="p-5 sm:p-6 rounded-3xl bg-[#E6F4EA]/80 border border-[#B7E1CD] text-[#102542] flex items-start gap-3.5">
+        <HeartHandshake className="w-5 h-5 text-[#1F7A65] shrink-0 mt-0.5" />
+        <div className="space-y-1 text-xs sm:text-sm">
+          <h3 className="font-bold text-[#1F7A65]">
             Jaminan Etika SELA.AI: Bantuan Darurat &amp; Keselamatan Tidak Pernah Dikunci
           </h3>
-          <p className="text-xs text-[#17365D]/85 leading-relaxed">
-            Meskipun dalam status paket bebas (free), kamu selalu dapat mengakses <strong>Support Pathway</strong>,
-            hotline krisis resmi Kemenkes (SEJIWA 119 ext 8, SAPA 129), dan membaca seluruh Kartu Cerita yang telah dibuat.
-            SELA.AI tidak pernah mengunci pertolongan darurat di balik pintu berbayar.
+          <p className="text-[#102542]/80 leading-relaxed text-xs">
+            Seluruh pengguna (gratis maupun supporter) dapat selalu mengakses <strong>Support Pathway</strong> dan nomor krisis resmi (SEJIWA 119 ext 8, SAPA 129). SELA.AI tidak pernah mengunci pertolongan darurat di balik pintu berbayar.
           </p>
-          <div className="pt-1">
-            <Link
-              href="/support"
-              className="inline-flex items-center gap-1 text-xs font-semibold text-[#1F7A65] hover:underline"
-            >
-              Buka Layanan Support Pathway Sekarang →
-            </Link>
-          </div>
         </div>
       </div>
 
-      {/* PRICING TRANSPARENCY NOTICE */}
-      <div className="p-6 rounded-3xl bg-white border border-[#CCE1FF] space-y-3">
-        <div className="flex items-center gap-2 text-sm font-bold text-[#17365D]">
-          <Info className="w-4 h-4 text-[#2457A7]" />
-          <span>Transparansi Biaya &amp; Model Supporter</span>
+      {/* 5. Transparansi Biaya */}
+      <div className="p-5 sm:p-6 rounded-3xl bg-white border border-[#BFD8F5] text-xs sm:text-sm text-[#102542] flex items-start gap-3.5">
+        <Info className="w-5 h-5 text-[#1E56A0] shrink-0 mt-0.5" />
+        <div className="space-y-1">
+          <h3 className="font-bold text-[#1E56A0]">
+            Transparansi Biaya &amp; Model Supporter
+          </h3>
+          <p className="text-[#35527A] leading-relaxed text-xs">
+            Kontribusi Rp19.000/30 hari digunakan langsung untuk menutupi biaya operasional server dan infrastruktur privasi terenkripsi. SELA.AI tidak menampilkan iklan, tidak menjual data pribadi, dan tidak ada sistem tagihan otomatis (*no auto-charge*).
+          </p>
         </div>
-        <p className="text-xs text-[#17365D]/80 leading-relaxed">
-          Biaya Rp19.000/30 hari digunakan langsung untuk menutupi biaya operasional server dan infrastruktur
-          privasi terenkripsi. SELA.AI tidak menampilkan iklan, tidak menjual data pribadi pengguna kepada pihak ketiga,
-          dan tidak menerapkan sistem penagihan otomatis (*no auto-charge*).
-        </p>
       </div>
 
       {/* Checkout Modal */}

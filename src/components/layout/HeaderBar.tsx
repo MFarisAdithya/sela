@@ -59,17 +59,19 @@ export const HeaderBar: React.FC = () => {
             <span className="hidden xs:inline">Aura Aktif</span>
           </Link>
 
+          {/* Upgrade Button */}
           <Link
             href="/app/paket"
             className={cn(
-              "hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold transition-colors",
+              "inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all shadow-sm active:scale-95",
               user?.plan === "premium"
-                ? "bg-[#102542] text-[#FAFDFE] border border-[#1E56A0]"
-                : "bg-[#FAFDFE] border border-[#BFD8F5] text-[#35527A] hover:text-[#102542]"
+                ? "bg-[#102542] text-[#FAFDFE] border border-[#1E56A0] hover:bg-[#1E56A0]"
+                : "bg-[#2457A7] text-white hover:bg-[#1C4477] shadow-[0_2px_8px_rgba(36,87,167,0.25)]"
             )}
+            title="Upgrade Paket SELA.AI"
           >
-            <Sparkles className={cn("w-3.5 h-3.5", user?.plan === "premium" ? "text-[#DCEAFB]" : "text-[#1E56A0]")} />
-            <span>{user?.plan === "premium" ? "SELA Supporter" : "Paket Gratis"}</span>
+            <Sparkles className="w-3.5 h-3.5 text-[#DCEAFB]" />
+            <span>Upgrade</span>
           </Link>
 
           <Link
