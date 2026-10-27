@@ -172,11 +172,11 @@ export default function PaketDanKuotaPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* 1. Respons AI */}
+          {/* 1. Respons Guided Story */}
           <div className="p-5 rounded-3xl bg-[#F7FAFF] border border-[#CCE1FF] shadow-sm space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-[#2457A7] uppercase tracking-wider">
-                Guided Story AI
+                Guided Story
               </span>
               <Sparkles className="w-4 h-4 text-[#2457A7]" />
             </div>
@@ -195,7 +195,7 @@ export default function PaketDanKuotaPage() {
             </div>
 
             <p className="text-[11px] text-[#17365D]/70 leading-relaxed">
-              Digunakan saat mengurai cerita terpandu dengan pendamping AI.
+              Digunakan saat mengurai cerita terpandu di ruang refleksi.
             </p>
           </div>
 
@@ -263,7 +263,7 @@ export default function PaketDanKuotaPage() {
             Jaminan Etika SELA.AI: Bantuan Darurat &amp; Keselamatan Tidak Pernah Dikunci
           </h3>
           <p className="text-xs text-[#17365D]/85 leading-relaxed">
-            Meskipun kuota AI bulananmu habis, kamu tetap dapat mengakses <strong>Support Pathway</strong>,
+            Meskipun kuota latihan bulananmu habis, kamu tetap dapat mengakses <strong>Support Pathway</strong>,
             hotline krisis resmi Kemenkes (SEJIWA 119 ext 8, SAPA 129), dan membaca seluruh Kartu Cerita yang telah dibuat.
             SELA.AI tidak pernah mengunci pertolongan darurat di balik pintu berbayar.
           </p>
@@ -285,7 +285,7 @@ export default function PaketDanKuotaPage() {
           <span>Transparansi Biaya &amp; Model Supporter</span>
         </div>
         <p className="text-xs text-[#17365D]/80 leading-relaxed">
-          Biaya Rp19.000/30 hari digunakan langsung untuk menutupi biaya komputasi model AI server dan infrastruktur
+          Biaya Rp19.000/30 hari digunakan langsung untuk menutupi biaya operasional server dan infrastruktur
           privasi terenkripsi. SELA.AI tidak menampilkan iklan, tidak menjual data pribadi pengguna kepada pihak ketiga,
           dan tidak menerapkan sistem penagihan otomatis (*no auto-charge*).
         </p>

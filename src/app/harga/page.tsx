@@ -40,7 +40,7 @@ export default function HargaPage() {
   const premiumBenefits = [
     {
       title: "100 respons Guided Story per bulan",
-      desc: "Kapasitas 10 kali lipat dari paket Gratis. AI bukan pengganti psikolog.",
+      desc: "Kapasitas 10 kali lipat dari paket Gratis. Latihan ini bukan pengganti psikolog.",
       icon: Sparkles,
     },
     {
@@ -72,7 +72,7 @@ export default function HargaPage() {
 
   const comparisonRows = [
     {
-      feature: "Respons Guided Story AI",
+      feature: "Respons Guided Story",
       free: "10 respons / bulan",
       premium: "100 respons / bulan",
     },
@@ -146,7 +146,7 @@ export default function HargaPage() {
           <div className="cotton-sheet p-4 rounded-xl border border-[#9AC0EB] text-xs sm:text-sm text-[#2B4566] flex items-start gap-3 max-w-3xl mx-auto mb-10">
             <Info className="w-5 h-5 text-[#1E56A0] shrink-0 mt-0.5" />
             <p className="leading-relaxed">
-              <strong className="text-[#102542]">Jaminan keselamatan:</strong> Hotline darurat SEJIWA 119 ext 8, SAPA 129, dan Support Pathway selalu gratis tanpa paywall. Biaya paket cuma untuk sewa operasional server AI.
+              <strong className="text-[#102542]">Jaminan keselamatan:</strong> Hotline darurat SEJIWA 119 ext 8, SAPA 129, dan Support Pathway selalu gratis tanpa paywall. Biaya paket cuma untuk operasional layanan dan pemeliharaan server.
             </p>
           </div>
 

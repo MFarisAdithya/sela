@@ -7,9 +7,6 @@ export async function GET() {
   return NextResponse.json({
     status: "ok",
     isConfigured: status.isConfigured,
-    provider: "google_gemini",
-    model: status.model,
     description: status.statusText,
-    mode: status.isConfigured ? "AI_AKTIF" : "API_BELUM_DIKONFIGURASI",
   });
 }

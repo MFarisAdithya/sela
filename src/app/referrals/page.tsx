@@ -226,7 +226,7 @@ export default function ReferralsPage() {
                 </div>
 
                 <p className="text-[10px] text-text-muted italic pt-1">
-                  * Catatan demonstrasi: Tiket ini dibuat sebagai simulasi alur rujukan. Isi percakapan AI tidak pernah dibagikan ke pihak ketiga secara otomatis.
+                  * Catatan demonstrasi: Tiket ini dibuat sebagai simulasi alur rujukan. Isi percakapan tidak pernah dibagikan ke pihak ketiga secara otomatis.
                 </p>
               </NeuCard>
             ))}

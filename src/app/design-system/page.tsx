@@ -356,8 +356,8 @@ export default function DesignSystemPage() {
         <NeuModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          title="Kirim teks ke layanan AI?"
-          description="Teks kamu akan diproses untuk memberikan respons reflektif."
+          title="Kirim catatan refleksi?"
+          description="Teks kamu akan diproses untuk memberikan tanggapan reflektif."
           footer={
             <>
               <NeuButton
@@ -386,7 +386,7 @@ export default function DesignSystemPage() {
         >
           <div className="p-3 rounded-xl bg-surface-inset shadow-neu-inset text-xs text-text-muted space-y-2">
             <p>
-              AI ini bukan psikolog atau konselor klinis dan tidak menggantikan bantuan profesional.
+              Layanan ini bukan psikolog atau konselor klinis dan tidak menggantikan bantuan profesional.
             </p>
           </div>
         </NeuModal>

@@ -73,11 +73,11 @@ export default function FiturPage() {
             ))}
           </div>
 
-          {/* Batasan AI & Prinsip Nonklinis */}
+          {/* Batasan Layanan & Prinsip Nonklinis */}
           <div className="mt-16 p-8 sm:p-10 rounded-3xl bg-white/90 border border-[#CCE1FF] shadow-md">
             <div className="flex items-center gap-3 text-lg font-bold text-[#17365D] mb-4">
               <ShieldAlert className="w-5 h-5 text-[#2457A7]" />
-              <h2>Batasan AI &amp; Tanggung Jawab Penggunaan</h2>
+              <h2>Batasan Layanan &amp; Tanggung Jawab Penggunaan</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-[#17365D]/80 leading-relaxed">
               <div className="space-y-3">
@@ -85,7 +85,7 @@ export default function FiturPage() {
                   <strong>Bukan Alat Diagnosis:</strong> SELA.AI tidak memberikan label kejiwaan, diagnosis depresi/gangguan psikologis, atau asesmen klinis formal.
                 </p>
                 <p>
-                  <strong>Bukan Pengganti Manusia:</strong> AI bertindak murni sebagai mitra persiapan dan simulasi komunikasi agar kamu lebih siap berbicara dengan orang sungguhan.
+                  <strong>Bukan Pengganti Manusia:</strong> Layanan ini bertindak murni sebagai ruang persiapan dan simulasi komunikasi agar kamu lebih siap berbicara dengan orang sungguhan.
                 </p>
               </div>
               <div className="space-y-3">

@@ -247,13 +247,6 @@ export default function SafeStoryPage() {
     const text = (textToSend || inputValue).trim();
     if (!text || isLoading) return;
 
-    const hasAlreadyConsented = sessionStorage.getItem("sela_chat_consent") === "true";
-    if (!hasAlreadyConsented) {
-      setPendingMessage(text);
-      setIsConsentModalOpen(true);
-      return;
-    }
-
     executeSend(text);
   };
 
@@ -691,13 +684,13 @@ export default function SafeStoryPage() {
         </div>
       )}
 
-      {/* TAB 2: FREE AI CHAT REFLECTION */}
+      {/* TAB 2: FREE CHAT REFLECTION */}
       {activeTab === "free_chat" && (
         <div className="flex flex-col h-[calc(100vh-230px)] space-y-3">
           {/* Action to convert free chat to Story Card */}
           <div className="flex items-center justify-between px-1">
             <span className="text-[11px] text-[#17365D]/70">
-              Bercerita bebas dengan pendamping AI SELA.
+              Bercerita bebas di ruang refleksi SELA.
             </span>
             <button
               type="button"
@@ -852,8 +845,8 @@ export default function SafeStoryPage() {
       <NeuModal
         isOpen={isConsentModalOpen}
         onClose={() => setIsConsentModalOpen(false)}
-        title="Persetujuan Pemrosesan AI"
-        description="SELA.AI meminta persetujuan sebelum mengirimkan teks refleksi ke Google Gemini API."
+        title="Persetujuan Privasi Refleksi"
+        description="SELA.AI menjaga kerahasiaan catatan refleksimu sebelum diproses."
         footer={
           <>
             <NeuButton variant="ghost" size="sm" onClick={() => setIsConsentModalOpen(false)}>
@@ -871,7 +864,7 @@ export default function SafeStoryPage() {
               <Lock className="w-3.5 h-3.5 text-[#2457A7]" /> Sanitasi Data &amp; Privasi
             </strong>
             <p>
-              Nomor kontak, nama lengkap, dan data identitas disamarkan otomatis sebelum teks diproses oleh model kecerdasan buatan. Teks tidak digunakan untuk melatih model publik pihak ketiga.
+              Nomor kontak, nama lengkap, dan data identitas disamarkan otomatis sebelum teks diproses. Teks tidak digunakan untuk iklan atau pihak ketiga.
             </p>
           </div>
         </div>

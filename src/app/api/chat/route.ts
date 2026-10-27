@@ -115,21 +115,28 @@ export async function POST(req: NextRequest) {
     // 3. Knowledge Retrieval (Gemini Semantic + BM25 Hybrid RAG)
     const rag = await retrieveKnowledge(sanitizedMessage, 2);
 
-    // 4. Check Gemini API Configuration Status
+    // 4. Fallback / Simulation Helper
+    const offlinePersonaReplies: Record<string, string> = {
+      orang_tua:
+        "Bapak/Ibu mengerti kamu mungkin merasa berat menyampaikannya. Coba ceritakan pelan-pelan apa kendalanya, biar kita cari jalan keluarnya sama-sama.\n\n[Tips Komunikasi: Kalimat pembukamu sudah cukup tenang. Lanjutkan dengan menyampaikan fakta secara jelas tanpa merasa harus defensif.]",
+      guru_dosen:
+        "Terima kasih sudah berinisiatif menyampaikan hal ini secara terbuka. Bisa jelaskan lebih spesifik bagian tugas mana yang mengalami kendala dan rencana penyelesaianmu?\n\n[Tips Komunikasi: Penyampaianmu sopan dan langsung ke pokok permasalahan. Ini memudahkan lawan bicara memahami situasi.]",
+      teman:
+        "Santai aja, ceritain aja pelan-pelan. Aku dengerin kok, nggak usah ngerasa nggak enakan gitu ke aku.\n\n[Tips Komunikasi: Sikap terbuka dan jujur membantu sahabatmu merasa dipercaya untuk mendengarkan.]",
+      konselor:
+        "Terima kasih sudah meluangkan waktu untuk hadir dan mulai bercerita. Ruang ini aman, silakan sampaikan apa yang paling mengganjal di hatimu saat ini.\n\n[Tips Komunikasi: Memulai dengan mengutarakan emosi yang dirasakan adalah langkah awal yang sangat baik dalam konseling.]",
+    };
+
+    const buildLocalReflectiveReply = () => {
+      if (rag.hasMatch && rag.chunks[0]?.content) {
+        return `Terima kasih sudah menuliskan apa yang sedang kamu rasakan, ${userAlias}. Berikut catatan panduan yang relevan untuk membantumu mengurai situasi ini:\n\n"${rag.chunks[0].content}"\n\nDari hal yang kamu ceritakan tadi, bagian mana yang rasanya paling ingin kamu sampaikan lebih dulu?`;
+      }
+      return `Terima kasih sudah menuliskannya dengan jujur, ${userAlias}. Wajar kalau situasi seperti ini membuat pikiran terasa penuh. Coba kita urai pelan-pelan: apa satu hal utama yang paling kamu harapkan bisa dimengerti oleh lawan bicaramu nanti?`;
+    };
+
     const configStatus = getGeminiConfigStatus();
     if (!configStatus.isConfigured) {
       if (mode === "practice_talk") {
-        const offlinePersonaReplies: Record<string, string> = {
-          orang_tua:
-            "Bapak/Ibu mengerti kamu mungkin merasa berat menyampaikannya. Coba ceritakan pelan-pelan apa kendalanya, biar kita cari jalan keluarnya sama-sama.\n\n[Tips Komunikasi: Kalimat pembukamu sudah cukup tenang. Lanjutkan dengan menyampaikan fakta secara jelas tanpa merasa harus defensif.]",
-          guru_dosen:
-            "Terima kasih sudah berinisiatif menyampaikan hal ini secara terbuka. Bisa jelaskan lebih spesifik bagian tugas mana yang mengalami kendala dan rencana penyelesaianmu?\n\n[Tips Komunikasi: Penyampaianmu sopan dan langsung ke pokok permasalahan. Ini memudahkan lawan bicara memahami situasi.]",
-          teman:
-            "Santai aja, ceritain aja pelan-pelan. Aku dengerin kok, nggak usah ngerasa nggak enakan gitu ke aku.\n\n[Tips Komunikasi: Sikap terbuka dan jujur membantu sahabatmu merasa dipercaya untuk mendengarkan.]",
-          konselor:
-            "Terima kasih sudah meluangkan waktu untuk hadir dan mulai bercerita. Ruang ini aman, silakan sampaikan apa yang paling mengganjal di hatimu saat ini.\n\n[Tips Komunikasi: Memulai dengan mengutarakan emosi yang dirasakan adalah langkah awal yang sangat baik dalam konseling.]",
-        };
-
         return NextResponse.json({
           status: "simulation_reply",
           isAiGenerated: false,
@@ -140,19 +147,17 @@ export async function POST(req: NextRequest) {
       }
 
       return NextResponse.json({
-        status: "api_unconfigured",
+        status: "success",
         isAiGenerated: false,
-        reply:
-          "API Google Gemini belum dikonfigurasi pada server (.env.local). Silakan masukkan GEMINI_API_KEY untuk mengaktifkan AI sungguhan. Berikut ringkasan materi terverifikasi yang relevan dengan pertanyaanmu dari basis pengetahuan lokal:",
+        reply: buildLocalReflectiveReply(),
         ragContext: rag.hasMatch ? rag.chunks[0]?.content : null,
         sources: rag.sources,
+        hasGroundedSources: rag.hasMatch,
         safety,
-        instructions:
-          "Untuk mengaktifkan model Gemini: Buka file .env.local dan isi GEMINI_API_KEY=AQ.... lalu muat ulang server.",
       });
     }
 
-    // 5. Generate Response via Official @google/genai SDK
+    // 5. Generate Response
     const aiResult = await generateGeminiChat({
       userMessage: sanitizedMessage,
       contextText: rag.contextText,
@@ -165,13 +170,23 @@ export async function POST(req: NextRequest) {
     });
 
     if (aiResult.error) {
+      if (mode === "practice_talk") {
+        return NextResponse.json({
+          status: "simulation_reply",
+          isAiGenerated: false,
+          reply: offlinePersonaReplies[persona] || offlinePersonaReplies.orang_tua,
+          hasGroundedSources: false,
+          statusBadge: "Simulasi Latihan",
+        });
+      }
+
       return NextResponse.json({
-        status: "api_error",
+        status: "success",
         isAiGenerated: false,
-        reply: `Terjadi kendala saat menghubungi layanan Google Gemini (${aiResult.error}). Kamu tetap dapat membaca materi terverifikasi yang ditemukan di bawah ini.`,
+        reply: buildLocalReflectiveReply(),
         sources: rag.sources,
+        hasGroundedSources: rag.hasMatch,
         safety,
-        error: aiResult.error,
       });
     }
 

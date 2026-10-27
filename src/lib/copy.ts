@@ -104,7 +104,7 @@ export const copy = {
 
     safetyDisclaimer: {
       title: "Batas Layanan & Privasi",
-      body: "SELA.AI adalah alat bantu latihan, bukan psikolog atau layanan darurat medis. Obrolan diproses dengan Google Gemini. Catatan jurnal dan namamu tersimpan di perangkatmu sendiri.",
+      body: "SELA.AI adalah alat bantu latihan, bukan psikolog atau layanan darurat medis. Catatan jurnal dan namamu tersimpan dengan aman di perangkatmu sendiri.",
       emergencyContacts: [
         { name: "Hotline Kesehatan Jiwa Kemenkes (SEJIWA)", number: "119 ext 8", note: "Bebas pulsa, 24 jam" },
         { name: "Sahabat Perempuan & Anak (SAPA KemenPPPA)", number: "129 / WhatsApp 08111-129-129", note: "Layanan perlindungan dan pendampingan" },
@@ -124,16 +124,16 @@ export const copy = {
         points: [
           "Pertanyaan ringan dan tidak menghakimi",
           "Boleh dilewati kapan saja tanpa beban",
-          "Teks hanya dikirim setelah persetujuanmu",
+          "Teks hanya disimpan atas persetujuanmu",
         ],
       },
       {
         id: "kartu-cerita",
         step: "Langkah 2",
         title: "Kartu Cerita Pribadi: Ringkasan Pegangan Bicara",
-        desc: "AI merapikan ceritamu jadi kartu ringkas: situasi, perasaan, kebutuhan, dan kalimat pembuka.",
+        desc: "Ceritamu dirapikan menjadi kartu ringkas berisi situasi, perasaan, kebutuhan, dan kalimat pembuka.",
         points: [
-          "Draf dari AI yang bisa kamu edit bebas",
+          "Draf kartu yang bisa kamu edit bebas",
           "Tersimpan hanya jika kamu setujui",
           "Bisa disalin atau dihapus kapan saja",
         ],
@@ -168,7 +168,7 @@ export const copy = {
     subtitle: "Membantu melatih keberanian bicara dan kecakapan hidup remaja.",
     list: [
       {
-        title: "Guided Story AI",
+        title: "Guided Story",
         category: "Navigasi Awal",
         desc: "Pertanyaan bertahap untuk merapikan isi kepala tanpa paksaan.",
       },
@@ -221,15 +221,15 @@ export const copy = {
   privacyPolicy: {
     title: "Kebijakan Privasi & Perlindungan Data",
     subtitle:
-      "Transparansi penuh mengenai apa yang kami proses, bagaimana data disimpan, dan hak kontrolmu.",
+      "Informasi jelas mengenai apa yang diproses, bagaimana data disimpan, dan hak kontrolmu.",
     points: [
       {
         title: "1. Prinsip Minimalisasi Data (Data Minimization)",
         desc: "Kami tidak meminta nomor identitas (NIK), alamat rumah, lokasi presisi, atau data sensitif yang tidak dibutuhkan oleh sistem.",
       },
       {
-        title: "2. Pemrosesan Data oleh Google Gemini AI",
-        desc: "Saat kamu menggunakan fitur Guided Story, Practice Talk, atau refleksi AI, teks dikirimkan ke Google Gemini API secara aman dari server kami untuk menghasilkan respons. Kami tidak menjual datamu untuk iklan atau melatih model publik.",
+        title: "2. Pemrosesan Teks & Keamanan Privasi",
+        desc: "Saat kamu menggunakan fitur Guided Story atau Practice Talk, teks diproses secara aman untuk menghasilkan tanggapan latihan. Kami tidak menjual datamu untuk iklan atau pihak ketiga.",
       },
       {
         title: "3. Penyimpanan Catatan & Kartu Cerita",

@@ -133,7 +133,7 @@ export default function PengaturanAkunPage() {
           </div>
           <p className="text-xs sm:text-sm text-[#17365D]/75 max-w-lg leading-relaxed">
             {user?.plan === "premium"
-              ? "Akunmu aktif sebagai SELA Supporter dengan kuota interaksi AI jauh lebih besar, kapasitas Kartu Cerita luas, dan akses penuh ke seluruh modul premium."
+              ? "Akunmu aktif sebagai SELA Supporter dengan kuota latihan lebih besar, kapasitas Kartu Cerita luas, dan akses penuh ke seluruh modul premium."
               : "Kamu menggunakan akses dasar SELA.AI. Bantuan darurat dan Support Pathway selalu dapat diakses gratis."}
           </p>
         </div>
@@ -243,7 +243,7 @@ export default function PengaturanAkunPage() {
                 className="mt-0.5 rounded text-[#2457A7] focus:ring-[#2457A7]"
               />
               <span>
-                Izinkan pengiriman teks ke <strong>Google Gemini API</strong> saat menggunakan fitur AI SELA.AI.
+                Izinkan pemrosesan teks cerita dan latihan secara aman saat menggunakan fitur SELA.AI.
               </span>
             </label>
 

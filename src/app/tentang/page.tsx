@@ -65,7 +65,7 @@ export default function TentangPage() {
             <div className="p-6 rounded-3xl bg-[#F7FAFF] border border-[#CCE1FF]">
               <h3 className="font-bold text-[#17365D] mb-2 text-base">Bukan Pengganti Manusia</h3>
               <p className="text-xs text-[#17365D]/80 leading-relaxed">
-                AI bukan dokter atau psikolog. AI bertindak sebagai teman latihan menyusun kata-kata.
+                Layanan ini bukan dokter atau psikolog, melainkan teman latihan menyusun kata-kata.
               </p>
             </div>
             <div className="p-6 rounded-3xl bg-[#F7FAFF] border border-[#CCE1FF]">

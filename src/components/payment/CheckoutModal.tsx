@@ -273,7 +273,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               <div className="border-t border-[#CCE1FF]/60 pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#17365D]/80">
                 <div className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#1F7A65] shrink-0" />
-                  <span>Kuota interaksi AI jauh lebih besar</span>
+                  <span>Kuota latihan Guided Story lebih besar</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#1F7A65] shrink-0" />

@@ -134,8 +134,8 @@ export default function OnboardingPage() {
                 <div className="p-4 rounded-2xl bg-white border border-[#CCE1FF] flex items-start gap-3">
                   <Sparkles className="w-5 h-5 text-[#2457A7] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="block text-[#17365D]">AI Mitra Latihan, Bukan Manusia</strong>
-                    AI dapat keliru dan tidak menggantikan kehangatan percakapan nyata dengan manusia tepercaya.
+                    <strong className="block text-[#17365D]">Mitra Latihan, Bukan Pengganti Manusia</strong>
+                    Simulasi latihan ini tidak menggantikan kehangatan percakapan nyata dengan manusia tepercaya.
                   </div>
                 </div>
 
@@ -256,7 +256,7 @@ export default function OnboardingPage() {
                 />
               </div>
 
-              {/* Explicit AI Consent Checkbox (PRD Section 4.1 point 11 & 5.2) */}
+              {/* Explicit Consent Checkbox */}
               <div className="p-4 rounded-2xl bg-[#EBF3FF] border border-[#CCE1FF]/80 text-xs text-[#17365D]/85">
                 <label className="flex items-start gap-2.5 cursor-pointer">
                   <input
@@ -266,7 +266,7 @@ export default function OnboardingPage() {
                     className="mt-0.5 rounded text-[#2457A7] focus:ring-[#2457A7]"
                   />
                   <span>
-                    Saya mengizinkan pengiriman teks cerita dan latihan ke <strong>Google Gemini API</strong> saat saya menggunakan fitur bantuan AI SELA.AI.
+                    Saya memahami batas layanan nonklinis dan menyetujui pemrosesan cerita latihan secara aman di SELA.AI.
                   </span>
                 </label>
               </div>

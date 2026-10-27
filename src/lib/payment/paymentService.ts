@@ -40,12 +40,12 @@ export const SERVER_PLANS: Record<string, PlanConfig> = {
     periodLabel: "30 hari",
     description: "Satu kali bayar · Tanpa auto-charge",
     features: [
-      "Kuota interaksi AI jauh lebih besar dibandingkan paket Gratis",
+      "Kuota latihan Guided Story jauh lebih besar dibandingkan paket Gratis",
       "Lebih banyak kesempatan menggunakan Practice Talk",
       "Kapasitas penyimpanan Kartu Cerita lebih luas",
       "Akses penuh ke seluruh modul premium",
-      "Insight refleksi dan perkembangan diri yang lebih mendalam",
-      "Rencana dukungan personal untuk membantu pengguna menentukan langkah berikutnya",
+      "Insight refleksi dan perkembangan diri yang lebih lengkap",
+      "Daftar persiapan langkah berikutnya sebelum memulai obrolan",
     ],
   },
 };

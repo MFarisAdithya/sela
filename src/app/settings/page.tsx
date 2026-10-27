@@ -67,45 +67,11 @@ export default function SettingsPage() {
           Pengaturan & privasi
         </h1>
         <p className="text-xs text-text-muted">
-          Kelola identitas samaran, status layanan AI, dan kontrol penyimpanan data.
+          Kelola identitas samaran, preferensi privasi, dan kontrol penyimpanan data.
         </p>
       </div>
 
-      {/* 1. AI API Configuration Status Card */}
-      <NeuCard variant="raised" className="p-5 space-y-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <KeyRound className="w-5 h-5 text-brand-700" />
-            <h2 className="text-sm font-bold text-brand-900">Status Konfigurasi AI Backend</h2>
-          </div>
-          {isAiConfigured ? (
-            <Badge variant="active" dot size="sm">
-              Terhubung
-            </Badge>
-          ) : (
-            <Badge variant="warning" dot size="sm">
-              Mode Lokal
-            </Badge>
-          )}
-        </div>
-
-        <p className="text-xs text-text-muted leading-relaxed">
-          {isAiConfigured
-            ? "Server terhubung ke Google Gemini API dengan semantic embeddings RAG dan filter kedaruratan nasional."
-            : "Kunci API (GEMINI_API_KEY) belum terpasang di file .env.local server. Safe Story AI saat ini menampilkan kutipan terverifikasi langsung dari basis pengetahuan lokal."}
-        </p>
-
-        <div className="pt-2 flex items-center justify-between border-t border-border-subtle/70">
-          <span className="text-[11px] text-text-subtle">
-            Model target: <code>gemini-flash-lite-latest</code> (Google Gen AI SDK Resmi)
-          </span>
-          <NeuButton size="sm" variant="secondary" onClick={() => checkAiConfiguration()}>
-            Periksa ulang status
-          </NeuButton>
-        </div>
-      </NeuCard>
-
-      {/* 2. Pseudonym & Profile Form */}
+      {/* 1. Pseudonym & Profile Form */}
       <NeuCard variant="raised" className="p-5 space-y-4">
         <div className="flex items-center gap-2">
           <User className="w-5 h-5 text-brand-700" />
@@ -152,15 +118,15 @@ export default function SettingsPage() {
         </form>
       </NeuCard>
 
-      {/* 3. External AI Data Transmission Consent */}
+      {/* 2. Data Privacy Consent */}
       <NeuCard variant="raised" className="p-5 space-y-3">
         <div className="flex items-center gap-2">
           <Lock className="w-5 h-5 text-brand-700" />
-          <h2 className="text-sm font-bold text-brand-900">Persetujuan Transmisi Teks AI</h2>
+          <h2 className="text-sm font-bold text-brand-900">Preferensi Pemrosesan Teks</h2>
         </div>
 
         <p className="text-xs text-text-muted leading-relaxed">
-          Ketika kamu mengirim pesan di Cerita AI, teks disanitasi dari data pribadi (nomor telepon, email, NIK) sebelum diteruskan ke model AI.
+          Ketika kamu mengirim pesan refleksi, teks disanitasi dari data pribadi (nomor telepon, email, NIK) secara otomatis demi menjaga privasimu.
         </p>
 
         <label className="flex items-center gap-3 p-3 rounded-xl bg-surface-inset border border-border-subtle/80 cursor-pointer">
@@ -172,10 +138,10 @@ export default function SettingsPage() {
           />
           <div className="text-xs space-y-0.5">
             <span className="font-semibold text-brand-900 block">
-              Izinkan pemrosesan teks oleh model AI pihak ketiga
+              Izinkan pemrosesan teks refleksi secara otomatis
             </span>
             <span className="text-text-muted block">
-              Jika dinonaktifkan, chat hanya akan menampilkan kutipan materi terverifikasi tanpa generasi teks eksternal.
+              Jika dinonaktifkan, obrolan hanya akan menampilkan kutipan materi panduan dari basis pengetahuan lokal.
             </span>
           </div>
         </label>

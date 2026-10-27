@@ -51,7 +51,7 @@ export const PublicFooter: React.FC = () => {
               </li>
               <li>
                 <Link href="/fitur" className="hover:text-[#1E56A0] hover:underline transition-colors">
-                  Fitur dan batasan AI
+                  Fitur dan batasan layanan
                 </Link>
               </li>
               <li>

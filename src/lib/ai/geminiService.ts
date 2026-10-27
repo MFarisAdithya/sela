@@ -45,7 +45,7 @@ export function getGeminiConfigStatus(): GeminiModelStatus {
   return {
     isConfigured,
     model,
-    statusText: isConfigured ? `Layanan Terhubung: Google Gemini (${model})` : "API Belum Dikonfigurasi",
+    statusText: isConfigured ? "Layanan Refleksi Terhubung" : "Mode Panduan Lokal Aktif",
   };
 }
 
@@ -154,7 +154,7 @@ Jawablah sebagai pendamping reflektif: dengarkan secara tenang, sampaikan dengan
           () =>
             reject(
               new Error(
-                `Batas waktu permintaan ke Google Gemini (${Math.round(timeoutMs / 1000)} detik) terlampaui.`
+                `Batas waktu permintaan (${Math.round(timeoutMs / 1000)} detik) terlampaui.`
               )
             ),
           timeoutMs
@@ -167,9 +167,9 @@ Jawablah sebagai pendamping reflektif: dengarkan secara tenang, sampaikan dengan
       if (!replyText) {
         return {
           reply:
-            "Model AI tidak menghasilkan teks untuk masukan ini. Silakan coba rumuskan ceritamu dengan cara lain.",
+            "Sistem belum dapat menghasilkan tanggapan untuk masukan ini. Silakan coba rumuskan ceritamu dengan cara lain.",
           isAiGenerated: true,
-          modelUsed: `Google Gemini (${modelToAttempt})`,
+          modelUsed: "Refleksi Terpandu SELA",
           hasGroundedSources,
         };
       }
@@ -177,13 +177,13 @@ Jawablah sebagai pendamping reflektif: dengarkan secara tenang, sampaikan dengan
       return {
         reply: replyText,
         isAiGenerated: true,
-        modelUsed: `Google Gemini (${modelToAttempt})`,
+        modelUsed: "Refleksi Terpandu SELA",
         hasGroundedSources,
       };
     } catch (error: any) {
       lastError = error;
       const errMsg = error?.message || "";
-      console.warn(`[Gemini Attempt] Model ${modelToAttempt} failed: ${errMsg.substring(0, 120)}`);
+      console.warn(`[Chat Attempt] Model ${modelToAttempt} failed: ${errMsg.substring(0, 120)}`);
 
       // If it's a critical auth issue, do not loop through other models
       if (errMsg.includes("API_KEY_INVALID") || errMsg.includes("API key not valid")) {
@@ -197,16 +197,10 @@ Jawablah sebagai pendamping reflektif: dengarkan secara tenang, sampaikan dengan
   }
 
   // Handle final error if all attempts fail
-  const rawMsg = lastError?.message || "Terjadi kegagalan komunikasi dengan layanan Gemini.";
-  let friendlyError = rawMsg;
+  const rawMsg = lastError?.message || "Terjadi kendala koneksi sementara.";
+  let friendlyError = "Layanan sedang sibuk sementara. Silakan coba beberapa saat lagi.";
 
-  if (rawMsg.includes("API_KEY_INVALID") || rawMsg.includes("API key not valid")) {
-    friendlyError = "API key Google Gemini tidak valid atau telah dicabut.";
-  } else if (rawMsg.includes("ResourceExhausted") || rawMsg.includes("429")) {
-    friendlyError = "Batas kuota panggilan Google Gemini sementara tercapai. Mohon tunggu beberapa saat.";
-  } else if (rawMsg.includes("UNAVAILABLE") || rawMsg.includes("503")) {
-    friendlyError = "Server Google Gemini sedang mengalami beban tinggi sementara. Mohon coba beberapa saat lagi.";
-  } else if (rawMsg.includes("Batas waktu permintaan")) {
+  if (rawMsg.includes("Batas waktu permintaan")) {
     friendlyError = rawMsg;
   }
 
