@@ -60,7 +60,7 @@ export const SelaLogo: React.FC<SelaLogoProps> = ({
   layout = "horizontal",
   size = "md",
   showTagline = false,
-  taglineText = "From Unspoken Problems to Prepared Conversations",
+  taglineText = "Cerita Kamu, Langkah Nyata",
   showAiSuffix = true,
   variant = "gradient",
   className,
@@ -99,22 +99,22 @@ export const SelaLogo: React.FC<SelaLogoProps> = ({
         <div className="mt-2 flex flex-col items-center">
           <span
             className={cn(
-              "font-bold font-sans lowercase text-brand-900 leading-none flex items-center",
+              "font-extrabold font-sans text-brand-900 leading-none flex items-center tracking-tight",
               variant === "white" && "text-white",
               textSizes[size]
             )}
           >
-            sela
+            SELA
             {showAiSuffix && (
-              <span className={cn(variant === "white" ? "text-[#6FB1FF]" : "text-[#2457A7]", "font-extrabold")}>
-                .ai
+              <span className={cn(variant === "white" ? "text-[#8AB6EB]" : "text-[#2563EB]", "font-black")}>
+                .AI
               </span>
             )}
           </span>
           {showTagline && (
             <span
               className={cn(
-                "text-text-muted mt-1 font-normal tracking-normal leading-tight font-sans max-w-xs",
+                "text-text-muted mt-1 font-semibold tracking-wider uppercase text-[10px] leading-tight font-sans max-w-xs",
                 variant === "white" && "text-white/80",
                 taglineSizes[size]
               )}
@@ -134,22 +134,22 @@ export const SelaLogo: React.FC<SelaLogoProps> = ({
       <div className="flex flex-col leading-none">
         <span
           className={cn(
-            "font-extrabold font-sans lowercase text-brand-900 leading-none tracking-tight flex items-center",
+            "font-extrabold font-sans text-brand-900 leading-none tracking-tight flex items-center",
             variant === "white" && "text-white",
             textSizes[size]
           )}
         >
-          sela
+          SELA
           {showAiSuffix && (
-            <span className={cn(variant === "white" ? "text-[#6FB1FF]" : "text-[#2457A7]", "font-black")}>
-              .ai
+            <span className={cn(variant === "white" ? "text-[#8AB6EB]" : "text-[#2563EB]", "font-black")}>
+              .AI
             </span>
           )}
         </span>
         {showTagline && (
           <span
             className={cn(
-              "text-text-muted text-[11px] sm:text-xs font-normal mt-0.5 tracking-tight font-sans max-w-[180px] sm:max-w-xs truncate hidden sm:inline-block",
+              "text-text-muted text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider mt-0.5 font-sans max-w-[180px] sm:max-w-xs truncate hidden sm:inline-block",
               variant === "white" && "text-white/80",
               taglineSizes[size]
             )}

@@ -16,7 +16,7 @@ export function greetingFor(hour: number): string {
 export const copy = {
   brand: {
     name: "SELA.AI",
-    tagline: "From Unspoken Problems to Prepared Conversations.",
+    tagline: "Cerita Kamu, Langkah Nyata",
     subtitle: "Pemandu Persiapan Obrolan untuk Remaja & Dewasa Muda",
     mission: "Membantu remaja merapikan pikiran, menyusun kata-kata, dan menemukan bantuan nyata.",
     sdgBadge: "Fokus Dampak: SDG 3 — Kehidupan Sehat dan Sejahtera",

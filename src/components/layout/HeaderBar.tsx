@@ -40,8 +40,8 @@ export const HeaderBar: React.FC = () => {
               <SelaMark size={22} />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-base tracking-tight text-[#102542] leading-none lowercase">
-                sela<span className="text-[#1E56A0]">.ai</span>
+              <span className="font-extrabold text-base tracking-tight text-[#102542] leading-none">
+                SELA<span className="text-[#2563EB]">.AI</span>
               </span>
             </div>
           </Link>
