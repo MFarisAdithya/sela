@@ -19,7 +19,7 @@ const STEP_AURA_IMAGES: Record<string, string> = {
   "01": "/images/aura/aura-mendengarkan.png",
   "02": "/images/aura/aura-merangkum-kartu.png",
   "03": "/images/aura/aura-berlatih-bicara.png",
-  "04": "/images/aura/aura-rencana-dukungan.png",
+  "04": "/images/aura/aura-menunjukkan-jalan.png",
 };
 
 export default function LandingPage() {

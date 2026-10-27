@@ -59,10 +59,10 @@ export const AURA_PRODUCT_CARDS = {
     src: "/images/aura/aura-berlatih-bicara.png",
   },
   "rencana-dukungan": {
-    title: "Rencana Dukungan",
-    subtitle: "Peta Jalur Bantuan Nyata",
-    desc: "Temukan kontak bantuan resmi, Puskesmas BPJS, Guru BK, dan checklist kesiapan bicara bersama Aura.",
-    src: "/images/aura/aura-rencana-dukungan.png",
+    title: "Aura Menunjukkan Jalan",
+    subtitle: "Peta Jalur Dukungan Nyata",
+    desc: "Aura memegang peta dengan jalur dan penanda lokasi. Membantu pengguna memahami pilihan untuk mencari dukungan di dunia nyata.",
+    src: "/images/aura/aura-menunjukkan-jalan.png",
   },
 } as const;
 

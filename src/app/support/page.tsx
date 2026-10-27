@@ -88,8 +88,32 @@ export default function SupportPathwayPage() {
         productKey="rencana-dukungan"
         eyebrow="Tahap 04 — Support Pathway"
         title="Peta Jalur Dukungan Nyata"
-        description="Daftar kontak bantuan resmi, faskes Puskesmas BPJS, dan pendamping sebaya gratis bersama Aura."
+        description="Membantu memahami pilihan untuk mencari dukungan di dunia nyata bersama Aura."
       />
+
+      {/* Aura Menunjukkan Jalan Companion Banner */}
+      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#FAFDFE] via-[#F4F8FF] to-[#E8F1FC] border border-[#BFD8F5] shadow-sm flex items-center gap-4 animate-in fade-in">
+        <div className="relative w-16 sm:w-20 h-16 sm:h-20 shrink-0">
+          <img
+            src="/images/aura/aura-menunjukkan-jalan.png"
+            alt="Aura memegang peta kecil menunjukkan jalur dan penanda lokasi dukungan"
+            className="w-full h-full object-contain drop-shadow-sm"
+          />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2 mb-0.5">
+            <span className="font-mono-num text-[10px] font-semibold text-[#1E56A0] px-2 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
+              Aura Menunjukkan Jalan
+            </span>
+            <span className="text-xs font-semibold text-[#102542]">
+              Peta Dukungan Nyata
+            </span>
+          </div>
+          <p className="text-xs text-[#35527A] leading-relaxed">
+            Meminta pertolongan adalah tanda keberanian, bukan kelemahan. Di sini kamu bisa menjelajahi berbagai pilihan dukungan di dunia nyata—mulai dari hotline krisis 24 jam bebas pulsa, psikolog Puskesmas BPJS, Guru BK di kampus, hingga lingkaran sahabat terdekatmu.
+          </p>
+        </div>
+      </div>
 
       {/* Free Access & Non-Paywall Commitment Banner */}
       <div className="p-3.5 rounded-2xl bg-[#FAFDFE] border border-[#BFD8F5] flex items-start gap-2.5 text-xs text-[#102542]">
