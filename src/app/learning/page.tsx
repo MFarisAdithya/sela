@@ -46,7 +46,6 @@ export default function LearningPage() {
       {/* Header with Aura Mascot */}
       <AuraModuleHeader
         productKey="materi-edukasi"
-        eyebrow="Belajar & Kenali Diri"
         title="Belajar & Kenali Diri"
         description="Tips ringan dan hal-hal kecil untuk membantumu memahami diri dan menghadapi orang lain."
         rightSlot={
