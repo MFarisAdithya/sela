@@ -172,9 +172,6 @@ export default function LandingPage() {
         <section className="py-20 sm:py-24 bg-[#E8F1FC]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-14">
-              <p className="font-mono-num text-xs font-semibold text-[#1E56A0] mb-2">
-                Paket &amp; Transparansi
-              </p>
               <h2 className="font-serif-display text-3xl sm:text-4xl font-medium tracking-tight text-[#102542]">
                 {t.pricingTeaserTitle}
               </h2>
