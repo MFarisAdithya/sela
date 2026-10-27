@@ -2,10 +2,9 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check, ArrowRight, ShieldCheck, Sparkles, RotateCcw } from "lucide-react";
+import { Check, Lock, RotateCcw } from "lucide-react";
 import { TEMAN_RASA_CHARACTERS, getAuraReflectionMessage } from "@/data/temanRasa";
 import { TemanRasaAvatar } from "./TemanRasaAvatar";
-import { AuraAvatar } from "@/components/ui/AuraMascot";
 import { cn } from "@/lib/utils";
 
 interface RuangRasaSectionProps {
@@ -67,30 +66,50 @@ export const RuangRasaSection: React.FC<RuangRasaSectionProps> = ({
   return (
     <div
       className={cn(
-        "cotton-sheet rounded-3xl p-6 sm:p-8 border border-[#BFD8F5] shadow-sm space-y-6 text-[#102542]",
+        "rounded-[32px] p-6 sm:p-8 lg:p-9 bg-white border border-[#DCEAFB] shadow-[0_16px_48px_rgba(30,86,160,0.08)] space-y-6 text-[#102542] relative",
         className
       )}
     >
-      {/* A. Header Section */}
-      <div className="space-y-2 text-center sm:text-left">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#DCEAFB] border border-[#BFD8F5] text-[11px] font-semibold text-[#1E56A0] tracking-wider uppercase mb-1">
-          <Sparkles className="w-3.5 h-3.5 text-[#2E63D6]" />
-          <span>Check-in Suasana Hati</span>
+      {/* A. Header Section with Peeking Aura & Speech Bubble */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 relative">
+        {/* Left: Titles & Eyebrow */}
+        <div className="space-y-1.5 max-w-xl">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EBF3FF] border border-[#BFD8F5] text-[11px] font-semibold text-[#2563EB] tracking-wider uppercase mb-1">
+            <span>Check-in Suasana Hati</span>
+          </div>
+          <h2 className="font-sans text-2xl sm:text-3xl font-bold tracking-tight text-[#102542]">
+            Apa yang sedang kamu rasakan?
+          </h2>
+          <p className="text-xs sm:text-sm text-[#47668D] leading-relaxed">
+            Setiap perasaan boleh hadir. Pilih satu atau beberapa yang paling menggambarkan keadaanmu hari ini.
+          </p>
         </div>
-        <h2 className="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[#102542]">
-          Ruang Rasa
-        </h2>
-        <p className="text-sm sm:text-base font-semibold text-[#1E56A0]">
-          &ldquo;Kenali perasaanmu, tanpa harus menghakimi dirimu sendiri.&rdquo;
-        </p>
-        <p className="text-xs sm:text-sm text-[#35527A] leading-relaxed max-w-2xl">
-          Setiap perasaan boleh hadir. Pilih satu atau beberapa yang paling menggambarkan keadaanmu hari ini bersama Teman Rasa.
-        </p>
+
+        {/* Right: Peeking Aura Mascot + Speech Bubble */}
+        <div className="flex items-end gap-2.5 self-end md:self-auto shrink-0 relative pt-2 sm:pt-0">
+          {/* Aura Peeking Artwork */}
+          <div className="relative w-24 h-16 sm:w-28 sm:h-20 shrink-0 select-none">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/teman-rasa/aura_peeking.png"
+              alt="Aura mengintip ramah"
+              className="w-full h-full object-contain filter drop-shadow-sm"
+            />
+          </div>
+
+          {/* Speech Bubble */}
+          <div className="relative bg-white/95 border border-[#BFD8F5] rounded-2xl p-2.5 sm:p-3 shadow-sm max-w-[190px] sm:max-w-[210px] text-[11px] sm:text-xs text-[#2B4566] leading-snug">
+            {/* Speech Bubble Tail */}
+            <div className="absolute top-1/2 -left-2 -translate-y-1/2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-r-[8px] border-r-white z-10" />
+            <div className="absolute top-1/2 -left-[9px] -translate-y-1/2 w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-r-[9px] border-r-[#BFD8F5]" />
+            <span>Nggak ada perasaan yang salah. Semua boleh kamu rasakan.</span>
+          </div>
+        </div>
       </div>
 
       {/* B. Grid of 8 Teman Rasa Emotion Cards */}
       <div
-        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
+        className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4"
         role="group"
         aria-label="Pilihan delapan karakter Teman Rasa"
       >
@@ -106,51 +125,47 @@ export const RuangRasaSection: React.FC<RuangRasaSectionProps> = ({
               onClick={() => toggleEmotion(char.id)}
               onKeyDown={(e) => handleKeyDown(e, char.id)}
               className={cn(
-                "group relative flex flex-col justify-between p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 cursor-pointer select-none",
-                "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1E56A0] focus-visible:ring-offset-2",
+                "group relative flex flex-col items-center justify-between p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 cursor-pointer select-none",
+                "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-2",
                 isSelected
-                  ? "bg-[#EAF3FF] border-[#1E56A0] shadow-[0_6px_16px_rgba(30,86,160,0.12)] scale-[1.01]"
-                  : "bg-[#FAFDFE] border-[#DCEAFB] hover:border-[#9AC0EB] hover:bg-[#F4F8FF] hover:shadow-sm"
+                  ? "bg-gradient-to-b from-[#EBF3FF] to-white border-[#2563EB] shadow-[0_8px_20px_rgba(37,99,235,0.16)] ring-2 ring-[#2563EB]/25 scale-[1.01]"
+                  : `bg-gradient-to-b ${char.theme.bgGradient} border-[#DCEAFB] hover:border-[#93C5FD] hover:shadow-sm hover:scale-[1.005]`
               )}
             >
-              {/* Checkmark Indicator in Top Right */}
+              {/* Checkbox circle in Top Right */}
               <div
                 className={cn(
-                  "absolute top-2.5 right-2.5 w-5 h-5 rounded-full flex items-center justify-center transition-all duration-200",
+                  "absolute top-2.5 right-2.5 w-5 h-5 rounded-full flex items-center justify-center transition-all duration-150",
                   isSelected
-                    ? "bg-[#1E56A0] text-white shadow-sm scale-100 opacity-100"
-                    : "border border-[#BFD8F5] bg-white/70 text-transparent scale-90 opacity-40 group-hover:opacity-75"
+                    ? "bg-[#2563EB] text-white border border-[#2563EB] shadow-sm"
+                    : "border border-[#BFD8F5] bg-white/90 text-transparent"
                 )}
                 aria-hidden="true"
               >
                 <Check className={cn("w-3 h-3 stroke-[3]", isSelected ? "text-white" : "text-transparent")} />
               </div>
 
-              {/* Character Illustration / Avatar */}
-              <div className="flex flex-col items-center pt-1 pb-2">
-                <TemanRasaAvatar character={char} isSelected={isSelected} size="md" />
+              {/* Character Illustration */}
+              <div className="w-full flex items-center justify-center pt-2 pb-1">
+                {char.imageSrc ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={char.imageSrc}
+                    alt={char.name}
+                    className="w-28 h-20 sm:w-32 sm:h-22 object-contain select-none transition-transform duration-200 group-hover:scale-105"
+                  />
+                ) : (
+                  <TemanRasaAvatar character={char} isSelected={isSelected} size="md" />
+                )}
               </div>
 
-              {/* Card Meta Content */}
-              <div className="text-center space-y-1">
-                <div className="flex items-center justify-center gap-1.5 flex-wrap">
-                  <span className="font-bold text-sm text-[#102542] group-hover:text-[#1E56A0] transition-colors">
-                    {char.name}
-                  </span>
-                </div>
-
-                <span
-                  className={cn(
-                    "inline-block text-[10px] sm:text-[11px] font-semibold px-2 py-0.5 rounded-full transition-colors",
-                    char.theme.badgeBg,
-                    char.theme.badgeText
-                  )}
-                >
+              {/* Card Title & Subtitle */}
+              <div className="text-center pt-1 pb-0.5">
+                <h3 className="font-bold text-sm sm:text-base text-[#102542] group-hover:text-[#2563EB] transition-colors leading-tight">
+                  {char.name}
+                </h3>
+                <p className="text-[11px] sm:text-xs text-[#516B8C] mt-0.5 leading-tight">
                   {char.emotion}
-                </span>
-
-                <p className="text-[11px] text-[#516B8C] leading-snug line-clamp-3 pt-1">
-                  {char.description}
                 </p>
               </div>
             </div>
@@ -158,81 +173,83 @@ export const RuangRasaSection: React.FC<RuangRasaSectionProps> = ({
         })}
       </div>
 
-      {/* D. Selection Counter Bar */}
-      <div className="flex items-center justify-between text-xs px-1">
-        <span className="text-[#35527A] font-medium">
-          {selectedIds.length === 0 ? (
-            <span className="italic text-[#6E87A6]">
-              Belum ada perasaan yang dipilih. Klik satu atau beberapa kartu di atas.
-            </span>
-          ) : (
-            <span className="inline-flex items-center gap-1.5 font-semibold text-[#1E56A0]">
-              <span className="w-2 h-2 rounded-full bg-[#1E56A0] inline-block animate-pulse" />
-              {selectedIds.length} perasaan dipilih
-            </span>
-          )}
-        </span>
+      {/* C. Bottom Section: Pesan Aura, Counter, Buttons & Privacy */}
+      <div className="space-y-3 pt-2">
+        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-4">
+          {/* Pesan Aura Panel */}
+          <div className="flex-1 rounded-2xl bg-[#EBF3FF] border border-[#BFD8F5] p-3 sm:p-3.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm transition-all duration-300">
+            <div className="flex items-center gap-3 min-w-0">
+              {/* Bottom Aura Avatar */}
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl overflow-hidden shrink-0 shadow-sm border border-[#BFD8F5] bg-white flex items-center justify-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/assets/teman-rasa/aura_bottom.png"
+                  alt="Aura"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="min-w-0 space-y-0.5">
+                <span className="font-bold text-[#2563EB] block text-xs tracking-wider">
+                  Pesan Aura
+                </span>
+                <p className="text-xs sm:text-[13px] text-[#102542]/90 leading-snug">
+                  {getAuraReflectionMessage(selectedIds)}
+                </p>
+              </div>
+            </div>
 
-        {selectedIds.length > 0 && (
-          <button
-            type="button"
-            onClick={handleReset}
-            className="text-[11px] font-semibold text-[#516B8C] hover:text-[#1E56A0] inline-flex items-center gap-1 transition-colors"
-          >
-            <RotateCcw className="w-3 h-3" />
-            <span>Reset pilihan</span>
-          </button>
-        )}
-      </div>
+            {/* Selection Counter Pill */}
+            <div className="shrink-0 self-end sm:self-center flex items-center gap-2">
+              <span className="text-[11px] sm:text-xs font-semibold text-[#516B8C] bg-white/90 px-3 py-1 rounded-full border border-[#BFD8F5] shadow-xs">
+                {selectedIds.length} perasaan dipilih
+              </span>
+              {selectedIds.length > 0 && (
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  className="text-[11px] font-semibold text-[#516B8C] hover:text-[#2563EB] inline-flex items-center gap-1 transition-colors"
+                  title="Reset pilihan"
+                >
+                  <RotateCcw className="w-3 h-3" />
+                  <span className="hidden sm:inline">Reset</span>
+                </button>
+              )}
+            </div>
+          </div>
 
-      {/* E. Pesan Reflektif dari Aura Panel */}
-      <div className="p-4 sm:p-5 rounded-2xl bg-[#F4F8FF] border border-[#BFD8F5] flex flex-col sm:flex-row items-start sm:items-center gap-3.5 shadow-sm transition-all duration-300">
-        <div className="shrink-0 pt-0.5 sm:pt-0">
-          <AuraAvatar size="sm" />
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2.5 shrink-0 justify-end">
+            <button
+              type="button"
+              onClick={handleSkip}
+              className="px-5 py-2.5 rounded-full border border-[#93C5FD] bg-white text-xs sm:text-sm font-semibold text-[#2563EB] hover:bg-[#F0F7FF] transition-all shadow-xs active:scale-95"
+            >
+              Lewati Dulu
+            </button>
+
+            <button
+              type="button"
+              onClick={handleContinue}
+              disabled={selectedIds.length === 0}
+              className={cn(
+                "inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-sm active:scale-95",
+                selectedIds.length > 0
+                  ? "bg-[#2563EB] text-white hover:bg-[#1D4ED8] shadow-[0_4px_12px_rgba(37,99,235,0.25)] cursor-pointer"
+                  : "bg-[#BFDBFE] text-white cursor-not-allowed"
+              )}
+            >
+              <span>Lanjutkan Refleksi</span>
+            </button>
+          </div>
         </div>
-        <div className="space-y-0.5 text-xs sm:text-sm text-[#102542]">
-          <span className="font-bold text-[#1E56A0] block text-xs uppercase tracking-wider">
-            Pesan Aura
+
+        {/* Reassurance & Privacy Note */}
+        <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-[#516B8C] pt-1">
+          <Lock className="w-3.5 h-3.5 text-[#2563EB] shrink-0" />
+          <span>
+            Perasaanmu tidak harus selalu dijelaskan. Kamu boleh memilih untuk berbagi, melewati, atau berhenti kapan saja.
           </span>
-          <p className="leading-relaxed text-[#102542]/90">
-            {getAuraReflectionMessage(selectedIds)}
-          </p>
         </div>
-      </div>
-
-      {/* F. Action Buttons */}
-      <div className="pt-2 flex flex-col-reverse sm:flex-row items-center justify-between gap-3">
-        <button
-          type="button"
-          onClick={handleSkip}
-          className="w-full sm:w-auto px-5 py-2.5 rounded-full border border-[#BFD8F5] text-xs font-semibold text-[#35527A] hover:bg-white hover:text-[#102542] transition-colors text-center"
-        >
-          Lewati Dulu
-        </button>
-
-        <button
-          type="button"
-          onClick={handleContinue}
-          disabled={selectedIds.length === 0}
-          className={cn(
-            "w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-md",
-            selectedIds.length > 0
-              ? "letterpress-primary cursor-pointer"
-              : "bg-[#DCEAFB] text-[#6E87A6] border border-[#BFD8F5] cursor-not-allowed opacity-60"
-          )}
-          aria-disabled={selectedIds.length === 0}
-        >
-          <span>Lanjutkan Refleksi</span>
-          <ArrowRight className="w-4 h-4" />
-        </button>
-      </div>
-
-      {/* G. Privacy & Reassurance Area */}
-      <div className="pt-2 border-t border-[#BFD8F5]/60 flex items-center gap-2 text-[11px] text-[#516B8C]">
-        <ShieldCheck className="w-4 h-4 text-[#1E56A0] shrink-0" />
-        <span>
-          Perasaanmu tidak harus selalu dijelaskan. Kamu boleh memilih untuk berbagi, melewati, atau berhenti kapan saja.
-        </span>
       </div>
     </div>
   );

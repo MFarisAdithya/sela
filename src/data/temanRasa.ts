@@ -19,34 +19,34 @@ export const TEMAN_RASA_CHARACTERS: TemanRasaCharacter[] = [
   {
     id: "cerah",
     name: "Cerah",
-    emotion: "Senang dan Lega",
+    emotion: "Senang dan lega",
     description: "Ruang lega dan ceria saat beban terasa terangkat atau ada hal baik yang terjadi.",
     theme: {
       baseColor: "#10B981", // Mint emerald
       accentColor: "#059669",
-      bgGradient: "from-[#ECFDF5] via-[#F0FDF4] to-[#E6FFFA]",
+      bgGradient: "from-[#E8F8F5]/90 via-[#F7FCFA] to-white",
       badgeBg: "bg-[#D1FAE5]",
       badgeText: "text-[#065F46]",
       borderColor: "#A7F3D0",
     },
-    imageSrc: null, // Will point to /images/teman-rasa/cerah.png when final PNG is available
+    imageSrc: "/assets/teman-rasa/cerah.png",
     auraReflection:
       "Senang rasanya ketika ada hal yang membuatmu merasa lebih baik. Apa yang ingin kamu simpan dari hari ini?",
   },
   {
     id: "pijar",
     name: "Pijar",
-    emotion: "Semangat dan Antusias",
+    emotion: "Semangat dan antusias",
     description: "Percikan energi positif dan dorongan hangat untuk mencoba atau menyambut sesuatu.",
     theme: {
       baseColor: "#F97316", // Coral flame
       accentColor: "#EA580C",
-      bgGradient: "from-[#FFF7ED] via-[#FFEDD5] to-[#FFE4E6]",
+      bgGradient: "from-[#FFF5EB]/90 via-[#FFF9F5] to-white",
       badgeBg: "bg-[#FFEDD5]",
       badgeText: "text-[#9A3412]",
       borderColor: "#FED7AA",
     },
-    imageSrc: null,
+    imageSrc: "/assets/teman-rasa/pijar.png",
     auraReflection:
       "Energi dan semangatmu boleh dirayakan. Apa yang paling ingin kamu lakukan sekarang?",
   },
@@ -58,12 +58,12 @@ export const TEMAN_RASA_CHARACTERS: TemanRasaCharacter[] = [
     theme: {
       baseColor: "#8B5CF6", // Lavender violet
       accentColor: "#7C3AED",
-      bgGradient: "from-[#F5F3FF] via-[#EDE9FE] to-[#F3E8FF]",
+      bgGradient: "from-[#F5F1FD]/90 via-[#FAF7FE] to-white",
       badgeBg: "bg-[#EDE9FE]",
       badgeText: "text-[#5B21B6]",
       borderColor: "#DDD6FE",
     },
-    imageSrc: null,
+    imageSrc: "/assets/teman-rasa/tanya.png",
     auraReflection:
       "Rasa ingin tahu bisa menjadi awal untuk memahami sesuatu yang baru.",
   },
@@ -75,12 +75,12 @@ export const TEMAN_RASA_CHARACTERS: TemanRasaCharacter[] = [
     theme: {
       baseColor: "#0EA5E9", // Aqua sky
       accentColor: "#0284C7",
-      bgGradient: "from-[#F0F9FF] via-[#E0F2FE] to-[#E6FFFA]",
+      bgGradient: "from-[#EBF6FE]/90 via-[#F5FAFF] to-white",
       badgeBg: "bg-[#E0F2FE]",
       badgeText: "text-[#0369A1]",
       borderColor: "#BAE6FD",
     },
-    imageSrc: null,
+    imageSrc: "/assets/teman-rasa/teduh.png",
     auraReflection:
       "Nikmati ruang tenang ini. Apa yang membantumu merasa nyaman hari ini?",
   },
@@ -92,63 +92,63 @@ export const TEMAN_RASA_CHARACTERS: TemanRasaCharacter[] = [
     theme: {
       baseColor: "#6366F1", // Indigo mist
       accentColor: "#4F46E5",
-      bgGradient: "from-[#EEF2FF] via-[#E0E7FF] to-[#EDE9FE]",
+      bgGradient: "from-[#EDF2FE]/90 via-[#F6F8FE] to-white",
       badgeBg: "bg-[#E0E7FF]",
       badgeText: "text-[#3730A3]",
       borderColor: "#C7D2FE",
     },
-    imageSrc: null,
+    imageSrc: "/assets/teman-rasa/kabut.png",
     auraReflection:
       "Kamu nggak harus menyelesaikan semuanya sekaligus. Kita bisa mulai dari satu hal kecil.",
   },
   {
     id: "riak",
     name: "Riak",
-    emotion: "Cemas dan Gelisah",
+    emotion: "Cemas dan gelisah",
     description: "Getaran rasa tidak pasti, khawatir, atau pikiran yang terus berputar mencari pegangan.",
     theme: {
       baseColor: "#818CF8", // Soft periwinkle
       accentColor: "#6366F1",
-      bgGradient: "from-[#F8FAFC] via-[#EEF2FF] to-[#E0E7FF]",
+      bgGradient: "from-[#F0F0FF]/90 via-[#F7F7FF] to-white",
       badgeBg: "bg-[#E0E7FF]",
       badgeText: "text-[#312E81]",
       borderColor: "#C7D2FE",
     },
-    imageSrc: null,
+    imageSrc: "/assets/teman-rasa/riak.png",
     auraReflection:
       "Kamu boleh mengambil waktu untuk memahami apa yang sedang memenuhi pikiranmu.",
   },
   {
     id: "bara",
     name: "Bara",
-    emotion: "Kesal dan Frustrasi",
+    emotion: "Kesal dan frustrasi",
     description: "Rasa geram atau jengkel saat kenyataan terasa tidak adil dan tidak sesuai harapan.",
     theme: {
       baseColor: "#EF4444", // Warm coral red
       accentColor: "#DC2626",
-      bgGradient: "from-[#FEF2F2] via-[#FEE2E2] to-[#FFF1F2]",
+      bgGradient: "from-[#FEEFF0]/90 via-[#FFF6F7] to-white",
       badgeBg: "bg-[#FEE2E2]",
       badgeText: "text-[#991B1B]",
       borderColor: "#FECACA",
     },
-    imageSrc: null,
+    imageSrc: "/assets/teman-rasa/bara.png",
     auraReflection:
       "Rasa kesal juga boleh hadir. Kita bisa coba memahami apa yang terasa tidak sesuai harapanmu.",
   },
   {
     id: "rindu",
     name: "Rindu",
-    emotion: "Kesepian dan Butuh Teman",
+    emotion: "Kesepian dan butuh teman",
     description: "Rasa hampa yang mendambakan kehangatan, ditemani, atau seseorang yang mau mendengar.",
     theme: {
       baseColor: "#64748B", // Lilac slate
       accentColor: "#475569",
-      bgGradient: "from-[#F8FAFC] via-[#F1F5F9] to-[#EEF2FF]",
+      bgGradient: "from-[#EEF2FC]/90 via-[#F6F8FD] to-white",
       badgeBg: "bg-[#F1F5F9]",
       badgeText: "text-[#334155]",
       borderColor: "#E2E8F0",
     },
-    imageSrc: null,
+    imageSrc: "/assets/teman-rasa/rindu.png",
     auraReflection:
       "Keinginan untuk ditemani itu wajar. Kamu ingin didengarkan atau mencari seseorang untuk diajak bicara?",
   },
@@ -159,7 +159,7 @@ export const TEMAN_RASA_CHARACTERS: TemanRasaCharacter[] = [
  */
 export function getAuraReflectionMessage(selectedIds: string[]): string {
   if (!selectedIds || selectedIds.length === 0) {
-    return "Aura siap menyimak. Luangkan waktu sejenak untuk merasakan apa yang sedang hadir hari ini.";
+    return "Pilih satu atau beberapa perasaan yang paling menggambarkan diri kamu hari ini. Aku di sini untuk menemanimu.";
   }
 
   if (selectedIds.length === 1) {
