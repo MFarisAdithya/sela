@@ -25,7 +25,14 @@ export const StateCard: React.FC<StateCardProps> = ({
 }) => {
   const config = {
     empty: {
-      icon: <Inbox className="w-8 h-8 text-brand-400" />,
+      icon: (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src="/images/aura/aura-empty-state.png"
+          alt="Aura duduk tenang"
+          className="w-14 h-14 object-contain"
+        />
+      ),
       badgeColor: "bg-brand-100 text-brand-800",
       btnVariant: "secondary" as const,
     },

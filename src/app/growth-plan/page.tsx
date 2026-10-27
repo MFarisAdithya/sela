@@ -143,45 +143,62 @@ export default function GrowthPlanPage() {
         </h3>
 
         <div className="space-y-2.5">
-          {growthTasks.map((task) => (
-            <div
-              key={task.id}
-              onClick={() => toggleGrowthTask(task.id)}
-              className={`p-4 rounded-2xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${
-                task.completed
-                  ? "bg-teal-50/50 border-teal-200 text-teal-950 shadow-neu-inset"
-                  : "bg-surface border-border-subtle shadow-neu-raised-sm hover:shadow-neu-raised text-text-main"
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  className="shrink-0 text-brand-700"
-                  aria-label={task.completed ? "Tandai belum selesai" : "Tandai selesai"}
-                >
-                  {task.completed ? (
-                    <CheckCircle2 className="w-5 h-5 text-teal-600 fill-teal-100" />
-                  ) : (
-                    <Circle className="w-5 h-5 text-text-muted" />
-                  )}
-                </button>
-                <div className="space-y-0.5">
-                  <span
-                    className={`text-xs sm:text-sm font-medium ${
-                      task.completed ? "line-through text-text-muted" : "text-brand-900"
-                    }`}
-                  >
-                    {task.title}
-                  </span>
-                  <span className="block text-[10px] text-text-subtle">{task.category}</span>
-                </div>
+          {growthTasks.length === 0 ? (
+            <div className="p-8 sm:p-10 text-center bg-[#F7FAFF] rounded-3xl border border-[#CCE1FF] space-y-3">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/aura/aura-empty-state.png"
+                  alt="Aura duduk tenang menunggu target langkahmu"
+                  className="w-full h-full object-contain drop-shadow-sm"
+                />
               </div>
-
-              <span className="text-[11px] font-semibold text-text-muted shrink-0">
-                {task.completed ? "Selesai" : "Belum"}
-              </span>
+              <h3 className="text-sm sm:text-base font-bold text-[#17365D]">Belum Ada Target Langkah</h3>
+              <p className="text-xs text-[#17365D]/70 max-w-sm mx-auto leading-relaxed">
+                Aura duduk tenang menemanimu. Klik &ldquo;Tambah target&rdquo; di atas untuk menetapkan satu langkah kecil yang santai tanpa beban produktivitas.
+              </p>
             </div>
-          ))}
+          ) : (
+            growthTasks.map((task) => (
+              <div
+                key={task.id}
+                onClick={() => toggleGrowthTask(task.id)}
+                className={`p-4 rounded-2xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${
+                  task.completed
+                    ? "bg-teal-50/50 border-teal-200 text-teal-950 shadow-neu-inset"
+                    : "bg-surface border-border-subtle shadow-neu-raised-sm hover:shadow-neu-raised text-text-main"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    className="shrink-0 text-brand-700"
+                    aria-label={task.completed ? "Tandai belum selesai" : "Tandai selesai"}
+                  >
+                    {task.completed ? (
+                      <CheckCircle2 className="w-5 h-5 text-teal-600 fill-teal-100" />
+                    ) : (
+                      <Circle className="w-5 h-5 text-text-muted" />
+                    )}
+                  </button>
+                  <div className="space-y-0.5">
+                    <span
+                      className={`text-xs sm:text-sm font-medium ${
+                        task.completed ? "line-through text-text-muted" : "text-brand-900"
+                      }`}
+                    >
+                      {task.title}
+                    </span>
+                    <span className="block text-[10px] text-text-subtle">{task.category}</span>
+                  </div>
+                </div>
+
+                <span className="text-[11px] font-semibold text-text-muted shrink-0">
+                  {task.completed ? "Selesai" : "Belum"}
+                </span>
+              </div>
+            ))
+          )}
         </div>
       </div>
 

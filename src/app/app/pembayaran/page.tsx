@@ -149,16 +149,23 @@ export default function RiwayatPembayaranPage() {
         </div>
 
         {transactions.length === 0 ? (
-          <div className="p-12 text-center space-y-3">
-            <CreditCard className="w-10 h-10 text-[#17365D]/30 mx-auto" />
-            <h3 className="font-semibold text-sm text-[#17365D]">Belum Ada Riwayat Transaksi</h3>
-            <p className="text-xs text-[#17365D]/60 max-w-sm mx-auto">
-              Kamu saat ini menggunakan paket Akses Bebas (Free). Jika ingin mendukung operasional platform, kamu dapat memilih paket Supporter.
+          <div className="p-8 sm:p-12 text-center space-y-3">
+            <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/aura/aura-empty-state.png"
+                alt="Aura duduk tenang"
+                className="w-full h-full object-contain drop-shadow-sm"
+              />
+            </div>
+            <h3 className="font-bold text-base text-[#17365D]">Belum Ada Riwayat Transaksi</h3>
+            <p className="text-xs text-[#17365D]/70 max-w-sm mx-auto leading-relaxed">
+              Aura duduk tenang menemanimu. Kamu saat ini menggunakan paket Akses Bebas (Free) tanpa beban biaya. Jika ingin mendukung operasional server, kamu dapat memilih paket Supporter.
             </p>
             <div className="pt-2">
               <Link
                 href="/app/paket"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#2457A7] text-white text-xs font-semibold hover:bg-[#1f4a8f]"
+                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#2457A7] text-white text-xs font-semibold hover:bg-[#1f4a8f] shadow-sm transition-all"
               >
                 Lihat Opsi Supporter
               </Link>

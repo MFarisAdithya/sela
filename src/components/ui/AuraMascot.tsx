@@ -64,6 +64,12 @@ export const AURA_PRODUCT_CARDS = {
     desc: "Potret kepala dan sayap Aura dalam komposisi sederhana, mudah dikenali saat diperkecil.",
     src: "/images/aura/aura-avatar.png",
   },
+  "empty-state": {
+    title: "Aura Duduk Tenang",
+    subtitle: "Empty State & Halaman Kosong",
+    desc: "Aura duduk tenang untuk halaman yang belum memiliki kartu cerita, jurnal, atau catatan.",
+    src: "/images/aura/aura-empty-state.png",
+  },
   "materi-edukasi": {
     title: "Aura Belajar",
     subtitle: "Ruang Belajar & Refleksi Mandiri",

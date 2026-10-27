@@ -425,18 +425,28 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
               </div>
             </div>
           ) : (
-            <div className="p-12 text-center bg-[#F7FAFF] rounded-3xl border border-[#CCE1FF] space-y-3">
-              <FileText className="w-10 h-10 text-[#2457A7]/50 mx-auto" />
-              <h3 className="text-base font-bold text-[#17365D]">Belum Ada Kartu Cerita</h3>
-              <p className="text-xs text-[#17365D]/70 max-w-sm mx-auto">
-                Mulai dari Guided Story untuk merapikan situasi yang mengganjal ke dalam 4 dimensi.
+            <div className="p-8 sm:p-12 text-center bg-[#F7FAFF] rounded-3xl border border-[#CCE1FF] space-y-3">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/aura/aura-empty-state.png"
+                  alt="Aura duduk tenang untuk halaman yang belum memiliki kartu cerita"
+                  className="w-full h-full object-contain drop-shadow-sm"
+                />
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-[#17365D]">Belum Ada Kartu Cerita</h3>
+              <p className="text-xs sm:text-sm text-[#17365D]/70 max-w-sm mx-auto leading-relaxed">
+                Aura duduk tenang menunggumu. Mulai dari Guided Story untuk merapikan situasi yang mengganjal ke dalam 4 dimensi persiapan bicara.
               </p>
-              <Link
-                href="/safe-story"
-                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#2457A7] text-white text-xs font-semibold shadow-md"
-              >
-                Mulai Urai Cerita Sekarang
-              </Link>
+              <div className="pt-1">
+                <Link
+                  href="/safe-story"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#2457A7] text-white text-xs sm:text-sm font-semibold shadow-md hover:bg-[#1f4a8f] transition-all"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  Mulai Urai Cerita Sekarang
+                </Link>
+              </div>
             </div>
           )}
         </div>
@@ -505,8 +515,8 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
             </div>
           </div>
 
-          {/* List of saved journal notes */}
-          {journalEntries.length > 0 && (
+          {/* List of saved journal notes or empty state */}
+          {journalEntries.length > 0 ? (
             <div className="space-y-3">
               <h3 className="text-xs font-bold uppercase tracking-wider text-[#2457A7]">
                 Riwayat Catatan Sesi Ini ({journalEntries.length})
@@ -532,6 +542,21 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
                   </div>
                 ))}
               </div>
+            </div>
+          ) : (
+            <div className="p-8 sm:p-10 text-center bg-[#F7FAFF] rounded-3xl border border-[#CCE1FF] space-y-3">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/aura/aura-empty-state.png"
+                  alt="Aura duduk tenang menunggu catatan jurnal pertamamu"
+                  className="w-full h-full object-contain drop-shadow-sm"
+                />
+              </div>
+              <h3 className="text-sm sm:text-base font-bold text-[#17365D]">Belum Ada Catatan Jurnal</h3>
+              <p className="text-xs text-[#17365D]/70 max-w-sm mx-auto leading-relaxed">
+                Aura duduk tenang menemanimu. Tuangkan uneg-uneg atau hal kecil yang kamu rasakan hari ini di kotak atas kapan pun kamu siap.
+              </p>
             </div>
           )}
         </div>
