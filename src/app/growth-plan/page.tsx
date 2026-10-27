@@ -48,9 +48,9 @@ export default function GrowthPlanPage() {
       {/* Header with Aura Mascot */}
       <AuraModuleHeader
         productKey="progress"
-        eyebrow="Rencana Mandiri"
-        title="Rencana Bertumbuh"
-        description="Langkah mingguan sukarela untuk melatih kebiasaan sehat bersama Aura tanpa tekanan batas waktu kaku."
+        eyebrow="Aura Menyemangati · Langkah Kecil"
+        title="Rencana Langkah Kecil & Progress"
+        description="Menghargai kemajuan kecil tanpa membuat pengguna merasa harus selalu produktif. Selesaikan langkah ringan sesuai kesiapanmu."
         rightSlot={
           <NeuButton
             size="sm"
@@ -63,6 +63,31 @@ export default function GrowthPlanPage() {
           </NeuButton>
         }
       />
+
+      {/* Aura Menyemangati Companion Banner */}
+      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#FAFDFE] via-[#F4F8FF] to-[#E8F1FC] border border-[#BFD8F5] shadow-sm flex items-center gap-4 animate-in fade-in">
+        <div className="relative w-16 sm:w-20 h-16 sm:h-20 shrink-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/aura/aura-menyemangati.png"
+            alt="Aura tersenyum dengan pose penuh semangat, ditemani panah naik dan bintang kecil"
+            className="w-full h-full object-contain drop-shadow-sm"
+          />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2 mb-0.5">
+            <span className="font-mono-num text-[10px] font-semibold text-[#1E56A0] px-2.5 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
+              Aura Menyemangati
+            </span>
+            <span className="text-xs font-semibold text-[#102542]">
+              Kemajuan Kecil Tetap Berarti
+            </span>
+          </div>
+          <p className="text-xs text-[#35527A] leading-relaxed">
+            Aura tersenyum dengan pose penuh semangat untuk mengapresiasi usahamu. Mengambil waktu untuk beristirahat atau menyelesaikan satu target kecil sudah merupakan kemajuan nyata yang patut dirayakan.
+          </p>
+        </div>
+      </div>
 
       {/* Main Focus & Circular Progress Card */}
       <NeuCard variant="raised" className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-center bg-surface">

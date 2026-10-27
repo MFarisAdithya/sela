@@ -47,10 +47,10 @@ export const AURA_PRODUCT_CARDS = {
     src: "/images/aura/aura-menulis-jurnal.png",
   },
   progress: {
-    title: "Progress & Pencapaian",
-    subtitle: "Langkah Kecil yang Berarti",
-    desc: "Pantau perkembangan keberanian bicaramu dan target langkah kecil harian tanpa tekanan.",
-    src: "/images/aura/aura-progress.png",
+    title: "Aura Menyemangati",
+    subtitle: "Rencana Langkah Kecil & Progress",
+    desc: "Aura tersenyum dengan pose penuh semangat, ditemani panah naik dan bintang kecil. Menghargai kemajuan kecil tanpa membuat pengguna merasa harus selalu produktif.",
+    src: "/images/aura/aura-menyemangati.png",
   },
   "materi-edukasi": {
     title: "Aura Belajar",
