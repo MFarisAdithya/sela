@@ -24,8 +24,8 @@ export const copy = {
 
   landing: {
     eyebrow: "Pemandu Persiapan Obrolan",
-    headlinePart1: "Bercerita tidak harus langsung ",
-    headlineAccent: "sempurna.",
+    headlinePart1: "Kamu nggak sendiri ",
+    headlineAccent: "untuk cerita.",
     description: "Urai uneg-uneg, latih caramu bicara, dan temukan bantuan saat kamu siap.",
     cta: "Mulai Gratis",
     secondaryCta: "Lihat Cara Kerja",

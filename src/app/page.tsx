@@ -46,8 +46,9 @@ export default function LandingPage() {
                 </div>
 
                 {/* Primary Editorial Headline */}
-                <h1 className="font-serif-display text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-[#102542] leading-[1.1]">
+                <h1 className="font-serif-display text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-[#102542] leading-[1.12]">
                   {t.headlinePart1}
+                  <br className="hidden sm:block" />
                   <span className="italic font-normal text-[#1E56A0]">
                     {t.headlineAccent}
                   </span>
