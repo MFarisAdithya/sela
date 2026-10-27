@@ -25,7 +25,7 @@ import { NeuButton } from "@/components/ui/NeuButton";
 import { NeuModal } from "@/components/ui/NeuModal";
 import { Badge } from "@/components/ui/Badge";
 import { SourceCitation } from "@/components/chat/SourceCitation";
-import { AuraModuleHeader, AuraAvatar } from "@/components/ui/AuraMascot";
+import { AuraModuleHeader, AuraAvatar, AuraLoadingIndicator } from "@/components/ui/AuraMascot";
 import { useApp, StoryCard } from "@/context/AppContext";
 import { RetrievedSource } from "@/types/knowledge";
 import { cn } from "@/lib/utils";
@@ -808,10 +808,11 @@ export default function SafeStoryPage() {
             })}
 
             {isLoading && (
-              <div className="flex items-center gap-2 text-xs text-[#17365D]/75 p-3 bg-white rounded-2xl border border-[#CCE1FF] shadow-sm w-fit animate-pulse">
-                <Sparkles className="w-4 h-4 text-[#2457A7] animate-spin" />
-                <span>Merumuskan refleksi terpandu...</span>
-              </div>
+              <AuraLoadingIndicator
+                message="Aura sedang merenungkan ceritamu..."
+                subMessage="Menyiapkan tanggapan yang tenang dan tidak menghakimi."
+                className="w-fit max-w-sm"
+              />
             )}
 
             <div ref={messagesEndRef} />

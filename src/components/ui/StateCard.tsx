@@ -37,7 +37,14 @@ export const StateCard: React.FC<StateCardProps> = ({
       btnVariant: "secondary" as const,
     },
     loading: {
-      icon: <Loader2 className="w-8 h-8 text-brand-600 animate-spin" />,
+      icon: (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src="/images/aura/aura-loading.png"
+          alt="Aura sedang memproses"
+          className="w-14 h-14 object-contain"
+        />
+      ),
       badgeColor: "bg-brand-100 text-brand-800",
       btnVariant: "ghost" as const,
     },

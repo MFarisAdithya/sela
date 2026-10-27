@@ -22,7 +22,7 @@ import {
   Sparkle,
 } from "lucide-react";
 import { useApp, StoryCard } from "@/context/AppContext";
-import { AuraModuleHeader, AuraAvatar } from "@/components/ui/AuraMascot";
+import { AuraModuleHeader, AuraAvatar, AuraLoadingIndicator } from "@/components/ui/AuraMascot";
 import { cn } from "@/lib/utils";
 
 interface PracticeMessage {
@@ -425,10 +425,11 @@ export default function PracticeTalkDashboard() {
           })}
 
           {isLoading && (
-            <div className="flex items-center gap-2 text-xs text-[#17365D]/75 p-3 bg-white rounded-2xl border border-[#CCE1FF] shadow-sm w-fit animate-pulse">
-              <Sparkles className="w-4 h-4 text-[#2457A7] animate-spin" />
-              <span>{currentPersona.roleTitle} sedang merespons...</span>
-            </div>
+            <AuraLoadingIndicator
+              message={`${currentPersona.roleTitle} sedang merespons...`}
+              subMessage="Menunggu sejenak dengan tenang, tanpa terburu-buru."
+              className="w-fit max-w-sm"
+            />
           )}
 
           <div ref={messagesEndRef} />

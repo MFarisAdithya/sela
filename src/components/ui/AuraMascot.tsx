@@ -70,6 +70,12 @@ export const AURA_PRODUCT_CARDS = {
     desc: "Aura duduk tenang untuk halaman yang belum memiliki kartu cerita, jurnal, atau catatan.",
     src: "/images/aura/aura-empty-state.png",
   },
+  loading: {
+    title: "Aura Memproses",
+    subtitle: "Loading & AI Sedang Memproses",
+    desc: "Aura menunggu dengan ekspresi penasaran dan kilauan kecil, bukan animasi yang terlalu ramai.",
+    src: "/images/aura/aura-loading.png",
+  },
   "materi-edukasi": {
     title: "Aura Belajar",
     subtitle: "Ruang Belajar & Refleksi Mandiri",
@@ -154,6 +160,54 @@ export const AuraModuleHeader: React.FC<{
           </div>
         </div>
         {rightSlot && <div className="shrink-0">{rightSlot}</div>}
+      </div>
+    </div>
+  );
+};
+
+export const AuraLoadingIndicator: React.FC<{
+  message?: string;
+  subMessage?: string;
+  size?: "sm" | "md" | "lg";
+  className?: string;
+}> = ({
+  message = "Aura sedang merenungkan ceritamu...",
+  subMessage,
+  size = "sm",
+  className,
+}) => {
+  return (
+    <div
+      className={cn(
+        "flex items-center gap-3 p-3 rounded-2xl bg-white border border-[#CCE1FF] shadow-sm text-xs text-[#17365D] animate-in fade-in",
+        className
+      )}
+    >
+      <div
+        className={cn(
+          "rounded-xl overflow-hidden shrink-0 bg-[#E8F1FC] border border-[#CCE1FF] p-1 flex items-center justify-center",
+          size === "sm" ? "w-9 h-9" : size === "md" ? "w-12 h-12" : "w-16 h-16"
+        )}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/aura/aura-loading.png"
+          alt="Aura menunggu dengan ekspresi penasaran dan kilauan kecil"
+          className="w-full h-full object-contain"
+        />
+      </div>
+      <div>
+        <div className="flex items-center gap-2">
+          <span className="font-semibold text-[#1E56A0]">{message}</span>
+          <span className="inline-flex gap-1 items-center">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1E56A0] animate-bounce [animation-delay:-0.3s]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1E56A0] animate-bounce [animation-delay:-0.15s]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1E56A0] animate-bounce" />
+          </span>
+        </div>
+        {subMessage && (
+          <p className="text-[11px] text-[#516B8C] mt-0.5">{subMessage}</p>
+        )}
       </div>
     </div>
   );
