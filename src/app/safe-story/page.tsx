@@ -282,7 +282,6 @@ export default function SafeStoryPage() {
       {/* Top Header with Aura Mascot */}
       <AuraModuleHeader
         productKey={activeTab === "guided_steps" ? "panduan-langkah" : "chat-assistant"}
-        eyebrow="Guided Story"
         title="Urai Cerita Pribadi"
         description="Berceritalah pelan-pelan tanpa harus merangkai semuanya sekaligus bersama Aura."
         rightSlot={

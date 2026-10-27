@@ -30,7 +30,7 @@ export const AURA_PRODUCT_CARDS = {
   },
   "panduan-langkah": {
     title: "Panduan Langkah",
-    subtitle: "Susun Kartu Cerita Bertahap",
+    subtitle: "Susun Kartu Cerita",
     desc: "Ikuti 4 langkah ringan bersama Aura untuk merumuskan situasi, perasaan, kebutuhan, dan kalimat pembuka.",
     src: "/images/aura/aura-memandu.png",
   },
@@ -129,29 +129,36 @@ export const AuraAvatar: React.FC<{
 
 export const AuraModuleHeader: React.FC<{
   productKey: AuraProductKey;
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description: string;
   rightSlot?: React.ReactNode;
 }> = ({ productKey, eyebrow, title, description, rightSlot }) => {
   const card = AURA_PRODUCT_CARDS[productKey];
+  const showEyebrow = eyebrow && !eyebrow.toLowerCase().includes("tahap");
+
   return (
     <div className="cotton-sheet rounded-3xl p-4 sm:p-6 border border-[#BFD8F5] bg-gradient-to-r from-[#FAFDFE] via-[#F4F8FF] to-[#E8F2FF]">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border border-[#BFD8F5] bg-[#FAFDFE] shrink-0 shadow-sm flex items-center justify-center p-1.5">
+          {/* Mascot blending directly into UI with abstract ambient aura (no bounding box shape) */}
+          <div className="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 flex items-center justify-center select-none">
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#6BA8FF]/25 via-[#BFD8F5]/40 to-transparent rounded-full blur-xl scale-125 -z-10 pointer-events-none" />
+            <div className="absolute -bottom-1 w-14 h-2.5 bg-[#2E63D6]/10 rounded-full blur-sm -z-10 pointer-events-none" />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={card.src}
               alt={card.title}
-              className="w-full h-full object-contain"
+              className="relative w-full h-full object-contain filter drop-shadow-[0_4px_12px_rgba(46,99,214,0.14)]"
             />
           </div>
           <div>
-            <span className="font-mono-num text-[11px] font-semibold text-[#2E63D6] px-2.5 py-0.5 rounded-full bg-[#D6E9FF] border border-[#9AC0EB]">
-              {eyebrow}
-            </span>
-            <h1 className="font-serif-display text-xl sm:text-3xl font-medium text-[#102542] tracking-tight mt-1.5">
+            {showEyebrow && (
+              <span className="font-mono-num text-[11px] font-semibold text-[#2E63D6] px-2.5 py-0.5 rounded-full bg-[#D6E9FF] border border-[#9AC0EB] inline-block mb-1.5">
+                {eyebrow}
+              </span>
+            )}
+            <h1 className="font-serif-display text-xl sm:text-3xl font-medium text-[#102542] tracking-tight">
               {title}
             </h1>
             <p className="text-xs sm:text-sm text-[#35527A] mt-0.5 max-w-xl">
@@ -183,17 +190,16 @@ export const AuraLoadingIndicator: React.FC<{
         className
       )}
     >
-      <div
-        className={cn(
-          "rounded-xl overflow-hidden shrink-0 bg-[#E8F1FC] border border-[#CCE1FF] p-1 flex items-center justify-center",
-          size === "sm" ? "w-9 h-9" : size === "md" ? "w-12 h-12" : "w-16 h-16"
-        )}
-      >
+      <div className="relative shrink-0 flex items-center justify-center select-none">
+        <div className="absolute inset-0 bg-[#6BA8FF]/20 rounded-full blur-md scale-125 pointer-events-none -z-10" />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/aura/aura-loading.png"
           alt="Aura menunggu dengan ekspresi penasaran dan kilauan kecil"
-          className="w-full h-full object-contain"
+          className={cn(
+            "relative object-contain",
+            size === "sm" ? "w-8 h-8" : size === "md" ? "w-11 h-11" : "w-14 h-14"
+          )}
         />
       </div>
       <div>
@@ -270,7 +276,7 @@ export const AuraShowcaseSection: React.FC<{ compact?: boolean; className?: stri
                 <span className="text-xs font-bold text-[#2E63D6] px-2.5 py-0.5 rounded-full bg-[#D6E9FF]">
                   Variasi Pose Aura
                 </span>
-                <span className="text-[11px] text-[#5B789E]">Menemani di setiap tahap</span>
+                <span className="text-[11px] text-[#5B789E]">Menemani setiap langkahmu</span>
               </div>
               <div className="grid grid-cols-5 gap-2 sm:gap-3">
                 {AURA_POSES.map((pose) => (
