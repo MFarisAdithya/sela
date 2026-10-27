@@ -15,9 +15,6 @@ import {
   ArrowRight,
   ShieldCheck,
   AlertCircle,
-  FileText,
-  ChevronDown,
-  ChevronUp,
   MessageSquare,
   Sparkle,
   MessageSquarePlus,
@@ -165,7 +162,6 @@ export default function PracticeTalkDashboard() {
   const [messages, setMessages] = useState<PracticeMessage[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isCheatSheetOpen, setIsCheatSheetOpen] = useState(true);
 
   const currentPersona = personas.find((p) => p.key === selectedPersonaKey) || personas[0];
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -527,64 +523,6 @@ export default function PracticeTalkDashboard() {
           </div>
         )}
       </div>
-
-      {/* Story Card Cheat Sheet Drawer (If card exists) */}
-      {activeStoryCard && (
-        <div className="rounded-2xl border border-[#CCE1FF] bg-[#EBF3FF] overflow-hidden">
-          <div
-            onClick={() => setIsCheatSheetOpen(!isCheatSheetOpen)}
-            className="p-3 px-4 flex items-center justify-between cursor-pointer hover:bg-[#CCE1FF]/30 transition-all text-xs font-bold text-[#17365D]"
-          >
-            <div className="flex items-center gap-2">
-              <FileText className="w-4 h-4 text-[#2457A7]" />
-              <span>Contekan Kartu Ceritamu: &ldquo;{activeStoryCard.title}&rdquo;</span>
-            </div>
-            <div className="flex items-center gap-2 text-xs font-semibold text-[#2457A7]">
-              <span>{isCheatSheetOpen ? "Sembunyikan" : "Tampilkan Poin"}</span>
-              {isCheatSheetOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-            </div>
-          </div>
-
-          {isCheatSheetOpen && (
-            <div className="p-4 pt-1 border-t border-[#CCE1FF]/70 text-xs text-[#17365D] space-y-2.5">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px]">
-                <div className="p-2.5 rounded-xl bg-white/80 border border-[#CCE1FF]/60">
-                  <strong className="block text-[#2457A7] uppercase tracking-wider mb-0.5">Fakta:</strong>
-                  <span className="line-clamp-2">{activeStoryCard.facts}</span>
-                </div>
-                <div className="p-2.5 rounded-xl bg-white/80 border border-[#CCE1FF]/60">
-                  <strong className="block text-[#2457A7] uppercase tracking-wider mb-0.5">Emosi:</strong>
-                  <span className="line-clamp-2">{activeStoryCard.feelings}</span>
-                </div>
-                <div className="p-2.5 rounded-xl bg-white/80 border border-[#CCE1FF]/60">
-                  <strong className="block text-[#2457A7] uppercase tracking-wider mb-0.5">Kebutuhan:</strong>
-                  <span className="line-clamp-2">{activeStoryCard.needs}</span>
-                </div>
-              </div>
-
-              {activeStoryCard.openingLine && (
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2.5 rounded-xl bg-white border border-[#2457A7]/30">
-                  <div className="text-xs">
-                    <span className="text-[10px] text-[#2457A7] font-bold uppercase tracking-wider block">
-                      Kalimat Pembuka Rekomendasi:
-                    </span>
-                    <span className="italic font-medium text-[#17365D]">
-                      &ldquo;{activeStoryCard.openingLine}&rdquo;
-                    </span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => handleSendMessage(activeStoryCard.openingLine)}
-                    className="px-3 py-1.5 rounded-xl bg-[#2457A7] text-white text-[11px] font-semibold hover:bg-[#1C4477] transition-all shrink-0 self-start sm:self-auto"
-                  >
-                    Gunakan Sekarang →
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      )}
 
       {/* Chat Simulation Area */}
       <div className="bg-[#F7FAFF] p-4 sm:p-6 rounded-3xl border border-[#CCE1FF] shadow-[6px_6px_16px_rgba(164,188,224,0.35),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col h-[520px]">
