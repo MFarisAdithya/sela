@@ -13,7 +13,6 @@ import { copy } from "@/lib/copy";
 import { SelaHeroIllustration } from "@/components/landing/SelaHeroIllustration";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { PublicFooter } from "@/components/layout/PublicFooter";
-import { AuraShowcaseSection } from "@/components/ui/AuraMascot";
 
 const STEP_AURA_IMAGES: Record<string, string> = {
   "01": "/images/aura/aura-mendengarkan.png",
@@ -163,11 +162,6 @@ export default function LandingPage() {
               >
                 Lihat rincian lengkap cara kerja SELA.AI
               </Link>
-            </div>
-
-            {/* AURA MASCOT SHOWCASE SECTION */}
-            <div className="mt-16">
-              <AuraShowcaseSection />
             </div>
           </div>
         </section>
