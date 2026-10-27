@@ -30,26 +30,26 @@ export default function HargaPage() {
   const isUserPremium = user?.plan === "premium";
 
   const freeBenefits = [
-    "10 respons Guided Story per bulan",
-    "2 sesi latihan Practice Talk per bulan",
-    "Simpan 1 Kartu Cerita aktif",
+    "Respons Guided Story untuk urai cerita",
+    "Sesi latihan Practice Talk dasar",
+    "Simpan Kartu Cerita aktif",
     "Modul belajar kelola emosi dasar",
     "Support Pathway dan kontak darurat gratis",
   ];
 
   const premiumBenefits = [
     {
-      title: "100 respons Guided Story per bulan",
-      desc: "Kapasitas 10 kali lipat dari paket Gratis. Latihan ini bukan pengganti psikolog.",
+      title: "Respons Guided Story lebih banyak",
+      desc: "Kapasitas lebih leluasa untuk merenungkan cerita tanpa rasa terburu-buru.",
       icon: Sparkles,
     },
     {
-      title: "10 sesi Practice Talk per bulan",
-      desc: "Latihan dengan 4 peran: Orang Tua, Guru atau Dosen, Teman, Konselor.",
+      title: "Sesi Practice Talk lebih banyak",
+      desc: "Latihan simulasi lebih leluasa dengan seluruh 4 peran lawan bicara.",
       icon: MessageCircle,
     },
     {
-      title: "Simpan sampai 20 Kartu Cerita",
+      title: "Simpan lebih banyak Kartu Cerita",
       desc: "Simpan banyak draf pegangan untuk bermacam situasi obrolan.",
       icon: BookmarkCheck,
     },
@@ -73,18 +73,18 @@ export default function HargaPage() {
   const comparisonRows = [
     {
       feature: "Respons Guided Story",
-      free: "10 respons / bulan",
-      premium: "100 respons / bulan",
+      free: "Akses dasar",
+      premium: "Respons lebih banyak & leluasa",
     },
     {
       feature: "Sesi Practice Talk",
-      free: "2 sesi / bulan (2 peran)",
-      premium: "10 sesi / bulan (4 peran)",
+      free: "Sesi latihan dasar",
+      premium: "Latihan lebih banyak (4 peran)",
     },
     {
       feature: "Penyimpanan Kartu Cerita",
-      free: "1 kartu aktif",
-      premium: "Sampai 20 kartu",
+      free: "Kartu cerita aktif",
+      premium: "Simpan lebih banyak kartu",
     },
     {
       feature: "Modul Belajar & Life Skills",
