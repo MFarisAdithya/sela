@@ -233,7 +233,7 @@ export default function PracticeTalkDashboard() {
         productKey="practice-talk"
         eyebrow="Tahap 03 — Practice Talk"
         title="Latihan Percakapan Terpandu"
-        description="Uji kalimat pembukamu dengan lawan bicara simulasi dan dapatkan tips komunikasi dari Aura."
+        description="Mencoba menyampaikan cerita dengan lawan bicara simulasi sebelum benar-benar bicara langsung."
         rightSlot={
           <button
             type="button"
@@ -354,6 +354,32 @@ export default function PracticeTalkDashboard() {
       <div className="bg-[#F7FAFF] p-4 sm:p-6 rounded-3xl border border-[#CCE1FF] shadow-[6px_6px_16px_rgba(164,188,224,0.35),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col h-[520px]">
         {/* Messages List */}
         <div className="flex-1 overflow-y-auto space-y-4 pr-1 min-h-0">
+          {/* Aura Berlatih Berbicara Companion Banner */}
+          {messages.length <= 1 && (
+            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#FAFDFE] via-[#F4F8FF] to-[#E8F1FC] border border-[#BFD8F5] shadow-sm flex items-center gap-4 mb-3 animate-in fade-in">
+              <div className="relative w-16 sm:w-20 h-16 sm:h-20 shrink-0">
+                <img
+                  src="/images/aura/aura-berlatih-bicara.png"
+                  alt="Aura berlatih berbicara menghadap dua gelembung percakapan"
+                  className="w-full h-full object-contain drop-shadow-sm"
+                />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <span className="font-mono-num text-[10px] font-semibold text-[#1E56A0] px-2 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
+                    Aura Berlatih Berbicara
+                  </span>
+                  <span className="text-xs font-semibold text-[#102542]">
+                    Simulasi Dialog Aman
+                  </span>
+                </div>
+                <p className="text-xs text-[#35527A] leading-relaxed">
+                  Coba sampaikan apa yang ingin kamu katakan di sini tanpa rasa cemas salah bicara. Aura akan membantu memberikan tips komunikasi asertif di setiap tanggapan.
+                </p>
+              </div>
+            </div>
+          )}
+
           {messages.map((msg) => {
             const isUser = msg.sender === "user";
 

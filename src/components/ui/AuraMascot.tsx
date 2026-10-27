@@ -53,10 +53,10 @@ export const AURA_PRODUCT_CARDS = {
     src: "/images/aura/aura-materi-edukasi.png",
   },
   "practice-talk": {
-    title: "Practice Talk",
-    subtitle: "Simulasi Latihan Percakapan",
-    desc: "Uji kalimat pembukamu dengan lawan bicara simulasi dan dapatkan tips komunikasi dari Aura.",
-    src: "/images/aura/aura-practice-talk.png",
+    title: "Aura Berlatih Berbicara",
+    subtitle: "Simulasi Latihan Percakapan Terpandu",
+    desc: "Aura menghadap dua gelembung percakapan dengan fokus hangat. Uji kalimatmu sebelum benar-benar berbicara dengan seseorang.",
+    src: "/images/aura/aura-berlatih-bicara.png",
   },
   "rencana-dukungan": {
     title: "Rencana Dukungan",
