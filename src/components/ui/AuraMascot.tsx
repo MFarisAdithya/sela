@@ -53,10 +53,10 @@ export const AURA_PRODUCT_CARDS = {
     src: "/images/aura/aura-progress.png",
   },
   "materi-edukasi": {
-    title: "Materi Edukasi",
-    subtitle: "Ruang Belajar & Life Skills",
-    desc: "Pelajari cara mengelola emosi, teknik napas 4-7-8, dan komunikasi asertif bersama Aura.",
-    src: "/images/aura/aura-materi-edukasi.png",
+    title: "Aura Belajar",
+    subtitle: "Ruang Belajar & Refleksi Mandiri",
+    desc: "Aura membaca buku terbuka dengan bintang kecil di atas kepalanya. Hal-hal kecil tentang menghadapi orang lain dan memahami diri.",
+    src: "/images/aura/aura-ruang-belajar.png",
   },
   "practice-talk": {
     title: "Aura Berlatih Berbicara",

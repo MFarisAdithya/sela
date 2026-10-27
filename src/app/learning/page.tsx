@@ -60,6 +60,30 @@ export default function LearningPage() {
         }
       />
 
+      {/* Aura Belajar Companion Banner */}
+      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#FAFDFE] via-[#F4F8FF] to-[#E8F1FC] border border-[#BFD8F5] shadow-sm flex items-center gap-4 animate-in fade-in">
+        <div className="relative w-16 sm:w-20 h-16 sm:h-20 shrink-0">
+          <img
+            src="/images/aura/aura-ruang-belajar.png"
+            alt="Aura membaca buku terbuka dengan bintang kecil di atas kepalanya"
+            className="w-full h-full object-contain drop-shadow-sm"
+          />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2 mb-0.5">
+            <span className="font-mono-num text-[10px] font-semibold text-[#1E56A0] px-2 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
+              Aura Belajar
+            </span>
+            <span className="text-xs font-semibold text-[#102542]">
+              Sudut Baca &amp; Keterampilan Hidup
+            </span>
+          </div>
+          <p className="text-xs text-[#35527A] leading-relaxed">
+            Belajar mengenali emosi, meredakan ketegangan fisik lewat teknik napas, dan melatih komunikasi asertif. Pelajari topik-topik ringkas ini kapan pun kamu butuh panduan santai.
+          </p>
+        </div>
+      </div>
+
       {/* Category Filter Pills */}
       <div className="flex items-center gap-2 overflow-x-auto pb-1">
         {categories.map((cat) => (
