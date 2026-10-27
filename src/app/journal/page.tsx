@@ -161,10 +161,10 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
     <div className="space-y-6 max-w-4xl mx-auto py-2 animate-in fade-in duration-150">
       {/* Header with Aura Mascot */}
       <AuraModuleHeader
-        productKey="panduan-langkah"
+        productKey="kartu-cerita"
         eyebrow="Tahap 02 — Kartu Cerita"
         title="Kartu Cerita Pribadi"
-        description="Jembatan konkret dari situasi yang kusut menjadi poin bicara yang siap diucapkan bersama Aura."
+        description="Cerita yang awalnya terasa rumit mulai tersusun menjadi lebih jelas bersama Aura."
         rightSlot={
           <div className="flex items-center gap-1.5 p-1 bg-[#E3EEFF] rounded-2xl border border-[#CCE1FF] self-start sm:self-auto">
             <button
@@ -290,6 +290,30 @@ Prinsip SELA.AI: Ruang untuk dirimu. From Unspoken Problems to Prepared Conversa
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
+                </div>
+              </div>
+
+              {/* Aura Merangkum Companion Banner */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#FAFDFE] via-[#F4F8FF] to-[#E8F1FC] border border-[#BFD8F5] shadow-sm flex items-center gap-4 animate-in fade-in">
+                <div className="relative w-16 sm:w-20 h-16 sm:h-20 shrink-0">
+                  <img
+                    src="/images/aura/aura-merangkum-kartu.png"
+                    alt="Aura memegang kartu cerita 4 pilar"
+                    className="w-full h-full object-contain drop-shadow-sm"
+                  />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="font-mono-num text-[10px] font-semibold text-[#1E56A0] px-2 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
+                      Aura Merangkum
+                    </span>
+                    <span className="text-xs font-semibold text-[#102542]">
+                      4 Pilar Komunikasi
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#35527A] leading-relaxed">
+                    Cerita yang awalnya terasa rumit kini tersusun rapi: fakta situasi objektif, perasaanmu, kebutuhan nyata, dan kalimat pembuka siap pakai saat kamu bicara.
+                  </p>
                 </div>
               </div>
 

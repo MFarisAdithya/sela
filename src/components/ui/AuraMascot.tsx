@@ -34,6 +34,12 @@ export const AURA_PRODUCT_CARDS = {
     desc: "Ikuti 4 langkah ringan bersama Aura untuk merumuskan situasi, perasaan, kebutuhan, dan kalimat pembuka.",
     src: "/images/aura/aura-memandu.png",
   },
+  "kartu-cerita": {
+    title: "Aura Membantu Merangkum",
+    subtitle: "Kartu Cerita Pribadi 4 Pilar",
+    desc: "Aura memegang kartu putih-biru 4 pilar. Cerita yang awalnya terasa rumit mulai tersusun menjadi lebih jelas.",
+    src: "/images/aura/aura-merangkum-kartu.png",
+  },
   progress: {
     title: "Progress & Pencapaian",
     subtitle: "Langkah Kecil yang Berarti",
