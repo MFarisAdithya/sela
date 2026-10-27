@@ -17,9 +17,8 @@ export const PublicFooter: React.FC = () => {
               <SelaLogo
                 layout="horizontal"
                 size="md"
-                showTagline={true}
+                showTagline={false}
                 showAiSuffix={true}
-                taglineText="Ruang Persiapan Obrolan & Kartu Cerita"
               />
             </Link>
             <p className="text-sm leading-relaxed text-[#2B4566] max-w-sm">

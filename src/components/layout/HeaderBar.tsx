@@ -43,9 +43,6 @@ export const HeaderBar: React.FC = () => {
               <span className="font-bold text-base tracking-tight text-[#102542] leading-none lowercase">
                 sela<span className="text-[#1E56A0]">.ai</span>
               </span>
-              <span className="text-[10px] text-[#5B789E] hidden sm:inline-block leading-tight mt-0.5">
-                Ruang Persiapan Obrolan
-              </span>
             </div>
           </Link>
         </div>

@@ -28,7 +28,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SELA.AI — Ruang Persiapan Obrolan & Kartu Cerita Remaja",
+  title: "SELA.AI — Persiapan Obrolan & Kartu Cerita",
   description:
     "SELA.AI membantu remaja merapikan pikiran yang kusut menjadi Kartu Cerita, berlatih memulai percakapan, dan menemukan jalur bantuan nyata yang aman.",
   keywords: [

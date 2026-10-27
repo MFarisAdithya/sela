@@ -40,9 +40,8 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({ className }) => {
           <SelaLogo
             layout="horizontal"
             size="md"
-            showTagline={true}
+            showTagline={false}
             showAiSuffix={true}
-            taglineText="Ruang Persiapan Obrolan & Kartu Cerita"
           />
         </Link>
 
