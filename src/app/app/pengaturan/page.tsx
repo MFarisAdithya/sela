@@ -21,7 +21,6 @@ import {
 import { useAuth } from "@/context/AuthContext";
 import { useApp } from "@/context/AppContext";
 import { AgeBand } from "@/types/auth";
-import { AuraAvatar } from "@/components/ui/AuraMascot";
 
 export default function PengaturanAkunPage() {
   const { user, updateProfile, updateConsent, logout, deleteAccount } = useAuth();
@@ -161,16 +160,13 @@ export default function PengaturanAkunPage() {
       {/* 1. Profil Pengguna */}
       <form onSubmit={handleSaveProfile} className="p-6 sm:p-8 rounded-3xl bg-[#F7FAFF] border border-[#CCE1FF] shadow-sm space-y-6">
         <div className="flex items-center gap-3.5 pb-4 border-b border-[#CCE1FF]/70">
-          <AuraAvatar size="md" />
+          <div className="w-12 h-12 rounded-full bg-[#E8F1FC] border border-[#BFD8F5] flex items-center justify-center text-[#1E56A0] shadow-sm shrink-0">
+            <User className="w-6 h-6 text-[#1E56A0]" />
+          </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-lg font-bold text-[#17365D]">Data Pengguna &amp; Avatar Aura</h2>
-              <span className="text-[11px] font-semibold text-[#1E56A0] px-2 py-0.5 rounded-full bg-[#DCEAFB]">
-                Aura Ikonik
-              </span>
-            </div>
+            <h2 className="text-lg font-bold text-[#17365D]">Data Pengguna</h2>
             <p className="text-xs text-[#516B8C]">
-              Avatar profil dan identitas akun yang didampingi oleh Aura.
+              Informasi profil dan identitas akunmu di SELA.AI.
             </p>
           </div>
         </div>

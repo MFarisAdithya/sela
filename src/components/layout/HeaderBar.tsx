@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Shield, Sparkles } from "lucide-react";
+import { Shield, Sparkles, User } from "lucide-react";
 import { SelaMark } from "@/components/ui/SelaLogo";
 import { AuraAvatar } from "@/components/ui/AuraMascot";
 import { useAuth } from "@/context/AuthContext";
@@ -77,11 +77,13 @@ export const HeaderBar: React.FC = () => {
 
           <Link
             href="/app/pengaturan"
-            className="flex items-center gap-1.5 p-1 pl-1.5 pr-2.5 rounded-full bg-white border border-[#BFD8F5] text-xs font-semibold text-[#102542] hover:border-[#2E63D6] transition-colors shadow-sm"
+            className="flex items-center gap-2 p-1 pl-1.5 pr-2.5 rounded-full bg-white border border-[#BFD8F5] text-xs font-semibold text-[#102542] hover:border-[#2E63D6] transition-colors shadow-sm"
             title="Akun Saya"
             aria-label="Akun Saya"
           >
-            <AuraAvatar size="xs" />
+            <div className="w-5 h-5 rounded-full bg-[#E8F1FC] border border-[#BFD8F5] flex items-center justify-center text-[#1E56A0] shrink-0">
+              <User className="w-3.5 h-3.5 text-[#1E56A0]" />
+            </div>
             <span className="hidden sm:inline">Akun Saya</span>
           </Link>
         </div>

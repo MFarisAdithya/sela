@@ -17,6 +17,7 @@ import {
   MessageCircle,
   Sparkles,
   CreditCard,
+  User,
   X,
 } from "lucide-react";
 import { NeuCard } from "@/components/ui/NeuCard";
@@ -34,7 +35,7 @@ const secondaryMobileTabs = [
   { label: "Belajar & Kenali Diri", href: "/learning", icon: GraduationCap, desc: "Modul keterampilan hidup & emosi" },
   { label: "Langkah Kecilku", href: "/growth-plan", icon: TrendingUp, desc: "Target kecil sukarela mandiri" },
   { label: "Riwayat Pembayaran", href: "/app/pembayaran", icon: CreditCard, desc: "Faktur dan catatan pembayaran" },
-  { label: "Akun Saya", href: "/app/pengaturan", icon: ShieldCheck, desc: "Profil, privasi, dan hapus akun" },
+  { label: "Akun Saya", href: "/app/pengaturan", icon: User, desc: "Profil, privasi, dan hapus akun" },
 ];
 
 export const MobileBottomNav: React.FC = () => {

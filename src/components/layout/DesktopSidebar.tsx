@@ -16,6 +16,7 @@ import {
   Sparkles,
   CreditCard,
   PhoneCall,
+  User,
 } from "lucide-react";
 import { SelaLogo } from "@/components/ui/SelaLogo";
 import { AuraAvatar } from "@/components/ui/AuraMascot";
@@ -36,7 +37,7 @@ const secondaryNavItems = [
 
 const accountNavItems = [
   { label: "Riwayat Pembayaran", href: "/app/pembayaran", icon: CreditCard },
-  { label: "Akun Saya", href: "/app/pengaturan", icon: ShieldCheck },
+  { label: "Akun Saya", href: "/app/pengaturan", icon: User },
 ];
 
 export const DesktopSidebar: React.FC = () => {
