@@ -48,7 +48,6 @@ export default function GrowthPlanPage() {
       {/* Header with Aura Mascot */}
       <AuraModuleHeader
         productKey="progress"
-        eyebrow="Langkah Kecilku"
         title="Langkah Kecilku"
         description="Lihat langkah kecilmu hari ini. Nggak perlu buru-buru, satu langkah kecil sudah sangat berarti."
         rightSlot={
