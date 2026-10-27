@@ -89,37 +89,55 @@ export default function PaketDanKuotaPage() {
         }`}
       >
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2.5">
-              <span
-                className={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full ${
-                  isPremium
-                    ? "bg-[#6FB1FF]/20 text-[#CCE1FF] border border-[#6FB1FF]/40"
-                    : "bg-[#EBF3FF] text-[#2457A7] border border-[#CCE1FF]"
+          <div className="flex items-start sm:items-center gap-4 sm:gap-5">
+            <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border p-1.5 shrink-0 shadow-sm flex items-center justify-center ${
+              isPremium
+                ? "bg-white/10 backdrop-blur-sm border-white/20"
+                : "bg-white border-[#CCE1FF]"
+            }`}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/aura/aura-supporter.png"
+                alt="Aura mengenakan pin bintang kecil berwarna biru dengan pose apresiatif"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-2.5">
+                <span
+                  className={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full ${
+                    isPremium
+                      ? "bg-[#6FB1FF]/20 text-[#CCE1FF] border border-[#6FB1FF]/40"
+                      : "bg-[#EBF3FF] text-[#2457A7] border border-[#CCE1FF]"
+                  }`}
+                >
+                  {isPremium ? "SELA Supporter Aktif" : "Paket Bebas (Free)"}
+                </span>
+                {isPremium ? (
+                  <span className="text-xs bg-[#E6F4EA] text-[#1F7A65] font-semibold px-2.5 py-0.5 rounded-full border border-[#B7E1CD]">
+                    Pin Bintang Biru Aktif ⭐
+                  </span>
+                ) : (
+                  <span className="text-xs bg-[#EBF3FF] text-[#2457A7] font-semibold px-2.5 py-0.5 rounded-full border border-[#CCE1FF]">
+                    Aura Menemani
+                  </span>
+                )}
+              </div>
+
+              <h2 className="text-2xl sm:text-3xl font-black">
+                {isPremium ? "Paket SELA Supporter Premium" : "Paket Akses Bebas (Free)"}
+              </h2>
+
+              <p
+                className={`text-xs sm:text-sm max-w-xl leading-relaxed ${
+                  isPremium ? "text-white/85" : "text-[#17365D]/80"
                 }`}
               >
-                {isPremium ? "SELA Supporter Aktif" : "Paket Bebas (Free)"}
-              </span>
-              {isPremium && (
-                <span className="text-xs bg-[#E6F4EA] text-[#1F7A65] font-semibold px-2.5 py-0.5 rounded-full border border-[#B7E1CD]">
-                  Lencana Aktif ⭐
-                </span>
-              )}
+                {isPremium
+                  ? "Terima kasih telah berkontribusi menjaga SELA.AI tetap mandiri dan aman. Pin bintang birumu aktif sebagai apresiasi identitas Supporter."
+                  : "Kamu menggunakan akses dasar SELA.AI dengan penuh penghargaan. Seluruh alat bantu esensial, keselamatan, dan kontak darurat dapat digunakan gratis tanpa rasa dibedakan."}
+              </p>
             </div>
-
-            <h2 className="text-2xl sm:text-3xl font-black">
-              {isPremium ? "Paket SELA Supporter Premium" : "Paket Akses Bebas (Free)"}
-            </h2>
-
-            <p
-              className={`text-xs sm:text-sm max-w-xl leading-relaxed ${
-                isPremium ? "text-white/85" : "text-[#17365D]/80"
-              }`}
-            >
-              {isPremium
-                ? "Terima kasih telah berkontribusi menjaga SELA.AI tetap mandiri dan aman. Paket ini aktif selama periode 30 hari tanpa perpanjangan otomatis."
-                : "Kamu menggunakan akses dasar SELA.AI. Seluruh alat bantu esensial, keselamatan, dan kontak darurat dapat digunakan gratis tanpa paywall."}
-            </p>
           </div>
 
           <div className="shrink-0 flex flex-col gap-2">
@@ -142,6 +160,34 @@ export default function PaketDanKuotaPage() {
               </span>
             )}
           </div>
+        </div>
+      </div>
+
+      {/* Aura Supporter Identity Card */}
+      <div className="p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-[#FAFDFE] via-[#F4F8FF] to-[#E8F1FC] border border-[#BFD8F5] shadow-sm flex flex-col sm:flex-row items-center gap-5">
+        <div className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-2xl bg-white border border-[#BFD8F5] p-2 flex items-center justify-center shadow-sm">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/aura/aura-supporter.png"
+            alt="Aura mengenakan pin bintang kecil berwarna biru dengan pose apresiatif"
+            className="w-full h-full object-contain"
+          />
+        </div>
+        <div className="flex-1 space-y-1 text-center sm:text-left">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+            <span className="font-mono-num text-[11px] font-semibold text-[#1E56A0] px-2.5 py-0.5 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
+              Aura Supporter
+            </span>
+            <span className="text-xs font-semibold text-[#102542]">
+              Pin Bintang Biru &amp; Identitas Apresiatif
+            </span>
+          </div>
+          <h3 className="text-base sm:text-lg font-bold text-[#102542]">
+            Memberi Identitas Premium Tanpa Mengurangi Penghargaan Pengguna Bebas
+          </h3>
+          <p className="text-xs text-[#35527A] leading-relaxed">
+            Aura mengenakan pin bintang kecil berwarna biru dengan pose apresiatif. Makna dari identitas ini adalah merayakan kebaikan hati para supporter yang menopang biaya operasional server dan infrastruktur enkripsi, tanpa pernah membuat pengguna paket Bebas merasa dikesampingkan atau kehilangan rasa aman.
+          </p>
         </div>
       </div>
 

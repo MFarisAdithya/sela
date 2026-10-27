@@ -128,8 +128,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
         {/* STATE 1: SUCCESS CONFIRMATION */}
         {paymentSuccess ? (
           <div className="text-center py-6 space-y-4">
-            <div className="w-16 h-16 rounded-full bg-[#E6F4EA] border border-[#B7E1CD] text-[#1F7A65] flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-8 h-8" />
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-br from-[#E6F4EA] to-[#D0EFE2] border border-[#B7E1CD] p-2 flex items-center justify-center mx-auto shadow-sm">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/aura/aura-supporter.png"
+                alt="Aura Supporter — Terima Kasih"
+                className="w-full h-full object-contain"
+              />
             </div>
 
             <h2 className="text-2xl font-bold text-[#17365D]">Terima Kasih, Dukunganmu Diterima!</h2>
@@ -237,17 +242,27 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
         ) : (
           /* STATE 3: ORDER INITIATION */
           <div className="space-y-6">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EBF3FF] border border-[#CCE1FF] text-[#2457A7] text-xs font-semibold uppercase tracking-wider mb-2">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Dukungan Transparan SELA.AI</span>
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-2xl bg-gradient-to-br from-[#EBF3FF] to-[#D6E9FF] border border-[#CCE1FF] p-1.5 flex items-center justify-center shadow-sm">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/aura/aura-supporter.png"
+                  alt="Aura mengenakan pin bintang kecil berwarna biru dengan pose apresiatif"
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <h2 id="checkout-modal-title" className="text-2xl font-bold text-[#17365D]">
-                Menjadi SELA Supporter
-              </h2>
-              <p className="text-xs sm:text-sm text-[#17365D]/75 mt-1 leading-relaxed">
-                Kontribusi sukarela untuk menjaga ruang refleksi ini mandiri, aman, dan tanpa iklan.
-              </p>
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#EBF3FF] border border-[#CCE1FF] text-[#2457A7] text-xs font-semibold uppercase tracking-wider mb-1">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Aura Supporter · Dukungan Transparan</span>
+                </div>
+                <h2 id="checkout-modal-title" className="text-xl sm:text-2xl font-bold text-[#17365D]">
+                  Menjadi SELA Supporter
+                </h2>
+                <p className="text-xs sm:text-sm text-[#17365D]/75 leading-relaxed">
+                  Aura mengenakan pin bintang kecil berwarna biru dengan penuh apresiasi atas kontribusimu menjaga ruang aman ini.
+                </p>
+              </div>
             </div>
 
             {errorMsg && (

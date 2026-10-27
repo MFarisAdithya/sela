@@ -210,11 +210,21 @@ export default function HargaPage() {
             <div className="cotton-sheet p-6 sm:p-8 bg-[#F4F9FF] border-2 border-[#1E56A0] flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between pb-4 border-b border-[#9AC0EB]">
-                  <div>
-                    <span className="font-mono-num text-xs font-semibold text-[#1E56A0] block mb-0.5">
-                      EDISI #02
-                    </span>
-                    <h2 className="text-xl font-bold text-[#102542]">SELA Supporter</h2>
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-xl overflow-hidden bg-white border border-[#9AC0EB] p-1 shrink-0 shadow-sm flex items-center justify-center">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src="/images/aura/aura-supporter.png"
+                        alt="Aura Supporter — Pin Bintang Biru"
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <div>
+                      <span className="font-mono-num text-[11px] font-semibold text-[#1E56A0] block mb-0.5">
+                        EDISI #02 · AURA SUPPORTER
+                      </span>
+                      <h2 className="text-xl font-bold text-[#102542]">SELA Supporter</h2>
+                    </div>
                   </div>
                   <span className="settled-stamp">
                     <Sparkles className="w-3.5 h-3.5" />
@@ -235,7 +245,7 @@ export default function HargaPage() {
                 </div>
 
                 <p className="mt-2.5 text-xs sm:text-sm text-[#2B4566] leading-relaxed">
-                  Latihan lebih banyak sekaligus bantu jaga server SELA tetap aktif.
+                  Aura mengenakan pin bintang kecil berwarna biru dengan penuh apresiasi. Memberi identitas Premium bagi pendukung platform tanpa membuat pengguna Gratis merasa kurang dihargai.
                 </p>
 
                 <div className="mt-6 pt-5 border-t border-[#9AC0EB]">

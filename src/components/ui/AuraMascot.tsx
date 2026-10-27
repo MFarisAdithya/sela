@@ -52,6 +52,12 @@ export const AURA_PRODUCT_CARDS = {
     desc: "Aura tersenyum dengan pose penuh semangat, ditemani panah naik dan bintang kecil. Menghargai kemajuan kecil tanpa membuat pengguna merasa harus selalu produktif.",
     src: "/images/aura/aura-menyemangati.png",
   },
+  supporter: {
+    title: "Aura Supporter",
+    subtitle: "Paket SELA Supporter Premium",
+    desc: "Aura mengenakan pin bintang kecil berwarna biru, dengan pose apresiatif. Memberi identitas Premium tanpa membuat pengguna Gratis merasa kurang dihargai.",
+    src: "/images/aura/aura-supporter.png",
+  },
   "materi-edukasi": {
     title: "Aura Belajar",
     subtitle: "Ruang Belajar & Refleksi Mandiri",
