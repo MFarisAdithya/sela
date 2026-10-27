@@ -21,11 +21,11 @@ import { SelaLogo } from "@/components/ui/SelaLogo";
 import { AuraAvatar } from "@/components/ui/AuraMascot";
 
 const coreNavItems = [
-  { code: "00", label: "Ringkasan Ruang", href: "/app", icon: LayoutDashboard },
-  { code: "01", label: "Guided Story", href: "/safe-story", icon: MessageSquareHeart },
-  { code: "02", label: "Kartu Cerita & Jurnal", href: "/journal", icon: Compass },
-  { code: "03", label: "Practice Talk", href: "/dashboard", icon: MessageCircle },
-  { code: "04", label: "Support Pathway", href: "/support", icon: Users },
+  { label: "Ringkasan Ruang", href: "/app", icon: LayoutDashboard },
+  { label: "Guided Story", href: "/safe-story", icon: MessageSquareHeart },
+  { label: "Kartu Cerita & Jurnal", href: "/journal", icon: Compass },
+  { label: "Practice Talk", href: "/dashboard", icon: MessageCircle },
+  { label: "Support Pathway", href: "/support", icon: Users },
 ];
 
 const secondaryNavItems = [
@@ -93,29 +93,19 @@ export const DesktopSidebar: React.FC = () => {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "flex items-center justify-between px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors",
+                    "flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors",
                     isActive
                       ? "bg-[#FAFDFE] text-[#102542] font-semibold border border-[#9AC0EB] shadow-sm"
                       : "text-[#2B4566] hover:text-[#102542] hover:bg-[#E8F1FC]/70 border border-transparent"
                   )}
                 >
-                  <span className="flex items-center gap-2.5">
-                    <Icon
-                      className={cn(
-                        "w-4 h-4 shrink-0",
-                        isActive ? "text-[#1E56A0]" : "text-[#516B8C]"
-                      )}
-                    />
-                    <span>{item.label}</span>
-                  </span>
-                  <span
+                  <Icon
                     className={cn(
-                      "font-mono-num text-[11px]",
-                      isActive ? "text-[#1E56A0] font-semibold" : "text-[#6E87A6]"
+                      "w-4 h-4 shrink-0",
+                      isActive ? "text-[#1E56A0]" : "text-[#516B8C]"
                     )}
-                  >
-                    {item.code}
-                  </span>
+                  />
+                  <span>{item.label}</span>
                 </Link>
               );
             })}
