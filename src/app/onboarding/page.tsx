@@ -68,30 +68,34 @@ export default function OnboardingPage() {
       <div className="max-w-xl mx-auto w-full">
         {/* Brand Header */}
         <div className="text-center mb-6">
-          <Link href="/" className="inline-block mb-3" aria-label="SELA.AI Beranda">
+          <Link href="/" className="inline-block" aria-label="SELA.AI Beranda">
             <SelaLogo layout="horizontal" size="md" showTagline={false} showAiSuffix={true} />
           </Link>
-          <div className="flex items-center justify-center gap-1.5 mt-2">
-            {[1, 2, 3, 4].map((s) => (
-              <span
-                key={s}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  s === step ? "w-8 bg-[#1E56A0]" : s < step ? "w-3 bg-[#6BA8FF]" : "w-3 bg-[#BFD8F5]"
-                }`}
-              />
-            ))}
-          </div>
         </div>
 
         {/* Multi-Step Card */}
         <div className="bg-[#FAFDFE] p-6 sm:p-10 rounded-3xl border border-[#BFD8F5] shadow-[0_20px_50px_rgba(46,99,214,0.12)]">
+          {/* Step Progress UI Bar */}
+          <div
+            className="w-full max-w-xs mx-auto flex items-center gap-2 mb-6 sm:mb-8"
+            role="progressbar"
+            aria-valuenow={step}
+            aria-valuemin={1}
+            aria-valuemax={4}
+          >
+            {[1, 2, 3, 4].map((s) => (
+              <div
+                key={s}
+                className={`h-2 flex-1 rounded-full transition-all duration-300 ${
+                  s <= step ? "bg-[#1E56A0]" : "bg-[#DCEAFB]"
+                }`}
+              />
+            ))}
+          </div>
+
           {/* STEP 1: Selamat Datang & Orientasi — Aura Memandu */}
           {step === 1 && (
             <div className="space-y-6 text-center animate-in fade-in duration-200">
-              <span className="font-mono-num text-[11px] font-semibold text-[#1E56A0] px-3 py-1 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
-                Langkah 1 dari 4 — Aura Memandu
-              </span>
-
               {/* Aura Memandu Illustration */}
               <div className="flex flex-col items-center justify-center relative pt-2">
                 <div className="absolute w-44 h-44 rounded-full bg-gradient-to-tr from-[#6BA8FF]/20 via-[#D6E9FF]/40 to-transparent blur-xl -z-10" />
@@ -131,10 +135,7 @@ export default function OnboardingPage() {
           {step === 2 && (
             <div className="space-y-6 animate-in fade-in duration-200">
               <div className="text-center">
-                <span className="font-mono-num text-[11px] font-semibold text-[#1E56A0] px-3 py-1 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
-                  Langkah 2 dari 4
-                </span>
-                <h2 className="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[#102542] mt-3">
+                <h2 className="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[#102542]">
                   Tiga Batasan Penting SELA.AI
                 </h2>
                 <p className="text-xs text-[#35527A] mt-1">
@@ -209,10 +210,7 @@ export default function OnboardingPage() {
               </div>
 
               <div className="text-center">
-                <span className="font-mono-num text-[11px] font-semibold text-[#1E56A0] px-3 py-1 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
-                  Langkah 3 dari 4 — Pemilihan Tujuan
-                </span>
-                <h2 className="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[#102542] mt-2">
+                <h2 className="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[#102542]">
                   Apa yang paling ingin kamu lakukan hari ini?
                 </h2>
               </div>
@@ -286,10 +284,7 @@ export default function OnboardingPage() {
               </div>
 
               <div className="text-center">
-                <span className="font-mono-num text-[11px] font-semibold text-[#1E56A0] px-3 py-1 rounded-full bg-[#DCEAFB] border border-[#BFD8F5]">
-                  Langkah 4 dari 4 — Preferensi Sapaan
-                </span>
-                <h2 className="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[#102542] mt-2">
+                <h2 className="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[#102542]">
                   Mau Dipanggil Siapa?
                 </h2>
                 <p className="text-xs text-[#35527A] mt-1">
