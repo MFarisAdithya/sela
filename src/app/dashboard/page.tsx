@@ -413,27 +413,6 @@ export default function PracticeTalkDashboard() {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Starter Sentence Suggestions */}
-        {messages.length <= 2 && (
-          <div className="pt-3 pb-1 border-t border-[#CCE1FF]/60 space-y-1.5 shrink-0">
-            <span className="text-[11px] font-semibold text-[#17365D]/60">
-              Pilihan kalimat awal untuk {currentPersona.label}:
-            </span>
-            <div className="flex flex-wrap gap-2">
-              {currentPersona.starterOptions.map((opt, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  onClick={() => handleSendMessage(opt)}
-                  className="px-3 py-1.5 rounded-xl bg-white text-xs text-[#17365D] border border-[#CCE1FF] shadow-sm hover:border-[#2457A7] text-left transition-all"
-                >
-                  {opt}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
         {/* Input Box */}
         <div className="pt-3 border-t border-[#CCE1FF]/60 shrink-0">
           <form
