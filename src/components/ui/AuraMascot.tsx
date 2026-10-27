@@ -58,6 +58,12 @@ export const AURA_PRODUCT_CARDS = {
     desc: "Aura mengenakan pin bintang kecil berwarna biru, dengan pose apresiatif. Memberi identitas Premium tanpa membuat pengguna Gratis merasa kurang dihargai.",
     src: "/images/aura/aura-supporter.png",
   },
+  ikonik: {
+    title: "Aura Ikonik",
+    subtitle: "Profil & Avatar SELA.AI",
+    desc: "Potret kepala dan sayap Aura dalam komposisi sederhana, mudah dikenali saat diperkecil.",
+    src: "/images/aura/aura-avatar.png",
+  },
   "materi-edukasi": {
     title: "Aura Belajar",
     subtitle: "Ruang Belajar & Refleksi Mandiri",
@@ -81,7 +87,7 @@ export const AURA_PRODUCT_CARDS = {
 export type AuraProductKey = keyof typeof AURA_PRODUCT_CARDS;
 
 export const AuraAvatar: React.FC<{
-  size?: "xs" | "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
   className?: string;
 }> = ({ size = "sm", className }) => {
   const dims = {
@@ -89,6 +95,7 @@ export const AuraAvatar: React.FC<{
     sm: "w-8 h-8",
     md: "w-11 h-11",
     lg: "w-14 h-14",
+    xl: "w-20 h-20",
   };
   return (
     <div
@@ -101,8 +108,8 @@ export const AuraAvatar: React.FC<{
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/images/aura/aura-avatar.png"
-        alt="Aura — Maskot SELA.AI"
-        className="w-full h-full object-cover"
+        alt="Aura Ikonik — Maskot SELA.AI"
+        className="w-full h-full object-contain p-0.5"
       />
     </div>
   );

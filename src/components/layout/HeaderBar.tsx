@@ -74,11 +74,12 @@ export const HeaderBar: React.FC = () => {
 
           <Link
             href="/app/pengaturan"
-            className="p-1.5 rounded-xl text-[#35527A] hover:text-[#102542] hover:bg-[#DCEAFB] transition-colors focus:outline-none focus:ring-2 focus:ring-[#1E56A0]"
-            title="Pengaturan Akun & Privasi"
+            className="flex items-center gap-1.5 p-1 pl-1.5 pr-2.5 rounded-full bg-white border border-[#BFD8F5] text-xs font-semibold text-[#102542] hover:border-[#2E63D6] transition-colors shadow-sm"
+            title="Pengaturan Akun & Profil"
             aria-label="Pengaturan Akun"
           >
-            <Shield className="w-4 h-4" />
+            <AuraAvatar size="xs" />
+            <span className="hidden sm:inline">Profil</span>
           </Link>
         </div>
       </div>

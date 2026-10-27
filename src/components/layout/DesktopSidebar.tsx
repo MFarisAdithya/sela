@@ -196,6 +196,7 @@ export const DesktopSidebar: React.FC = () => {
         <Link
           href="/safe-story"
           className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/95 border border-[#B8D7FA] shadow-sm hover:border-[#2E63D6] transition-all group"
+          title="Bantuan Aura"
         >
           <AuraAvatar size="sm" />
           <div className="min-w-0 flex-1">
@@ -203,7 +204,7 @@ export const DesktopSidebar: React.FC = () => {
               Aura · Temanmu
             </span>
             <span className="block text-[10px] text-[#516B8C] truncate">
-              Si Cahaya Kecil dari SELA.AI
+              Ikon Bantuan &amp; Ruang Refleksi
             </span>
           </div>
         </Link>
