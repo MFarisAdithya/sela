@@ -75,20 +75,20 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({ className }) => {
             Masuk
           </Link>
           <Link
-            href="/onboarding"
+            href="/daftar"
             className="letterpress-primary inline-flex items-center justify-center px-5 py-2.5 text-sm"
           >
-            Mulai gratis
+            Daftar
           </Link>
         </div>
 
         {/* Mobile & Tablet Toggle (<lg) */}
         <div className="flex lg:hidden items-center gap-2 shrink-0">
           <Link
-            href="/onboarding"
+            href="/daftar"
             className="letterpress-primary inline-flex items-center justify-center px-4 py-2 text-xs"
           >
-            Mulai
+            Daftar
           </Link>
           <button
             type="button"
@@ -129,14 +129,14 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({ className }) => {
               onClick={() => setMobileMenuOpen(false)}
               className="letterpress-cotton w-full inline-flex items-center justify-center py-2.5 text-sm"
             >
-              Masuk akun
+              Masuk
             </Link>
             <Link
-              href="/onboarding"
+              href="/daftar"
               onClick={() => setMobileMenuOpen(false)}
               className="letterpress-primary w-full inline-flex items-center justify-center py-2.5 text-sm"
             >
-              Mulai gratis sekarang
+              Daftar
             </Link>
           </div>
         </div>
