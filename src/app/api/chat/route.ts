@@ -9,7 +9,9 @@ const ChatRequestSchema = z.object({
   message: z.string().min(1, "Pesan tidak boleh kosong").max(1000, "Pesan maksimal 1.000 karakter"),
   userAlias: z.string().optional().default("Alex"),
   mode: z.enum(["guided_story", "practice_talk"]).optional().default("guided_story"),
-  persona: z.enum(["orang_tua", "guru_dosen", "teman", "konselor"]).optional().default("orang_tua"),
+  persona: z.string().optional().default("sela_bebas"),
+  customPersonaName: z.string().optional(),
+  customTopic: z.string().optional(),
   storyContext: z
     .object({
       facts: z.string().optional(),
@@ -117,6 +119,10 @@ export async function POST(req: NextRequest) {
 
     // 4. Fallback / Simulation Helper
     const offlinePersonaReplies: Record<string, string> = {
+      sela_bebas:
+        "Aku mengerti perasaanmu. Ceritakan lebih banyak tentang apa yang ada di pikiranmu saat ini, aku siap mendengarkan dengan santai.\n\n[Tips dari Sela: Mengeluarkan isi kepala adalah langkah awal yang baik untuk merasa lebih lega.]",
+      kustom:
+        "Halo, terima kasih sudah menyampaikan hal ini. Ceritakan pelan-pelan apa yang ingin kamu bahas bersama.\n\n[Tips Komunikasi: Sampaikan inti pikiranmu dengan tenang dan jelas.]",
       orang_tua:
         "Bapak/Ibu mengerti kamu mungkin merasa berat menyampaikannya. Coba ceritakan pelan-pelan apa kendalanya, biar kita cari jalan keluarnya sama-sama.\n\n[Tips Komunikasi: Kalimat pembukamu sudah cukup tenang. Lanjutkan dengan menyampaikan fakta secara jelas tanpa merasa harus defensif.]",
       guru_dosen:
@@ -166,6 +172,8 @@ export async function POST(req: NextRequest) {
       isEducationalQuery: rag.hasMatch,
       mode,
       persona,
+      customPersonaName: parseResult.data.customPersonaName,
+      customTopic: parseResult.data.customTopic,
       storyContext,
     });
 

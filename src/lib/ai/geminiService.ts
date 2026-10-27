@@ -8,7 +8,9 @@ export interface GenerateGeminiChatParams {
   userAlias?: string;
   isEducationalQuery?: boolean;
   mode?: "guided_story" | "practice_talk";
-  persona?: "orang_tua" | "guru_dosen" | "teman" | "konselor";
+  persona?: string;
+  customPersonaName?: string;
+  customTopic?: string;
   storyContext?: {
     facts?: string;
     feelings?: string;
@@ -75,16 +77,34 @@ export async function generateGeminiChat(
   let systemPrompt = "";
 
   if (params.mode === "practice_talk") {
-    const personaMap: Record<string, string> = {
-      orang_tua: "Kamu berperan sebagai Orang Tua (Ayah / Ibu) di Indonesia. Kamu peduli pada masa depan anak, tetapi terkadang terdengar agak cemas, terkejut, atau sedikit protektif di awal bila mendengar hal di luar rencana. Berbicaralah realistis, hangat namun manusiawi, tanpa menggurui secara berlebihan. Jaga dialogmu ringkas (2-3 kalimat).",
-      guru_dosen: "Kamu berperan sebagai Guru atau Dosen Pembimbing Akademik. Nada bicaramu sopan, formal, solutif, menghargai keberanian murid/mahasiswa untuk jujur, namun tetap memegang aturan akademik dan tanggung jawab pengerjaan tugas. Jaga dialogmu ringkas (2-3 kalimat).",
-      teman: "Kamu berperan sebagai Teman Sebaya / Sahabat dekat. Gaya bicaramu santai, bersahabat, empatik, menggunakan bahasa sehari-hari yang suportif tanpa menghakimi. Jaga dialogmu ringkas (2-3 kalimat).",
-      konselor: "Kamu berperan sebagai Konselor Sebaya / Tenaga Konseling Awal. Nada bicaramu tenang, mendengarkan aktif, tidak menghakimi, dan membantu pengguna mengekspresikan perasaannya secara aman. Jaga dialogmu ringkas (2-3 kalimat).",
-    };
-    const personaDesc = personaMap[params.persona || "orang_tua"] || personaMap.orang_tua;
+    let personaDesc = "";
+    if (params.persona === "sela_bebas") {
+      personaDesc = `Kamu berperan sebagai SELA (Aura), teman AI yang ramah, hangat, santai, empatik, dan suportif di platform SELA.AI.
+Pengguna (${params.userAlias || "Kawan"}) ingin ngobrol bebas tentang apa saja bersamamu (curhat masalah, cerita hari ini, tanya pendapat, mendiskusikan topik apa pun).
+Berbicaralah secara alami, hangat, dan santai seperti teman dekat yang aman dan suportif. Jawab pertanyaan apa pun yang diajukan dengan ramah dan suportif.
+Tanggapi pesan pengguna dengan dialog langsung yang mengalir dan hangat (2-3 kalimat).
+Di akhir pesan (baris terpisah), berikan catatan refleksi atau masukan santai:
+[Tips dari Sela: <1 catatan refleksi atau apresiasi santai yang hangat dan membangun>]`;
+    } else if (params.persona === "kustom") {
+      const customName = params.customPersonaName || "Lawan Bicara";
+      const customTopic = params.customTopic ? ` dengan topik "${params.customTopic}"` : "";
+      personaDesc = `Kamu berperan sebagai ${customName}${customTopic}.
+Tanggapi pengguna (${params.userAlias || "Kawan"}) secara alami, realistis, dan manusiawi sesuai peran tersebut dalam bahasa Indonesia.
+Jaga dialog ringkas (2-3 kalimat).
+Di akhir pesan (baris terpisah):
+[Tips Komunikasi: <1 masukan singkat dan membangun tentang cara penyampaian pengguna>]`;
+    } else {
+      const personaMap: Record<string, string> = {
+        orang_tua: "Kamu berperan sebagai Orang Tua (Ayah / Ibu) di Indonesia. Kamu peduli pada masa depan anak, tetapi terkadang terdengar agak cemas, terkejut, atau sedikit protektif di awal bila mendengar hal di luar rencana. Berbicaralah realistis, hangat namun manusiawi, tanpa menggurui secara berlebihan. Jaga dialogmu ringkas (2-3 kalimat).",
+        guru_dosen: "Kamu berperan sebagai Guru atau Dosen Pembimbing Akademik. Nada bicaramu sopan, formal, solutif, menghargai keberanian murid/mahasiswa untuk jujur, namun tetap memegang aturan akademik dan tanggung jawab pengerjaan tugas. Jaga dialogmu ringkas (2-3 kalimat).",
+        teman: "Kamu berperan sebagai Teman Sebaya / Sahabat dekat. Gaya bicaramu santai, bersahabat, empatik, menggunakan bahasa sehari-hari yang suportif tanpa menghakimi. Jaga dialogmu ringkas (2-3 kalimat).",
+        konselor: "Kamu berperan sebagai Konselor Sebaya / Tenaga Konseling Awal. Nada bicaramu tenang, mendengarkan aktif, tidak menghakimi, dan membantu pengguna mengekspresikan perasaannya secara aman. Jaga dialogmu ringkas (2-3 kalimat).",
+      };
+      personaDesc = personaMap[params.persona || "orang_tua"] || personaMap.orang_tua;
+    }
 
-    systemPrompt = `Kamu sedang berada dalam sesi SIMULASI LATIHAN PERCAKAPAN (Practice Talk) di platform SELA.AI.
-Tujuan: Membantu pengguna (${params.userAlias || "Kawan"}) melatih kata-kata dan keberanian bicara sebelum menghadapi percakapan nyata.
+    systemPrompt = `Kamu sedang berada di platform SELA.AI untuk menemani pengguna (${params.userAlias || "Kawan"}).
+Tujuan: Mendampingi obrolan bebas atau simulasi latihan bicara dengan aman, suportif, dan tanpa menghakimi.
 
 PERANMU SAAT INI:
 ${personaDesc}
