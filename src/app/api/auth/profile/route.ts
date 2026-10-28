@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { decodeSessionToken, getUserProfileById, updateUserProfile } from "@/lib/auth/authService";
+import {
+  encodeSessionToken,
+  getUserFromSessionToken,
+  updateUserProfile,
+} from "@/lib/auth/authService";
 
 export async function PATCH(req: NextRequest) {
   const token = req.cookies.get("sela_session_token")?.value;
@@ -7,20 +11,16 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ success: false, error: "Sesi tidak ditemukan" }, { status: 401 });
   }
 
-  const decoded = decodeSessionToken(token);
-  if (!decoded) {
+  const existing = getUserFromSessionToken(token);
+  if (!existing) {
     return NextResponse.json({ success: false, error: "Sesi kedaluwarsa" }, { status: 401 });
   }
 
   try {
     const json = await req.json();
-    const existing = getUserProfileById(decoded.uid);
-    if (!existing) {
-      return NextResponse.json({ success: false, error: "Pengguna tidak ditemukan" }, { status: 404 });
-    }
 
-    const updates: any = {};
-    if (typeof json.displayName === "string" && json.displayName.trim().length >= 2) {
+    const updates: Record<string, unknown> = {};
+    if (typeof json.displayName === "string" && json.displayName.trim().length >= 1) {
       updates.displayName = json.displayName.trim();
     }
     if (json.ageBand) {
@@ -30,7 +30,6 @@ export async function PATCH(req: NextRequest) {
       updates.onboardingCompleted = json.onboardingCompleted;
     }
 
-    // Consent updates
     if (json.consent) {
       updates.consent = {
         ...existing.consent,
@@ -41,13 +40,26 @@ export async function PATCH(req: NextRequest) {
       };
     }
 
-    const updatedUser = updateUserProfile(decoded.uid, updates);
+    const updatedUser = updateUserProfile(existing.id, updates) || {
+      ...existing,
+      ...updates,
+    };
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       user: updatedUser,
     });
-  } catch (error) {
+
+    response.cookies.set("sela_session_token", encodeSessionToken(updatedUser), {
+      path: "/",
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7,
+    });
+
+    return response;
+  } catch {
     return NextResponse.json({ success: false, error: "Gagal memperbarui profil" }, { status: 500 });
   }
 }

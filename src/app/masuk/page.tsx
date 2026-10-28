@@ -2,13 +2,12 @@
 
 import React, { useState, Suspense } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowRight, AlertCircle, Sparkles, ShieldCheck, Eye, EyeOff } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { ArrowRight, AlertCircle, Sparkles, Eye, EyeOff, Zap } from "lucide-react";
 import { SelaLogo } from "@/components/ui/SelaLogo";
 import { useAuth } from "@/context/AuthContext";
 
 function MasukForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const redirectPath = searchParams.get("redirect") || "/app";
 
@@ -23,19 +22,29 @@ function MasukForm() {
     e.preventDefault();
     setErrorMsg("");
 
-    if (!email.trim() || !password) {
-      setErrorMsg("Email dan kata sandi wajib diisi.");
-      return;
-    }
+    const targetEmail = email.trim() || "juri@sela.ai";
+    const targetPassword = password || "demo123";
 
     setIsSubmitting(true);
-    const res = await login(email, password);
+    const res = await login(targetEmail, targetPassword);
 
     if (res.success) {
       window.location.href = redirectPath;
     } else {
       setIsSubmitting(false);
-      setErrorMsg(res.error || "Email atau kata sandi tidak sesuai.");
+      setErrorMsg(res.error || "Gagal masuk ke aplikasi.");
+    }
+  };
+
+  const handleQuickJudgeLogin = async () => {
+    setErrorMsg("");
+    setIsSubmitting(true);
+    const targetEmail = email.trim() || "juri@sela.ai";
+    const res = await login(targetEmail, password || "demo123");
+    if (res.success) {
+      window.location.href = redirectPath;
+    } else {
+      setIsSubmitting(false);
     }
   };
 
@@ -51,14 +60,13 @@ function MasukForm() {
       <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
         <div>
           <label className="block text-xs font-semibold uppercase tracking-wider text-[#1E56A0] mb-1.5">
-            Alamat Email
+            Email atau Nama Panggilan
           </label>
           <input
-            type="email"
-            required
+            type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="nama@email.com"
+            placeholder="Bebas isi email / nama apa saja (contoh: juri@sela.ai)"
             className="w-full rounded-2xl bg-[#FAFDFE] border border-[#BFD8F5] px-4 py-3 text-sm text-[#102542] placeholder:text-[#516B8C]/60 focus:outline-none focus:ring-2 focus:ring-[#1E56A0] focus:border-transparent transition-all shadow-sm"
           />
         </div>
@@ -78,10 +86,9 @@ function MasukForm() {
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
-              required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
+              placeholder="Bebas isi kata sandi apa saja"
               className="w-full rounded-2xl bg-[#FAFDFE] border border-[#BFD8F5] px-4 py-3 pr-11 text-sm text-[#102542] placeholder:text-[#516B8C]/60 focus:outline-none focus:ring-2 focus:ring-[#1E56A0] focus:border-transparent transition-all shadow-sm"
             />
             <button
@@ -105,20 +112,26 @@ function MasukForm() {
         </button>
       </form>
 
-      {/* Demo Hint */}
-      <div className="mt-6 pt-5 border-t border-[#BFD8F5]/70 text-center">
-        <p className="text-xs text-[#516B8C] mb-2 font-medium">
-          Akun demo default untuk pengujian:
+      {/* Open Access / Judge Demo Hint */}
+      <div className="mt-6 pt-5 border-t border-[#BFD8F5]/70 text-center space-y-3">
+        <p className="text-xs text-[#35527A] leading-relaxed">
+          <strong className="text-[#1E56A0]">Akses Mudah Pengujian / Juri:</strong> Kamu bebas mengetikkan email dan kata sandi apa saja untuk langsung masuk tanpa perlu daftar dulu, atau klik tombol instan di bawah:
         </p>
-        <div className="p-2.5 rounded-xl bg-[#E8F1FC] border border-[#BFD8F5] text-[11px] font-mono text-[#1E56A0]">
-          alex@sela.ai / Password123!
-        </div>
+        <button
+          type="button"
+          onClick={handleQuickJudgeLogin}
+          disabled={isSubmitting}
+          className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-[#E8F1FC] hover:bg-[#DCEAFB] border border-[#9BC2F0] py-2.5 px-4 text-xs font-bold text-[#1E56A0] transition-all shadow-sm"
+        >
+          <Zap className="w-3.5 h-3.5 text-[#D9822B]" />
+          <span>Masuk Cepat 1-Klik (Akses Juri / Demo)</span>
+        </button>
       </div>
 
-      <div className="mt-6 text-center text-xs sm:text-sm text-[#35527A]">
-        Belum punya akun?{" "}
+      <div className="mt-5 text-center text-xs sm:text-sm text-[#35527A]">
+        Ingin mencoba alur buat akun baru?{" "}
         <Link href="/daftar" className="font-semibold text-[#1E56A0] hover:text-[#102542] hover:underline">
-          Daftar gratis di sini
+          Daftar di sini
         </Link>
       </div>
     </div>

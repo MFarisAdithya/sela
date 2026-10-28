@@ -2,14 +2,12 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { ArrowRight, AlertCircle, Sparkles, ShieldCheck, Eye, EyeOff } from "lucide-react";
+import { ArrowRight, AlertCircle, Sparkles, Eye, EyeOff } from "lucide-react";
 import { SelaLogo } from "@/components/ui/SelaLogo";
 import { useAuth } from "@/context/AuthContext";
 import { AgeBand } from "@/types/auth";
 
 export default function DaftarPage() {
-  const router = useRouter();
   const { register } = useAuth();
 
   const [displayName, setDisplayName] = useState("");
@@ -19,8 +17,8 @@ export default function DaftarPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [ageBand, setAgeBand] = useState<AgeBand>("15-18 tahun");
-  const [termsAccepted, setTermsAccepted] = useState(false);
-  const [privacyAcknowledged, setPrivacyAcknowledged] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(true);
+  const [privacyAcknowledged, setPrivacyAcknowledged] = useState(true);
   const [marketingOptIn, setMarketingOptIn] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,46 +27,25 @@ export default function DaftarPage() {
     e.preventDefault();
     setErrorMsg("");
 
-    if (!displayName.trim() || displayName.trim().length < 2) {
-      setErrorMsg("Nama panggilan minimal 2 karakter.");
-      return;
-    }
-    if (!email.trim()) {
-      setErrorMsg("Alamat email wajib diisi.");
-      return;
-    }
-    if (password.length < 8) {
-      setErrorMsg("Kata sandi minimal 8 karakter.");
-      return;
-    }
-    if (password !== confirmPassword) {
-      setErrorMsg("Konfirmasi kata sandi tidak cocok.");
-      return;
-    }
-    if (!termsAccepted) {
-      setErrorMsg("Kamu perlu menyetujui Ketentuan Layanan.");
-      return;
-    }
-    if (!privacyAcknowledged) {
-      setErrorMsg("Kamu perlu membaca dan menyetujui Pemberitahuan Privasi.");
-      return;
-    }
+    const finalName = displayName.trim() || (email.trim() ? email.trim().split("@")[0] : "Kawan Sela");
+    const finalEmail = email.trim() || `${finalName.toLowerCase().replace(/\s+/g, ".")}@sela.ai`;
+    const finalPassword = password || "demo123";
 
     setIsSubmitting(true);
     const res = await register({
-      displayName: displayName.trim(),
-      email: email.trim(),
-      password,
+      displayName: finalName,
+      email: finalEmail,
+      password: finalPassword,
       ageBand,
-      termsAccepted,
-      privacyAcknowledged,
+      termsAccepted: true,
+      privacyAcknowledged: true,
       marketingOptIn,
     });
-    setIsSubmitting(false);
 
     if (res.success) {
-      router.push("/verifikasi-email");
+      window.location.href = "/app";
     } else {
+      setIsSubmitting(false);
       setErrorMsg(res.error || "Pendaftaran tidak dapat diproses.");
     }
   };
@@ -159,7 +136,6 @@ export default function DaftarPage() {
               </label>
               <input
                 type="text"
-                required
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
                 placeholder="Boleh nama samaran (contoh: Alex)"
@@ -175,11 +151,10 @@ export default function DaftarPage() {
                 Alamat Email
               </label>
               <input
-                type="email"
-                required
+                type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="nama@email.com"
+                placeholder="nama@email.com (bebas diisi apa saja)"
                 className="w-full rounded-2xl bg-[#FAFDFE] border border-[#BFD8F5] px-4 py-3 text-sm text-[#102542] placeholder:text-[#516B8C]/60 focus:outline-none focus:ring-2 focus:ring-[#1E56A0] focus:border-transparent transition-all shadow-sm"
               />
             </div>
@@ -192,10 +167,9 @@ export default function DaftarPage() {
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
-                    required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Min. 8 karakter"
+                    placeholder="Bebas isi sandi"
                     className="w-full rounded-2xl bg-[#FAFDFE] border border-[#BFD8F5] px-4 py-3 pr-11 text-sm text-[#102542] placeholder:text-[#516B8C]/60 focus:outline-none focus:ring-2 focus:ring-[#1E56A0] focus:border-transparent transition-all shadow-sm"
                   />
                   <button
@@ -215,7 +189,6 @@ export default function DaftarPage() {
                 <div className="relative">
                   <input
                     type={showConfirmPassword ? "text" : "password"}
-                    required
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Ulangi kata sandi"
@@ -300,13 +273,13 @@ export default function DaftarPage() {
               disabled={isSubmitting}
               className="letterpress-primary mt-2 w-full inline-flex items-center justify-center rounded-full py-3.5 px-5 text-sm font-semibold transition-all shadow-md disabled:opacity-50"
             >
-              {isSubmitting ? "Mendaftarkan..." : "Daftar Akun SELA.AI"}
+              {isSubmitting ? "Mendaftarkan..." : "Daftar & Langsung Masuk"}
               <ArrowRight className="w-4 h-4 ml-2" />
             </button>
           </form>
 
           <div className="mt-6 text-center text-xs sm:text-sm text-[#35527A]">
-            Sudah punya akun?{" "}
+            Sudah punya akun atau ingin langsung masuk?{" "}
             <Link href="/masuk" className="font-semibold text-[#1E56A0] hover:text-[#102542] hover:underline">
               Masuk di sini
             </Link>
