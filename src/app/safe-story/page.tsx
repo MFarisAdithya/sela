@@ -22,16 +22,10 @@ import { AuraAvatar, AuraLoadingIndicator } from "@/components/ui/AuraMascot";
 import { useApp, StoryCard } from "@/context/AppContext";
 import { RetrievedSource } from "@/types/knowledge";
 import { SourceCitation } from "@/components/chat/SourceCitation";
+import { SavedMessage } from "@/lib/storage/accountStorage";
 import { cn } from "@/lib/utils";
 
-interface ChatMessage {
-  id: string;
-  sender: "user" | "ai" | "system";
-  text: string;
-  timestamp: string;
-  sources?: RetrievedSource[];
-  isCrisis?: boolean;
-}
+type ChatMessage = SavedMessage;
 
 interface StructuredStorySummary {
   facts: string;
@@ -47,20 +41,16 @@ const STARTER_SUGGESTIONS = [
 
 export default function SafeStoryPage() {
   const router = useRouter();
-  const { userName, addStoryCard, setActiveStoryCard } = useApp();
-
+  const mounted = useRef(true);
+  useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
+  const { userName, addStoryCard, setActiveStoryCard, allowAiTransmission, checkInEmotions, setCheckInEmotions, reflectionMessages, setReflectionMessages } = useApp();
+  const [serviceNotice, setServiceNotice] = useState("");
   // Mode: "chat" or "card"
   const [viewMode, setViewMode] = useState<"chat" | "card">("chat");
 
   // Chat conversation state
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      id: "msg-welcome",
-      sender: "ai",
-      text: "Hai, kamu lagi ingin cerita tentang apa?",
-      timestamp: "Baru saja",
-    },
-  ]);
+  const messages: ChatMessage[] = reflectionMessages.length ? reflectionMessages : [{ id: "msg-welcome", sender: "ai", text: "Hai, kamu lagi ingin cerita tentang apa?", timestamp: "Baru saja" }];
+  const setMessages = setReflectionMessages;
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSummarizing, setIsSummarizing] = useState(false);
@@ -107,10 +97,16 @@ export default function SafeStoryPage() {
           message: text,
           userAlias: userName,
           mode: "guided_story",
+          checkInEmotions,
+          allowAiTransmission,
+          history: messages.filter(m => m.sender !== "system").slice(-20).map(m => ({ role: m.sender === "user" ? "user" : "model", text: m.text.slice(-6000) })),
         }),
       });
 
       const data = await res.json();
+      if (!mounted.current) return;
+      if (!res.ok) throw new Error(data.error || "Permintaan gagal");
+      setServiceNotice(data.isAiGenerated === false && !data.isCrisis ? "Mode panduan lokal: AI belum terhubung atau sedang tidak tersedia. Jawaban bisa lebih terbatas." : "");
       const aiMsgId = "ai-" + Date.now();
 
       if (data.status === "crisis_detected") {
@@ -138,6 +134,7 @@ export default function SafeStoryPage() {
         ]);
       }
     } catch {
+      if (!mounted.current) return;
       setMessages((prev) => [
         ...prev,
         {
@@ -163,40 +160,43 @@ export default function SafeStoryPage() {
       .map((m) => m.text)
       .join("\n");
 
-    const fullConversationText = messages
-      .map((m) => `${m.sender === "user" ? userName : "Sela"}: ${m.text}`)
-      .join("\n");
-
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          message: fullConversationText.slice(-1000) || userTexts || "Cerita refleksi bersama Sela",
+          message: "Rangkum cerita pengguna dari riwayat percakapan ini.",
+          history: messages.filter(m => m.sender !== "system").slice(-20).map(m => ({ role: m.sender === "user" ? "user" : "model", text: m.text.slice(-6000) })),
+          checkInEmotions,
+          allowAiTransmission,
           userAlias: userName,
           mode: "summarize_story",
         }),
       });
 
       const data = await res.json();
+      if (!mounted.current) return;
+      if (!res.ok) throw new Error(data.error || "Permintaan gagal");
+      setServiceNotice(data.isAiGenerated === false && !data.isCrisis ? "Mode panduan lokal: AI belum terhubung atau sedang tidak tersedia. Jawaban bisa lebih terbatas." : "");
       if (data.summary) {
         setSummary({
           facts: data.summary.facts || userTexts.slice(0, 200) || "Fakta situasi yang sedang dihadapi.",
-          feelings: data.summary.feelings || "Merasa banyak pikiran dan butuh ruang tenang untuk berpikir.",
+          feelings: data.summary.feelings || "Belum dirumuskan; silakan isi sesuai perasaanmu.",
           nextSteps: data.summary.nextSteps || "Menyiapkan kata-kata dengan tenang dan istirahat sejenak.",
         });
       } else {
         // Fallback extraction
         setSummary({
           facts: userTexts.slice(0, 200) || "Fakta situasi yang sedang dihadapi.",
-          feelings: "Merasa banyak pikiran, cemas, dan butuh ruang tenang untuk merapikannya.",
+          feelings: "Belum dirumuskan; silakan isi sesuai perasaanmu.",
           nextSteps: "Menyiapkan kata-kata dengan tenang sebelum melanjutkan.",
         });
       }
     } catch {
+      if (!mounted.current) return;
       setSummary({
         facts: userTexts.slice(0, 200) || "Fakta situasi yang sedang dihadapi.",
-        feelings: "Merasa banyak pikiran, cemas, dan butuh ruang tenang untuk merapikannya.",
+        feelings: "Belum dirumuskan; silakan isi sesuai perasaanmu.",
         nextSteps: "Menyiapkan kata-kata dengan tenang sebelum melanjutkan.",
       });
     } finally {
@@ -209,7 +209,7 @@ export default function SafeStoryPage() {
     const newCard = addStoryCard({
       title: `Cerita bersama Sela (${new Date().toLocaleDateString("id-ID", { day: "numeric", month: "short" })})`,
       facts: summary.facts.trim() || "Fakta situasi belum dirumuskan.",
-      feelings: summary.feelings.trim() || "Merasa cemas dan butuh ruang tenang.",
+      feelings: summary.feelings.trim() || "Belum dirumuskan.",
       needs: summary.nextSteps.trim() || "Didengarkan dan dipahami dengan tenang.",
       openingLine: `Boleh luangkan waktu sebentar? Ada hal yang ingin aku bicarakan pelan-pelan.`,
       targetPerson: "Teman Sebaya",
@@ -224,6 +224,11 @@ export default function SafeStoryPage() {
     if (confirm("Mulai ulang sesi cerita dari awal?")) {
       setViewMode("chat");
       setSavedCardId(null);
+      setCheckInEmotions([]);
+      setServiceNotice("");
+      setSummary({ facts: "", feelings: "", nextSteps: "" });
+      setInputValue("");
+      try { sessionStorage.removeItem("sela:checkin_emotions"); } catch {}
       setShowNextSteps(false);
       setIsEditingCard(false);
       setMessages([
@@ -266,6 +271,7 @@ export default function SafeStoryPage() {
         </button>
       </div>
 
+      {serviceNotice && <p role="status" className="text-xs text-[#47668D]">{serviceNotice}</p>}
       {/* 2. MODE 1: CHAT CONVERSATION */}
       {viewMode === "chat" && (
         <div className="space-y-4">
@@ -374,6 +380,7 @@ export default function SafeStoryPage() {
                 <button
                   type="button"
                   onClick={handleGenerateSummary}
+                  disabled={isLoading || isSummarizing}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#1E56A0] hover:bg-[#133A6E] text-white text-xs font-semibold shadow-sm transition-all active:scale-95"
                 >
                   <Sparkles className="w-3.5 h-3.5" />

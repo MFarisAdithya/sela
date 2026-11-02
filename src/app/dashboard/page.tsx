@@ -24,15 +24,10 @@ import {
 } from "lucide-react";
 import { useApp, StoryCard } from "@/context/AppContext";
 import { AuraModuleHeader, AuraAvatar, AuraLoadingIndicator } from "@/components/ui/AuraMascot";
+import { SavedMessage } from "@/lib/storage/accountStorage";
 import { cn } from "@/lib/utils";
 
-interface PracticeMessage {
-  id: string;
-  sender: "user" | "persona";
-  text: string;
-  tip?: string;
-  timestamp: string;
-}
+type PracticeMessage = SavedMessage;
 
 export type PersonaKey = "sela_bebas" | "orang_tua" | "guru_dosen" | "teman" | "konselor" | "kustom";
 
@@ -153,13 +148,18 @@ const customPresets = [
 
 export default function PracticeTalkDashboard() {
   const router = useRouter();
-  const { userName, activeStoryCard, storyCards, setActiveStoryCard } = useApp();
+  const mounted = useRef(true);
+  useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
+  const { userName, activeStoryCard, storyCards, setActiveStoryCard, allowAiTransmission, practiceSessions, setPracticeSessions } = useApp();
+  const [serviceNotice, setServiceNotice] = useState("");
 
-  const [selectedPersonaKey, setSelectedPersonaKey] = useState<PersonaKey>("sela_bebas");
+  const [selectedPersonaKey, setSelectedPersonaKey] = useState<PersonaKey>(() => {
+    const target = activeStoryCard?.targetPerson;
+    return target === "Orang Tua" ? "orang_tua" : target === "Guru / Dosen" ? "guru_dosen" : target === "Teman Sebaya" ? "teman" : target === "Konselor Profesional" ? "konselor" : "sela_bebas";
+  });
   const [filterCategory, setFilterCategory] = useState<"semua" | "bebas" | "simulasi">("semua");
   const [customPersonaName, setCustomPersonaName] = useState("Pasangan / Pacar");
   const [customTopic, setCustomTopic] = useState("");
-  const [messages, setMessages] = useState<PracticeMessage[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -185,17 +185,11 @@ export default function PracticeTalkDashboard() {
     }
   };
 
-  // Initialize welcome message when persona changes
-  useEffect(() => {
-    setMessages([
-      {
-        id: "msg-init-" + selectedPersonaKey + "-" + Date.now(),
-        sender: "persona",
-        text: getWelcomeText(selectedPersonaKey, userName, customPersonaName),
-        timestamp: "Baru saja",
-      },
-    ]);
-  }, [selectedPersonaKey, userName]);
+  const sessionKey = JSON.stringify([selectedPersonaKey, selectedPersonaKey === "sela_bebas" ? null : activeStoryCard?.id, selectedPersonaKey === "kustom" ? customPersonaName : null, selectedPersonaKey === "kustom" ? customTopic : null]);
+  const messages: PracticeMessage[] = practiceSessions[sessionKey] || [{ id: "welcome", sender: "persona", text: getWelcomeText(selectedPersonaKey, userName, customPersonaName), timestamp: "Baru saja" }];
+  const setMessages = (action: React.SetStateAction<PracticeMessage[]>) => {
+    setPracticeSessions(prev => ({ ...prev, [sessionKey]: typeof action === "function" ? action(prev[sessionKey] || []) : action }));
+  };
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -225,10 +219,12 @@ export default function PracticeTalkDashboard() {
           message: text,
           userAlias: userName,
           mode: "practice_talk",
+          allowAiTransmission,
+          history: messages.slice(-20).map(m => ({ role: m.sender === "user" ? "user" : "model", text: m.text.slice(-6000) })),
           persona: selectedPersonaKey,
           customPersonaName: selectedPersonaKey === "kustom" ? customPersonaName : undefined,
           customTopic: selectedPersonaKey === "kustom" ? customTopic : undefined,
-          storyContext: activeStoryCard
+          storyContext: selectedPersonaKey !== "sela_bebas" && activeStoryCard
             ? {
                 facts: activeStoryCard.facts,
                 feelings: activeStoryCard.feelings,
@@ -240,6 +236,9 @@ export default function PracticeTalkDashboard() {
       });
 
       const data = await res.json();
+      if (!mounted.current) return;
+      if (!res.ok) throw new Error(data.error || "Permintaan gagal");
+      setServiceNotice(data.isAiGenerated === false && !data.isCrisis ? "Mode panduan lokal: AI belum terhubung atau sedang tidak tersedia." : "");
       const replyFull = data.reply || "Maaf, respon tidak dapat dihasilkan.";
 
       // Parse [Tips Komunikasi: ...] or [Tips dari Sela: ...] if returned
@@ -263,6 +262,7 @@ export default function PracticeTalkDashboard() {
         },
       ]);
     } catch {
+      if (!mounted.current) return;
       setMessages((prev) => [
         ...prev,
         {
@@ -303,6 +303,7 @@ export default function PracticeTalkDashboard() {
 
   return (
     <div className="space-y-5 max-w-4xl mx-auto py-2 animate-in fade-in duration-150">
+      {serviceNotice && <p role="status" className="text-xs text-[#47668D]">{serviceNotice}</p>}
       {/* Top Header with Aura Mascot */}
       <AuraModuleHeader
         productKey="practice-talk"

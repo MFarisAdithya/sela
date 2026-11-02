@@ -70,7 +70,7 @@ function lexicalScore(query: string, chunk: KnowledgeChunk): number {
  * Retrieve knowledge using hybrid Gemini Semantic Embeddings + Lexical Scoring.
  * Automatically falls back to BM25 lexical match if embedding API times out or fails.
  */
-export async function retrieveKnowledge(query: string, maxResults: number = 2): Promise<RagResult> {
+export async function retrieveKnowledge(query: string, maxResults: number = 2, allowAiTransmission: boolean = true): Promise<RagResult> {
   const normalizedQuery = query.trim();
   if (!normalizedQuery || normalizedQuery.length < 3) {
     return {
@@ -86,7 +86,7 @@ export async function retrieveKnowledge(query: string, maxResults: number = 2): 
   let queryVector: number[] | null = null;
 
   // 1. Attempt to generate Query Embedding via Gemini
-  if (geminiKey && geminiKey.trim().length > 0) {
+  if (allowAiTransmission && geminiKey && geminiKey.trim().length > 0) {
     try {
       const ai = new GoogleGenAI({ apiKey: geminiKey.trim() });
       const embedPromise = ai.models.embedContent({

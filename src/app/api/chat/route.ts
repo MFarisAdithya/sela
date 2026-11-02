@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { TEMAN_RASA_CHARACTERS } from "@/data/temanRasa";
 import { evaluateSafety } from "@/lib/safety/classifier";
 import { maskPii } from "@/lib/safety/piiMasker";
 import { retrieveKnowledge } from "@/lib/ai/ragEngine";
@@ -7,6 +8,9 @@ import { generateGeminiChat, getGeminiConfigStatus } from "@/lib/ai/geminiServic
 
 const ChatRequestSchema = z.object({
   message: z.string().min(1, "Pesan tidak boleh kosong").max(1000, "Pesan maksimal 1.000 karakter"),
+  history: z.array(z.object({ role: z.enum(["user", "model"]), text: z.string().max(6000) })).max(20).optional().default([]),
+  checkInEmotions: z.array(z.string().max(30)).max(8).optional().default([]),
+  allowAiTransmission: z.boolean().optional().default(true),
   userAlias: z.string().optional().default("Alex"),
   mode: z.enum(["guided_story", "practice_talk", "summarize_story"]).optional().default("guided_story"),
   persona: z.string().optional().default("sela_bebas"),
@@ -113,9 +117,15 @@ export async function POST(req: NextRequest) {
 
     // 2. Data Sanitization (PII Masking)
     const sanitizedMessage = maskPii(message);
+    const allTurns = parseResult.data.history;
+    const firstUser = allTurns.findIndex(turn => turn.role === "user");
+    const history = (firstUser < 0 ? [] : allTurns.slice(firstUser)).map(turn => ({ ...turn, text: maskPii(turn.text) }));
+    const checkInEmotions = TEMAN_RASA_CHARACTERS.filter(c => parseResult.data.checkInEmotions.includes(c.id)).map(c => c.emotion);
+    const summaryInput = history.filter(t => t.role === "user").map(t => t.text).join("\n") || sanitizedMessage;
+    const safeStoryContext = storyContext ? Object.fromEntries(Object.entries(storyContext).map(([key, value]) => [key, maskPii(value || "")])) : undefined;
 
     // 3. Knowledge Retrieval (Gemini Semantic + BM25 Hybrid RAG)
-    const rag = await retrieveKnowledge(sanitizedMessage, 2);
+    const rag = await retrieveKnowledge(sanitizedMessage, 2, parseResult.data.allowAiTransmission);
 
     // 4. Fallback / Simulation Helper
     const offlinePersonaReplies: Record<string, string> = {
@@ -134,6 +144,9 @@ export async function POST(req: NextRequest) {
     };
 
     const buildLocalReflectiveReply = () => {
+      if (checkInEmotions.length) {
+        return `Tadi kamu memilih perasaan ${checkInEmotions.join(", ").toLowerCase()}. Kamu bisa melanjutkan menulis tentang hal yang paling ingin kamu bahas. Saat ini Sela memakai panduan lokal, sehingga belum bisa menanggapi ceritamu secara mendalam.`;
+      }
       if (rag.hasMatch && rag.chunks[0]?.content) {
         return `Terima kasih sudah menuliskan apa yang sedang kamu rasakan, ${userAlias}. Berikut catatan panduan yang relevan untuk membantumu mengurai situasi ini:\n\n"${rag.chunks[0].content}"\n\nDari hal yang kamu ceritakan tadi, bagian mana yang rasanya paling ingin kamu sampaikan lebih dulu?`;
       }
@@ -141,14 +154,14 @@ export async function POST(req: NextRequest) {
     };
 
     const configStatus = getGeminiConfigStatus();
-    if (!configStatus.isConfigured) {
+    if (!configStatus.isConfigured || !parseResult.data.allowAiTransmission) {
       if (mode === "summarize_story") {
         return NextResponse.json({
           status: "summary_reply",
           isAiGenerated: false,
           summary: {
-            facts: sanitizedMessage.substring(0, 300),
-            feelings: "Merasa banyak pikiran, lelah, dan butuh ruang tenang untuk merapikannya.",
+            facts: summaryInput.substring(0, 600),
+            feelings: checkInEmotions.join(", ") || "Belum dirumuskan; silakan isi sesuai perasaanmu.",
             nextSteps: "Menyusun cerita ini jadi pegangan tenang untuk persiapan bicara.",
           },
         });
@@ -186,7 +199,9 @@ export async function POST(req: NextRequest) {
       persona,
       customPersonaName: parseResult.data.customPersonaName,
       customTopic: parseResult.data.customTopic,
-      storyContext,
+      storyContext: safeStoryContext,
+      history,
+      checkInEmotions,
     });
 
     if (aiResult.error) {
@@ -195,8 +210,8 @@ export async function POST(req: NextRequest) {
           status: "summary_reply",
           isAiGenerated: false,
           summary: {
-            facts: sanitizedMessage.substring(0, 300),
-            feelings: "Merasa banyak pikiran, lelah, dan butuh ruang tenang untuk merapikannya.",
+            facts: summaryInput.substring(0, 600),
+            feelings: checkInEmotions.join(", ") || "Belum dirumuskan; silakan isi sesuai perasaanmu.",
             nextSteps: "Menyusun cerita ini jadi pegangan tenang untuk persiapan bicara.",
           },
         });
@@ -227,7 +242,9 @@ export async function POST(req: NextRequest) {
       try {
         const jsonMatch = aiResult.reply.match(/\{[\s\S]*\}/);
         if (jsonMatch) {
-          parsedSummary = JSON.parse(jsonMatch[0]);
+          const candidate = JSON.parse(jsonMatch[0]);
+          const validated = z.object({ facts: z.string(), feelings: z.string(), nextSteps: z.string() }).safeParse(candidate);
+          if (validated.success) parsedSummary = validated.data;
         }
       } catch {
         // fallback
@@ -235,10 +252,10 @@ export async function POST(req: NextRequest) {
 
       return NextResponse.json({
         status: "summary_reply",
-        isAiGenerated: true,
+        isAiGenerated: !!parsedSummary,
         summary: parsedSummary || {
-          facts: sanitizedMessage.substring(0, 300),
-          feelings: "Merasa banyak pikiran dan butuh ruang tenang untuk berpikir.",
+          facts: summaryInput.substring(0, 600),
+          feelings: checkInEmotions.join(", ") || "Belum dirumuskan; silakan isi sesuai perasaanmu.",
           nextSteps: "Menyiapkan kata-kata dengan tenang dan beristirahat sejenak.",
         },
       });

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   User,
@@ -23,14 +23,22 @@ import { useApp } from "@/context/AppContext";
 import { AgeBand } from "@/types/auth";
 
 export default function PengaturanAkunPage() {
-  const { user, updateProfile, updateConsent, logout, deleteAccount } = useAuth();
-  const { journalEntries, supportContacts, growthTasks } = useApp();
+  const { user, updateProfile, logout, deleteAccount } = useAuth();
+  const { journalEntries, storyCards, supportContacts, growthTasks, completedModules, referralTickets, checkInEmotions, reflectionMessages, practiceSessions, resetAllSessionData } = useApp();
 
-  const [displayName, setDisplayName] = useState(user?.displayName || "Alex");
+  const [displayName, setDisplayName] = useState(user?.displayName || "Kawan");
   const [ageBand, setAgeBand] = useState<AgeBand>(user?.ageBand || "15-18 tahun");
   const [aiConsent, setAiConsent] = useState(user?.consent?.aiProcessingConsent ?? true);
   const [marketingOptIn, setMarketingOptIn] = useState(user?.consent?.marketingOptIn ?? false);
 
+  useEffect(() => {
+    setDisplayName(user?.displayName || "Kawan");
+    setAgeBand(user?.ageBand || "15-18 tahun");
+    setAiConsent(user?.consent.aiProcessingConsent ?? false);
+    setMarketingOptIn(user?.consent.marketingOptIn ?? false);
+  }, [user]);
+
+  const [saveError, setSaveError] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [saveNotice, setSaveNotice] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -40,16 +48,14 @@ export default function PengaturanAkunPage() {
     e.preventDefault();
     setIsSaving(true);
 
-    await updateProfile({
-      displayName: displayName.trim() || "Kawan",
-      ageBand,
+    setSaveError("");
+    setSaveNotice(false);
+    const result = await updateProfile({
+      displayName: displayName.trim() || "Kawan", ageBand,
+      consent: { ...user!.consent, aiProcessingConsent: aiConsent, marketingOptIn },
     });
-    await updateConsent({
-      aiProcessingConsent: aiConsent,
-      marketingOptIn,
-    });
-
     setIsSaving(false);
+    if (!result.success) { setSaveError(result.error || "Gagal menyimpan profil."); return; }
     setSaveNotice(true);
     setTimeout(() => setSaveNotice(false), 3000);
   };
@@ -65,6 +71,7 @@ export default function PengaturanAkunPage() {
         createdAt: user?.createdAt,
       },
       consents: user?.consent,
+      journalEntries, storyCards, supportContacts, growthTasks, completedModules, referralTickets, checkInEmotions, reflectionMessages, practiceSessions,
       exportedAt: new Date().toISOString(),
       disclaimer: "Data ini adalah salinan catatan lokal SELA.AI milik pengguna.",
     };
@@ -82,7 +89,8 @@ export default function PengaturanAkunPage() {
 
   const handleDeleteAccount = async () => {
     setIsDeleting(true);
-    await deleteAccount();
+    const deleted = await deleteAccount();
+    if (!deleted) { setIsDeleting(false); setIsDeleteModalOpen(false); setSaveError("Penghapusan belum selesai. Coba lagi atau hapus data browser melalui pengaturan perangkat."); }
   };
 
   return (
@@ -108,6 +116,11 @@ export default function PengaturanAkunPage() {
         </button>
       </div>
 
+      <div className="rounded-2xl border border-[#CCE1FF] bg-white p-4 text-sm space-y-3">
+        <p>Catatan, percakapan, dan progres disimpan untuk akun ini di browser perangkat ini. Belum tersinkron ke perangkat lain; menghapus data browser juga menghapus salinan ini.</p>
+        <button type="button" className="text-[#B42332] underline" onClick={() => { if (confirm("Hapus catatan, percakapan, kartu, kontak, dan progres akun ini dari browser? Profil akun tetap tersedia.")) resetAllSessionData(); }}>Hapus catatan dan progres di browser ini</button>
+      </div>
+      {saveError && <p role="alert" className="text-sm text-[#B42332]">{saveError}</p>}
       {saveNotice && (
         <div className="p-4 rounded-2xl bg-[#E6F4EA] border border-[#B7E1CD] text-xs sm:text-sm text-[#1F7A65] flex items-center gap-2.5">
           <CheckCircle2 className="w-4 h-4 shrink-0" />

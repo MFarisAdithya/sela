@@ -19,7 +19,7 @@ import { AuraModuleHeader } from "@/components/ui/AuraMascot";
 import { useApp } from "@/context/AppContext";
 
 export default function GrowthPlanPage() {
-  const { growthTasks, toggleGrowthTask } = useApp();
+  const { growthTasks, toggleGrowthTask, addGrowthTask } = useApp();
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [isAdding, setIsAdding] = useState(false);
 
@@ -32,13 +32,7 @@ export default function GrowthPlanPage() {
   const handleAddTask = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newTaskTitle.trim()) return;
-    // Add locally to tasks
-    growthTasks.push({
-      id: "task-" + Date.now(),
-      title: newTaskTitle.trim(),
-      category: "Target Pribadi",
-      completed: false,
-    });
+    addGrowthTask(newTaskTitle);
     setNewTaskTitle("");
     setIsAdding(false);
   };
@@ -76,7 +70,7 @@ export default function GrowthPlanPage() {
             Membangun Keterampilan Komunikasi & Regulasi Diri
           </h2>
           <p className="text-xs text-text-muted leading-relaxed">
-            Pilih 1–3 langkah kecil yang dapat kamu selesaikan dengan tenang. Tidak ada pengurangan skor bila kamu membutuhkan istirahat.
+            Pilih 1â€“3 langkah kecil yang dapat kamu selesaikan dengan tenang. Tidak ada pengurangan skor bila kamu membutuhkan istirahat.
           </p>
         </div>
 

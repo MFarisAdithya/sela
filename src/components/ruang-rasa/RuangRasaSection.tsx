@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Check, Lock, RotateCcw } from "lucide-react";
 import { TEMAN_RASA_CHARACTERS, getAuraReflectionMessage } from "@/data/temanRasa";
 import { TemanRasaAvatar } from "./TemanRasaAvatar";
+import { useApp } from "@/context/AppContext";
 import { cn } from "@/lib/utils";
 
 interface RuangRasaSectionProps {
@@ -19,6 +20,7 @@ export const RuangRasaSection: React.FC<RuangRasaSectionProps> = ({
   onSkip,
 }) => {
   const router = useRouter();
+  const { setCheckInEmotions, setReflectionMessages } = useApp();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   // Toggle selection for multi-select
@@ -42,11 +44,9 @@ export const RuangRasaSection: React.FC<RuangRasaSectionProps> = ({
   const handleContinue = () => {
     if (selectedIds.length === 0) return;
 
-    try {
-      sessionStorage.setItem("sela:checkin_emotions", JSON.stringify(selectedIds));
-    } catch {
-      // safe fallback
-    }
+    setCheckInEmotions(selectedIds);
+    const labels = TEMAN_RASA_CHARACTERS.filter(c => selectedIds.includes(c.id)).map(c => c.emotion.toLowerCase()).join(", ");
+    setReflectionMessages(prev => [...prev, { id: "checkin-" + crypto.randomUUID(), sender: "ai", text: `Tadi kamu memilih perasaan ${labels}. Perasaan mana yang paling ingin kamu ceritakan lebih dulu?`, timestamp: "Baru saja" }]);
 
     if (onProceed) {
       onProceed(selectedIds);
@@ -56,6 +56,7 @@ export const RuangRasaSection: React.FC<RuangRasaSectionProps> = ({
   };
 
   const handleSkip = () => {
+    setCheckInEmotions([]);
     if (onSkip) {
       onSkip();
     } else {

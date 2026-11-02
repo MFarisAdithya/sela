@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
+import { removeAccountData } from "@/lib/storage/accountStorage";
 import { UserProfile, UserConsent } from "@/types/auth";
 
 interface AuthContextType {
@@ -130,6 +131,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const res = await fetch("/api/auth/delete-account", { method: "POST" });
       if (res.ok) {
+        if (user) {
+          try { removeAccountData(localStorage, user.email); } catch { return false; }
+        }
         setUser(null);
         window.location.href = "/";
         return true;

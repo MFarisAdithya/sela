@@ -2,6 +2,11 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 
+import { usePathname } from "next/navigation";
+import { isPublicRoute } from "@/lib/routes";
+import { useAuth } from "./AuthContext";
+import { readAccountData, writeAccountData, SavedMessage } from "@/lib/storage/accountStorage";
+
 export type MoodType = "sangat-sedih" | "sedih" | "biasa" | "senang" | "bersemangat";
 
 export interface StoryCard {
@@ -53,13 +58,10 @@ export interface ReferralTicket {
 
 interface AppContextType {
   userName: string;
-  setUserName: (name: string) => void;
   userAgeRange: string;
-  setUserAgeRange: (age: string) => void;
   hasConsented: boolean;
   setHasConsented: (val: boolean) => void;
   allowAiTransmission: boolean;
-  setAllowAiTransmission: (val: boolean) => void;
   currentMood: MoodType | null;
   setCurrentMood: (mood: MoodType | null) => void;
   completedModules: string[];
@@ -80,65 +82,95 @@ interface AppContextType {
   deleteSupportContact: (id: string) => void;
   growthTasks: GrowthTask[];
   toggleGrowthTask: (taskId: string) => void;
+  addGrowthTask: (title: string) => void;
   referralTickets: ReferralTicket[];
   createReferralTicket: (ticket: Omit<ReferralTicket, "id" | "date" | "status">) => void;
   isAiConfigured: boolean;
   checkAiConfiguration: () => Promise<boolean>;
   resetAllSessionData: () => void;
+  checkInEmotions: string[];
+  setCheckInEmotions: React.Dispatch<React.SetStateAction<string[]>>;
+  reflectionMessages: SavedMessage[];
+  setReflectionMessages: React.Dispatch<React.SetStateAction<SavedMessage[]>>;
+  practiceSessions: Record<string, SavedMessage[]>;
+  setPracticeSessions: React.Dispatch<React.SetStateAction<Record<string, SavedMessage[]>>>;
+  storageNotice: string;
+
 }
-
-const defaultTasks: GrowthTask[] = [
-  { id: "task-1", title: "Menulis satu hal yang disyukuri di catatan pribadi", category: "Refleksi", completed: true },
-  { id: "task-2", title: "Menyapa satu sahabat atau teman terdekat", category: "Dukungan sosial", completed: true },
-  { id: "task-3", title: "Membaca modul Komunikasi Asertif selama 3 menit", category: "Life skills", completed: false },
-  { id: "task-4", title: "Mencoba latihan pernapasan saat merasa lelah", category: "Regulasi diri", completed: false },
-];
-
-const defaultContacts: SupportContact[] = [
-  { id: "c-1", name: "Rian (Sahabat)", role: "Teman dekat sekolah", category: "sahabat" },
-  { id: "c-2", name: "Ibu Rahma", role: "Guru BK Sekolah", category: "sekolah" },
-  { id: "c-3", name: "Kak Dimas", role: "Konselor Sebaya PIK-R", category: "profesional" },
-];
-
-const defaultStoryCards: StoryCard[] = [
-  {
-    id: "sc-1",
-    title: "Bicara dengan Orang Tua Soal Minat Jurusan",
-    date: "25 Oktober 2026",
-    facts: "Jurusan yang kuinginkan berbeda dari rencana orang tua, dan nilai semester ini menurun karena merasa terbebani.",
-    feelings: "Cemas mengecewakan keluarga, lelah memendam sendiri, takut disalahkan jika terbuka.",
-    needs: "Didengarkan dengan tenang tanpa langsung dihakimi, dan diberi ruang mendiskusikan opsi secara realistis.",
-    openingLine: "Ayah/Ibu, ada hal penting tentang perkuliahan yang ingin aku obrolkan dengan tenang saat Ayah/Ibu ada waktu senggang.",
-    targetPerson: "Orang Tua",
-  },
-  {
-    id: "sc-2",
-    title: "Konsultasi Kendala Tugas ke Dosen/Guru",
-    date: "24 Oktober 2026",
-    facts: "Tiga tugas besar memiliki tenggat bersamaan minggu ini, sementara kondisi fisik sedang tidak fit.",
-    feelings: "Kewalahan, takut dianggap mencari alasan atau tidak bertanggung jawab.",
-    needs: "Konsultasi prioritas pengerjaan tugas atau kemungkinan dispensasi perpanjangan tenggat.",
-    openingLine: "Selamat pagi Bapak/Ibu, mohon izin meminta waktu sebentar untuk berkonsultasi mengenai progres dan kendala tugas saya.",
-    targetPerson: "Guru / Dosen",
-  },
-];
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [userName, setUserName] = useState("Alex");
-  const [userAgeRange, setUserAgeRange] = useState("16-18 tahun");
+  const { user, isLoading } = useAuth();
+  const publicPage = isPublicRoute(usePathname());
+  if (isLoading && !publicPage) return <p role="status" className="p-6 text-sm">Memuat akunmu...</p>;
+  return <AccountAppProvider key={user?.email.toLowerCase() || "guest"}>{children}</AccountAppProvider>;
+};
+
+const AccountAppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { user } = useAuth();
+  const publicPage = isPublicRoute(usePathname());
+  const userName = user?.displayName || "Kawan";
+  const userAgeRange = user?.ageBand || "15-18 tahun";
+  const allowAiTransmission = user?.consent.aiProcessingConsent ?? false;
   const [hasConsented, setHasConsented] = useState(false);
-  const [allowAiTransmission, setAllowAiTransmission] = useState(true);
-  const [currentMood, setCurrentMood] = useState<MoodType | null>("biasa");
-  const [completedModules, setCompletedModules] = useState<string[]>(["mod-1"]);
+  const [currentMood, setCurrentMood] = useState<MoodType | null>(null);
+  const [completedModules, setCompletedModules] = useState<string[]>([]);
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
-  const [storyCards, setStoryCards] = useState<StoryCard[]>(defaultStoryCards);
-  const [activeStoryCard, setActiveStoryCard] = useState<StoryCard | null>(defaultStoryCards[0]);
-  const [supportContacts, setSupportContacts] = useState<SupportContact[]>(defaultContacts);
-  const [growthTasks, setGrowthTasks] = useState<GrowthTask[]>(defaultTasks);
+  const [storyCards, setStoryCards] = useState<StoryCard[]>([]);
+  const [activeStoryCard, setActiveStoryCard] = useState<StoryCard | null>(null);
+  const [supportContacts, setSupportContacts] = useState<SupportContact[]>([]);
+  const [growthTasks, setGrowthTasks] = useState<GrowthTask[]>([]);
   const [referralTickets, setReferralTickets] = useState<ReferralTicket[]>([]);
   const [isAiConfigured, setIsAiConfigured] = useState(false);
+
+  const [checkInEmotions, setCheckInEmotions] = useState<string[]>([]);
+  const [reflectionMessages, setReflectionMessages] = useState<SavedMessage[]>([]);
+  const [practiceSessions, setPracticeSessions] = useState<Record<string, SavedMessage[]>>({});
+  const [resetVersion, setResetVersion] = useState(0);
+  const [ready, setReady] = useState(false);
+  const [storageNotice, setStorageNotice] = useState(user ? "" : "Masuk ke akun agar catatan dan percakapan tersimpan di browser ini.");
+  const [canSave, setCanSave] = useState(true);
+
+  useEffect(() => {
+    if (user) {
+      try {
+        const saved = readAccountData(localStorage, user.email);
+        setHasConsented(saved.hasConsented);
+        setCurrentMood(saved.currentMood);
+        setCompletedModules(saved.completedModules);
+        setJournalEntries(saved.journalEntries);
+        setStoryCards(saved.storyCards);
+        setActiveStoryCard(saved.storyCards.find(c => c.id === saved.activeStoryCardId) || null);
+        setSupportContacts(saved.supportContacts);
+        setGrowthTasks(saved.growthTasks);
+        setReferralTickets(saved.referralTickets);
+        setCheckInEmotions(saved.checkInEmotions);
+        setReflectionMessages(saved.reflectionMessages);
+        setPracticeSessions(saved.practiceSessions);
+      } catch {
+        setCanSave(false);
+        setStorageNotice("Data tersimpan belum bisa dibaca. Data lama tidak ditimpa; perubahan sesi ini belum tersimpan. Kamu bisa mencoba memuat ulang atau mereset data di Pengaturan.");
+      }
+    }
+    // Discard the old unscoped check-in so it cannot follow another account.
+    try { sessionStorage.removeItem("sela:checkin_emotions"); } catch {}
+    setReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!ready || !user || !canSave) return;
+    try {
+      writeAccountData(localStorage, user.email, {
+        version: 1, hasConsented, currentMood, completedModules, journalEntries, storyCards,
+        activeStoryCardId: activeStoryCard?.id || null, supportContacts, growthTasks,
+        referralTickets, checkInEmotions, reflectionMessages, practiceSessions,
+      });
+      setStorageNotice("");
+    } catch {
+      setStorageNotice("Perubahan belum tersimpan di browser. Ruang penyimpanan mungkin penuh atau diblokir. Ekspor datamu sebelum menutup halaman.");
+    }
+  }, [ready, user?.email, canSave, hasConsented, currentMood, completedModules, journalEntries, storyCards, activeStoryCard, supportContacts, growthTasks, referralTickets, checkInEmotions, reflectionMessages, practiceSessions]);
 
   // Check backend AI configuration status
   const checkAiConfiguration = async (): Promise<boolean> => {
@@ -199,6 +231,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setSupportContacts((prev) => prev.filter((c) => c.id !== id));
   };
 
+  const addGrowthTask = (title: string) => {
+    if (!title.trim()) return;
+    setGrowthTasks(prev => [...prev, { id: "task-" + Date.now(), title: title.trim(), category: "Target Pribadi", completed: false }]);
+  };
+
   const toggleGrowthTask = (taskId: string) => {
     setGrowthTasks((prev) =>
       prev.map((t) => (t.id === taskId ? { ...t, completed: !t.completed } : t))
@@ -252,29 +289,33 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const resetAllSessionData = () => {
-    setUserName("Alex");
+    setResetVersion(value => value + 1);
     setHasConsented(false);
     setCurrentMood(null);
     setCompletedModules([]);
     setJournalEntries([]);
-    setStoryCards(defaultStoryCards);
-    setActiveStoryCard(defaultStoryCards[0]);
-    setSupportContacts(defaultContacts);
-    setGrowthTasks(defaultTasks.map((t) => ({ ...t, completed: false })));
+    setStoryCards([]);
+    setActiveStoryCard(null);
+    try { sessionStorage.removeItem("sela:checkin_emotions"); } catch {}
+    setSupportContacts([]);
+    setGrowthTasks([]);
+    setCheckInEmotions([]);
+    setReflectionMessages([]);
+    setPracticeSessions({});
+    setCanSave(true);
     setReferralTickets([]);
   };
+
+  if (!ready && !publicPage) return <p role="status" className="p-6 text-sm">Memuat catatanmu...</p>;
 
   return (
     <AppContext.Provider
       value={{
         userName,
-        setUserName,
         userAgeRange,
-        setUserAgeRange,
         hasConsented,
         setHasConsented,
         allowAiTransmission,
-        setAllowAiTransmission,
         currentMood,
         setCurrentMood,
         completedModules,
@@ -295,14 +336,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         deleteSupportContact,
         growthTasks,
         toggleGrowthTask,
+        addGrowthTask,
         referralTickets,
         createReferralTicket,
         isAiConfigured,
         checkAiConfiguration,
         resetAllSessionData,
+        checkInEmotions, setCheckInEmotions, reflectionMessages, setReflectionMessages, practiceSessions, setPracticeSessions, storageNotice,
       }}
     >
-      {children}
+      <React.Fragment key={resetVersion}>{children}</React.Fragment>
     </AppContext.Provider>
   );
 };
