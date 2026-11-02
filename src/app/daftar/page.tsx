@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, AlertCircle, Sparkles, Eye, EyeOff } from "lucide-react";
+import { ArrowRight, AlertCircle, Eye, EyeOff } from "lucide-react";
 import { SelaLogo } from "@/components/ui/SelaLogo";
 import { useAuth } from "@/context/AuthContext";
 import { AgeBand } from "@/types/auth";
@@ -69,11 +69,6 @@ export default function DaftarPage() {
         {/* Left Side: Aura Menemani Welcome Panel */}
         <div className="lg:col-span-5 bg-gradient-to-b from-[#E8F1FC]/80 via-[#F4F8FF] to-[#FAFDFE] p-6 sm:p-8 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-[#BFD8F5]">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAFDFE] border border-[#BFD8F5] text-xs font-semibold text-[#1E56A0] mb-4 shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-[#D9822B]" />
-              <span>Aura Menemani</span>
-            </div>
-
             <h2 className="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[#102542] leading-tight">
               Mulai langkahmu bersama Aura
             </h2>
